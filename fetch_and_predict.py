@@ -15,78 +15,74 @@ def jra_waku(tot, uma):
 s = chr(47)
 hdr = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
 
-# 今週末（土曜・日曜）の日付を自動取得
-wd = now.weekday()
-sat = now + timedelta(days=(5 - wd) % 7) if wd != 6 else now - timedelta(days=1)
-sun = sat + timedelta(days=1)
-dates = [sat.strftime("%Y%m%d"), sun.strftime("%Y%m%d")]
-
+# Yahoo!競馬の開催日程ページから今週のレースURLを自動取得
+sched_url = f"https:{s}{s}sports.yahoo.co.jp{s}keiba{s}schedule{s}"
 rows = []
-p_map = {"01":"札幌","02":"函館","03":"福島","04":"新潟","05":"東京","06":"中山","07":"中京","08":"京都","09":"阪神","10":"小倉"}
+try:
+    r = requests.get(sched_url, headers=hdr, timeout=15)
+    r.encoding = "utf-8"
+    sp = BeautifulSoup(r.text, "html.parser")
+    day_links = []
+    for a in sp.find_all("a", href=True):
+        if "/keiba/race/list/" in a["href"]:
+            u = "https://yahoo.co.jp" + a["href"] if a["href"].startswith("/") else a["href"]
+            if u not in day_links:
+                day_links.append(u)
+    race_urls = []
+    for du in day_links[:4]:
+        dr = requests.get(du, headers=hdr, timeout=15)
+        dr.encoding = "utf-8"
+        dsp = BeautifulSoup(dr.text, "html.parser")
+        for a in dsp.find_all("a", href=True):
+            if "/keiba/race/denma/" in a["href"]:
+                ru = "https://yahoo.co.jp" + a["href"] if a["href"].startswith("/") else a["href"]
+                if ru not in race_urls:
+                    race_urls.append(ru)
+    for ru in race_urls[:48]:
+        rr = requests.get(ru, headers=hdr, timeout=15)
+        rr.encoding = "utf-8"
+        rsp = BeautifulSoup(rr.text, "html.parser")
+        txt_all = rsp.get_text(" ", strip=True)
+        pm = re.search(r'(札幌|函館|福島|新潟|東京|中山|中京|京都|阪神|小倉)', txt_all[:300])
+        place = pm.group(1) if pm else "中央"
+        dm = re.search(r'(\d{1,2}月\d{1,2}日)', txt_all[:300])
+        dt_lbl = dm.group(1) if dm else now.strftime("%m/%d")
+        k_label = f"{place} ({dt_lbl})"
+        rm = re.search(r'(\d{1,2})R', txt_all[:300])
+        rnum = int(rm.group(1)) if rm else 1
+        h1 = rsp.find("h1")
+        r_title = h1.text.strip().split("\n") if h1 else f"{rnum}R"
+        baba = "ダート" if "ダート" in txt_all[:500] or "ダ" in txt_all[:500] else "芝"
+        dist_m = re.search(r'(\d{4})m', txt_all[:500])
+        dist = int(dist_m.group(1)) if dist_m else 1600
+        rcls, cbon = ("G1", 6.0) if ("G1" in txt_all[:400] or "GI" in txt_all[:400]) and rnum >= 10 else ("G2", 4.5) if ("G2" in txt_all[:400] or "GII" in txt_all[:400]) and rnum >= 10 else ("G3", 3.5) if ("G3" in txt_all[:400] or "GIII" in txt_all[:400]) and rnum >= 10 else ("OP", 2.5) if "オープン" in txt_all[:400] else ("条件戦", 0.0)
+        trs = [tr for tr in rsp.select("table tr") if len(tr.find_all("td")) >= 4]
+        tot = len(trs)
+        for idx_h, tr in enumerate(trs, 1):
+            tds = tr.find_all("td")
+            row_s = " ".join(td.text.strip() for td in tds)
+            nm = ""
+            for a in tr.find_all("a", href=True):
+                if "/keiba/directory/horse/" in a["href"] and len(a.text.strip()) >= 2:
+                    nm = a.text.strip(); break
+            if not nm: continue
+            jk = "騎手未定"
+            for a in tr.find_all("a", href=True):
+                if "/keiba/directory/jocky/" in a["href"] or "/jockey/" in a["href"]:
+                    jk = a.text.strip(); break
+            nums = [int(td.text.strip()) for td in tds[:3] if td.text.strip().isdigit()]
+            uma = nums[-1] if nums else idx_h
+            wk = nums if len(nums) >= 2 and 1 <= nums <= 8 else jra_waku(tot, uma)
+            sa_m = re.search(r'(牡|牝|セ)\d', row_s)
+            sa = sa_m.group(0) if sa_m else "牡3"
+            kn_m = re.search(r'\b(5[0-9](?:\.5)?|6[0-2](?:\.5)?)\b', row_s)
+            kn = float(kn_m.group(1)) if kn_m else 56.0
+            nk = "https:" + s + s + "://netkeiba.com" + s + "?pid=horse_list&word=" + urllib.parse.quote(nm, encoding="euc-jp", errors="ignore")
+            rows.append({"開催":k_label,"競馬場":place,"レース番号":rnum,"レースクラス":rcls,"クラス補正":cbon,"レース":f"{rnum}R {r_title} ({baba}{dist}m)","馬場":baba,"距離":dist,"枠番":wk,"馬番":uma,"馬名":nm,"性齢":sa,"netkeiba":nk,"騎手":jk,"父馬":"主要血統","斤量":kn})
+except Exception as e:
+    print("Yahoo fetch error:", e)
 
-for dt in dates:
-    top_url = f"https:{s}{s}www.keibalab.jp{s}db{s}race{s}{dt}{s}"
-    try:
-        r = requests.get(top_url, headers=hdr, timeout=15)
-        r.encoding = "utf-8"
-        sp = BeautifulSoup(r.text, "html.parser")
-        r_urls = []
-        for a in sp.find_all("a", href=True):
-            m = re.search(rf'(/db/race/{dt}\d{{6}}/)', a["href"])
-            if m:
-                full_u = f"https:{s}{s}www.keibalab.jp" + m.group(1) + "shutuba.html"
-                if full_u not in r_urls:
-                    r_urls.append(full_u)
-        for u in r_urls[:24]:
-            rid_m = re.search(r'/db/race/(\d{14})/', u)
-            if not rid_m: continue
-            rid = rid_m.group(1)
-            place = p_map.get(rid[8:10], "中央")
-            rnum = int(rid[12:14])
-            k_label = f"{place} ({dt[4:6]}/{dt[6:8]})"
-            sr = requests.get(u, headers=hdr, timeout=15)
-            sr.encoding = "utf-8"
-            ssp = BeautifulSoup(sr.text, "html.parser")
-            h1 = ssp.find("h1")
-            r_name = h1.text.strip().split("\n") if h1 else f"{rnum}R"
-            info_txt = ssp.get_text(" ", strip=True)[:800]
-            baba = "ダート" if "ダート" in info_txt or "ダ1" in info_txt or "ダ2" in info_txt else "芝"
-            dm = re.search(r'(?:芝|ダート|ダ)\s*(\d{4})m', info_txt)
-            dist = int(dm.group(1)) if dm else 1600
-            rcls, cbon = ("G1", 6.0) if "G1" in info_txt and rnum >= 10 else ("G2", 4.5) if "G2" in info_txt and rnum >= 10 else ("G3", 3.5) if "G3" in info_txt and rnum >= 10 else ("OP", 2.5) if "オープン" in info_txt else ("条件戦", 0.0)
-            trs = ssp.select("table.shutubaTable tbody tr")
-            if not trs:
-                trs = [tr for tr in ssp.select("table tr") if len(tr.find_all("td")) >= 6]
-            tot = len(trs)
-            for idx_h, tr in enumerate(trs, 1):
-                tds = tr.find_all("td")
-                if len(tds) < 5: continue
-                nums = [int(td.text.strip()) for td in tds[:3] if td.text.strip().isdigit()]
-                uma = nums[-1] if nums else idx_h
-                wk = nums if len(nums) >= 2 and 1 <= nums <= 8 else jra_waku(tot, uma)
-                row_txt = " ".join(td.text.strip() for td in tds)
-                nm = ""
-                for a in tr.find_all("a", href=True):
-                    if "/db/horse/" in a["href"] and len(a.text.strip()) >= 2:
-                        nm = a.text.strip(); break
-                if not nm: continue
-                jk = "騎手未定"
-                for a in tr.find_all("a", href=True):
-                    if "/db/jockey/" in a["href"] and len(a.text.strip()) >= 2:
-                        jk = a.text.strip(); break
-                sa_m = re.search(r'(牡|牝|セ)\d', row_txt)
-                sa = sa_m.group(0) if sa_m else "牡3"
-                kn_m = re.search(r'\b(5[0-9](?:\.5)?|6[0-2](?:\.5)?)\b', row_txt)
-                kn = float(kn_m.group(1)) if kn_m else 56.0
-                sire = "主要血統"
-                h_links = [a.text.strip() for a in tr.find_all("a", href=True) if "/db/horse/" in a["href"] and a.text.strip() != nm]
-                if h_links:
-                    sire = h_links
-                nk = "https:" + s + s + "://netkeiba.com" + s + "?pid=horse_list&word=" + urllib.parse.quote(nm, encoding="euc-jp", errors="ignore")
-                rows.append({"開催":k_label,"競馬場":place,"レース番号":rnum,"レースクラス":rcls,"クラス補正":cbon,"レース":f"{rnum}R {r_name} ({baba}{dist}m)","馬場":baba,"距離":dist,"枠番":wk,"馬番":uma,"馬名":nm,"性齢":sa,"netkeiba":nk,"騎手":jk,"父馬":sire,"斤量":kn})
-    except Exception as e:
-        print("Skip:", dt, e)
-
+print("Fetched rows:", len(rows))
 if rows:
     df = pd.DataFrame(rows).drop_duplicates(subset=["開催","レース番号","馬番"]).sort_values(["開催","レース番号","馬番"]).reset_index(drop=True)
     np.random.seed(int(now.strftime("%Y%m%d")))
