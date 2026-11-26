@@ -103,7 +103,8 @@ def ai_comment(r, avg):
 if "勝負レース" in page_mode:
     st.subheader("🔥 本日のAI激アツ勝負レース")
     found = False
-    for (ks, rn), g in all_df.groupby(("開催", "レース"), sort=False):
+    for (ks, rn), g in all_df.groupby(list(("開催", "レース")), sort=False):
+
         sg = g.sort_values("能力スコア", ascending=False)
         t1 = sg.head(1).squeeze()
         t2 = sg.head(2).tail(1).squeeze() if len(sg) > 1 else t1
