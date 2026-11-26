@@ -190,7 +190,8 @@ else:
         with st.expander("✏️ My印・Myメモを登録・保存する"):
             mc1, mc2, mc3 = st.columns(3)
             sel_u = mc1.selectbox("馬番を選択", tuple(f"{int(r['馬番'])} {r['馬名']}" for r in rdf.sort_values("馬番").to_dict("records")))
-            u_num = int(sel_u.split())
+            u_num = int(next(iter(sel_u.split())))
+
             new_m = mc2.selectbox("My印", ("", "◎", "○", "▲", "△", "☆", "✓", "消"), index=("", "◎", "○", "▲", "△", "☆", "✓", "消").index(smk.get(u_num, "")))
             new_txt = mc3.text_input("Myメモ", value=smm.get(u_num, ""))
             if st.button("💾 保存する", type="primary"):
