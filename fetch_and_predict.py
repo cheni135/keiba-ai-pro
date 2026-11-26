@@ -21,11 +21,10 @@ s = chr(47)
 base = f"https:{s}{s}www.jra.go.jp{s}keiba{s}rpdf{s}"
 hdr = {"User-Agent": "Mozilla/5.0"}
 soup = BeautifulSoup(requests.get(base, headers=hdr, timeout=20).content.decode("shift_jis", "ignore"), "html.parser")
-links = [(a.text.strip(), base + a["href"]) for a in soup.find_all("a", href=True) if a["href"].endswith(".pdf") and "mikata" not in a["href"]]
-print("PDF links:", len(links))
+links = [(a.text.strip(), base + a["href"]) for a in soup.find_all("a", href=True) if a["href"].endswith(".pdf") and "競馬場" in a.text and "特別版" not in a.text]
 
 rows = []
-for title, url in links[:4]:
+for title, url in links[:6]:
     pm = re.search(r'(札幌|函館|福島|新潟|東京|中山|中京|京都|阪神|小倉)', title)
     place = pm.group(1) if pm else title[:4]
     dm = re.search(r'(\d+回.*?競馬場\d+日)', title)
@@ -46,15 +45,16 @@ for title, url in links[:4]:
                     rcls, cbon = ("G1", 6.0) if ("ＧⅠ" in head or "G1" in head) and rnum >= 10 else ("G2", 4.5) if ("ＧⅡ" in head or "G2" in head) and rnum >= 10 else ("G3", 3.5) if ("ＧⅢ" in head or "G3" in head) and rnum >= 10 else ("OP", 2.5) if "オープン" in head else ("3勝", 1.5) if "3勝" in head else ("2勝", 0.8) if "2勝" in head else ("1勝", 0.0) if "1勝" in head else ("未勝利", -1.5) if "未勝利" in head else ("新馬", -1.0) if "新馬" in head else ("条件戦", 0.0)
                     rh = []
                     for il, ln in enumerate(lines):
-                        mh = re.search(r'([ァ-ヶー・]{2,15})\s*(牡|牝|セ|騙)\s*(\d)\s*(5[0-9](?:\.5)?|6[0-2](?:\.5)?)', ln)
-                        if not mh:
+                        if any(ng in ln for ng in ("賞金", "万円", "レコード", "コース", "発走", "サラ系", "定量", "別定", "ハンデ", "馬齢")):
                             continue
+                        mh = re.search(r'([ァ-ヶー・]{2,15})\s*(牡|牝|セ|騙)\s*(\d)', ln)
+                        if not mh: continue
                         nm = mh.group(1).strip()
                         sa = mh.group(2) + mh.group(3)
-                        kn = float(mh.group(4))
-                        after_kn = ln[mh.end():]
-                        mj = re.search(r'([ァ-ヶー一-龠]{2,7})', after_kn)
-                        jk = re.sub(r'(初出走|美浦|栗東|地方|海外).*$', '', mj.group(1)).strip() if mj else "騎手未定"
+                        blk = "\n".join(lines[il:min(len(lines), il + 3)])
+                        mj = re.search(r'(5[0-9](?:\.5)?|6[0-2](?:\.5)?)\s*([ァ-ヶー一-龠]{2,7})', blk)
+                        kn = float(mj.group(1)) if mj else 56.0
+                        jk = re.sub(r'(初出走|美浦|栗東|地方|海外).*$', '', mj.group(2)).strip() if mj else "騎手未定"
                         uma = 0
                         for bk in range(max(0, il - 1), min(len(lines), il + 3)):
                             mu = re.match(r'^\s*(\d{1,2})\b', lines[bk])
@@ -74,7 +74,6 @@ for title, url in links[:4]:
     except Exception as e:
         print("Skip:", e)
 
-print("Extracted total:", len(rows))
 if rows:
     df = pd.DataFrame(rows).drop_duplicates(subset=["開催","レース番号","馬番"]).sort_values(["開催","レース番号","馬番"]).reset_index(drop=True)
     np.random.seed(int(now.strftime("%Y%m%d")))
@@ -89,9 +88,9 @@ if rows:
     b_chk = np.where(df["コース替わり"]!="", np.maximum(50.0, np.random.normal(50,9.5,n)), np.random.normal(50,9.5,n))
     df["着順着差指数"] = np.round(np.clip(b_chk + df["クラス補正"] + df["不利補正値"], 20, 92), 1)
     df["ラップタイム指数"] = np.round(np.clip(np.random.normal(50,9.5,n) + df["クラス補正"]*0.4, 20, 92), 1)
-    df["血統適性"] = np.round(np.clip(df["父馬"].map(lambda x: sires.get(x,49)+np.random.randint(-4,5)) + np.where(df["コース替わり"]!="",6,0), 20, 92), 1)
+    df["血統適性"] = np.round(np.clip(df["父馬"].map(lambda x: sires.get(x,50)+np.random.randint(-4,5)) + np.where(df["コース替わり"]!="",6,0), 20, 92), 1)
     df["枠順展開適合"] = np.round(np.clip(50 + np.where(df["馬場"]=="芝",(5-df["枠番"])*1.8,(df["枠番"]-4)*1.4) + np.where(df["脚質"].isin(["逃げ","先行"]),4.5,-2.5) + np.random.normal(0,5.5,n), 20, 92), 1)
-    df["厩舎騎手勝負度"] = np.round(np.clip(df["騎手"].map(lambda x: next((v for k,v in tjk.items() if k in str(x)),49)+np.random.randint(-3,4)) + np.where(df["激変サイン"]=="初ブリンカー",6.5,0), 22, 92), 1)
+    df["厩舎騎手勝負度"] = np.round(np.clip(df["騎手"].map(lambda x: next((v for k,v in tjk.items() if k in str(x)),50)+np.random.randint(-3,4)) + np.where(df["激変サイン"]=="初ブリンカー",6.5,0), 22, 92), 1)
     df["ローテ体調"] = np.round(np.clip(np.random.normal(50,8.5,n), 22, 90), 1)
     df["調教指数"] = np.round(np.clip(np.random.normal(50,9.0,n), 22, 92), 1)
     df["道悪適性"] = np.round(np.clip(np.where(df["父馬"].isin(["キズナ","モーリス","ゴールドシップ","オルフェーヴル","ドレフォン"]),63,49) + np.random.normal(0,5.5,n), 22, 92), 1)
