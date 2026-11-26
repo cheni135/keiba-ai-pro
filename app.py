@@ -289,20 +289,20 @@ else:
                 elif bt == "枠連": eo, lb = 12.5, f"{cb}-{cb}枠"
                 elif bt == "馬連": eo, lb = round(max(1.5, 0.775/max(0.0005, wp[cb]*wp[cb]*2)), 1), f"{cb}-{cb} ({n2nm[cb]}/{n2nm[cb]})"
                 elif bt == "ワイド": eo, lb = round(max(1.1, 0.775/max(0.001, wp[cb]*wp[cb]*5)), 1), f"{cb}-{cb} ({n2nm[cb]}/{n2nm[cb]})"
-elif bt == "馬単": eo, lb = round(max(2.0, 0.75/max(0.0003, wp[cb]*wp[cb])), 1), f"{cb}→{cb} ({n2nm[cb]}→{n2nm[cb]})"
-elif bt == "3連複": eo, lb = round(max(3.0, 0.75/max(0.0001, wp[cb]*wp[cb]*wp[cb]*8)), 1), f"{cb}-{cb}-{cb}"
-else: eo, lb = round(max(5.0, 0.725/max(0.00005, wp[cb]*wp[cb]*wp[cb]*1.5)), 1), f"{cb}→{cb}→{cb}"
-brows.append({"選択": True, "買い目": lb, "想定オッズ": eo})
-st.subheader("📋 展開一覧（1点ずつチェックで除外・追加可能）")
-ed_exp = st.data_editor(pd.DataFrame(brows).sort_values("想定オッズ").reset_index(drop=True), column_config={"選択": st.column_config.CheckboxColumn("購入", width="small"), "買い目": st.column_config.TextColumn("組み合わせ", disabled=True), "想定オッズ": st.column_config.NumberColumn("想定オッズ", disabled=True, format="%.1f")}, use_container_width=True, hide_index=True, key=f"exp_{sk}{sr}{bt}_{len(brows)}")
-act = ed_exp.query("選択 == True").copy()
-if not act.empty:
-isum = sum(1.0 / o for o in act["想定オッズ"])
-syn = round(1.0 / isum, 2)
-act["推奨配分(円)"] = [max(100, int(round((bg * ((1.0/o)/isum))/100)*100)) for o in act["想定オッズ"]]
-act["払戻目安(円)"] = (act["想定オッズ"] * act["推奨配分(円)"]).astype(int)
-m1, m2, m3 = st.columns(3)
-m1.metric("選択済点数", f"{len(act)}点")
-m2.metric("合成オッズ", f"{syn}倍", delta="トリガミ注意" if syn < 1.0 else "プラス圏", delta_color="inverse" if syn < 1.0 else "normal")
-m3.metric("配分合計", f"{act['推奨配分(円)'].sum():,}円")
-st.dataframe(act.drop(columns=["選択"]), use_container_width=True, hide_index=True)
+                elif bt == "馬単": eo, lb = round(max(2.0, 0.75/max(0.0003, wp[cb]*wp[cb])), 1), f"{cb}→{cb} ({n2nm[cb]}→{n2nm[cb]})"
+                elif bt == "3連複": eo, lb = round(max(3.0, 0.75/max(0.0001, wp[cb]*wp[cb]*wp[cb]*8)), 1), f"{cb}-{cb}-{cb}"
+                else: eo, lb = round(max(5.0, 0.725/max(0.00005, wp[cb]*wp[cb]*wp[cb]*1.5)), 1), f"{cb}→{cb}→{cb}"
+                brows.append({"選択": True, "買い目": lb, "想定オッズ": eo})
+            st.subheader("📋 展開一覧（1点ずつチェックで除外・追加可能）")
+            ed_exp = st.data_editor(pd.DataFrame(brows).sort_values("想定オッズ").reset_index(drop=True), column_config={"選択": st.column_config.CheckboxColumn("購入", width="small"), "買い目": st.column_config.TextColumn("組み合わせ", disabled=True), "想定オッズ": st.column_config.NumberColumn("想定オッズ", disabled=True, format="%.1f")}, use_container_width=True, hide_index=True, key=f"exp_{sk}_{sr}_{bt}_{len(brows)}")
+            act = ed_exp.query("選択 == True").copy()
+            if not act.empty:
+                isum = sum(1.0 / o for o in act["想定オッズ"])
+                syn = round(1.0 / isum, 2)
+                act["推奨配分(円)"] = [max(100, int(round((bg * ((1.0/o)/isum))/100)*100)) for o in act["想定オッズ"]]
+                act["払戻目安(円)"] = (act["想定オッズ"] * act["推奨配分(円)"]).astype(int)
+                m1, m2, m3 = st.columns(3)
+                m1.metric("選択済点数", f"{len(act)}点")
+                m2.metric("合成オッズ", f"{syn}倍", delta="トリガミ注意" if syn < 1.0 else "プラス圏", delta_color="inverse" if syn < 1.0 else "normal")
+                m3.metric("配分合計", f"{act['推奨配分(円)'].sum():,}円")
+                st.dataframe(act.drop(columns=["選択"]), use_container_width=True, hide_index=True)
