@@ -267,8 +267,8 @@ st.subheader("📝 収支履歴一覧")
 st.dataframe(led_df.drop(columns=["累計収支"]), use_container_width=True, hide_index=True)
 col_b1, col_b2 = st.columns(2)
 with col_b1:
-csv_bytes = led_df.drop(columns=["累計収支"]).to_csv(index=False, encoding="utf-8-sig").encode("utf-8-sig")
-st.download_button("📥 手元バックアップCSVダウンロード", data=csv_bytes, file_name="my_keiba_ledger.csv", mime="text/csv")
+　　　　csv_bytes = led_df.drop(columns=["累計収支"]).to_csv(index=False, encoding="utf-8-sig").encode("utf-8-sig")
+　　　　st.download_button("📥 手元バックアップCSVダウンロード", data=csv_bytes, file_name="my_keiba_ledger.csv", mime="text/csv")
 with col_b2:
 if st.button("🗑️ 履歴をすべてリセット"):
 empty_led = pd.DataFrame(columns=["レース", "券種", "投資額", "払戻額", "収支", "結果"])
