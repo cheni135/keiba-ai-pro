@@ -2,11 +2,16 @@ name: Auto Update JRA Races
 
 on:
   schedule:
-    # 毎週金曜18時、土曜7時、日曜7時（日本時間）に自動実行
+    # 水曜19時、木曜13時、木曜19時（枠順確定前の事前予想用）
+    - cron: '0 10 * * 3'
+    - cron: '0 4 * * 4'
+    - cron: '0 10 * * 4'
+    # 金曜11時、金曜18時（全レース枠順確定用）
+    - cron: '0 2 * * 5'
     - cron: '0 9 * * 5'
-    - cron: '0 22 * * 5'
-    - cron: '0 22 * * 6'
-  workflow_dispatch: # スマホから手動で「今すぐ実行」ボタンも押せるようにする
+    # 土曜・日曜 9:00〜16:00 毎時0分（リアルタイムオッズ・馬体重用）
+    - cron: '0 0,1,2,3,4,5,6,7 * * 6,0'
+  workflow_dispatch:
 
 permissions:
   contents: write
