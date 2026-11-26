@@ -51,31 +51,30 @@ for title, url in links[:6]:
                             if len(cells) < 2: continue
                             row_join = " ".join(cells)
                             if any(ng in row_join for ng in ("馬名", "騎手", "負担", "賞金", "レコード", "コース")): continue
-                            uma = 0
-                            for c in cells[:2]:
-                                m_u = re.search(r'\b([1-9]|1[0-8])\b', c)
-                                if m_u:
-                                    uma = int(m_u.group(1)); break
-                            if uma == 0: continue
-                            # 馬名セル（一番最初のカタカナ馬名行）だけを取り、後ろの血統欄は切り捨てる
+                            # 性齢（牡2・牝3・セ4等）が含まれるセルだけを本物の馬データとして処理
+                            if not re.search(r'(牡|牝|セ|騙)\d', row_join): continue
                             nm, sa, kn, jk, sr_name = "", "牡3", 56.0, "騎手未定", "主要血統"
                             for c in cells:
-                                lines_c = [x.strip() for x in c.split("\n") if x.strip()]
-                                for idx_l, lc in enumerate(lines_c):
-                                    m_nm = re.search(r'^([ァ-ヶー・]{2,15})', lc)
-                                    if m_nm and not nm:
-                                        nm = m_nm.group(1)
-                                        m_sa = re.search(r'(牡|牝|セ|騙)\d', c)
-                                        if m_sa: sa = m_sa.group(0)
-                                        m_kn = re.search(r'(5[0-9](?:\.5)?|6[0-2](?:\.5)?)', c)
-                                        if m_kn: kn = float(m_kn.group(1))
-                                        m_jk = re.search(r'(?:5[0-9](?:\.5)?|6[0-2](?:\.5)?)\s*([ァ-ヶー一-龠]{2,7})', c)
-                                        if m_jk: jk = re.sub(r'(初出走|美浦|栗東|地方|海外).*$', '', m_jk.group(1)).strip()
-                                        if idx_l + 2 < len(lines_c):
-                                            sr_name = re.sub(r'[^ァ-ヶーA-Za-z]', '', lines_c[idx_l + 2])[:12] or "主要血統"
-                                        break
-                            if nm and len(nm) >= 2 and not any(x == uma for x in rh):
-                                rh.append((uma, nm, sa, kn, jk, sr_name))
+                                if re.search(r'(牡|牝|セ|騙)\d', c):
+                                    lines_c = [x.strip() for x in c.split("\n") if x.strip()]
+                                    for idx_l, lc in enumerate(lines_c):
+                                        if re.search(r'(牡|牝|セ|騙)\d', lc):
+                                            m_nm = re.search(r'([ァ-ヶー・]{2,15})', lc)
+                                            if m_nm: nm = m_nm.group(1)
+                                            elif idx_l > 0:
+                                                m_prev = re.search(r'([ァ-ヶー・]{2,15})', lines_c[idx_l - 1])
+                                                if m_prev: nm = m_prev.group(1)
+                                            m_sa = re.search(r'(牡|牝|セ|騙)\d', lc)
+                                            if m_sa: sa = m_sa.group(0)
+                                            if idx_l > 0 and nm != re.sub(r'[^ァ-ヶー・]', '', lines_c[idx_l - 1]):
+                                                sr_name = re.sub(r'[^ァ-ヶーA-Za-z]', '', lines_c[idx_l - 1])[:12] or "主要血統"
+                                            break
+                                m_kn = re.search(r'(5[0-9](?:\.5)?|6[0-2](?:\.5)?)', row_join)
+                                if m_kn: kn = float(m_kn.group(1))
+                                m_jk = re.search(r'(?:5[0-9](?:\.5)?|6[0-2](?:\.5)?)\s*([ァ-ヶー一-龠]{2,6})', row_join)
+                                if m_jk: jk = re.sub(r'(初出走|美浦|栗東|地方|海外).*$', '', m_jk.group(1)).strip()
+                            if nm and len(nm) >= 2 and not any(x == nm for x in rh):
+                                rh.append((len(rh) + 1, nm, sa, kn, jk, sr_name))
                     tot = len(rh)
                     for uma, nm, sa, kn, jk, sr_name in rh:
                         wk = jra_waku(tot, uma)
@@ -84,7 +83,6 @@ for title, url in links[:6]:
     except Exception as e:
         print("Skip:", e)
 
-print("Table extracted total:", len(rows))
 if rows:
     df = pd.DataFrame(rows).drop_duplicates(subset=["開催","レース番号","馬番"]).sort_values(["開催","レース番号","馬番"]).reset_index(drop=True)
     np.random.seed(int(now.strftime("%Y%m%d")))
