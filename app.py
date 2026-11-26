@@ -286,14 +286,20 @@ else:
         if cbs:
             brows = []
             for cb in cbs:
-                if bt == "単勝": eo, lb = n2o[cb], f"{cb} {n2nm[cb]}"
-                elif bt == "複勝": eo, lb = round(max(1.1, n2o[cb]*0.28+0.8), 1), f"{cb} {n2nm[cb]}"
-                elif bt == "枠連": eo, lb = 12.5, f"{cb}-{cb}枠"
-                elif bt == "馬連": eo, lb = round(max(1.5, 0.775/max(0.0005, wp[cb]*wp[cb]*2)), 1), f"{cb}-{cb} ({n2nm[cb]}/{n2nm[cb]})"
-                elif bt == "ワイド": eo, lb = round(max(1.1, 0.775/max(0.001, wp[cb]*wp[cb]*5)), 1), f"{cb}-{cb} ({n2nm[cb]}/{n2nm[cb]})"
-                elif bt == "馬単": eo, lb = round(max(2.0, 0.75/max(0.0003, wp[cb]*wp[cb])), 1), f"{cb}→{cb} ({n2nm[cb]}→{n2nm[cb]})"
-                elif bt == "3連複": eo, lb = round(max(3.0, 0.75/max(0.0001, wp[cb]*wp[cb]*wp[cb]*8)), 1), f"{cb}-{cb}-{cb}"
-                else: eo, lb = round(max(5.0, 0.725/max(0.00005, wp[cb]*wp[cb]*wp[cb]*1.5)), 1), f"{cb}→{cb}→{cb}"
+                            for cb in cbs:
+                it = iter(cb)
+                a = next(it, 0)
+                b = next(it, 0)
+                c = next(it, 0)
+                if bt == "単勝": eo, lb = n2o[a], f"{a} {n2nm[a]}"
+                elif bt == "複勝": eo, lb = round(max(1.1, n2o[a]*0.28+0.8), 1), f"{a} {n2nm[a]}"
+                elif bt == "枠連": eo, lb = 12.5, f"{a}-{b}枠"
+                elif bt == "馬連": eo, lb = round(max(1.5, 0.775/max(0.0005, wp[a]*wp[b]*2)), 1), f"{a}-{b} ({n2nm[a]}/{n2nm[b]})"
+                elif bt == "ワイド": eo, lb = round(max(1.1, 0.775/max(0.001, wp[a]*wp[b]*5)), 1), f"{a}-{b} ({n2nm[a]}/{n2nm[b]})"
+                elif bt == "馬単": eo, lb = round(max(2.0, 0.75/max(0.0003, wp[a]*wp[b])), 1), f"{a}→{b} ({n2nm[a]}→{n2nm[b]})"
+                elif bt == "3連複": eo, lb = round(max(3.0, 0.75/max(0.0001, wp[a]*wp[b]*wp[c]*8)), 1), f"{a}-{b}-{c}"
+                else: eo, lb = round(max(5.0, 0.725/max(0.00005, wp[a]*wp[b]*wp[c]*1.5)), 1), f"{a}→{b}→{c}"
+
                 brows.append({"選択": True, "買い目": lb, "想定オッズ": eo})
             st.subheader("📋 展開一覧（1点ずつチェックで除外・追加可能）")
             ed_exp = st.data_editor(pd.DataFrame(brows).sort_values("想定オッズ").reset_index(drop=True), column_config={"選択": st.column_config.CheckboxColumn("購入", width="small"), "買い目": st.column_config.TextColumn("組み合わせ", disabled=True), "想定オッズ": st.column_config.NumberColumn("想定オッズ", disabled=True, format="%.1f")}, use_container_width=True, hide_index=True, key=f"exp_{sk}_{sr}_{bt}_{len(brows)}")
