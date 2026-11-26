@@ -55,7 +55,7 @@ for title, url in links[:4]:
     except Exception as e:
         print("Skip:", e)
 
-df = pd.DataFrame(rows).drop_duplicates(subset=["開催","レース番号","馬番"]).sort_values(["開催","レース番号","馬番"])
+df = pd.DataFrame(rows).drop_duplicates(subset=["開催","レース番号","馬番"]).sort_values(["開催","レース番号","馬番"]).reset_index(drop=True)
 if not df.empty:
     np.random.seed(int(now.strftime("%Y%m%d")))
     n = len(df)
@@ -78,7 +78,7 @@ if not df.empty:
     df["能力スコア"] = np.round(np.clip(df["着順着差指数"]*0.28 + df["ラップタイム指数"]*0.22 + df["血統適性"]*0.15 + df["枠順展開適合"]*0.15 + df["厩舎騎手勝負度"]*0.10 + df["ローテ体調"]*0.05 + df["調教指数"]*0.05, 20, 94), 1)
     wp, t3p, odds, exps = np.zeros(n), np.zeros(n), np.zeros(n), np.zeros(n)
     for _, g in df.groupby(["開催","レース番号"]):
-        ix = g.index
+        ix = g.index.to_numpy()
         sc = g["能力スコア"].values
         e = np.exp((sc - np.mean(sc))/7.5)
         w = e / np.sum(e)
