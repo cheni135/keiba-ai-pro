@@ -130,7 +130,6 @@ for title, pdf_url in pdf_links[:4]:
                             m_wk = re.match(r'^\s*(白|黒|赤|青|黄|緑|橙|桃)', prev_line)
                             waku = waku_map.get(m_wk.group(1), min(8, (umaban + 1) // 2)) if m_wk else min(8, (umaban + 1) // 2)
 
-                            # netkeibaの競走馬検索直通URLを生成
                             encoded_name = urllib.parse.quote(raw_name, encoding="euc-jp", errors="ignore")
                             nk_url = "https:" + s + s + "://netkeiba.com" + s + "?pid=horse_list&word=" + encoded_name
 
