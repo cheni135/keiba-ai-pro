@@ -45,7 +45,7 @@ if all_df.empty:
     st.warning("データが空です。")
     st.stop()
 
-last_upd = str(all_df.get("更新日時").iloc) if "更新日時" in all_df.columns else "自動更新済み"
+last_upd = str(all_df.get("更新日時").iloc[0］) if "更新日時" in all_df.columns else "自動更新済み"
 tk_c, _ = get_gh()
 st.caption(f"🔄 AI最終更新: {last_upd} ｜ {'☁️ クラウド保存ON' if tk_c else '💾 ローカル保存モード'}")
 
@@ -73,10 +73,10 @@ if "勝負レース" in page_mode:
     hot = []
     for (ks, rn), g in all_df.groupby(["開催", "レース"], sort=False):
         sg = g.sort_values("能力スコア", ascending=False)
-        t1 = sg.iloc
-        t2 = sg.iloc if len(sg) > 1 else t1
+        t1 = sg.iloc[0］
+        t2 = sg.iloc[1］ if len(sg) > 1 else t1
         d12 = round(float(t1.get("能力スコア")) - float(t2.get("能力スコア")), 1)
-        eh = g.sort_values("期待値スコア", ascending=False).iloc
+        eh = g.sort_values("期待値スコア", ascending=False).iloc[0］
         bg = "👑 AI鉄板・自信あり" if float(t1.get("能力スコア")) >= 66 and d12 >= 4.5 else "💎 激アツお宝レース" if float(g.get("期待値スコア").max()) >= 125 else "🔥 有力軸信頼" if d12 >= 3.5 else ""
         if bg:
             hot.append({"判定": bg, "開催": ks, "レース": rn, "AI能力1位": f"{int(t1.get('馬番'))}番 {t1.get('馬名')} ({t1.get('能力スコア')}点)", "2位差": f"+{d12}pt", "期待値TOP": f"{int(eh.get('馬番'))}番 {eh.get('馬名')} ({eh.get('期待値スコア')}pt / {eh.get('単勝オッズ')}倍)"})
@@ -154,7 +154,7 @@ else:
         m1, m2, m3 = st.columns(3)
         m1.metric("📊 レースAI平均", f"{avg}点")
         m2.metric("🎯 馬券内目安", f"{brd}点 / 3着内25%", delta=f"圏内:{int(ibk.sum())}頭")
-        m3.metric("🏆 トップ評価", f"{rk['能力スコア'].iloc}点", delta=f"平均比 {rk['能力スコア'].iloc - avg:+.1f}")
+        m3.metric("🏆 トップ評価", f"{rk['能力スコア'].iloc}点", delta=f"平均比 {rk['能力スコア'].iloc[0］ - avg:+.1f}")
         rk = rk.assign(馬券内目安=np.where(ibk, "🎯 圏内", "・"), 平均差=np.round(rk["能力スコア"] - avg, 1))
         t1, t2 = st.tabs(("📊 ランキング＆根拠コメント", "🔍 8大ファクター詳細内訳"))
         with t1:
