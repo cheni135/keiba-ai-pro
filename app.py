@@ -655,18 +655,3 @@ hide_index=True
 )
 else:
 st.write("該当する条件の馬がまだ登録されていません。")
-
----
-
-### 最後の仕上げ手順（あと3分であなたのスマホアプリが完成！）
-
-1. **GitHubでロボットを1回起動して最新データを作る.**
-   * `keiba-ai-pro` の **`More ▾` → `Actions` → `Auto Update JRA Races` → `Run workflow`** をタップして緑色のチェック（✅）がつくのを待つ。
-2. **StreamlitでWebサイトを公開する.**
-   * [Streamlit Community Cloud（作成画面）](https://share.streamlit.io/deploy "Streamlit Community Cloud") を開き、**Repository** に **`cheni135/keiba-ai-pro`**、**Main file path** に **`app.py`** を選んで **`Deploy`** をタップ！
-3. **（任意・1分）My印と収支を完全永続保存したい場合の設定.**
-   * GitHubの右上アイコン → `Settings` → 一番下の `Developer settings` → `Personal access tokens` → `Tokens (classic)` → `Generate new token (classic)` で `repo` にチェックを入れてトークンを発行。
-   * Streamlitの公開アプリ画面の右下 `Manage app` → `•••` → `Settings` → `Secrets` に以下を貼って保存すれば、あなたの印・メモ・収支がGitHubに完全自動保存されます！
-   ```toml
-   GITHUB_TOKEN = "ここに発行したトークンを貼る"
-   GITHUB_REPO = "cheni135/keiba-ai-pro"
