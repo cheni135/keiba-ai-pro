@@ -29,9 +29,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: |
-          pip install pandas numpy scikit-learn joblib playwright beautifulsoup4 requests
-          playwright install chromium
+        run: pip install pandas numpy scikit-learn joblib pdfplumber beautifulsoup4 requests
 
       - name: Run data fetch and AI scoring
         run: python fetch_and_predict.py
