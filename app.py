@@ -275,8 +275,8 @@ with col_b2:
         st.session_state["ledger_df"] = empty_led
         save_cloud_csv("my_ledger.csv", empty_led, "Reset my_ledger.csv")
         st.rerun()
-else:
-st.info("まだ収支データがありません。上のフォームから投資額と払戻額を記録すると、回収率や収支推移グラフが自動表示されます。")
+    else:
+        st.info("まだ収支データがありません。上のフォームから投資額と払戻額を記録すると、回収率や収支推移グラフが自動表示されます。")
 
 #==========================================
 
