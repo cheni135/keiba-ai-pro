@@ -270,11 +270,11 @@ with col_b1:
     csv_bytes = led_df.drop(columns=["累計収支"]).to_csv(index=False, encoding="utf-8-sig").encode("utf-8-sig")
     st.download_button("📥 手元バックアップCSVダウンロード", data=csv_bytes, file_name="my_keiba_ledger.csv", mime="text/csv")
 with col_b2:
-if st.button("🗑️ 履歴をすべてリセット"):
-empty_led = pd.DataFrame(columns=["レース", "券種", "投資額", "払戻額", "収支", "結果"])
-st.session_state["ledger_df"] = empty_led
-save_cloud_csv("my_ledger.csv", empty_led, "Reset my_ledger.csv")
-st.rerun()
+    if st.button("🗑️ 履歴をすべてリセット"):
+        empty_led = pd.DataFrame(columns=["レース", "券種", "投資額", "払戻額", "収支", "結果"])
+        st.session_state["ledger_df"] = empty_led
+        save_cloud_csv("my_ledger.csv", empty_led, "Reset my_ledger.csv")
+        st.rerun()
 else:
 st.info("まだ収支データがありません。上のフォームから投資額と払戻額を記録すると、回収率や収支推移グラフが自動表示されます。")
 
