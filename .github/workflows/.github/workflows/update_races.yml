@@ -1,0 +1,40 @@
+name: Auto Update JRA Races
+
+on:
+  schedule:
+    # 毎週金曜18時、土曜7時、日曜7時（日本時間）に自動実行
+    - cron: '0 9 * * 5'
+    - cron: '0 22 * * 5'
+    - cron: '0 22 * * 6'
+  workflow_dispatch: # スマホから手動で「今すぐ実行」ボタンも押せるようにする
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install pandas numpy scikit-learn joblib playwright beautifulsoup4 requests
+          playwright install chromium
+
+      - name: Run data fetch and AI scoring
+        run: python fetch_and_predict.py
+
+      - name: Commit and push updated data
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git diff-index --quiet HEAD || git commit -m "Auto update race predictions"
+          git push
