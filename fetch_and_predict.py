@@ -10,7 +10,7 @@ now = datetime.now(JST)
 def clean_txt(t):
     for i in range(10):
         t = t.replace(f"(cid:{9872+i})", str(i))
-    return re.sub(r'(.)\1', r'\1', t)
+    return t
 
 def jra_waku(tot, uma):
     if tot <= 8: return uma
@@ -40,31 +40,23 @@ for title, url in links[:4]:
                     lines = txt.split('\n')
                     head = "\n".join(lines[:15])
                     baba = "ダート" if "ダート" in head or "Dirt" in head else "芝"
-                    md = re.search(r'(\d,\d{3}|\d{4})', head)
+                    md = re.search(r'([1-3],\d{3})', head)
                     dist = int(md.group(1).replace(",", "")) if md else 1600
                     rcls, cbon = ("G1", 6.0) if ("ＧⅠ" in head or "G1" in head) and rnum >= 10 else ("G2", 4.5) if ("ＧⅡ" in head or "G2" in head) and rnum >= 10 else ("G3", 3.5) if ("ＧⅢ" in head or "G3" in head) and rnum >= 10 else ("OP", 2.5) if "オープン" in head else ("3勝", 1.5) if "3勝" in head else ("2勝", 0.8) if "2勝" in head else ("1勝", 0.0) if "1勝" in head else ("未勝利", -1.5) if "未勝利" in head else ("新馬", -1.0) if "新馬" in head else ("条件戦", 0.0)
                     rh = []
                     for il, ln in enumerate(lines):
                         if any(ng in ln for ng in ("賞金", "万円", "レコード", "コース", "発走", "サラ系", "定量", "別定", "ハンデ", "馬齢")):
                             continue
-                        mh = re.search(r'(?:^|\s)(\d{1,2})\s+([ァ-ヶー・]{2,14})\s+(?:牡|牝|セ|騙)(\d)', ln)
-                        if not mh:
-                            mh2 = re.search(r'([ァ-ヶー・]{2,14})\s+(?:牡|牝|セ|騙)(\d)', ln)
-                            if mh2:
-                                u_found = 0
-                                for bk in range(max(0, il - 1), min(len(lines), il + 2)):
-                                    mu = re.search(r'(?:^|\s)(\d{1,2})(?:\s|$)', lines[bk])
-                                    if mu and 1 <= int(mu.group(1)) <= 18:
-                                        u_found = int(mu.group(1)); break
-                                nm = mh2.group(1).strip()
-                                sa = ("牡" if "牡" in ln else "牝" if "牝" in ln else "セ") + mh2.group(2)
-                                uma = u_found
-                            else:
-                                continue
-                        else:
-                            uma = int(mh.group(1))
-                            nm = mh.group(2).strip()
-                            sa = ("牡" if "牡" in ln else "牝" if "牝" in ln else "セ") + mh.group(3)
+                        mh2 = re.search(r'([ァ-ヶー・]{2,15})\s*(牡|牝|セ|騙)\s*(\d)', ln)
+                        if not mh2:
+                            continue
+                        nm = mh2.group(1).strip()
+                        sa = mh2.group(2) + mh2.group(3)
+                        u_found = 0
+                        for bk in range(max(0, il - 1), min(len(lines), il + 2)):
+                            mu = re.search(r'(?:^|\s)(\d{1,2})(?:\s|$)', lines[bk])
+                            if mu and 1 <= int(mu.group(1)) <= 18:
+                                u_found = int(mu.group(1)); break
                         blk = "\n".join(lines[il:min(len(lines), il + 3)])
                         mj = re.search(r'(5[0-9](?:\.5)?|6[0-2](?:\.5)?)\s*([ァ-ヶー一-龠]{2,7})', blk)
                         kn = float(mj.group(1)) if mj else 56.0
@@ -73,7 +65,7 @@ for title, url in links[:4]:
                         ms = re.search(r'(キズナ|ロードカナロア|エピファネイア|ドゥラメンテ|キタサンブラック|モーリス|サートゥルナーリア|コントレイル|ドレフォン|ヘニーヒューズ|リアルスティール|シルバーステート|ルーラーシップ|ハービンジャー|オルフェーヴル|ゴールドシップ)', sub)
                         sr_name = ms.group(1) if ms else "その他"
                         if len(nm) >= 2 and not any(x == nm for x in rh):
-                            rh.append((uma, nm, sa, kn, jk, sr_name))
+                            rh.append((u_found, nm, sa, kn, jk, sr_name))
                     tot = len(rh)
                     for idx_h, (ur, nm, sa, kn, jk, sr_name) in enumerate(rh, 1):
                         uma = ur if 1 <= ur <= tot else idx_h
