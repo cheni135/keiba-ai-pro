@@ -3,6 +3,6 @@ pandas
 numpy
 scikit-learn
 joblib
-playwright
+pdfplumber
 beautifulsoup4
 requests
