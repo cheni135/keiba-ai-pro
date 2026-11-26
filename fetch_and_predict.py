@@ -29,22 +29,25 @@ for title, url in links[:4]:
             for pi, pg in enumerate(pdf.pages):
                 for ci in range(4):
                     rnum = pi * 4 + ci + 1
-                    txt = clean_txt(pg.crop((pg.width*ci*0.25, 0, pg.width*(ci+1)*0.25, pg.height)).extract_text(layout=True) or "")
+                    x0 = max(0, pg.width * (ci * 0.25 - 0.01))
+                    x1 = min(pg.width, pg.width * ((ci + 1) * 0.25 + 0.01))
+                    txt = clean_txt(pg.crop((x0, 0, x1, pg.height)).extract_text(layout=True) or "")
                     lines = txt.split('\n')
-                    baba = "ダート" if "ダート" in txt or "Dirt" in txt else "芝"
-                    md = re.search(r'(\d,\d{3})', txt)
+                    head_txt = "\n".join(lines[:10])
+                    baba = "ダート" if "ダート" in head_txt or "Dirt" in head_txt else "芝"
+                    md = re.search(r'(\d,\d{3})', head_txt)
                     dist = int(md.group(1).replace(",", "")) if md else 1600
-                    rcls, cbon = ("G1", 6.0) if "ＧⅠ" in txt or "G1" in txt else ("G2", 4.5) if "ＧⅡ" in txt or "G2" in txt else ("G3", 3.5) if "ＧⅢ" in txt or "G3" in txt else ("OP", 2.5) if "オープン" in txt else ("条件戦", 0.0)
+                    rcls, cbon = ("G1", 6.0) if ("ＧⅠ" in head_txt or "G1" in head_txt) and rnum >= 10 else ("G2", 4.5) if ("ＧⅡ" in head_txt or "G2" in head_txt) and rnum >= 10 else ("G3", 3.5) if ("ＧⅢ" in head_txt or "G3" in head_txt) and rnum >= 10 else ("OP", 2.5) if "オープン" in head_txt else ("3勝", 1.5) if "3勝" in head_txt else ("2勝", 0.8) if "2勝" in head_txt else ("1勝", 0.0) if "1勝" in head_txt else ("未勝利", -1.5) if "未勝利" in head_txt else ("新馬", -1.0) if "新馬" in head_txt else ("条件戦", 0.0)
                     for il, ln in enumerate(lines):
-                        me = re.match(r'^\s*(\d{1,2})\s+([A-Za-z][A-Za-z\s\'\-\.\(（\)）]{2,})\s+(?:鹿|黒鹿|青鹿|栗|栃栗|芦|白|青)\s+([A-Za-z][A-Za-z\.\s]+)', ln)
+                        me = re.match(r'^\s*(\d{1,2})\s+[A-Za-z\(\)（）][A-Za-z\s\'\-\.\(（\)）]{1,}\s+(?:鹿|黒鹿|青鹿|栗|栃栗|芦|白|青)\s+([A-Za-z][A-Za-z\.\s]+)', ln)
                         if me and il > 0:
                             uma = int(me.group(1))
-                            prev = re.sub(r'^\s*(?:白|黒|赤|青|黄|緑|橙|桃|Wht\.|Blk\.|Red\.|Blu\.|Yel\.|Grn\.|Org\.|Pnk\.)\s*', '', lines[il-1].replace("市場取", "").replace("引馬", ""))
+                            prev = re.sub(r'^\s*(?:白|黒|赤|青|黄|緑|橙|桃|Wht\.|Blk\.|Red\.|Blu\.|Yel\.|Grn\.|Org\.|Pnk\.|\d{1,2})\s*', '', lines[il-1].replace("市場取", "").replace("引馬", ""))
                             mn = re.search(r'^(.*?)\s*(?:牡|牝|セ|騙)', prev)
-                            name = re.sub(r'\s+', '', mn.group(1)).strip() if mn else re.sub(r'[^ァ-ヶー・]', '', prev[:18]).strip()
+                            name = re.sub(r'[^ァ-ヶー・A-Za-z0-9]', '', mn.group(1)).strip() if mn else re.sub(r'[^ァ-ヶー・]', '', prev[:20]).strip()
                             mj = re.search(r'(5[0-9](?:\.5)?|6[0-2](?:\.5)?)\s*([ァ-ヶー一-龠A-Za-z\.．\s]{2,12})(?:（|\(|$)', prev)
                             kin = float(mj.group(1)) if mj else 56.0
-                            jk = re.sub(r'\s+', '', mj.group(2)).strip() if mj and len(re.sub(r'\s+', '', mj.group(2)).strip()) >= 2 else me.group(3).strip()
+                            jk = re.sub(r'\s+', '', mj.group(2)).strip() if mj and len(re.sub(r'\s+', '', mj.group(2)).strip()) >= 2 else me.group(2).strip()
                             sub = "\n".join(lines[il+1:min(len(lines), il+6)])
                             ms = re.search(r'(キズナ|ロードカナロア|エピファネイア|ドゥラメンテ|キタサンブラック|モーリス|サートゥルナーリア|コントレイル|ドレフォン|ヘニーヒューズ|リアルスティール|シルバーステート|ルーラーシップ|ハービンジャー|オルフェーヴル|ゴールドシップ)', sub)
                             sire = ms.group(1) if ms else "その他"
