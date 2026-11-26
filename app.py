@@ -1,3 +1,11 @@
+import streamlit as st
+import pandas as pd
+import numpy as np
+import requests, base64, io, os
+from datetime import datetime, timedelta, timezone
+
+st.set_page_config(page_title="競馬AI Pro", layout="wide")
+
 st.markdown("""
 <style>
 .nk-header { background: linear-gradient(90deg, #1e3a8a, #2563eb); color: #ffffff; padding: 12px 16px; border-radius: 8px; margin-bottom: 10px; font-weight: bold; font-size: 18px; }
