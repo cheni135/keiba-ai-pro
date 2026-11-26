@@ -1,4 +1,4 @@
-import requests, re, urllib.parse
+import requests, pdfplumber, io, re, urllib.parse
 from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
@@ -7,90 +7,82 @@ from datetime import datetime, timedelta, timezone
 JST = timezone(timedelta(hours=9))
 now = datetime.now(JST)
 
+def clean_txt(t):
+    if not t: return ""
+    for i in range(10):
+        t = t.replace(f"(cid:{9872+i})", str(i))
+    return t
+
 def jra_waku(tot, uma):
     if tot <= 8: return uma
     ds = 9 - (tot - 8)
     return uma if uma < ds else ds + (uma - ds) // 2
 
 s = chr(47)
-jra_top = f"https:{s}{s}www.jra.go.jp{s}"
-jra_db = f"https:{s}{s}www.jra.go.jp{s}JRADB{s}accessD.html"
-hdr = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-    "Referer": f"https:{s}{s}www.jra.go.jp{s}keiba{s}"
-}
+base = f"https:{s}{s}www.jra.go.jp{s}keiba{s}rpdf{s}"
+hdr = {"User-Agent": "Mozilla/5.0"}
+soup = BeautifulSoup(requests.get(base, headers=hdr, timeout=20).content.decode("shift_jis", "ignore"), "html.parser")
+links = [(a.text.strip(), base + a["href"]) for a in soup.find_all("a", href=True) if a["href"].endswith(".pdf") and "競馬場" in a.text and "特別版" not in a.text]
 
 rows = []
-try:
-    # JRAトップおよび競馬メニューから出馬表の最新cnameを取得
-    r0 = requests.get(f"https:{s}{s}www.jra.go.jp{s}keiba{s}", headers=hdr, timeout=15)
-    r0.encoding = "shift_jis"
-    c_top = re.findall(r"accessD\.html['\"],\s*['\"](pw01dli00/[A-Z0-9]+)['\"]", r0.text)
-    if not c_top:
-        rt = requests.get(jra_top, headers=hdr, timeout=15)
-        rt.encoding = "shift_jis"
-        c_top = re.findall(r"accessD\.html['\"],\s*['\"](pw01dli00/[A-Z0-9]+)['\"]", rt.text)
-    start_cname = c_top if c_top else "pw01dli00/F3"
+for title, url in links[:6]:
+    pm = re.search(r'(札幌|函館|福島|新潟|東京|中山|中京|京都|阪神|小倉)', title)
+    place = pm.group(1) if pm else title[:4]
+    dm = re.search(r'(\d+回.*?競馬場\d+日)', title)
+    k_label = dm.group(1) if dm else place
+    try:
+        with pdfplumber.open(io.BytesIO(requests.get(url, headers=hdr, timeout=25).content)) as pdf:
+            for pi, pg in enumerate(pdf.pages):
+                for ci in range(4):
+                    rnum = pi * 4 + ci + 1
+                    col_w = pg.width * 0.25
+                    x0 = pg.width * (ci * 0.25)
+                    # レース全体のヘッダー（距離・クラス）は列全体から取得
+                    head = clean_txt(pg.crop((x0, 0, x0 + col_w, pg.height * 0.22)).extract_text() or "")
+                    baba = "ダート" if "ダート" in head or "Dirt" in head else "芝"
+                    md = re.search(r'([1-3],\d{3})', head)
+                    dist = int(md.group(1).replace(",", "")) if md else 1600
+                    rcls, cbon = ("G1", 6.0) if ("ＧⅠ" in head or "G1" in head) and rnum >= 10 else ("G2", 4.5) if ("ＧⅡ" in head or "G2" in head) and rnum >= 10 else ("G3", 3.5) if ("ＧⅢ" in head or "G3" in head) and rnum >= 10 else ("OP", 2.5) if "オープン" in head else ("3勝", 1.5) if "3勝" in head else ("2勝", 0.8) if "2勝" in head else ("1勝", 0.0) if "1勝" in head else ("未勝利", -1.5) if "未勝利" in head else ("新馬", -1.0) if "新馬" in head else ("条件戦", 0.0)
 
-    r1 = requests.post(jra_db, data={"cname": start_cname}, headers=hdr, timeout=15)
-    r1.encoding = "shift_jis"
-    day_cnames = list(dict.fromkeys(re.findall(r"accessD\.html['\"],\s*['\"](pw01dde01/[A-Z0-9]+)['\"]", r1.text)))
-    print("JRA HTML Days:", len(day_cnames))
+                    # 右半分の前走欄を完全にカットし、左半分（馬番・馬名・騎手・血統エリア）だけを切り抜く！
+                    left_txt = clean_txt(pg.crop((x0, pg.height * 0.12, x0 + col_w * 0.56, pg.height * 0.96)).extract_text(layout=True) or "")
+                    lines = left_txt.split("\n")
+                    rh = []
+                    for il, ln in enumerate(lines):
+                        m_sa = re.search(r'(牡|牝|セ|騙)\s*(\d)', ln)
+                        if not m_sa: continue
+                        sa = m_sa.group(1) + m_sa.group(2)
+                        # 性齢の左側（または直前の行）にあるカタカナ馬名を取得
+                        before_sa = ln[:m_sa.start()]
+                        m_nm = re.search(r'([ァ-ヶー・]{2,15})', before_sa)
+                        if not m_nm and il > 0:
+                            m_nm = re.search(r'([ァ-ヶー・]{2,15})', lines[il - 1])
+                        if not m_nm: continue
+                        nm = m_nm.group(1).strip()
 
-    for dc in day_cnames[:4]:
-        rd = requests.post(jra_db, data={"cname": dc}, headers=hdr, timeout=15)
-        rd.encoding = "shift_jis"
-        race_cnames = list(dict.fromkeys(re.findall(r"accessD\.html['\"],\s*['\"](pw01dde10/[A-Z0-9]+)['\"]", rd.text)))
-        for rc in race_cnames[:12]:
-            rr = requests.post(jra_db, data={"cname": rc}, headers=hdr, timeout=15)
-            rr.encoding = "shift_jis"
-            rsp = BeautifulSoup(rr.text, "html.parser")
-            head_txt = rsp.get_text(" ", strip=True)[:700]
-            pm = re.search(r'(\d+回\s*(?:札幌|函館|福島|新潟|東京|中山|中京|京都|阪神|小倉)\s*\d+日)', head_txt)
-            k_label = pm.group(1).replace(" ", "") if pm else "JRA開催"
-            pl_m = re.search(r'(札幌|函館|福島|新潟|東京|中山|中京|京都|阪神|小倉)', k_label)
-            place = pl_m.group(1) if pl_m else "中央"
-            rm = re.search(r'(\d{1,2})\s*レース', head_txt)
-            rnum = int(rm.group(1)) if rm else 1
-            baba = "ダート" if "ダート" in head_txt else "芝"
-            dm = re.search(r'([1-3],\d{3})\s*メートル', head_txt)
-            dist = int(dm.group(1).replace(",", "")) if dm else 1600
-            rcls, cbon = ("G1", 6.0) if ("ＧⅠ" in head_txt or "G1" in head_txt) and rnum >= 10 else ("G2", 4.5) if ("ＧⅡ" in head_txt or "G2" in head_txt) and rnum >= 10 else ("G3", 3.5) if ("ＧⅢ" in head_txt or "G3" in head_txt) and rnum >= 10 else ("OP", 2.5) if "オープン" in head_txt else ("3勝", 1.5) if "3勝" in head_txt else ("2勝", 0.8) if "2勝" in head_txt else ("1勝", 0.0) if "1勝" in head_txt else ("未勝利", -1.5) if "未勝利" in head_txt else ("新馬", -1.0) if "新馬" in head_txt else ("条件戦", 0.0)
-            rname_tag = rsp.select_one("span.race_name") or rsp.select_one("div.race_title")
-            rname_str = rname_tag.text.strip() if rname_tag else f"[{rcls}]"
+                        blk = "\n".join(lines[max(0, il - 1):min(len(lines), il + 3)])
+                        m_kn = re.search(r'(5[0-9](?:\.5)?|6[0-2](?:\.5)?)', blk)
+                        kn = float(m_kn.group(1)) if m_kn else 56.0
+                        m_jk = re.search(r'(?:5[0-9](?:\.5)?|6[0-2](?:\.5)?)\s*([ァ-ヶー一-龠]{2,6})', blk)
+                        jk = re.sub(r'(初出走|美浦|栗東|地方|海外).*$', '', m_jk.group(1)).strip() if m_jk else "騎手未定"
 
-            trs = rsp.select("table.basic tbody tr")
-            if not trs:
-                trs = [tr for tr in rsp.select("table tr") if tr.select_one("td.horse") or tr.select_one("td.num")]
-            tot = len(trs)
-            for idx_h, tr in enumerate(trs, 1):
-                tds = tr.find_all("td")
-                if len(tds) < 4: continue
-                row_s = " ".join(td.text.strip() for td in tds)
-                um_td = tr.select_one("td.num")
-                uma = int(re.sub(r'\D', '', um_td.text)) if um_td and re.sub(r'\D', '', um_td.text) else idx_h
-                wk_td = tr.select_one("td.waku img")
-                wk = int(re.sub(r'\D', '', wk_td.get("alt", ""))) if wk_td and re.sub(r'\D', '', wk_td.get("alt", "")) else jra_waku(tot, uma)
-                nm_tag = tr.select_one("td.horse div.name a") or tr.select_one("td.horse a") or tr.select_one("td.horse")
-                nm = re.sub(r'\s+', '', nm_tag.text).strip() if nm_tag else ""
-                if not nm: continue
-                jk_tag = tr.select_one("td.jockey a") or tr.select_one("td.jockey")
-                jk = re.sub(r'\s+', '', jk_tag.text).strip() if jk_tag else "騎手未定"
-                sa_m = re.search(r'(牡|牝|セ)\d', row_s)
-                sa = sa_m.group(0) if sa_m else "牡3"
-                kn_m = re.search(r'\b(5[0-9](?:\.5)?|6[0-2](?:\.5)?)\b', row_s)
-                kn = float(kn_m.group(1)) if kn_m else 56.0
-                sire = "主要血統"
-                ped = tr.select_one("td.pedigree")
-                if ped:
-                    plines = [x.strip() for x in ped.get_text("\n").split("\n") if x.strip()]
-                    if plines: sire = plines
-                nk = f"https:{s}{s}://netkeiba.com{s}?pid=horse_list&word=" + urllib.parse.quote(nm, encoding="euc-jp", errors="ignore")
-                rows.append({"開催":k_label,"競馬場":place,"レース番号":rnum,"レースクラス":rcls,"クラス補正":cbon,"レース":f"{rnum}R {rname_str} ({baba}{dist}m)","馬場":baba,"距離":dist,"枠番":wk,"馬番":uma,"馬名":nm,"性齢":sa,"netkeiba":nk,"騎手":jk,"父馬":sire,"斤量":kn})
-except Exception as e:
-    print("JRA HTML error:", e)
+                        sr_name = "主要血統"
+                        if il + 1 < len(lines):
+                            cand_sire = re.sub(r'[^ァ-ヶーA-Za-z]', '', lines[il + 1])
+                            if 2 <= len(cand_sire) <= 14 and cand_sire != nm:
+                                sr_name = cand_sire
 
-print("HTML extracted rows:", len(rows))
+                        if len(nm) >= 2 and not any(x == nm for x in rh):
+                            rh.append((len(rh) + 1, nm, sa, kn, jk, sr_name))
+
+                    tot = len(rh)
+                    for uma, nm, sa, kn, jk, sr_name in rh:
+                        wk = jra_waku(tot, uma)
+                        nk = f"https:{s}{s}://netkeiba.com{s}?pid=horse_list&word=" + urllib.parse.quote(nm, encoding="euc-jp", errors="ignore")
+                        rows.append({"開催":k_label,"競馬場":place,"レース番号":rnum,"レースクラス":rcls,"クラス補正":cbon,"レース":f"{rnum}R [{rcls}] ({baba}{dist}m)","馬場":baba,"距離":dist,"枠番":wk,"馬番":uma,"馬名":nm,"性齢":sa,"netkeiba":nk,"騎手":jk,"父馬":sr_name,"斤量":kn})
+    except Exception as e:
+        print("Skip:", e)
+
 if rows:
     df = pd.DataFrame(rows).drop_duplicates(subset=["開催","レース番号","馬番"]).sort_values(["開催","レース番号","馬番"]).reset_index(drop=True)
     np.random.seed(int(now.strftime("%Y%m%d")))
@@ -122,4 +114,4 @@ if rows:
         wp[ix], t3p[ix], odds[ix], exps[ix] = np.round(w*100,1), np.round(t3*100,1), od, np.round(((w*od*0.5)+(t3*(od*0.28+0.7)*0.5))*100,1)
     df["AI予測勝率"], df["AI予測3着内率"], df["単勝オッズ"], df["期待値スコア"], df["更新日時"] = wp, t3p, odds, exps, now.strftime("%Y/%m/%d %H:%M")
     df.to_csv("latest_races.csv", index=False, encoding="utf-8-sig")
-    print("Saved HTML rows:", len(df))
+    print("Saved rows:", len(df))
