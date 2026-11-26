@@ -59,7 +59,7 @@ if "cloud_loaded" not in st.session_state:
     st.session_state["cloud_loaded"] = True
 
 # ヘッダー＆ワンタップ最新オッズ更新ボタン
-h1, h2 = st.columns([3, 1])
+h1, h2 = st.columns((2,1))
 with h1:
     st.markdown("### 🏇 競馬AI Pro")
 with h2:
@@ -83,7 +83,7 @@ if not os.path.exists("latest_races.csv"):
 all_df = pd.read_csv("latest_races.csv")
 if all_df.empty:
     st.warning("データが空です。"); st.stop()
-st.caption(f"🔄 最終更新: {all_df['更新日時'].iat if '更新日時' in all_df.columns else '自動更新済'}")
+st.caption(f"🔄 最終更新: {all_df['更新日時'].iat[0] if '更新日時' in all_df.columns else '自動更新済'}")
 def score_rank(v):
     return "S（超抜）" if v >= 70 else "A（優秀）" if v >= 60 else "B（平均以上）" if v >= 50 else "C（平均未満）"
 
@@ -109,10 +109,10 @@ if "勝負レース" in page_mode:
     found = False
     for (ks, rn), g in all_df.groupby(["開催", "レース"], sort=False):
         sg = g.sort_values("能力スコア", ascending=False)
-        t1 = sg.iloc
-        t2 = sg.iloc if len(sg) > 1 else t1
+        t1 = sg.iloc[0]
+        t2 = sg.iloc[1] if len(sg) > 1 else t1
         d12 = round(float(t1["能力スコア"]) - float(t2["能力スコア"]), 1)
-        eh = g.sort_values("期待値スコア", ascending=False).iloc
+        eh = g.sort_values("期待値スコア", ascending=False).iloc[0]
         bg = "👑 AI鉄板・自信あり" if float(t1["能力スコア"]) >= 66 and d12 >= 4.5 else "💎 激アツお宝レース" if float(g["期待値スコア"].max()) >= 125 else "🔥 有力軸信頼" if d12 >= 3.5 else ""
         if bg:
             found = True
@@ -188,7 +188,7 @@ else:
         elif sort_by == "オッズ人気順": rdf = rdf.sort_values("単勝オッズ", ascending=True)
 
         with st.expander("✏️ My印・Myメモを登録・保存する"):
-            mc1, mc2, mc3 = st.columns()
+            mc1, mc2, mc3 = st.columns(3)
             sel_u = mc1.selectbox("馬番を選択", tuple(f"{int(r['馬番'])} {r['馬名']}" for r in rdf.sort_values("馬番").to_dict("records")))
             u_num = int(sel_u.split())
             new_m = mc2.selectbox("My印", ("", "◎", "○", "▲", "△", "☆", "✓", "消"), index=("", "◎", "○", "▲", "△", "☆", "✓", "消").index(smk.get(u_num, "")))
@@ -236,7 +236,7 @@ else:
         m1, m2, m3 = st.columns(3)
         m1.metric("📊 レース平均", f"{avg}点")
         m2.metric("🎯 馬券内目安", f"{brd}点 / 25%", delta=f"圏内:{int(ibk.sum())}頭")
-        m3.metric("🏆 トップ評価", f"{rk['能力スコア'].iat}点", delta=f"平均比 {rk['能力スコア'].iat - avg:+.1f}")
+        m3.metric("🏆 トップ評価", f"{rk['能力スコア'].iat[0]}点", delta=f"平均比 {rk['能力スコア'].iat - avg:+.1f}")
         for r in rk.head(5).to_dict("records"):
             st.info(f"**{r['AI印']} {int(r['馬番'])}番 {r['馬名']}（{r['単勝オッズ']}倍 / 勝率{r['AI予測勝率']}% / 3着内{r['AI予測3着内率']}%）**\n\n{ai_comment(r, avg)}")
         sh = st.selectbox("詳細内訳を見る馬", rk["馬名"])
