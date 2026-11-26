@@ -1,12 +1,3 @@
-
----
-
-### 完成版ファイル②：`app.py`（6ページ構成＋netkeiba直通リンク＋クラウド永続保存対応）
-
-1. SafariでGitHubリポジトリ（`keiba-ai-pro`）の **`app.py`** を開く（なければ新規作成）。
-2. 中身をすべて消して、以下のコードを**上から下まで全部コピー＆ペースト**し、**`Commit changes`** で保存する。
-
-```python
 import streamlit as st
 import pandas as pd
 import numpy as np
