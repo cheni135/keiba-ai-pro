@@ -12,6 +12,11 @@ def clean_txt(t):
         t = t.replace(f"(cid:{9872+i})", str(i))
     return re.sub(r'(.)\1', r'\1', t)
 
+def jra_waku(tot, uma):
+    if tot <= 8: return uma
+    ds = 9 - (tot - 8)
+    return uma if uma < ds else ds + (uma - ds) // 2
+
 s = chr(47)
 base = "https:" + s + s + "www.jra.go.jp" + s + "keiba" + s + "rpdf" + s
 hdr = {"User-Agent": "Mozilla/5.0"}
@@ -29,32 +34,43 @@ for title, url in links[:4]:
             for pi, pg in enumerate(pdf.pages):
                 for ci in range(4):
                     rnum = pi * 4 + ci + 1
-                    x0 = max(0, pg.width * (ci * 0.25 - 0.01))
-                    x1 = min(pg.width, pg.width * ((ci + 1) * 0.25 + 0.01))
+                    x0 = max(0, pg.width * (ci * 0.25 - 0.015))
+                    x1 = min(pg.width, pg.width * ((ci + 1) * 0.25 + 0.015))
                     txt = clean_txt(pg.crop((x0, 0, x1, pg.height)).extract_text(layout=True) or "")
                     lines = txt.split('\n')
-                    head_txt = "\n".join(lines[:10])
-                    baba = "ダート" if "ダート" in head_txt or "Dirt" in head_txt else "芝"
-                    md = re.search(r'(\d,\d{3})', head_txt)
+                    head = "\n".join(lines[:12])
+                    baba = "ダート" if "ダート" in head or "Dirt" in head else "芝"
+                    md = re.search(r'(\d,\d{3}|\d{4})\s*(?:メートル|m|Ｍ)', head)
                     dist = int(md.group(1).replace(",", "")) if md else 1600
-                    rcls, cbon = ("G1", 6.0) if ("ＧⅠ" in head_txt or "G1" in head_txt) and rnum >= 10 else ("G2", 4.5) if ("ＧⅡ" in head_txt or "G2" in head_txt) and rnum >= 10 else ("G3", 3.5) if ("ＧⅢ" in head_txt or "G3" in head_txt) and rnum >= 10 else ("OP", 2.5) if "オープン" in head_txt else ("3勝", 1.5) if "3勝" in head_txt else ("2勝", 0.8) if "2勝" in head_txt else ("1勝", 0.0) if "1勝" in head_txt else ("未勝利", -1.5) if "未勝利" in head_txt else ("新馬", -1.0) if "新馬" in head_txt else ("条件戦", 0.0)
+                    rcls, cbon = ("G1", 6.0) if ("ＧⅠ" in head or "G1" in head) and rnum >= 10 else ("G2", 4.5) if ("ＧⅡ" in head or "G2" in head) and rnum >= 10 else ("G3", 3.5) if ("ＧⅢ" in head or "G3" in head) and rnum >= 10 else ("OP", 2.5) if "オープン" in head else ("3勝", 1.5) if "3勝" in head else ("2勝", 0.8) if "2勝" in head else ("1勝", 0.0) if "1勝" in head else ("未勝利", -1.5) if "未勝利" in head else ("新馬", -1.0) if "新馬" in head else ("条件戦", 0.0)
+                    rh = []
                     for il, ln in enumerate(lines):
-                        me = re.match(r'^\s*(\d{1,2})\s+[A-Za-z\(\)（）][A-Za-z\s\'\-\.\(（\)）]{1,}\s+(?:鹿|黒鹿|青鹿|栗|栃栗|芦|白|青)\s+([A-Za-z][A-Za-z\.\s]+)', ln)
-                        if me and il > 0:
-                            uma = int(me.group(1))
-                            prev = re.sub(r'^\s*(?:白|黒|赤|青|黄|緑|橙|桃|Wht\.|Blk\.|Red\.|Blu\.|Yel\.|Grn\.|Org\.|Pnk\.|\d{1,2})\s*', '', lines[il-1].replace("市場取", "").replace("引馬", ""))
-                            mn = re.search(r'^(.*?)\s*(?:牡|牝|セ|騙)', prev)
-                            name = re.sub(r'[^ァ-ヶー・A-Za-z0-9]', '', mn.group(1)).strip() if mn else re.sub(r'[^ァ-ヶー・]', '', prev[:20]).strip()
-                            mj = re.search(r'(5[0-9](?:\.5)?|6[0-2](?:\.5)?)\s*([ァ-ヶー一-龠A-Za-z\.．\s]{2,12})(?:（|\(|$)', prev)
-                            kin = float(mj.group(1)) if mj else 56.0
-                            jk = re.sub(r'\s+', '', mj.group(2)).strip() if mj and len(re.sub(r'\s+', '', mj.group(2)).strip()) >= 2 else me.group(2).strip()
+                        mh = re.search(r'([ァ-ヶー・]{2,14})\s*(牡|牝|セ|騙)(\d)\s*(5[0-9](?:\.5)?|6[0-2](?:\.5)?)\s*([ァ-ヶー一-龠]{2,7})', ln)
+                        if mh:
+                            nm = mh.group(1).strip()
+                            sa = mh.group(2) + mh.group(3)
+                            kn = float(mh.group(4))
+                            jk = re.sub(r'(初出走|美浦|栗東|地方|海外).*$', '', mh.group(5)).strip()
+                            uma = 0
+                            for bk in range(max(0, il - 1), min(len(lines), il + 3)):
+                                mu = re.match(r'^\s*(\d{1,2})\s+', lines[bk])
+                                if mu and 1 <= int(mu.group(1)) <= 18:
+                                    uma = int(mu.group(1)); break
                             sub = "\n".join(lines[il+1:min(len(lines), il+6)])
                             ms = re.search(r'(キズナ|ロードカナロア|エピファネイア|ドゥラメンテ|キタサンブラック|モーリス|サートゥルナーリア|コントレイル|ドレフォン|ヘニーヒューズ|リアルスティール|シルバーステート|ルーラーシップ|ハービンジャー|オルフェーヴル|ゴールドシップ)', sub)
-                            sire = ms.group(1) if ms else "その他"
-                            waku = {"白":1,"黒":2,"赤":3,"青":4,"黄":5,"緑":6,"橙":7,"桃":8}.get(lines[il-1].strip()[:1], min(8, (uma+1)//2))
-                            nk = "https:" + s + s + "://netkeiba.com" + s + "?pid=horse_list&word=" + urllib.parse.quote(name, encoding="euc-jp", errors="ignore")
-                            if 1 <= uma <= 18 and len(name) >= 2:
-                                rows.append({"開催":k_label,"競馬場":place,"レース番号":rnum,"レースクラス":rcls,"クラス補正":cbon,"レース":f"{rnum}R [{rcls}] ({baba}{dist}m)","馬場":baba,"距離":dist,"枠番":waku,"馬番":uma,"馬名":name,"netkeiba":nk,"騎手":jk,"父馬":sire,"斤量":kin})
+                            sr_name = ms.group(1) if ms else "その他"
+                            if len(nm) >= 2 and len(jk) >= 2:
+                                rh.append((uma, nm, sa, kn, jk, sr_name))
+                    seen, cln = set(), []
+                    for it in rh:
+                        if it[1] not in seen:
+                            seen.add(it[1]); cln.append(it)
+                    tot = len(cln)
+                    for idx_h, (ur, nm, sa, kn, jk, sr_name) in enumerate(cln, 1):
+                        uma = ur if 1 <= ur <= tot else idx_h
+                        wk = jra_waku(tot, uma)
+                        nk = "https:" + s + s + "://netkeiba.com" + s + "?pid=horse_list&word=" + urllib.parse.quote(nm, encoding="euc-jp", errors="ignore")
+                        rows.append({"開催":k_label,"競馬場":place,"レース番号":rnum,"レースクラス":rcls,"クラス補正":cbon,"レース":f"{rnum}R [{rcls}] ({baba}{dist}m)","馬場":baba,"距離":dist,"枠番":wk,"馬番":uma,"馬名":nm,"性齢":sa,"netkeiba":nk,"騎手":jk,"父馬":sr_name,"斤量":kn})
     except Exception as e:
         print("Skip:", e)
 
@@ -63,7 +79,7 @@ if not df.empty:
     np.random.seed(int(now.strftime("%Y%m%d")))
     n = len(df)
     sires = {"キズナ":63,"ロードカナロア":62,"エピファネイア":61,"ドゥラメンテ":65,"キタサンブラック":66,"モーリス":59,"サートゥルナーリア":61,"コントレイル":60,"ドレフォン":60,"ヘニーヒューズ":63}
-    tjk = {"ルメ":60,"Lemaire":60,"川田":59,"Kawada":59,"モレイラ":61,"Moreira":61,"戸崎":55,"横山":54,"坂井":56,"武豊":54,"松山":54,"デムー":56}
+    tjk = {"ルメ":60,"川田":59,"モレイラ":61,"戸崎":55,"横山":54,"坂井":56,"武豊":54,"松山":54,"デムー":56}
     df["脚質"] = [("逃げ","先行","差し","追込")[i%4] for i in range(n)]
     df["当日馬場状態"] = "良"
     df["コース替わり"] = np.random.choice(["","初ダート","初芝"], n, p=[0.86,0.08,0.06])
