@@ -45,7 +45,7 @@ if all_df.empty:
     st.warning("データが空です。")
     st.stop()
 
-last_upd = str(all_df.get("更新日時").iloc[0］) if "更新日時" in all_df.columns else "自動更新済み"
+last_upd = str(all_df.get("更新日時").iloc[0]) if "更新日時" in all_df.columns else "自動更新済み"
 tk_c, _ = get_gh()
 st.caption(f"🔄 AI最終更新: {last_upd} ｜ {'☁️ クラウド保存ON' if tk_c else '💾 ローカル保存モード'}")
 
