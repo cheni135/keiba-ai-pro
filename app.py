@@ -1,30 +1,23 @@
-import streamlit as st
-import pandas as pd
-import numpy as np
-import requests, base64, io, os
-from datetime import datetime, timedelta, timezone
-
-st.set_page_config(page_title="競馬AI Pro", layout="wide")
-
 st.markdown("""
 <style>
-.stApp { background-color: #121417; color: #f0f2f5; }
-.nk-card { background: #1e2126; border: 1px solid #2e323a; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; border-radius: 8px; margin-bottom: 8px; }
+.nk-header { background: linear-gradient(90deg, #1e3a8a, #2563eb); color: #ffffff; padding: 12px 16px; border-radius: 8px; margin-bottom: 10px; font-weight: bold; font-size: 18px; }
+.nk-card { background: #1e2126; color: #f0f2f5; border: 1px solid #374151; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; border-radius: 8px; margin-bottom: 8px; }
 .waku-box { width: 32px; height: 36px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px; margin-right: 10px; flex-shrink: 0; }
 .w1 { background: #ffffff; color: #111111; }
-.w2 { background: #222222; color: #ffffff; border: 1px solid #555; }
+.w2 { background: #222222; color: #ffffff; border: 1px solid #666; }
 .w3 { background: #d93829; color: #ffffff; }
 .w4 { background: #2563eb; color: #ffffff; }
 .w5 { background: #eab308; color: #111111; }
 .w6 { background: #16a34a; color: #ffffff; }
 .w7 { background: #ea580c; color: #ffffff; }
 .w8 { background: #ec4899; color: #ffffff; }
-.r-badge { background: #1d4ed8; color: #fff; font-weight: bold; padding: 3px 8px; border-radius: 4px; font-size: 13px; margin-right: 6px; }
+.r-badge { background: #2563eb; color: #fff; font-weight: bold; padding: 3px 8px; border-radius: 4px; font-size: 13px; margin-right: 6px; }
 .cls-badge { background: #374151; color: #e5e7eb; padding: 2px 6px; border-radius: 4px; font-size: 11px; margin-left: 6px; }
 .cls-g1 { background: #dc2626; color: #fff; }
 .odds-txt { color: #f87171; font-weight: bold; font-size: 16px; text-align: right; }
 .score-pill { background: #2563eb; color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 12px; font-weight: bold; }
 </style>
+<div class="nk-header">🏇 競馬AI Pro（netkeibaスタイル）</div>
 """, unsafe_allow_html=True)
 
 def get_gh():
