@@ -23,7 +23,7 @@ if os.path.exists("sp_raw.txt"):
     if "芝" not in txt and "ダ" not in txt:
         txt = raw_b.decode("euc-jp", errors="ignore")
 
-    blocks = re.split(r'(?=\d{1,2}回(?:札幌|函館|福島|新潟|東京|中山|中京|京都|阪神|小倉)\d{1,2}日)', txt) if "<!-- RACE_SPLIT -->" not in txt else txt.split("<!-- RACE_SPLIT -->")
+        blocks = re.split(r'(?=(?:1[0-2]|[1-9])R\s)', txt) if "<!-- RACE_SPLIT -->" not in txt else txt.split("<!-- RACE_SPLIT -->")
 
     for idx_b, blk in enumerate(blocks, 1):
         flat = re.sub(r'\s+', ' ', blk).strip()
