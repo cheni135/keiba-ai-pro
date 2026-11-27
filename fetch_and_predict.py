@@ -32,35 +32,26 @@ if os.path.exists("sp_raw.txt"):
         k_m = re.search(r'(\d{1,2}回' + place + r'\d{1,2}日)', flat[:800])
         k_label = k_m.group(1) if k_m else f"5回{place}8日"
 
-        # 距離・馬場：発走時刻の近くにある「芝2400m」「ダ1600m」を正確に抽出
         cd_m = re.search(r'(?:発走|15:|14:|13:|12:|11:|10:|09:)\d{0,2}\s*(芝|ダ)\s*(\d{4})m', flat[:1200]) or re.search(r'(芝|ダ)\s*(\d{4})m', flat[:1000])
         baba = "ダート" if cd_m and cd_m.group(1) == "ダ" else "芝"
         dist = int(cd_m.group(2)) if cd_m else 1600
 
-        # 正式レース名を抽出
         rn_m = re.search(r'(?:1[0-2]|[1-9])R\s+([^\s\(\)芝ダ障0-9]{2,18})', flat[:800])
         cand_rn = rn_m.group(1) if rn_m else ""
         r_name = cand_rn if cand_rn and not any(ng in cand_rn for ng in ng_words) else f"{rnum}R"
         rcls, cbon = ("G1", 6.0) if ("G1" in flat[:1000] or "ジャパン" in r_name) and rnum >= 10 else ("G2", 4.5) if "G2" in flat[:1000] and rnum >= 10 else ("G3", 3.5) if "G3" in flat[:1000] and rnum >= 10 else ("OP", 2.5) if "オープン" in r_name else ("条件戦", 0.0)
 
-        # 各馬の「馬名 ＋ 性齢」の後ろ側から、斤量・本物の騎手名・本物のオッズを抽出
+        # netkeibaスマホ版出馬表の正確な並び順：「馬名 ＋ 性齢 ＋ 騎手 ＋ 斤量 ＋ オッズ」をピンポイント抽出
         race_horses = []
-        for m in re.finditer(r'([ァ-ヶー]{2,11})\s*(牡|牝|セ)(\d)', flat):
-            nm, sa = m.group(1), m.group(2) + m.group(3)
+        for m in re.finditer(r'([ァ-ヶー]{2,11})\s*(牡|牝|セ)(\d)\s*([▲△☆◇★一-龠ァ-ヶーA-Za-z・]{2,7})\s*(4[89](?:\.5)?|5[0-9](?:\.5)?|6[0-2](?:\.5)?)\s*(\d{1,3}\.\d)?', flat):
+            nm = m.group(1)
             if nm in ng_words: continue
-            after = flat[m.end():m.end()+140]
-            # 斤量（48.0〜62.5）
-            kn_m = re.search(r'\b(4[89](?:\.5)?|5[0-9](?:\.5)?|6[0-2](?:\.5)?)\b', after)
-            kn = float(kn_m.group(1)) if kn_m else 56.0
-            # 性齢・斤量・馬名を除いた文字列から本物の騎手名を取得
-            jk_area = after[kn_m.end():] if kn_m else after
-            jk_area = re.sub(r'\b\d{1,4}(?:\.\d)?\b|kg|栗東|美浦|厩舎|前走|単勝|人気|倍|結果|払戻|' + re.escape(nm), ' ', jk_area)
-            jk_m = re.search(r'([一-龠ァ-ヶーA-Za-z・]{2,7})', jk_area)
-            jk = jk_m.group(1) if jk_m and jk_m.group(1) not in ng_words else "騎手未定"
-            # 単勝オッズ：斤量（48〜62の.0/.5）を除外し、本物のオッズ（または発売前なら0.0→AIリアル予測オッズ）を採用
-            odds_cands = [float(x) for x in re.findall(r'\b(\d{1,3}\.\d)\b', after) if 1.1 <= float(x) <= 499.9 and not (48.0 <= float(x) <= 62.5 and str(x).endswith((".0", ".5")))]
-            od_val = odds_cands if odds_cands else 0.0
+            sa = m.group(2) + m.group(3)
+            jk = m.group(4)
+            kn = float(m.group(5))
+            od_val = float(m.group(6)) if m.group(6) and float(m.group(6)) >= 1.1 else 0.0
             race_horses.append((nm, sa, kn, jk, od_val))
+
 
 
         seen_nm = set()
