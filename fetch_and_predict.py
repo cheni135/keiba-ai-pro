@@ -90,11 +90,14 @@ if os.path.exists("target_kaisai.txt"):
             k_label = f"5回{place}7日"
 
         r_name = "一般戦"
-        rn_m = re.search(r'([^\s|<>]{2,22})\s*[(（]?\b(GIII|GII|GI|G3|G2|G1|J・GIII|J・GII|J・GI|J・G3|J・G2|J・G1|L)\b[)）]?', flat)
-        if rn_m:
-            r_name = f"{rn_m.group(1)}({rn_m.group(2)})"
+        rn_g = re.search(r'\b(GIII|GII|GI|G3|G2|G1|J・GIII|J・GII|J・GI|J・G3|J・G2|J・G1|L)\b\s*([^\s|<>]{2,22})', flat)
+        if not rn_g:
+            rn_g = re.search(r'(?!\d{1,2}R\b)([^\s|<>]{2,22})\s*[(（]?\b(GIII|GII|GI|G3|G2|G1|L)\b[)）]?', flat)
+        if rn_g:
+            g_str, n_str = (rn_g.group(1), rn_g.group(2)) if rn_g.group(1) in ("GIII","GII","GI","G3","G2","G1","L") else (rn_g.group(2), rn_g.group(1))
+            r_name = f"{n_str}({g_str})"
         else:
-            rn_c = re.search(r'((?:歳以上|歳)?(?:新馬|未勝利|勝クラス|オープン)|[^\s|<>]{2,14}(?:特別|ステークス|賞|カップ|ハンデ|Ｓ|S))', flat)
+            rn_c = re.search(r'(\d歳(?:以上)?(?:新馬|未勝利|\d勝クラス|オープン)|[^\s|<>]{2,14}(?:特別|ステークス|賞|カップ|ハンデ|Ｓ|S))', flat)
             if rn_c: r_name = rn_c.group(1).strip()
 
 
