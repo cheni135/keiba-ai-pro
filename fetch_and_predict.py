@@ -35,7 +35,7 @@ if os.path.exists("sp_raw.txt"):
         html_part = parts[0]
         odds_part = parts[1] if len(parts) > 1 else ""
         # オッズAPIのJSONから {馬番(int): 単勝オッズ(float)} の辞書を作成
-          real_odds_map = {}
+        real_odds_map = {}
         if odds_part:
             tansho_m = re.search(r'"1"\s*:\s*\{(.*?)\}\s*,\s*"2"\s*:', odds_part, re.DOTALL)
             tansho_sec = tansho_m.group(1) if tansho_m else odds_part
