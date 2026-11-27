@@ -36,6 +36,7 @@ if os.path.exists("sp_raw.txt"):
                     mask = (df_ex["開催"] == k_label) & (df_ex["レース番号"] == rnum) & (df_ex["馬番"] == u_no)
                     df_ex.loc[mask, "単勝オッズ"] = o_v
         df_ex.to_csv("latest_races.csv", index=False, encoding="utf-8-sig")
+        with open("last_updated.txt", "w", encoding="utf-8") as lf: lf.write(now.strftime("%Y/%m/%d %H:%M"))
         print("Fast odds-only update completed.")
         raise SystemExit(0)
 
