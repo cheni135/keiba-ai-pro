@@ -89,13 +89,13 @@ if os.path.exists("target_kaisai.txt"):
             place = next((p for p in p_map.values() if p in flat), "東京")
             k_label = f"5回{place}7日"
 
-        r_name = f"{rnum}R"
-        raw_html_src = next((v for v in locals().values() if isinstance(v, str) and "<title>" in v and len(v) > 500), "")
-        t_m = re.search(r'<title>([^|<]+)', raw_html_src)
+        r_name = "一般戦"
+        raw_html_src = next((v for v in locals().values() if isinstance(v, str) and "netkeiba" in v and len(v) > 500), "")
+        t_m = re.search(r'(?:<title>|RaceName[^>]*>)([^|<]+)', raw_html_src)
         if t_m:
             raw_t = re.sub(r'^(?:\d{4}年\d+月\d+日\s*)?(?:\d+回[^\s\d]+\d+日\s*)?(?:\d+R\s*)?', '', t_m.group(1).strip())
             raw_t = re.sub(r'(?:出馬表|オッズ|レース結果).*$', '', raw_t).strip()
-            if raw_t: r_name = raw_t
+            if raw_t and raw_t != f"{rnum}R": r_name = raw_t
 
 
         cd_m = re.search(r'(芝|ダ)\s*(\d{4})m', flat[:1800])
