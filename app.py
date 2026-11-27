@@ -55,7 +55,12 @@ if "cloud_loaded" not in st.session_state:
 h1, h2 = st.columns((2, 1))
 h1.markdown("### 🏇 競馬AI Pro")
 with h2:
-    st.link_button("🔄 最新オッズ更新", "shortcuts://run-shortcut?name=KeibaAIUpdate", use_container_width=True)
+c_btn1, c_btn2 = st.columns(2)
+with c_btn1:
+    st.link_button("🔄 全体データ更新 (出馬表+オッズ)", "shortcuts://run-shortcut?name=KeibaAIUpdate", use_container_width=True)
+with c_btn2:
+    st.link_button("⚡ 最新オッズ高速更新 (約15秒)", "shortcuts://run-shortcut?name=KeibaOddsFast", use_container_width=True)
+
 
 page_mode = st.radio("メニュー", ("🔥 勝負レース", "📋 出馬表", "🤖 AI分析", "💰 買い目", "🌱 馬場傾向"), horizontal=True, label_visibility="collapsed")
 if not os.path.exists("latest_races.csv"): st.stop()
