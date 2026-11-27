@@ -546,7 +546,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -1127,7 +1127,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -1741,7 +1741,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -2255,7 +2255,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -2791,7 +2791,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -3283,7 +3283,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -3831,7 +3831,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -4412,7 +4412,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -4995,7 +4995,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -5516,12 +5516,12 @@ AIパドック解析(前走)
 メインメニュー
 	•	  出馬表 
 	•	  予想 
-	•	  オッズ 
+	•	  オッズ購入 
 	•	  データ分析 
 	•	  結果払戻 
 	•	  厩舎コメント 
 	•	  調教タイム 
-	•	  投票 
+	•	  IPAT連携 
 	•	  掲示板 
 レース攻略
 	•	  競馬新聞 
@@ -5601,7 +5601,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -6229,7 +6229,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -6843,7 +6843,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -7171,7 +7171,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -7492,7 +7492,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -7799,7 +7799,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -8141,7 +8141,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -8436,7 +8436,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -8731,7 +8731,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -9059,7 +9059,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -9369,7 +9369,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -9700,7 +9700,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -10032,7 +10032,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -10343,7 +10343,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -10972,7 +10972,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -11564,7 +11564,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -12112,7 +12112,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -12704,7 +12704,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -13063,7 +13063,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -13610,7 +13610,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -14190,7 +14190,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -14804,7 +14804,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -15385,7 +15385,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -15958,7 +15958,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -16553,7 +16553,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -17105,7 +17105,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -17719,7 +17719,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -18019,7 +18019,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -18305,7 +18305,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -18614,7 +18614,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -18928,7 +18928,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -19207,7 +19207,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -19438,12 +19438,12 @@ AIパドック解析(前走)
 メインメニュー
 	•	  出馬表 
 	•	  予想 
-	•	  オッズ 
+	•	  オッズ購入 
 	•	  データ分析 
 	•	  結果払戻 
 	•	  厩舎コメント 
 	•	  調教タイム 
-	•	  投票 
+	•	  IPAT連携 
 	•	  掲示板 
 レース攻略
 	•	  競馬新聞 
@@ -19523,7 +19523,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -19759,12 +19759,12 @@ AIパドック解析(前走)
 メインメニュー
 	•	  出馬表 
 	•	  予想 
-	•	  オッズ 
+	•	  オッズ購入 
 	•	  データ分析 
 	•	  結果払戻 
 	•	  厩舎コメント 
 	•	  調教タイム 
-	•	  投票 
+	•	  IPAT連携 
 	•	  掲示板 
 レース攻略
 	•	  競馬新聞 
@@ -19844,7 +19844,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -20151,7 +20151,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -20426,7 +20426,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -20737,7 +20737,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -21041,7 +21041,7 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}<!-- RACE_SPLIT -->
+ <!-- ODDS_JSON -->empty paramter(race_id)<!-- RACE_SPLIT -->
 
 
 
@@ -21625,4 +21625,4 @@ URLリンクをコピーしました
 オーナーズ｜競輪｜野球｜SMART会員証
 © NET DREAMERS, Co., Ltd.  All Rights Reserved.
 
- <!-- ODDS_JSON -->{"status":"middle","data":"","reason":"","update_count":"0"}
+ <!-- ODDS_JSON -->empty paramter(race_id)
