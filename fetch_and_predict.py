@@ -23,26 +23,31 @@ if os.path.exists("sp_raw.txt"):
     if "芝" not in txt and "ダ" not in txt:
         txt = raw_b.decode("euc-jp", errors="ignore")
 
-    blocks = txt.split("<!-- RACE_SPLIT -->") if "<!-- RACE_SPLIT -->" in txt else re.split(r'(?=出馬表)', txt)
-    for idx_b, blk in enumerate(blocks, 1):
+    k_codes = []
+    if os.path.exists("target_kaisai.txt"):
+        with open("target_kaisai.txt", "r", encoding="utf-8") as kf:
+            k_codes = [ln.strip() for ln in kf if re.fullmatch(r'\d{10}', ln.strip())]
+    blocks = txt.split("<!-- RACE_SPLIT -->") if "<!-- RACE_SPLIT -->" in txt else re.split(r'(?=netkeiba LIVE)', txt)
+    valid_blks = [b for b in blocks if len(b.strip()) > 200]
+    for idx_b, blk in enumerate(valid_blks):
         flat = re.sub(r'\s+', ' ', blk).strip()
-        if len(flat) < 80: continue
-        # ページタイトルの「〇〇(東京|京都など)1R〜12R」から本物の開催場とレース番号を確定
-        title_m = re.search(r'(札幌|函館|福島|新潟|東京|中山|中京|京都|阪神|小倉)(1[0-2]|[1-9])R', flat[:400])
-        if not title_m: continue
-        place, rnum = title_m.group(1), int(title_m.group(2))
-        # ページ全体から「〇回[place]〇日」を確実に取得（先頭1000文字制限を解除）
-        k_m = re.search(r'(\d{1,2}回' + place + r'\d{1,2}日)', flat)
-        k_label = k_m.group(1) if k_m else f"5回{place}7日"
-        # 正式レース名（出馬表の直前、またはレース番号の直後）を取得
-        rn_all = re.search(r'([^\s\|]{2,20})\s*出馬表', flat[:300]) or re.search(r'(?:1[0-2]|[1-9])R\s+([^\s\(\)芝ダ障0-9]{2,20})', flat[:1200])
+        # 順番から開催コード（年4桁+場2桁+回2桁+日2桁）とレース番号（1〜12）を確定
+        c_idx = idx_b // 12
+        rnum = (idx_b % 12) + 1
+        if c_idx < len(k_codes):
+            kc = k_codes[c_idx]
+            place = p_map.get(kc[4:6], "東京")
+            k_label = f"{int(kc[6:8])}回{place}{int(kc[8:10])}日"
+        else:
+            place = next((p for p in p_map.values() if p in flat), "東京")
+            k_label = f"5回{place}7日"
+        # 正式レース名とコース・距離を抽出
+        rn_all = re.search(rf'\b{rnum}R\s+([^\s\(\)芝ダ障0-9]{{2,20}})', flat)
         cand_rn = rn_all.group(1) if rn_all else ""
         r_name = cand_rn if cand_rn and not any(ng in cand_rn for ng in ng_words) else f"{rnum}R"
-        cd_m = re.search(r'(芝|ダ)\s*(\d{4})m', flat[:1500])
+        cd_m = re.search(r'(芝|ダ)\s*(\d{4})m', flat)
         baba = "ダート" if cd_m and cd_m.group(1) == "ダ" else "芝"
         dist = int(cd_m.group(2)) if cd_m else 1600
-
-
 
 
         rcls, cbon = ("G1", 6.0) if ("G1" in flat[:1000] or "ジャパン" in r_name) and rnum >= 10 else ("G2", 4.5) if "G2" in flat[:1000] and rnum >= 10 else ("G3", 3.5) if "G3" in flat[:1000] and rnum >= 10 else ("OP", 2.5) if "オープン" in r_name else ("条件戦", 0.0)
