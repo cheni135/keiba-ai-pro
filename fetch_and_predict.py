@@ -90,12 +90,11 @@ if os.path.exists("target_kaisai.txt"):
             k_label = f"5回{place}7日"
 
         r_name = "一般戦"
-        raw_html_src = next((v for v in locals().values() if isinstance(v, str) and "netkeiba" in v and len(v) > 500), "")
-        t_m = re.search(r'(?:<title>|RaceName[^>]*>)([^|<]+)', raw_html_src)
-        if t_m:
-            raw_t = re.sub(r'^(?:\d{4}年\d+月\d+日\s*)?(?:\d+回[^\s\d]+\d+日\s*)?(?:\d+R\s*)?', '', t_m.group(1).strip())
-            raw_t = re.sub(r'(?:出馬表|オッズ|レース結果).*$', '', raw_t).strip()
-            if raw_t and raw_t != f"{rnum}R": r_name = raw_t
+        rn_m = re.search(rf'\b{rnum}R\s+([^\s]+(?:\(G[123]\)|\(L\))?)', flat)
+        if not rn_m:
+            rn_m = re.search(r'((?:[23]歳以上|[23]歳)?(?:新馬|未勝利|[123]勝クラス|オープン)|[^\s]{2,14}(?:\(G[123]\)|\(L\)|特別|ステークス|賞|カップ|ハンデ))', flat)
+        if rn_m:
+            r_name = rn_m.group(1).strip()
 
 
         cd_m = re.search(r'(芝|ダ)\s*(\d{4})m', flat[:1800])
