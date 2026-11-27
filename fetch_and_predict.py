@@ -60,7 +60,9 @@ if os.path.exists("sp_raw.txt"):
             kn_m = re.search(r'([▲△☆◇★]?[一-龠ァ-ヶーA-Za-z・]{2,6})\s+(4(?:\.5)?|5[0-9](?:\.5)?|6[0-2](?:\.5)?)\s*(\d{1,3}\.\d)?', after)
             jk = kn_m.group(1) if kn_m and kn_m.group(1) not in ng_words and kn_m.group(1) != "データベース" else "騎手未定"
             kn = float(kn_m.group(2)) if kn_m else 56.0
-            od_val = float(kn_m.group(3)) if kn_m and kn_m.group(3) and float(kn_m.group(3)) >= 1.1 else 0.0
+            od_m = re.search(r'(\d{1,3}\.\d)\s*\d{1,2}人気', after)
+            od_val = float(od_m.group(1)) if od_m and float(od_m.group(1)) >= 1.1 else 0.0
+
             race_horses.append((nm, sa, kn, jk, od_val))
 
 
