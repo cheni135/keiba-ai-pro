@@ -90,7 +90,7 @@ if os.path.exists("target_kaisai.txt"):
             k_label = f"5回{place}7日"
 
         r_name =      r_name = "一般戦"
-     rn_g = re.search(r'\b(J・GIII|J・GII|J・GI|J・G3|J・G2|J・G1|GIII|GII|GI|G3|G2|G1|L)\b\s*([^\s|<>]{2,22})', flat)
+        rn_g = re.search(r'\b(J・GIII|J・GII|J・GI|J・G3|J・G2|J・G1|GIII|GII|GI|G3|G2|G1|L)\b\s*([^\s|<>]{2,22})', flat)
      if not rn_g:
          rn_g = re.search(r'(?!\d{1,2}R\b)([^\s|<>]{2,22})\s*[(（]?\b(J・GIII|J・GII|J・GI|J・G3|J・G2|J・G1|GIII|GII|GI|G3|G2|G1|L)\b[)）]?', flat)
      if rn_g:
