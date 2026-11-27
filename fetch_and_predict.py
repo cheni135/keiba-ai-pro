@@ -27,23 +27,21 @@ if os.path.exists("sp_raw.txt"):
     for idx_b, blk in enumerate(blocks, 1):
         flat = re.sub(r'\s+', ' ', blk).strip()
         if len(flat) < 80: continue
-        # ページタイトルの「〇〇(東京|京都など)1R〜12R」から本物の開催場と本物のレース番号をピンポイント取得
+        # ページタイトルの「〇〇(東京|京都など)1R〜12R」から本物の開催場とレース番号を確定
         title_m = re.search(r'(札幌|函館|福島|新潟|東京|中山|中京|京都|阪神|小倉)(1[0-2]|[1-9])R', flat[:400])
-        if title_m:
-            place, rnum = title_m.group(1), int(title_m.group(2))
-        else:
-            place = next((p for p in p_map.values() if p in flat[:400]), "東京")
-            rnum = ((idx_b - 1) % 12) + 1
-        # その開催場の「〇回〇〇〇日」を取得
-        k_m = re.search(r'(\d{1,2}回' + place + r'\d{1,2}日)', flat[:1000])
+        if not title_m: continue
+        place, rnum = title_m.group(1), int(title_m.group(2))
+        # ページ全体から「〇回[place]〇日」を確実に取得（先頭1000文字制限を解除）
+        k_m = re.search(r'(\d{1,2}回' + place + r'\d{1,2}日)', flat)
         k_label = k_m.group(1) if k_m else f"5回{place}7日"
-        # 正式レース名とコース・距離を取得
-        rn_all = re.search(r'([^\s\|]{2,20})\s*出馬表', flat[:300]) or re.search(r'(?:1[0-2]|[1-9])R\s+([^\s\(\)芝ダ障0-9]{2,20})', flat[:800])
+        # 正式レース名（出馬表の直前、またはレース番号の直後）を取得
+        rn_all = re.search(r'([^\s\|]{2,20})\s*出馬表', flat[:300]) or re.search(r'(?:1[0-2]|[1-9])R\s+([^\s\(\)芝ダ障0-9]{2,20})', flat[:1200])
         cand_rn = rn_all.group(1) if rn_all else ""
         r_name = cand_rn if cand_rn and not any(ng in cand_rn for ng in ng_words) else f"{rnum}R"
-        cd_m = re.search(r'(芝|ダ)\s*(\d{4})m', flat[:1000])
+        cd_m = re.search(r'(芝|ダ)\s*(\d{4})m', flat[:1500])
         baba = "ダート" if cd_m and cd_m.group(1) == "ダ" else "芝"
         dist = int(cd_m.group(2)) if cd_m else 1600
+
 
 
 
