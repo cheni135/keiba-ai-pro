@@ -97,7 +97,8 @@ if os.path.exists("target_kaisai.txt"):
             g_str, n_str = (rn_g.group(1), rn_g.group(2)) if "G" in rn_g.group(1) or rn_g.group(1) == "L" else (rn_g.group(2), rn_g.group(1))
             r_name = f"{n_str}({g_str})"
         else:
-            rn_c = re.search(r'(障害\s*\d歳(?:以上)?\s*(?:未勝利|オープン|OP)|\d歳(?:以上)?\s*(?:新馬|未勝利|\d勝クラス|オープン)|[^\s|<>]{2,14}(?:特別|ステークス|賞|カップ|ハンデ|Ｓ|S))', flat)
+            rn_c = re.search(r'(障害(?:\s*\d歳(?:以上)?)?\s*(?:未勝利|オープン|OP)|\d歳(?:以上)?\s*(?:新馬|未勝利|\d勝クラス|オープン)|[^\s|<>]{2,14}(?:特別|ステークス|賞|カップ|ハンデ|Ｓ|S))', flat)
+
             if rn_c and "予想家" not in rn_c.group(1):
                 r_name = re.sub(r'\s+', '', rn_c.group(1)).strip()
 
