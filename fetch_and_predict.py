@@ -27,7 +27,8 @@ if os.path.exists("sp_raw.txt"):
             c_idx, rnum = idx_b // 12, (idx_b % 12) + 1
             if c_idx >= len(k_codes): continue
             kc = k_codes[c_idx]
-            k_label = f"{int(kc[6:8])}回{p_map.get(kc[4:6], '東京')}{int(kc[8:10])}日"
+            k_label = f"{int(kc[6:8])}回{ {'01':'札幌','02':'函館','03':'福島','04':'新潟','05':'東京','06':'中山','07':'中京','08':'京都','09':'阪神','10':'小倉'}.get(kc[4:6], '東京') }{int(kc[8:10])}日"
+
             o_flat = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', blk))
             sec = o_flat.split("単勝・複勝", 1)[1] if "単勝・複勝" in o_flat else o_flat
 
