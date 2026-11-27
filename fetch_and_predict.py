@@ -14,55 +14,45 @@ def jra_waku(tot, uma):
 s = chr(47)
 rows = []
 p_map = {"01":"札幌","02":"函館","03":"福島","04":"新潟","05":"東京","06":"中山","07":"中京","08":"京都","09":"阪神","10":"小倉"}
-ng_words = {"データ","タイム","コース","ニュース","コラム","メニュー","ログイン","マイページ","コメント","レースメニュー","結果払戻","オッズ","パドック","調教","血統","掲示板","マイ馬メモ","お気に入り"}
+ng_words = {"データ","タイム","コース","ニュース","コラム","メニュー","ログイン","マイページ","コメント","レースメニュー","結果払戻","オッズ","パドック","調教","血統","掲示板","マイ馬メモ","お気に入り","トップ","一覧"}
 
 if os.path.exists("sp_raw.txt"):
     with open("sp_raw.txt", "rb") as f:
         raw_b = f.read()
     txt = raw_b.decode("utf-8", errors="ignore")
-    if "レース" not in txt and "芝" not in txt and "ダ" not in txt:
+    if "芝" not in txt and "ダ" not in txt:
         txt = raw_b.decode("euc-jp", errors="ignore")
 
     blocks = txt.split("<!-- RACE_SPLIT -->")
     for idx_b, blk in enumerate(blocks, 1):
-        lines = [re.sub(r'\s+', ' ', ln).strip() for ln in blk.splitlines() if ln.strip()]
-        if len(lines) < 5: continue
-        full_t = "\n".join(lines)
+        flat = re.sub(r'\s+', ' ', blk).strip()
+        if len(flat) < 50: continue
         rnum = idx_b if idx_b <= 12 else ((idx_b - 1) % 12) + 1
-        place = next((p for p in p_map.values() if p in full_t[:500]), "東京")
-        k_m = re.search(r'(\d{1,2}回' + place + r'\d{1,2}日)', full_t[:600])
+        place = next((p for p in p_map.values() if p in flat[:600]), "東京")
+        k_m = re.search(r'(\d{1,2}回' + place + r'\d{1,2}日)', flat[:800])
         k_label = k_m.group(1) if k_m else f"5回{place}8日"
-        cd_m = re.search(r'(芝|ダ)\s*(\d{4})m', full_t[:1000])
+        cd_m = re.search(r'(芝|ダ)\s*(\d{4})m', flat[:1200])
         baba = "ダート" if cd_m and cd_m.group(1) == "ダ" else "芝"
         dist = int(cd_m.group(2)) if cd_m else 1600
-        r_name = f"{rnum}R"
-        for ln in lines[:35]:
-            if any(w in ln for w in ("ステークス","S","賞","杯","カップ","記念","未勝利","新馬","1勝","2勝","3勝","オープン")) and not any(ng in ln for ng in ng_words):
-                r_name = re.sub(r'^\d{1,2}R\s*', '', ln)[:18]
-                break
-        rcls, cbon = ("G1", 6.0) if "G1" in full_t[:800] and rnum >= 10 else ("G2", 4.5) if "G2" in full_t[:800] and rnum >= 10 else ("G3", 3.5) if "G3" in full_t[:800] and rnum >= 10 else ("OP", 2.5) if "オープン" in r_name else ("条件戦", 0.0)
+        rn_m = re.search(r'(?:1[0-2]|[1-9])R\s*([^\s\(\)芝ダ障]{2,18}(?:ステークス|S|賞|杯|カップ|記念|未勝利|新馬|1勝|2勝|3勝|オープン)?)', flat[:800])
+        r_name = rn_m.group(1) if rn_m and not any(ng in rn_m.group(1) for ng in ng_words) else f"{rnum}R"
+        rcls, cbon = ("G1", 6.0) if "G1" in flat[:1000] and rnum >= 10 else ("G2", 4.5) if "G2" in flat[:1000] and rnum >= 10 else ("G3", 3.5) if "G3" in flat[:1000] and rnum >= 10 else ("OP", 2.5) if "オープン" in r_name else ("条件戦", 0.0)
 
+        # テキスト全体から「馬名（カタカナ2〜11文字）＋ 性齢（牡/牝/セ＋数字）」を直接すべて抽出
         race_horses = []
-        for i, ln in enumerate(lines):
-            sa_m = re.search(r'(牡|牝|セ)(\d)', ln)
-            if not sa_m or i < 15: continue
-            sa = sa_m.group(0)
-            ctx = " ".join(lines[max(0, i-2):min(len(lines), i+4)])
-            nm = ""
-            for cand in [ln[:sa_m.start()].strip(), lines[i-1] if i > 0 else "", lines[i-2] if i > 1 else ""]:
-                nm_m = re.search(r'([ァ-ヶー]{2,11})', cand)
-                if nm_m and nm_m.group(1) not in ng_words:
-                    nm = nm_m.group(1)
-                    break
-            if not nm: continue
-            kn_m = re.search(r'\b(5[0-9](?:\.5)?|6[0-2](?:\.5)?)\b', ctx)
+        for m in re.finditer(r'([ァ-ヶー]{2,11})\s*(牡|牝|セ)(\d)', flat):
+            nm, sa = m.group(1), m.group(2) + m.group(3)
+            if nm in ng_words: continue
+            after = flat[m.end():m.end()+120]
+            kn_m = re.search(r'\b(5[0-9](?:\.5)?|6[0-2](?:\.5)?)\b', after)
             kn = float(kn_m.group(1)) if kn_m else 56.0
-            after_sa = re.sub(r'(牡|牝|セ)\d|\b\d{1,3}(?:\.\d)?\b|kg|栗東|美浦|厩舎|前走|単勝|人気|倍|結果|払戻', ' ', " ".join(lines[i:min(len(lines), i+4)]))
-            jk_m = re.search(r'([一-龠ァ-ヶーA-Za-z・]{2,7})', after_sa)
+            clean_after = re.sub(r'\b\d{1,3}(?:\.\d)?\b|kg|栗東|美浦|厩舎|前走|単勝|人気|倍|結果|払戻|[^\w一-龠ァ-ヶー・]', ' ', after)
+            jk_m = re.search(r'([一-龠ァ-ヶーA-Za-z・]{2,7})', clean_after)
             jk = jk_m.group(1) if jk_m and jk_m.group(1) not in ng_words else "騎手未定"
-            odds_cands = [float(x) for x in re.findall(r'\b(\d{1,3}\.\d)\b', ctx) if 1.1 <= float(x) <= 499.9 and abs(float(x) - kn) > 0.05]
-            od_val = odds_cands[0] if odds_cands else 0.0
+            odds_cands = [float(x) for x in re.findall(r'\b(\d{1,3}\.\d)\b', after) if 1.1 <= float(x) <= 499.9 and abs(float(x) - kn) > 0.05]
+            od_val = odds_cands if odds_cands else 0.0
             race_horses.append((nm, sa, kn, jk, od_val))
+
 
         # 重複馬名を除いて枠番・馬番を割り当て
         seen_nm = set()
