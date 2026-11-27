@@ -174,7 +174,8 @@ if "勝負レース" in page_mode:
                 <div class="score-pill" style="background:#dc2626;">期待値 {r['期待値スコア']}</div>
             </div>
         </div>
-        """, unsafe_allow_html=True)elif "出馬表" in page_mode:
+        """, unsafe_allow_html=True)
+    elif "出馬表" in page_mode:
     sel_ks, sel_rc, rdf = select_race_ui(all_df)
     st.subheader(f"📋 {sel_ks} {sel_rc}")
     ai_marks = assign_ai_marks(rdf)
