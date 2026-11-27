@@ -50,17 +50,16 @@ if os.path.exists("sp_raw.txt"):
             jk_m = re.search(r'([一-龠ァ-ヶーA-Za-z・]{2,7})', clean_after)
             jk = jk_m.group(1) if jk_m and jk_m.group(1) not in ng_words else "騎手未定"
             odds_cands = [float(x) for x in re.findall(r'\b(\d{1,3}\.\d)\b', after) if 1.1 <= float(x) <= 499.9 and abs(float(x) - kn) > 0.05]
-            od_val = odds_cands if odds_cands else 0.0
+            od_val = odds_cands[0] if odds_cands else 0.0
             race_horses.append((nm, sa, kn, jk, od_val))
 
-
-        # 重複馬名を除いて枠番・馬番を割り当て
         seen_nm = set()
         uniq_h = []
         for h in race_horses:
-            if h not in seen_nm:
-                seen_nm.add(h)
+            if h[0] not in seen_nm:
+                seen_nm.add(h[0])
                 uniq_h.append(h)
+
         tot = len(uniq_h)
         for uma, (nm, sa, kn, jk, od_val) in enumerate(uniq_h, 1):
             wk = jra_waku(tot, uma)
