@@ -52,7 +52,7 @@ if os.path.exists("sp_raw.txt"):
     with open("sp_raw.txt", "rb") as f:
         raw_b = f.read()
     txt = raw_b.decode("utf-8", errors="ignore")
-    if "芝" not in txt a nd "ダ" not in txt:
+if "芝" not in txt and "ダ" not in txt:
         txt = raw_b.decode("euc-jp", errors="ignore")
 
     k_codes = []
