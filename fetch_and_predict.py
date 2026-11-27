@@ -26,18 +26,17 @@ if os.path.exists("sp_raw.txt"):
     blocks = txt.split("<!-- RACE_SPLIT -->")
     for idx_b, blk in enumerate(blocks, 1):
         flat = re.sub(r'\s+', ' ', blk).strip()
-        if len(flat) < 50: continue
-        rnum = idx_b if idx_b <= 12 else ((idx_b - 1) % 12) + 1
-        place = next((p for p in p_map.values() if p in flat[:600]), "東京")
-        k_m = re.search(r'(\d{1,2}回' + place + r'\d{1,2}日)', flat[:800])
-        k_label = k_m.group(1) if k_m else f"5回{place}8日"
-
+        if len(flat) < 80: continue
+        # 競馬場・回・日・レース番号をテキストから自動判定（東京・京都・中山・阪神ほか全場対応）
+        k_m = re.search(r'(\d{1,2})回(札幌|函館|福島|新潟|東京|中山|中京|京都|阪神|小倉)(\d{1,2})日', flat[:800])
+        place = k_m.group(2) if k_m else next((p for p in p_map.values() if p in flat[:600]), "東京")
+        k_label = k_m.group(0) if k_m else f"5回{place}8日"
+        rn_all = re.search(r'(1[0-2]|[1-9])R\s+([^\s\(\)芝ダ障0-9]{2,18})', flat[:800])
+        rnum = int(rn_all.group(1)) if rn_all else (((idx_b - 1) % 12) + 1)
         cd_m = re.search(r'(?:発走|15:|14:|13:|12:|11:|10:|09:)\d{0,2}\s*(芝|ダ)\s*(\d{4})m', flat[:1200]) or re.search(r'(芝|ダ)\s*(\d{4})m', flat[:1000])
         baba = "ダート" if cd_m and cd_m.group(1) == "ダ" else "芝"
         dist = int(cd_m.group(2)) if cd_m else 1600
-
-        rn_m = re.search(r'(?:1[0-2]|[1-9])R\s+([^\s\(\)芝ダ障0-9]{2,18})', flat[:800])
-        cand_rn = rn_m.group(1) if rn_m else ""
+        cand_rn = rn_all.group(2) if rn_all else ""
         r_name = cand_rn if cand_rn and not any(ng in cand_rn for ng in ng_words) else f"{rnum}R"
         rcls, cbon = ("G1", 6.0) if ("G1" in flat[:1000] or "ジャパン" in r_name) and rnum >= 10 else ("G2", 4.5) if "G2" in flat[:1000] and rnum >= 10 else ("G3", 3.5) if "G3" in flat[:1000] and rnum >= 10 else ("OP", 2.5) if "オープン" in r_name else ("条件戦", 0.0)
 
@@ -115,3 +114,14 @@ if rows:
     df["AI予測勝率"], df["AI予測3着内率"], df["単勝オッズ"], df["期待値スコア"], df["更新日時"] = wp, t3p, odds, exps, now.strftime("%Y/%m/%d %H:%M")
     df.to_csv("latest_races.csv", index=False, encoding="utf-8-sig")
     print("Saved rows:", len(df))
+# 毎週自動で来週の開催候補コードを target_kaisai.txt に更新（JRA月別標準ローテーション）
+nxt_sun = now + timedelta(days=(6 - now.weekday()) % 7)
+if now.weekday() == 6 and now.hour >= 17:
+    nxt_sun += timedelta(days=7)
+yr = nxt_sun.strftime("%Y")
+m_rot = {1:["0601","0801"],2:["0501","0802","1001"],3:["0602","0901","0701"],4:["0603","0902","0301"],5:["0502","0803","0401"],6:["0503","0903","0201"],7:["0302","1002","0202"],8:["0402","0702","0101"],9:["0604","0904","0102"],10:["0504","0804","0403"],11:["0505","0805","0303"],12:["0605","0905","0703"]}
+wk_idx = min(4, (nxt_sun.day - 1) // 7 + 1)
+d_sat, d_sun = f"{wk_idx*2-1:02d}", f"{wk_idx*2:02d}"
+auto_codes = [f"{yr}{kc}{d}" for kc in m_rot.get(nxt_sun.month, ["0505","0805"]) for d in (d_sat, d_sun)]
+with open("target_kaisai.txt", "w", encoding="utf-8") as tf:
+    tf.write("\n".join(auto_codes) + "\n")
