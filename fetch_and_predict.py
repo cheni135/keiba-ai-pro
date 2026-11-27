@@ -40,6 +40,8 @@ if ("odds_raw.txt" in changed_files or os.environ.get("UPDATE_MODE") == "odds") 
             if 1.1 <= o_v <= 999.9:
                 mask = (df_ex["開催"] == k_label) & (df_ex["レース番号"] == rnum) & (df_ex["馬番"] == u_no)
                 df_ex.loc[mask, "単勝オッズ"] = o_v
+        if "最終更新" in df_ex.columns: df_ex["最終更新"] = now.strftime("%Y/%m/%d %H:%M")
+
     df_ex.to_csv("latest_races.csv", index=False, encoding="utf-8-sig")
     print("Fast odds-only update completed via odds_raw.txt.")
     raise SystemExit(0)
