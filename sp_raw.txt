@@ -12,26 +12,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0.5, user-scalable=yes">
 
 <meta name="format-detection" content="telephone=no" />
-<meta name="description" content="2026年11月29日 東京11R ウェルカムＳ(3勝クラス)の出馬表です。JRA開催レースの出馬表や最新オッズ、レース結果速報、払戻情報をはじめ、競馬予想やデータ分析など予想に役立つ情報も満載です。" />
+<meta name="description" content="2026年11月29日 東京12R ジャパンＣ(G1)の出馬表です。JRA開催レースの出馬表や最新オッズ、レース結果速報、払戻情報をはじめ、競馬予想やデータ分析など予想に役立つ情報も満載です。" />
 <meta name="keywords" content="競馬,keiba,出馬表,オッズ,予想,レース結果,払戻し,結果速報,競馬予想,ネット競馬,netkeiba" />
 <meta name="thumbnail" content="https://www.netkeiba.com/style/netkeiba.ja/image/netkeiba.png" />
 <!-- ogp用 -->
 <meta property="og:site_name" content="netkeiba" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="ウェルカムＳ(3勝クラス) 出馬表 | 2026年11月29日 東京11R レース情報(JRA) - netkeiba" />
-<meta property="og:url" content="https://race.netkeiba.com/race/shutuba.html?race_id=202605050811" />
-<meta property="og:description" content="2026年11月29日 東京11R ウェルカムＳ(3勝クラス)の出馬表です。JRA開催レースの出馬表や最新オッズ、レース結果速報、払戻情報をはじめ、競馬予想やデータ分析など予想に役立つ情報も満載です。" />
+<meta property="og:title" content="ジャパンＣ(G1) 出馬表 | 2026年11月29日 東京12R レース情報(JRA) - netkeiba" />
+<meta property="og:url" content="https://race.netkeiba.com/race/shutuba.html?race_id=202605050812" />
+<meta property="og:description" content="2026年11月29日 東京12R ジャパンＣ(G1)の出馬表です。JRA開催レースの出馬表や最新オッズ、レース結果速報、払戻情報をはじめ、競馬予想やデータ分析など予想に役立つ情報も満載です。" />
 <meta property="og:image" content="https://www.netkeiba.com/style/netkeiba.ja/image/netkeiba.png" />
 <!-- Twitter用 -->
 <meta property="twitter:card" content="summary">
 <meta property="twitter:site" content="@netkeiba">
 <!-- アノテーション -->
-<link rel="canonical" href="https://race.netkeiba.com/race/shutuba.html?race_id=202605050811" />
+<link rel="canonical" href="https://race.netkeiba.com/race/shutuba.html?race_id=202605050812" />
 
-<link rel="alternate" media="only screen and (max-width: 640px)" href="https://race.sp.netkeiba.com/race/shutuba.html?race_id=202605050811" />
+<link rel="alternate" media="only screen and (max-width: 640px)" href="https://race.sp.netkeiba.com/race/shutuba.html?race_id=202605050812" />
 <link rel="alternate" type="application/rss+xml" href="https://rss.netkeiba.com/?pid=rss_netkeiba&site=netkeiba" />
 <link rel="apple-touch-icon" href="https://rcdnv2.netkeiba.com/img.sp/common/img/common/icon_home.png" />
-<title>ウェルカムＳ(3勝クラス) 出馬表 | 2026年11月29日 東京11R レース情報(JRA) - netkeiba</title>
+<title>ジャパンＣ(G1) 出馬表 | 2026年11月29日 東京12R レース情報(JRA) - netkeiba</title>
 <script type="application/ld+json">
 [
 {
@@ -58,8 +58,8 @@
 "@type": "ListItem",
 "position": 3,
 "item": {
-"@id": "https://race.sp.netkeiba.com/race/shutuba.html?race_id=202605050811",
-"name": "ウェルカムＳ(3勝クラス) 出馬表 | 2026年11月29日 東京11R"
+"@id": "https://race.sp.netkeiba.com/race/shutuba.html?race_id=202605050812",
+"name": "ジャパンＣ(G1) 出馬表 | 2026年11月29日 東京12R"
 }
 }
 ]
@@ -240,10 +240,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- block=app_install (d) -->
 
 <link rel="stylesheet" href="https://cdnv2.netkeiba.com/img.sp/common/css/head_bnr.css?2018022002" />
-<div class="HeadBnrWrap" style="background-image:url(https://cdnv2.netkeiba.com/img.sp/common/img/head_bnr/cms/1571.jpg?v=MjAyNi0xMS0wNSAwOTo1ODozMA==)">
+<div class="HeadBnrWrap" style="background-image:url(https://cdnv2.netkeiba.com/img.sp/common/img/head_bnr/cms/3081.jpg?v=MjAyNi0xMS0wNSAwOTo1NzoyOQ==)">
 <div class="CampaignBox">
 <div class="CampaignVisual">
-<a href="https://netkeiba.onelink.me/cexk/0d9urele" onclick="ga('send','event','bnr','click','app_iOS_inst',1);"><img src="https://cdnv2.netkeiba.com/img.sp/common/img/top/bnr_transprent_h155.png" alt="" width="100%"></a>
+<a href="https://netkeiba.onelink.me/Wmzg/sdtihze9" onclick="ga('send','event','bnr','click','app_iOS_inst',1);"><img src="https://cdnv2.netkeiba.com/img.sp/common/img/top/bnr_transprent_h155.png" alt="" width="100%"></a>
 
 
 </div>
@@ -643,9 +643,9 @@ $('.master_course_infoText01, .master_course_infoText02').hide();
 </div><!-- / .Change_Btn Change_Day -->
 <ul class="DayChange_List" style="display:none">
 <li>
-<a href="https://race.sp.netkeiba.com/race/shutuba.html?race_id=202605050711&rf=rs" onclick="window.location=window.location.origin + '/race/shutuba.html?race_id=202605050711&rf=rs';return false;">11/28(土)</a>
+<a href="https://race.sp.netkeiba.com/race/shutuba.html?race_id=202605050712&rf=rs" onclick="window.location=window.location.origin + '/race/shutuba.html?race_id=202605050712&rf=rs';return false;">11/28(土)</a>
 </li><li>
-<a href="https://race.sp.netkeiba.com/race/shutuba.html?race_id=202605050911&rf=rs" onclick="window.location=window.location.origin + '/race/shutuba.html?race_id=202605050911&rf=rs';return false;">11/30(月)</a>
+<a href="https://race.sp.netkeiba.com/race/shutuba.html?race_id=202605050912&rf=rs" onclick="window.location=window.location.origin + '/race/shutuba.html?race_id=202605050912&rf=rs';return false;">11/30(月)</a>
 </li><li>
 <a href="https://race.sp.netkeiba.com/race/shutuba.html?race_id=202607040211&rf=rs" onclick="window.location=window.location.origin + '/race/shutuba.html?race_id=202607040211&rf=rs';return false;">12/6(日)</a>
 </li>
@@ -661,28 +661,24 @@ $('.master_course_infoText01, .master_course_infoText02').hide();
 </div><!-- / .Change_Btn Course -->
 <ul class="CourseChange_List" style="display:none">
 <li>
-<a href="https://race.sp.netkeiba.com/race/shutuba.html?race_id=202608050811&rf=rs" onclick="window.location=window.location.origin + '/race/shutuba.html?race_id=202608050811&rf=rs';return false;">京都</a>
+<a href="https://race.sp.netkeiba.com/race/shutuba.html?race_id=202608050812&rf=rs" onclick="window.location=window.location.origin + '/race/shutuba.html?race_id=202608050812&rf=rs';return false;">京都</a>
 </li>
 </ul>
 </div>
 <div class="Change_Btn Day">
-<a href="https://race.sp.netkeiba.com?pid=kaisai_list&race_id=202605050811">
+<a href="https://race.sp.netkeiba.com?pid=kaisai_list&race_id=202605050812">
 <span class="Icon_Sprite_Nk_New Icon_RaceCalendar"></span>
 </a>
 </div><!-- / .Change_Btn Day -->
 <ul class="RaceNumLink fc">
 
 <li class="Prev_Race">
-<a href="https://race.sp.netkeiba.com/race/shutuba.html?race_id=202605050810&rf=rs" onclick="window.location=window.location.origin + '/race/shutuba.html?race_id=202605050810&rf=rs';return false;" title="10R">
-10R
-</a>
-</li>
-<li class="Next_Race">
-<a href="https://race.sp.netkeiba.com/race/shutuba.html?race_id=202605050812&rf=rs" onclick="window.location=window.location.origin + '/race/shutuba.html?race_id=202605050812&rf=rs';return false;" title="10R">
-12R
+<a href="https://race.sp.netkeiba.com/race/shutuba.html?race_id=202605050811&rf=rs" onclick="window.location=window.location.origin + '/race/shutuba.html?race_id=202605050811&rf=rs';return false;" title="11R">
+11R
 </a>
 </li>
 
+<li class="Next_Race Last"><span></span></li>
 </ul>
 </div><!-- / .RaceChangeMenu_Group -->
 <div class="AllMenuOpenBtn">
@@ -703,13 +699,22 @@ $(this).next().slideToggle("fast");
 <div class="RaceMovieBox" style="display:none">
 <!--↓↓「style="height: auto;"」はモック用でつけています↓↓-->
 <div class="MoviePlayerBox" style="height: auto;">
-
+<iframe id="adminttv" class="adminttv" src="about:blank" allowfullscreen="true" frameborder="0" scrolling="no" width="100%" height="100%" allow="encrypted-media *;"></iframe>
 
 </div><!-- /.MoviePlayerBox -->
 <div class="RaceMovieList fc">
 <div class="RaceMovieListWrap">
 <ul>
-
+<li>
+<div class="MovieListItem">
+<a href="javascript:void(0);" class="MovieViewLink" title="参考レース" data-url="https://tv-player.ap1.admint.biz/5d4b839a9332e/digest/cXZ0cmZnNXE0bzgzOW45MzMycjM2NzEzOTQ2MzhwMzRvMHM4NDgwMDNxMTFuMzJuNTI1/ba9d739915fe57b1f12e4b998861afd7?site_id=5d4b839a9332e&autoplay=1" id="a_monthly_goods_link_01078" data-theme="01078">
+<div class="PickupPhoto">
+<div style="background-image:url(https://cdnv2.netkeiba.com/img.racev4.sp/common/img/race_menu/tv_image8_288x180.jpg);" title="参考レース" class="PickupPhotoImg"></div>
+<span class="MovieTag">参考レース</span>
+</div><!-- /.PickupPhoto -->
+</a>
+</div><!-- /.MovieListItem -->
+</li>
 
 </ul>
 </div><!-- /.RaceMovieListWrap -->
@@ -739,7 +744,7 @@ $(this).addClass('Active');
 <dd>
 <ul class="col_5 fc">
 <li class="legacy_paper">
-<a href="https://race.sp.netkeiba.com/race/newspaper.html?race_id=202605050811&rf=multimenu" class="RaceMenuButton" title="競馬新聞" onclick="window.location=window.location.origin + '/race/newspaper.html?race_id=202605050811&rf=multimenu';return false;">
+<a href="https://race.sp.netkeiba.com/race/newspaper.html?race_id=202605050812&rf=multimenu" class="RaceMenuButton" title="競馬新聞" onclick="window.location=window.location.origin + '/race/newspaper.html?race_id=202605050812&rf=multimenu';return false;">
 <div class="Icon_Nk_New_bg">
 <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_39"></span>
 </div>
@@ -747,7 +752,7 @@ $(this).addClass('Active');
 </a>
 </li>
 <li>
-<a href="https://race.sp.netkeiba.com?pid=oikiri&amp;race_id=202605050811&rf=multimenu" class="RaceMenuButton" title="調教タイム">
+<a href="https://race.sp.netkeiba.com?pid=oikiri&amp;race_id=202605050812&rf=multimenu" class="RaceMenuButton" title="調教タイム">
 <div class="Icon_Nk_New_bg">
 <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_09"></span>
 </div>
@@ -755,7 +760,7 @@ $(this).addClass('Active');
 </a>
 </li>
 <li>
-<a href="https://race.sp.netkeiba.com?pid=comment&amp;race_id=202605050811&rf=multimenu" class="RaceMenuButton" title="厩舎コメント">
+<a href="https://race.sp.netkeiba.com?pid=comment&amp;race_id=202605050812&rf=multimenu" class="RaceMenuButton" title="厩舎コメント">
 <div class="Icon_Nk_New_bg">
 <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_08"></span>
 </div>
@@ -763,7 +768,7 @@ $(this).addClass('Active');
 </a>
 </li>
 <li>
-<a href="https://race.sp.netkeiba.com?pid=speed&amp;race_id=202605050811&rf=multimenu" class="RaceMenuButton" title="タイム指数">
+<a href="https://race.sp.netkeiba.com?pid=speed&amp;race_id=202605050812&rf=multimenu" class="RaceMenuButton" title="タイム指数">
 <div class="Icon_Nk_New_bg">
 <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_10"></span>
 </div>
@@ -771,7 +776,7 @@ $(this).addClass('Active');
 </a>
 </li>
 <li>
-<a href="https://race.sp.netkeiba.com?pid=bbs&amp;race_id=202605050811&rf=multimenu" class="RaceMenuButton" title="掲示板">
+<a href="https://race.sp.netkeiba.com?pid=bbs&amp;race_id=202605050812&rf=multimenu" class="RaceMenuButton" title="掲示板">
 <div class="Icon_Nk_New_bg">
 <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_14"></span>
 </div>
@@ -779,7 +784,7 @@ $(this).addClass('Active');
 </a>
 </li>
 <li>
-<a href="https://race.sp.netkeiba.com?pid=paddock&amp;race_id=202605050811&rf=multimenu" class="RaceMenuButton" title="パドック速報">
+<a href="https://race.sp.netkeiba.com?pid=paddock&amp;race_id=202605050812&rf=multimenu" class="RaceMenuButton" title="パドック速報">
 <div class="Icon_Nk_New_bg">
 <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_44"></span>
 </div>
@@ -792,7 +797,7 @@ $(this).addClass('Active');
 <dd class="IpatMenu">
 <ul class="col_5 fc">
 <li>
-<a href="https://race.sp.netkeiba.com?pid=bet&amp;race_id=202605050811&rf=multimenu" class="RaceMenuButton" title="IPAT連携">
+<a href="https://race.sp.netkeiba.com?pid=bet&amp;race_id=202605050812&rf=multimenu" class="RaceMenuButton" title="IPAT連携">
 <div class="Icon_Nk_New_bg">
 <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_16"></span>
 </div>
@@ -829,7 +834,7 @@ $(this).addClass('Active');
 <dd>
 <ul class="col_5 fc">
 <li class="legacy_course">
-<a href="https://race.sp.netkeiba.com/modal/course.html?race_id=202605050811&amp;tab=race-past&rf=multimenu" class="RaceMenuButton" title="過去の結果">
+<a href="https://race.sp.netkeiba.com/modal/course.html?race_id=202605050812&amp;tab=race-past&rf=multimenu" class="RaceMenuButton" title="過去の結果">
 <div class="Icon_Nk_New_bg">
 <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_36"></span>
 </div>
@@ -837,7 +842,7 @@ $(this).addClass('Active');
 </a>
 </li>
 <li>
-<a href="https://race.sp.netkeiba.com?pid=bias&amp;race_id=202605050811&rf=multimenu" class="RaceMenuButton" title="血統">
+<a href="https://race.sp.netkeiba.com?pid=bias&amp;race_id=202605050812&rf=multimenu" class="RaceMenuButton" title="血統">
 <div class="Icon_Nk_New_bg">
 <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_11"></span>
 </div>
@@ -845,7 +850,7 @@ $(this).addClass('Active');
 </a>
 </li>
 <li>
-<a href="https://race.sp.netkeiba.com/race/holding_time.html?race_id=202605050811&rf=multimenu" class="RaceMenuButton" title="持ちタイム" onclick="window.location=window.location.origin + '/race/holding_time.html?race_id=202605050811&rf=multimenu';return false;">
+<a href="https://race.sp.netkeiba.com/race/holding_time.html?race_id=202605050812&rf=multimenu" class="RaceMenuButton" title="持ちタイム" onclick="window.location=window.location.origin + '/race/holding_time.html?race_id=202605050812&rf=multimenu';return false;">
 <div class="Icon_Nk_New_bg">
 <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_43"></span>
 </div>
@@ -853,7 +858,7 @@ $(this).addClass('Active');
 </a>
 </li>
 <li>
-<a href="https://race.sp.netkeiba.com/barometer/score.html?race_id=202605050811&rf=multimenu" class="RaceMenuButton" title="調子偏差値">
+<a href="https://race.sp.netkeiba.com/barometer/score.html?race_id=202605050812&rf=multimenu" class="RaceMenuButton" title="調子偏差値">
 <div class="Icon_Nk_New_bg">
 <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_35"></span>
 </div>
@@ -861,7 +866,7 @@ $(this).addClass('Active');
 </a>
 </li>
 <li>
-<a href="https://race.sp.netkeiba.com/race/match.html?race_id=202605050811&rf=multimenu" class="RaceMenuButton" title="対戦表" onclick="window.location=window.location.origin + '/race/match.html?race_id=202605050811&rf=multimenu';return false;">
+<a href="https://race.sp.netkeiba.com/race/match.html?race_id=202605050812&rf=multimenu" class="RaceMenuButton" title="対戦表" onclick="window.location=window.location.origin + '/race/match.html?race_id=202605050812&rf=multimenu';return false;">
 <div class="Icon_Nk_New_bg">
 <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_41"></span>
 </div>
@@ -874,7 +879,7 @@ $(this).addClass('Active');
 <dd>
 <ul class="col_5 fc">
 <li>
-<a href="https://race.sp.netkeiba.com?pid=special&amp;race_id=202605050811&rf=multimenu" class="RaceMenuButton" title="特集">
+<a href="https://race.sp.netkeiba.com?pid=special&amp;race_id=202605050812&rf=multimenu" class="RaceMenuButton" title="特集">
 <div class="Icon_Nk_New_bg">
 <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_12"></span>
 </div>
@@ -882,7 +887,7 @@ $(this).addClass('Active');
 </a>
 </li>
 <li>
-<a href="https://yoso.sp.netkeiba.com/race/jra/yoso_list.html?race_id=202605050811&rf=multimenu" class="RaceMenuButton" title="ウマい馬券">
+<a href="https://yoso.sp.netkeiba.com/race/jra/yoso_list.html?race_id=202605050812&rf=multimenu" class="RaceMenuButton" title="ウマい馬券">
 <div class="Icon_Nk_New_bg">
 <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_15"></span>
 </div>
@@ -890,7 +895,7 @@ $(this).addClass('Active');
 </a>
 </li>
 <li>
-<a href="https://orepro.netkeiba.com/bet/shutuba.html?race_id=202605050811&amp;mode=init&rf=multimenu" class="RaceMenuButton" title="俺プロ">
+<a href="https://orepro.netkeiba.com/bet/shutuba.html?race_id=202605050812&amp;mode=init&rf=multimenu" class="RaceMenuButton" title="俺プロ">
 <div class="Icon_Nk_New_bg">
 <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_34"></span>
 </div>
@@ -906,7 +911,7 @@ $(this).addClass('Active');
 </a>
 </li>
 <li>
-<a href="https://yoso.sp.netkeiba.com/senmonshi/jra/yoso_list.html?race_id=202605050811&rf=multimenu" class="RaceMenuButton" title="競馬専門紙">
+<a href="https://yoso.sp.netkeiba.com/senmonshi/jra/yoso_list.html?race_id=202605050812&rf=multimenu" class="RaceMenuButton" title="競馬専門紙">
 <div class="Icon_Nk_New_bg">
 <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_45"></span>
 </div>
@@ -975,13 +980,14 @@ scrollTop: e
 <div class="RaceList_NameBox_inner">
 <div class="RaceList_Item01">
 <div class="Race_Num">
-<span id="kaisaiDate:20261129">11R</span>
+<span id="kaisaiDate:20261129">12R</span>
 </div><!-- /.Race_Num -->
-<span class="MyRaceCheck disp_none" id="myrace_202605050811"></span>
+<span class="MyRaceCheck disp_none" id="myrace_202605050812"></span>
 </div><!-- /.RaceList_Item01 -->
 <div class="RaceList_Item02">
 <div class="Race_Tag">
 
+<span class="Icon_GradeType Icon_GradeType1 Icon_GradePos01">GI</span>
 
 
 
@@ -994,13 +1000,12 @@ scrollTop: e
 
 
 
-<span class="Icon_GradeType Icon_GradeType16 Icon_GradePos01">3勝クラス</span>
 
 
 <span class="Icon_Win5"><img src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_win5.png" alt="WIN5" width="30"></span>
 </div>
-<h1 class="Race_Name">ウェルカムS</h1>
-<div class="Race_Data">15:00 <span class="Turf">芝</span><span>2000m</span>&nbsp;左&nbsp;C 13頭
+<h1 class="Race_Name">ジャパンC</h1>
+<div class="Race_Data">15:40 <span class="Turf">芝</span><span>2400m</span>&nbsp;左&nbsp;C 18頭
 
 
 
@@ -1011,12 +1016,19 @@ scrollTop: e
 <span class="Icon_ArrowB"></span>
 </div><!-- /.RaceList_NameBox_inner -->
 </a>
+<div class="RaceMovieBtn">
+<a href="javascript:void(0);" id="a_monthly_goods_link_01078" data-theme="01078">
+<div class="RaceMovieInner" style="background-image:url(https://cdnv2.netkeiba.com/img.racev4.sp/common/img/race_menu/tv_image8_288x180.jpg);">
+<span class="MovieTag">参考レース</span>
+</div>
+</a>
 
+</div>
 </div><!-- /.RaceList_NameBox -->
 <script type="text/javascript" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/js/race/api_myrace.action.js?20220824a"></script>
 <script type="text/javascript">
 // myrace race_id
-var _race_title_race_id = '202605050811';
+var _race_title_race_id = '202605050812';
 // url
 var _action_api_url_myrace = window.location.origin;
 // myrace entry
@@ -1056,8 +1068,8 @@ $('#movie_sam_img').html('<img src="" class="MovieSamImg01">');
 <div class="Course_Header">
 <div class="Race_Name_Box">
 <div class="RaceList_Item01">
-<p class="Race_Info">サラ系３歳以上３勝クラス(国際)(特指)定量<br>本賞金：1870、750、470、280、187万円</p>
-<span class="SpecialPageLink"><a href="https://race.sp.netkeiba.com/?pid=special&amp;race_id=202605050811">特集</a></span>
+<p class="Race_Info">サラ系３歳以上オープン(国際)(指)定量<br>本賞金：50000、20000、12500、7500、5000万円</p>
+<span class="SpecialPageLink"><a href="https://race.sp.netkeiba.com/?pid=special&amp;race_id=202605050812">特集</a></span>
 </div><!-- /.RaceList_Item01 -->
 </div><!--/.Race_Name_Box -->
 </div><!-- /.Course_Header -->
@@ -1066,9 +1078,9 @@ $('#movie_sam_img').html('<img src="" class="MovieSamImg01">');
 <tbody>
 <tr>
 <th rowspan="1">コースレコード</th>
-<td class="Time">1:55.2</td>
-<td class="Horse">イクイノックス</td>
-<td>2023年</td>
+<td class="Time">2:20.3</td>
+<td class="Horse">カランダガン</td>
+<td>2025年</td>
 </tr>
 
 </tbody>
@@ -1107,9 +1119,9 @@ $('#Legacy_RaceList_NameBox').slideToggle('fast');
 showRaceCourse( "CourseInfo" );
 function showRaceCourse(_show_id){
 var api = new AplApiRace(window.location.origin + '/race_api/', true, 'jsonp');
-var race_id = '202605050811';
+var race_id = '202605050812';
 api.get('AplCourseDetail',{'race_id': race_id}, function(data) {
-var course_data = data[202605050811];
+var course_data = data[202605050812];
 var movie_exists = false;
 $(".CourseInfoVideo").hide();
 $(".Course_Image").hide();
@@ -1130,7 +1142,7 @@ $(".AboutCouseTxt p").text( course_data.text );
 $("#"+_show_id).slideToggle('fast');
 };
 //$('.RaceCourseLink a').on('click', function(e){
-//  location.href='https://race.sp.netkeiba.com/modal/course.html?race_id=202605050811';
+//  location.href='https://race.sp.netkeiba.com/modal/course.html?race_id=202605050812';
 //});
 }
 return false;
@@ -1211,14 +1223,14 @@ $('#cboxOverlay').css('background', 'rgba(0, 0, 0, 0.4)');
 }
 });
 </script>
-<!-- block=race_navi (cp) -->
+<!-- block=race_navi (cg) -->
 <div class="RaceInfo_Navi">
 <ul class="RaceInfo_Tab fc js-ai-bloodline-new-menu">
-<li id="navi_shutuba"><a href="https://race.sp.netkeiba.com/race/shutuba.html?race_id=202605050811&amp;rf=race_toggle_menu"><span class="Icon_Sprite_Nk_New Icon_RaceInfo01"></span>出馬表<span class="NewIcon js-ai-bloodline-new-shutuba" style="display:none;"></span></a></li>
-<li id="navi_yoso_mark_list"><a href="https://race.sp.netkeiba.com/yoso/mark_list.html?race_id=202605050811&amp;rf=race_toggle_menu"><span class="Icon_Sprite_Nk_New Icon_RaceInfo02"></span>予想<!--<span class="NewIcon"></span>--><span class="FreeTrial" style="display:none;"></span></a></a></li>
-<li id="navi_odds_view"><a href="https://race.sp.netkeiba.com/?pid=odds_view&amp;race_id=202605050811&amp;rf=race_toggle_menu"><span class="Icon_Sprite_Nk_New Icon_RaceInfo32_3"></span><span style="font-size:92%;letter-spacing:-2px;white-space:nowrap;">オッズ</span>&middot購入</a></li>
-<li id="navi_data"><a href="https://race.sp.netkeiba.com/race/data_top.html?race_id=202605050811&amp;rf=race_toggle_menu"><span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_07"></span>データ分析</a></li>
-<li id="navi_race_result"><a href="https://race.sp.netkeiba.com/?pid=race_result&amp;race_id=202605050811&amp;rf=race_toggle_menu"><span class="Icon_Sprite_Nk_New Icon_RaceInfo05"></span>結果払戻</a></li>
+<li id="navi_shutuba"><a href="https://race.sp.netkeiba.com/race/shutuba.html?race_id=202605050812&amp;rf=race_toggle_menu"><span class="Icon_Sprite_Nk_New Icon_RaceInfo01"></span>出馬表<span class="NewIcon js-ai-bloodline-new-shutuba" style="display:none;"></span></a></li>
+<li id="navi_yoso_mark_list"><a href="https://race.sp.netkeiba.com/yoso/mark_list.html?race_id=202605050812&amp;rf=race_toggle_menu"><span class="Icon_Sprite_Nk_New Icon_RaceInfo02"></span>予想<!--<span class="NewIcon"></span>--><span class="FreeTrial" style="display:none;"></span></a></a></li>
+<li id="navi_odds_view"><a href="https://race.sp.netkeiba.com/?pid=odds_view&amp;race_id=202605050812&amp;rf=race_toggle_menu"><span class="Icon_Sprite_Nk_New Icon_RaceInfo32_3"></span><span style="font-size:92%;letter-spacing:-2px;white-space:nowrap;">オッズ</span>&middot購入</a></li>
+<li id="navi_data"><a href="https://race.sp.netkeiba.com/race/data_top.html?race_id=202605050812&amp;rf=race_toggle_menu"><span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_07"></span>データ分析</a></li>
+<li id="navi_race_result"><a href="https://race.sp.netkeiba.com/?pid=race_result&amp;race_id=202605050812&amp;rf=race_toggle_menu"><span class="Icon_Sprite_Nk_New Icon_RaceInfo05"></span>結果払戻</a></li>
 </ul>
 </div><!-- /.RaceInfo_Navi -->
 <script>
@@ -1415,17 +1427,17 @@ $("#navi_yoso_mark_list span.FreeTrial").css('display', '');
 <div class="LeftArrow">←</div>
 <div class="RaceInfo_Tab02_Wrap">
 <ul class="RaceInfo_Tab02_v2 js-ai-score-new-menu">
-<li id="navi02_shutuba"><a href="https://race.sp.netkeiba.com/race/shutuba.html?race_id=202605050811&amp;rf=race_toggle_menu">通常</a></li>
-<li id="navi02_newspaper"><a href="https://race.sp.netkeiba.com/race/newspaper.html?race_id=202605050811&rf=race_toggle_menu">新聞</a></li>
-<li id="navi02_training"><a href="https://race.sp.netkeiba.com?pid=oikiri&amp;race_id=202605050811&amp;rf=race_toggle_menu">調教</a></li>
-<li id="navi02_comment"><a href="https://race.sp.netkeiba.com?pid=comment&amp;race_id=202605050811&amp;rf=race_toggle_menu">コメント</a></li>
-<li id="navi02_ai_summary"><a href="https://race.sp.netkeiba.com?pid=ai_summary&amp;race_id=202605050811&amp;rf=race_toggle_menu">AI総合スコア</a></li>
-<li id="navi02_speed"><a href="https://race.sp.netkeiba.com?pid=speed&amp;race_id=202605050811&amp;rf=race_toggle_menu">タイム指数</a></li>
-<li id="navi02_note"><a href="https://race.sp.netkeiba.com/race/note_past5.html?race_id=202605050811&rf=race_toggle_menu">メモ</a></li>
-<li id="navi02_bbs"><a href="https://race.sp.netkeiba.com/?pid=bbs&amp;race_id=202605050811&amp;rf=race_toggle_menu">掲示板</a></li>
-<li id="navi02_cgm_label"><a href="https://race.sp.netkeiba.com/?pid=cgm_label&amp;race_id=202605050811&amp;rf=race_toggle_menu">みんなのラベル</a></li>
-<li id="navi02_paddock"><a href="https://race.sp.netkeiba.com?pid=paddock&race_id=202605050811&amp;rf=race_toggle_menu">パドック</a></li>
-<!--<li id="navi02_other"><a href="https://race.sp.netkeiba.com/race/strategy.html?race_id=202605050811&amp;rf=race_toggle_menu">レース攻略</a></li>-->
+<li id="navi02_shutuba"><a href="https://race.sp.netkeiba.com/race/shutuba.html?race_id=202605050812&amp;rf=race_toggle_menu">通常</a></li>
+<li id="navi02_newspaper"><a href="https://race.sp.netkeiba.com/race/newspaper.html?race_id=202605050812&rf=race_toggle_menu">新聞</a></li>
+<li id="navi02_training"><a href="https://race.sp.netkeiba.com?pid=oikiri&amp;race_id=202605050812&amp;rf=race_toggle_menu">調教</a></li>
+<li id="navi02_comment"><a href="https://race.sp.netkeiba.com?pid=comment&amp;race_id=202605050812&amp;rf=race_toggle_menu">コメント</a></li>
+<li id="navi02_ai_summary"><a href="https://race.sp.netkeiba.com?pid=ai_summary&amp;race_id=202605050812&amp;rf=race_toggle_menu">AI総合スコア</a></li>
+<li id="navi02_speed"><a href="https://race.sp.netkeiba.com?pid=speed&amp;race_id=202605050812&amp;rf=race_toggle_menu">タイム指数</a></li>
+<li id="navi02_note"><a href="https://race.sp.netkeiba.com/race/note_past5.html?race_id=202605050812&rf=race_toggle_menu">メモ</a></li>
+<li id="navi02_bbs"><a href="https://race.sp.netkeiba.com/?pid=bbs&amp;race_id=202605050812&amp;rf=race_toggle_menu">掲示板</a></li>
+<li id="navi02_cgm_label"><a href="https://race.sp.netkeiba.com/?pid=cgm_label&amp;race_id=202605050812&amp;rf=race_toggle_menu">みんなのラベル</a></li>
+<li id="navi02_paddock"><a href="https://race.sp.netkeiba.com?pid=paddock&race_id=202605050812&amp;rf=race_toggle_menu">パドック</a></li>
+<!--<li id="navi02_other"><a href="https://race.sp.netkeiba.com/race/strategy.html?race_id=202605050812&amp;rf=race_toggle_menu">レース攻略</a></li>-->
 </ul>
 </div><!-- /.RaceInfo_Tab02_Wrap -->
 <div class="RightArrow">→</div>
@@ -1576,7 +1588,7 @@ var _action_api_url_change_session = 'https://race.sp.netkeiba.com';
 </script>
 <script type="text/javascript" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/js/change_session.js?190920"></script>
 
-<!-- block=shutuba (cp) -->
+<!-- block=shutuba (cg) -->
 <style>
 .sort_icon { display:none; }
 th {
@@ -1613,8 +1625,8 @@ $('head link:last').after(style);
 var _action_api_url = 'https://race.sp.netkeiba.com';
 var _action_api_url_myhorse = window.location.origin;
 var _race_location_url = window.location.origin;
-var _shutuba_cart_group = 'horse_202605050811';
-var _shutuba_race_id = '202605050811';
+var _shutuba_cart_group = 'horse_202605050812';
+var _shutuba_race_id = '202605050812';
 var _race_cookie_domain_ = '.netkeiba.com';
 var _raceapi_action_api_url = window.location.origin;
 </script>
@@ -1628,10 +1640,10 @@ var _raceapi_action_api_url = window.location.origin;
 <thead>
 <tr class="Header">
 
-
+<th class="Waku">馬番<br /><span class="sort_icon"></span></th>
 <th class="CheckMark">
 <span class="On_CheckMode">チェック</span><br />
-<input type="button" value="切替" class="Shutuba_Table_Btn01" onclick="change_mark_mode('shutuba','202605050811');">
+<input type="button" value="切替" class="Shutuba_Table_Btn01" onclick="change_mark_mode('shutuba','202605050812');">
 </th>
 
 <th class="Horse_Info">
@@ -1650,24 +1662,84 @@ var _raceapi_action_api_url = window.location.origin;
 </button>
 </div><!-- /.Tooltip_OddsUpLimit_Wrap -->
 </div></th>
-
+<th class="Weight">馬体重<br /><span>(増減)</span><br /><span class="sort_icon"></span></th>
 </tr>
 </thead>
-<tr class="HorseList" id="tr_9">
+<tr class="HorseList" id="tr_6">
 
-
+<td class="Waku1">1</td>
 <td class="Horse_Select">
-<input type="checkbox" class="HorseCheck_Select" id="check_9" name="9" value="_98" />
-<label for="check_9" class="HorseCheckBtn"></label>
+<input type="checkbox" class="HorseCheck_Select" id="check_6" name="6" value="1_98" />
+<label for="check_6" class="HorseCheckBtn"></label>
 
 </td>
 <td class="Horse_Info">
 <dl class="fc">
 <dt class="Horse HorseLink">
-<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050811&horse_id=2022102303&i=0&rf=shutuba_modal"> アスクコモンタレヴ</a>&nbsp;<img id="note-2022102303" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2022102303" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
+<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2021105521&i=0&rf=shutuba_modal"> ヘデントール</a>&nbsp;<img id="note-2021105521" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2021105521" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
 
 </dt>
-<dd class="Age">牡4 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2022102303/?rf=shutuba_db" id="db_2022102303"><span>アスクコモンタレヴのデータベース</span></a></span></dd>
+<dd class="Age">牡5 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2021105521/?rf=shutuba_db" id="db_2021105521"><span>ヘデントールのデータベース</span></a></span></dd>
+
+<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/05626/?rf=shutuba"> <em>マーカンド</em> 58.0</a><!--05626--></dd>
+
+
+</dl>
+</td>
+<td class="Popular">
+<!-- <td class="Popular"> -->
+<span id="odds-1_01">---.-</span><br />
+<span id="ninki-1_01">**</span><span>人気</span>
+</td>
+<td class="Weight">
+
+</td>
+</tr>
+<tr class="HorseList" id="tr_8">
+
+<td class="Waku1">2</td>
+<td class="Horse_Select">
+<input type="checkbox" class="HorseCheck_Select" id="check_8" name="8" value="2_98" />
+<label for="check_8" class="HorseCheckBtn"></label>
+
+</td>
+<td class="Horse_Info">
+<dl class="fc">
+<dt class="Horse HorseLink">
+<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2021106787&i=1&rf=shutuba_modal"> コスモキュランダ</a>&nbsp;<img id="note-2021106787" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2021106787" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
+
+</dt>
+<dd class="Age">牡5 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2021106787/?rf=shutuba_db" id="db_2021106787"><span>コスモキュランダのデータベース</span></a></span></dd>
+
+<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/01091/?rf=shutuba"> <em>丹内</em> 58.0</a><!--01091--></dd>
+
+
+</dl>
+</td>
+<td class="Popular">
+<!-- <td class="Popular"> -->
+<span id="odds-1_02">---.-</span><br />
+<span id="ninki-1_02">**</span><span>人気</span>
+</td>
+<td class="Weight">
+
+</td>
+</tr>
+<tr class="HorseList" id="tr_3">
+
+<td class="Waku2">3</td>
+<td class="Horse_Select">
+<input type="checkbox" class="HorseCheck_Select" id="check_3" name="3" value="3_98" />
+<label for="check_3" class="HorseCheckBtn"></label>
+
+</td>
+<td class="Horse_Info">
+<dl class="fc">
+<dt class="Horse HorseLink">
+<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2021103272&i=2&rf=shutuba_modal"> メイショウタバル</a>&nbsp;<img id="note-2021103272" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2021103272" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
+
+</dt>
+<dd class="Age">牡5 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2021103272/?rf=shutuba_db" id="db_2021103272"><span>メイショウタバルのデータベース</span></a></span></dd>
 
 <dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/00666/?rf=shutuba"> <em>武豊</em> 58.0</a><!--00666--></dd>
 
@@ -1676,28 +1748,210 @@ var _raceapi_action_api_url = window.location.origin;
 </td>
 <td class="Popular">
 <!-- <td class="Popular"> -->
-<span id="odds-1_9">---.-</span><br />
-<span id="ninki-1_9">**</span><span>人気</span>
+<span id="odds-1_03">---.-</span><br />
+<span id="ninki-1_03">**</span><span>人気</span>
 </td>
+<td class="Weight">
 
+</td>
+</tr>
+<tr class="HorseList" id="tr_11">
+
+<td class="Waku2">4</td>
+<td class="Horse_Select">
+<input type="checkbox" class="HorseCheck_Select" id="check_11" name="11" value="4_98" />
+<label for="check_11" class="HorseCheckBtn"></label>
+
+</td>
+<td class="Horse_Info">
+<dl class="fc">
+<dt class="Horse HorseLink">
+<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2022105102&i=3&rf=shutuba_modal"> クロワデュノール</a>&nbsp;<img id="note-2022105102" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2022105102" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
+
+</dt>
+<dd class="Age">牡4 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2022105102/?rf=shutuba_db" id="db_2022105102"><span>クロワデュノールのデータベース</span></a></span></dd>
+
+<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/05473/?rf=shutuba"> <em>Ｃデムーロ</em> 58.0</a><!--05473--></dd>
+
+
+</dl>
+</td>
+<td class="Popular">
+<!-- <td class="Popular"> -->
+<span id="odds-1_04">---.-</span><br />
+<span id="ninki-1_04">**</span><span>人気</span>
+</td>
+<td class="Weight">
+
+</td>
+</tr>
+<tr class="HorseList" id="tr_2">
+
+<td class="Waku3">5</td>
+<td class="Horse_Select">
+<input type="checkbox" class="HorseCheck_Select" id="check_2" name="2" value="5_98" />
+<label for="check_2" class="HorseCheckBtn"></label>
+
+</td>
+<td class="Horse_Info">
+<dl class="fc">
+<dt class="Horse HorseLink">
+<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2020103101&i=4&rf=shutuba_modal"> シェイクユアハート</a>&nbsp;<img id="note-2020103101" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2020103101" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
+
+</dt>
+<dd class="Age">牡6 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2020103101/?rf=shutuba_db" id="db_2020103101"><span>シェイクユアハートのデータベース</span></a></span></dd>
+
+<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/01015/?rf=shutuba"> <em>古川吉</em> 58.0</a><!--01015--></dd>
+
+
+</dl>
+</td>
+<td class="Popular">
+<!-- <td class="Popular"> -->
+<span id="odds-1_05">---.-</span><br />
+<span id="ninki-1_05">**</span><span>人気</span>
+</td>
+<td class="Weight">
+
+</td>
+</tr>
+<tr class="HorseList" id="tr_12">
+
+<td class="Waku3">6</td>
+<td class="Horse_Select">
+<input type="checkbox" class="HorseCheck_Select" id="check_12" name="12" value="6_98" />
+<label for="check_12" class="HorseCheckBtn"></label>
+
+</td>
+<td class="Horse_Info">
+<dl class="fc">
+<dt class="Horse HorseLink">
+<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2022105519&i=5&rf=shutuba_modal"> マスカレードボール</a>&nbsp;<img id="note-2022105519" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2022105519" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
+
+</dt>
+<dd class="Age">牡4 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2022105519/?rf=shutuba_db" id="db_2022105519"><span>マスカレードボールのデータベース</span></a></span></dd>
+
+<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/05339/?rf=shutuba"> <em>ルメール</em> 58.0</a><!--05339--></dd>
+
+
+</dl>
+</td>
+<td class="Popular">
+<!-- <td class="Popular"> -->
+<span id="odds-1_06">---.-</span><br />
+<span id="ninki-1_06">**</span><span>人気</span>
+</td>
+<td class="Weight">
+
+</td>
 </tr>
 <tr class="HorseList" id="tr_10">
 
-
+<td class="Waku4">7</td>
 <td class="Horse_Select">
-<input type="checkbox" class="HorseCheck_Select" id="check_10" name="10" value="_98" />
+<input type="checkbox" class="HorseCheck_Select" id="check_10" name="10" value="7_98" />
 <label for="check_10" class="HorseCheckBtn"></label>
 
 </td>
 <td class="Horse_Info">
 <dl class="fc">
 <dt class="Horse HorseLink">
-<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050811&horse_id=2022105456&i=1&rf=shutuba_modal"> オストラヴァ</a>&nbsp;<img id="note-2022105456" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2022105456" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
+<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2022104720&i=6&rf=shutuba_modal"> ファイアンクランツ</a>&nbsp;<img id="note-2022104720" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2022104720" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
 
 </dt>
-<dd class="Age">牡4 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2022105456/?rf=shutuba_db" id="db_2022105456"><span>オストラヴァのデータベース</span></a></span></dd>
+<dd class="Age">牡4 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2022104720/?rf=shutuba_db" id="db_2022104720"><span>ファイアンクランツのデータベース</span></a></span></dd>
 
-<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/01092/?rf=shutuba"> <em>津村</em> 58.0</a><!--01092--></dd>
+<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/05509/?rf=shutuba"> <em>モレイラ</em> 58.0</a><!--05509--></dd>
+
+
+</dl>
+</td>
+<td class="Popular">
+<!-- <td class="Popular"> -->
+<span id="odds-1_07">---.-</span><br />
+<span id="ninki-1_07">**</span><span>人気</span>
+</td>
+<td class="Weight">
+
+</td>
+</tr>
+<tr class="HorseList" id="tr_14">
+
+<td class="Waku4">8</td>
+<td class="Horse_Select">
+<input type="checkbox" class="HorseCheck_Select" id="check_14" name="14" value="8_98" />
+<label for="check_14" class="HorseCheckBtn"></label>
+
+</td>
+<td class="Horse_Info">
+<dl class="fc">
+<dt class="Horse HorseLink">
+<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2021190002&i=7&rf=shutuba_modal"><span class="Icon_HorseMark Icon_KakuGai"></span>オンブズマン</a>&nbsp;<img id="note-2021190002" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2021190002" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
+
+</dt>
+<dd class="Age">牡5 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2021190002/?rf=shutuba_db" id="db_2021190002"><span>オンブズマンのデータベース</span></a></span></dd>
+
+<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/05495/?rf=shutuba"> <em>ビュイック</em> 58.0</a><!--05495--></dd>
+
+
+</dl>
+</td>
+<td class="Popular">
+<!-- <td class="Popular"> -->
+<span id="odds-1_08">---.-</span><br />
+<span id="ninki-1_08">**</span><span>人気</span>
+</td>
+<td class="Weight">
+
+</td>
+</tr>
+<tr class="HorseList" id="tr_15">
+
+<td class="Waku5">9</td>
+<td class="Horse_Select">
+<input type="checkbox" class="HorseCheck_Select" id="check_15" name="15" value="9_98" />
+<label for="check_15" class="HorseCheckBtn"></label>
+
+</td>
+<td class="Horse_Info">
+<dl class="fc">
+<dt class="Horse HorseLink">
+<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2021190001&i=8&rf=shutuba_modal"><span class="Icon_HorseMark Icon_KakuGai"></span>カランダガン</a>&nbsp;<img id="note-2021190001" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2021190001" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
+
+</dt>
+<dd class="Age">セ5 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2021190001/?rf=shutuba_db" id="db_2021190001"><span>カランダガンのデータベース</span></a></span></dd>
+
+<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/05504/?rf=shutuba"> <em>バルザロー</em> 58.0</a><!--05504--></dd>
+
+
+</dl>
+</td>
+<td class="Popular">
+<!-- <td class="Popular"> -->
+<span id="odds-1_09">---.-</span><br />
+<span id="ninki-1_09">**</span><span>人気</span>
+</td>
+<td class="Weight">
+
+</td>
+</tr>
+<tr class="HorseList" id="tr_18">
+
+<td class="Waku5">10</td>
+<td class="Horse_Select">
+<input type="checkbox" class="HorseCheck_Select" id="check_18" name="18" value="10_98" />
+<label for="check_18" class="HorseCheckBtn"></label>
+
+</td>
+<td class="Horse_Info">
+<dl class="fc">
+<dt class="Horse HorseLink">
+<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2022190002&i=9&rf=shutuba_modal"><span class="Icon_HorseMark Icon_KakuGai"></span>ミニーホーク</a>&nbsp;<img id="note-2022190002" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2022190002" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
+
+</dt>
+<dd class="Age">牝4 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2022190002/?rf=shutuba_db" id="db_2022190002"><span>ミニーホークのデータベース</span></a></span></dd>
+
+<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/05366/?rf=shutuba"> <em>ムーア</em> 56.0</a><!--05366--></dd>
 
 
 </dl>
@@ -1707,221 +1961,27 @@ var _raceapi_action_api_url = window.location.origin;
 <span id="odds-1_10">---.-</span><br />
 <span id="ninki-1_10">**</span><span>人気</span>
 </td>
-
-</tr>
-<tr class="HorseList" id="tr_3">
-
-
-<td class="Horse_Select">
-<input type="checkbox" class="HorseCheck_Select" id="check_3" name="3" value="_98" />
-<label for="check_3" class="HorseCheckBtn"></label>
+<td class="Weight">
 
 </td>
-<td class="Horse_Info">
-<dl class="fc">
-<dt class="Horse HorseLink">
-<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050811&horse_id=2021104865&i=2&rf=shutuba_modal"> カニキュル</a>&nbsp;<img id="note-2021104865" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2021104865" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
-
-</dt>
-<dd class="Age">牝5 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2021104865/?rf=shutuba_db" id="db_2021104865"><span>カニキュルのデータベース</span></a></span></dd>
-
-<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/05509/?rf=shutuba"> <em>モレイラ</em> 56.0</a><!--05509--></dd>
-
-
-</dl>
-</td>
-<td class="Popular">
-<!-- <td class="Popular"> -->
-<span id="odds-1_3">---.-</span><br />
-<span id="ninki-1_3">**</span><span>人気</span>
-</td>
-
-</tr>
-<tr class="HorseList" id="tr_5">
-
-
-<td class="Horse_Select">
-<input type="checkbox" class="HorseCheck_Select" id="check_5" name="5" value="_98" />
-<label for="check_5" class="HorseCheckBtn"></label>
-
-</td>
-<td class="Horse_Info">
-<dl class="fc">
-<dt class="Horse HorseLink">
-<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050811&horse_id=2021105585&i=3&rf=shutuba_modal"> カリーニョ</a>&nbsp;<img id="note-2021105585" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2021105585" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
-
-</dt>
-<dd class="Age">牡5 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2021105585/?rf=shutuba_db" id="db_2021105585"><span>カリーニョのデータベース</span></a></span></dd>
-
-<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/05495/?rf=shutuba"> <em>ビュイック</em> 58.0</a><!--05495--></dd>
-
-
-</dl>
-</td>
-<td class="Popular">
-<!-- <td class="Popular"> -->
-<span id="odds-1_5">---.-</span><br />
-<span id="ninki-1_5">**</span><span>人気</span>
-</td>
-
-</tr>
-<tr class="HorseList" id="tr_12">
-
-
-<td class="Horse_Select">
-<input type="checkbox" class="HorseCheck_Select" id="check_12" name="12" value="_98" />
-<label for="check_12" class="HorseCheckBtn"></label>
-
-</td>
-<td class="Horse_Info">
-<dl class="fc">
-<dt class="Horse HorseLink">
-<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050811&horse_id=2023107056&i=4&rf=shutuba_modal"> ゴーラッキー</a>&nbsp;<img id="note-2023107056" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2023107056" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
-
-</dt>
-<dd class="Age">牡3 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2023107056/?rf=shutuba_db" id="db_2023107056"><span>ゴーラッキーのデータベース</span></a></span></dd>
-
-<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/05339/?rf=shutuba"> <em>ルメール</em> 56.0</a><!--05339--></dd>
-
-
-</dl>
-</td>
-<td class="Popular">
-<!-- <td class="Popular"> -->
-<span id="odds-1_12">---.-</span><br />
-<span id="ninki-1_12">**</span><span>人気</span>
-</td>
-
-</tr>
-<tr class="HorseList" id="tr_6">
-
-
-<td class="Horse_Select">
-<input type="checkbox" class="HorseCheck_Select" id="check_6" name="6" value="_98" />
-<label for="check_6" class="HorseCheckBtn"></label>
-
-</td>
-<td class="Horse_Info">
-<dl class="fc">
-<dt class="Horse HorseLink">
-<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050811&horse_id=2021105609&i=5&rf=shutuba_modal"> スパークリシャール</a>&nbsp;<img id="note-2021105609" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2021105609" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
-
-</dt>
-<dd class="Age">セ5 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2021105609/?rf=shutuba_db" id="db_2021105609"><span>スパークリシャールのデータベース</span></a></span></dd>
-
-<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/05678/?rf=shutuba"> <em>プーシャン</em> 58.0</a><!--05678--></dd>
-
-
-</dl>
-</td>
-<td class="Popular">
-<!-- <td class="Popular"> -->
-<span id="odds-1_6">---.-</span><br />
-<span id="ninki-1_6">**</span><span>人気</span>
-</td>
-
-</tr>
-<tr class="HorseList" id="tr_4">
-
-
-<td class="Horse_Select">
-<input type="checkbox" class="HorseCheck_Select" id="check_4" name="4" value="_98" />
-<label for="check_4" class="HorseCheckBtn"></label>
-
-</td>
-<td class="Horse_Info">
-<dl class="fc">
-<dt class="Horse HorseLink">
-<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050811&horse_id=2021105244&i=6&rf=shutuba_modal"><span class="Icon_HorseMark Icon_MaruChi"></span>スピンザブラッド</a>&nbsp;<img id="note-2021105244" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2021105244" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
-
-</dt>
-<dd class="Age">牡5 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2021105244/?rf=shutuba_db" id="db_2021105244"><span>スピンザブラッドのデータベース</span></a></span></dd>
-
-<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/05504/?rf=shutuba"> <em>バルザロー</em> 58.0</a><!--05504--></dd>
-
-
-</dl>
-</td>
-<td class="Popular">
-<!-- <td class="Popular"> -->
-<span id="odds-1_4">---.-</span><br />
-<span id="ninki-1_4">**</span><span>人気</span>
-</td>
-
 </tr>
 <tr class="HorseList" id="tr_1">
 
-
+<td class="Waku6">11</td>
 <td class="Horse_Select">
-<input type="checkbox" class="HorseCheck_Select" id="check_1" name="1" value="_98" />
+<input type="checkbox" class="HorseCheck_Select" id="check_1" name="1" value="11_98" />
 <label for="check_1" class="HorseCheckBtn"></label>
 
 </td>
 <td class="Horse_Info">
 <dl class="fc">
 <dt class="Horse HorseLink">
-<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050811&horse_id=2020106475&i=7&rf=shutuba_modal"> ピンキープロミス</a>&nbsp;<img id="note-2020106475" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2020106475" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
+<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2020103060&i=10&rf=shutuba_modal"> ヴェルテンベルク</a>&nbsp;<img id="note-2020103060" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2020103060" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
 
 </dt>
-<dd class="Age">牡6 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2020106475/?rf=shutuba_db" id="db_2020106475"><span>ピンキープロミスのデータベース</span></a></span></dd>
+<dd class="Age">牡6 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2020103060/?rf=shutuba_db" id="db_2020103060"><span>ヴェルテンベルクのデータベース</span></a></span></dd>
 
-<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/01162/?rf=shutuba"> <em>木幡巧</em> 58.0</a><!--01162--></dd>
-
-
-</dl>
-</td>
-<td class="Popular">
-<!-- <td class="Popular"> -->
-<span id="odds-1_1">---.-</span><br />
-<span id="ninki-1_1">**</span><span>人気</span>
-</td>
-
-</tr>
-<tr class="HorseList" id="tr_8">
-
-
-<td class="Horse_Select">
-<input type="checkbox" class="HorseCheck_Select" id="check_8" name="8" value="_98" />
-<label for="check_8" class="HorseCheckBtn"></label>
-
-</td>
-<td class="Horse_Info">
-<dl class="fc">
-<dt class="Horse HorseLink">
-<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050811&horse_id=2021106816&i=8&rf=shutuba_modal"> マイネルブリックス</a>&nbsp;<img id="note-2021106816" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2021106816" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
-
-</dt>
-<dd class="Age">牡5 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2021106816/?rf=shutuba_db" id="db_2021106816"><span>マイネルブリックスのデータベース</span></a></span></dd>
-
-<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/01161/?rf=shutuba"> <em>菊沢</em> 58.0</a><!--01161--></dd>
-
-
-</dl>
-</td>
-<td class="Popular">
-<!-- <td class="Popular"> -->
-<span id="odds-1_8">---.-</span><br />
-<span id="ninki-1_8">**</span><span>人気</span>
-</td>
-
-</tr>
-<tr class="HorseList" id="tr_11">
-
-
-<td class="Horse_Select">
-<input type="checkbox" class="HorseCheck_Select" id="check_11" name="11" value="_98" />
-<label for="check_11" class="HorseCheckBtn"></label>
-
-</td>
-<td class="Horse_Info">
-<dl class="fc">
-<dt class="Horse HorseLink">
-<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050811&horse_id=2022106813&i=9&rf=shutuba_modal"> マイネルフーガ</a>&nbsp;<img id="note-2022106813" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2022106813" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
-
-</dt>
-<dd class="Age">牡4 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2022106813/?rf=shutuba_db" id="db_2022106813"><span>マイネルフーガのデータベース</span></a></span></dd>
-
-<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/05626/?rf=shutuba"> <em>マーカンド</em> 58.0</a><!--05626--></dd>
+<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/00660/?rf=shutuba"> <em>横山典</em> 58.0</a><!--00660--></dd>
 
 
 </dl>
@@ -1931,81 +1991,57 @@ var _raceapi_action_api_url = window.location.origin;
 <span id="odds-1_11">---.-</span><br />
 <span id="ninki-1_11">**</span><span>人気</span>
 </td>
+<td class="Weight">
 
+</td>
 </tr>
-<tr class="HorseList" id="tr_2">
+<tr class="HorseList" id="tr_17">
 
-
+<td class="Waku6">12</td>
 <td class="Horse_Select">
-<input type="checkbox" class="HorseCheck_Select" id="check_2" name="2" value="_98" />
-<label for="check_2" class="HorseCheckBtn"></label>
+<input type="checkbox" class="HorseCheck_Select" id="check_17" name="17" value="12_98" />
+<label for="check_17" class="HorseCheckBtn"></label>
 
 </td>
 <td class="Horse_Info">
 <dl class="fc">
 <dt class="Horse HorseLink">
-<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050811&horse_id=2021103678&i=10&rf=shutuba_modal"> ユキワリザクラ</a>&nbsp;<img id="note-2021103678" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2021103678" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
+<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2022190003&i=11&rf=shutuba_modal"><span class="Icon_HorseMark Icon_KakuGai"></span>テアオ</a>&nbsp;<img id="note-2022190003" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2022190003" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
 
 </dt>
-<dd class="Age">牝5 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2021103678/?rf=shutuba_db" id="db_2021103678"><span>ユキワリザクラのデータベース</span></a></span></dd>
+<dd class="Age">牡4 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2022190003/?rf=shutuba_db" id="db_2022190003"><span>テアオのデータベース</span></a></span></dd>
 
-<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/01122/?rf=shutuba"> <em>三浦</em> 56.0</a><!--01122--></dd>
+<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/05698/?rf=shutuba"> <em>Ｌトーレス</em> 58.0</a><!--05698--></dd>
 
 
 </dl>
 </td>
 <td class="Popular">
 <!-- <td class="Popular"> -->
-<span id="odds-1_2">---.-</span><br />
-<span id="ninki-1_2">**</span><span>人気</span>
+<span id="odds-1_12">---.-</span><br />
+<span id="ninki-1_12">**</span><span>人気</span>
 </td>
+<td class="Weight">
 
+</td>
 </tr>
-<tr class="HorseList" id="tr_7">
+<tr class="HorseList" id="tr_5">
 
-
+<td class="Waku7">13</td>
 <td class="Horse_Select">
-<input type="checkbox" class="HorseCheck_Select" id="check_7" name="7" value="_98" />
-<label for="check_7" class="HorseCheckBtn"></label>
+<input type="checkbox" class="HorseCheck_Select" id="check_5" name="5" value="13_98" />
+<label for="check_5" class="HorseCheckBtn"></label>
 
 </td>
 <td class="Horse_Info">
 <dl class="fc">
 <dt class="Horse HorseLink">
-<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050811&horse_id=2021105662&i=11&rf=shutuba_modal"> ログラール</a>&nbsp;<img id="note-2021105662" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2021105662" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
+<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2021105436&i=12&rf=shutuba_modal"> アーバンシック</a>&nbsp;<img id="note-2021105436" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2021105436" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
 
 </dt>
-<dd class="Age">セ5 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2021105662/?rf=shutuba_db" id="db_2021105662"><span>ログラールのデータベース</span></a></span></dd>
+<dd class="Age">牡5 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2021105436/?rf=shutuba_db" id="db_2021105436"><span>アーバンシックのデータベース</span></a></span></dd>
 
-<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/05271/?rf=shutuba"> <em>スミヨン</em> 58.0</a><!--05271--></dd>
-
-
-</dl>
-</td>
-<td class="Popular">
-<!-- <td class="Popular"> -->
-<span id="odds-1_7">---.-</span><br />
-<span id="ninki-1_7">**</span><span>人気</span>
-</td>
-
-</tr>
-<tr class="HorseList" id="tr_13">
-
-
-<td class="Horse_Select">
-<input type="checkbox" class="HorseCheck_Select" id="check_13" name="13" value="_98" />
-<label for="check_13" class="HorseCheckBtn"></label>
-
-</td>
-<td class="Horse_Info">
-<dl class="fc">
-<dt class="Horse HorseLink">
-<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050811&horse_id=2023107199&i=12&rf=shutuba_modal"> ローベルクランツ</a>&nbsp;<img id="note-2023107199" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2023107199" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
-
-</dt>
-<dd class="Age">牡3 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2023107199/?rf=shutuba_db" id="db_2023107199"><span>ローベルクランツのデータベース</span></a></span></dd>
-
-<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/05473/?rf=shutuba"> <em>Ｃデムーロ</em> 56.0</a><!--05473--></dd>
+<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/05678/?rf=shutuba"> <em>プーシャン</em> 58.0</a><!--05678--></dd>
 
 
 </dl>
@@ -2015,7 +2051,159 @@ var _raceapi_action_api_url = window.location.origin;
 <span id="odds-1_13">---.-</span><br />
 <span id="ninki-1_13">**</span><span>人気</span>
 </td>
+<td class="Weight">
 
+</td>
+</tr>
+<tr class="HorseList" id="tr_7">
+
+<td class="Waku7">14</td>
+<td class="Horse_Select">
+<input type="checkbox" class="HorseCheck_Select" id="check_7" name="7" value="14_98" />
+<label for="check_7" class="HorseCheckBtn"></label>
+
+</td>
+<td class="Horse_Info">
+<dl class="fc">
+<dt class="Horse HorseLink">
+<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2021106548&i=13&rf=shutuba_modal"> タガノデュード</a>&nbsp;<img id="note-2021106548" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2021106548" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
+
+</dt>
+<dd class="Age">牡5 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2021106548/?rf=shutuba_db" id="db_2021106548"><span>タガノデュードのデータベース</span></a></span></dd>
+
+<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/05212/?rf=shutuba"> <em>Ｍデムーロ</em> 58.0</a><!--05212--></dd>
+
+
+</dl>
+</td>
+<td class="Popular">
+<!-- <td class="Popular"> -->
+<span id="odds-1_14">---.-</span><br />
+<span id="ninki-1_14">**</span><span>人気</span>
+</td>
+<td class="Weight">
+
+</td>
+</tr>
+<tr class="HorseList" id="tr_9">
+
+<td class="Waku7">15</td>
+<td class="Horse_Select">
+<input type="checkbox" class="HorseCheck_Select" id="check_9" name="9" value="15_98" />
+<label for="check_9" class="HorseCheckBtn"></label>
+
+</td>
+<td class="Horse_Info">
+<dl class="fc">
+<dt class="Horse HorseLink">
+<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2022104614&i=14&rf=shutuba_modal"> エキサイトバイオ</a>&nbsp;<img id="note-2022104614" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2022104614" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
+
+</dt>
+<dd class="Age">牡4 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2022104614/?rf=shutuba_db" id="db_2022104614"><span>エキサイトバイオのデータベース</span></a></span></dd>
+
+<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/01160/?rf=shutuba"> <em>荻野極</em> 58.0</a><!--01160--></dd>
+
+
+</dl>
+</td>
+<td class="Popular">
+<!-- <td class="Popular"> -->
+<span id="odds-1_15">---.-</span><br />
+<span id="ninki-1_15">**</span><span>人気</span>
+</td>
+<td class="Weight">
+
+</td>
+</tr>
+<tr class="HorseList" id="tr_4">
+
+<td class="Waku8">16</td>
+<td class="Horse_Select">
+<input type="checkbox" class="HorseCheck_Select" id="check_4" name="4" value="16_98" />
+<label for="check_4" class="HorseCheckBtn"></label>
+
+</td>
+<td class="Horse_Info">
+<dl class="fc">
+<dt class="Horse HorseLink">
+<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2021105143&i=15&rf=shutuba_modal"> ダノンデサイル</a>&nbsp;<img id="note-2021105143" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2021105143" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
+
+</dt>
+<dd class="Age">牡5 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2021105143/?rf=shutuba_db" id="db_2021105143"><span>ダノンデサイルのデータベース</span></a></span></dd>
+
+<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/05386/?rf=shutuba"> <em>戸崎圭</em> 58.0</a><!--05386--></dd>
+
+
+</dl>
+</td>
+<td class="Popular">
+<!-- <td class="Popular"> -->
+<span id="odds-1_16">---.-</span><br />
+<span id="ninki-1_16">**</span><span>人気</span>
+</td>
+<td class="Weight">
+
+</td>
+</tr>
+<tr class="HorseList" id="tr_16">
+
+<td class="Waku8">17</td>
+<td class="Horse_Select">
+<input type="checkbox" class="HorseCheck_Select" id="check_16" name="16" value="17_98" />
+<label for="check_16" class="HorseCheckBtn"></label>
+
+</td>
+<td class="Horse_Info">
+<dl class="fc">
+<dt class="Horse HorseLink">
+<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2020190005&i=16&rf=shutuba_modal"><span class="Icon_HorseMark Icon_KakuGai"></span>ゴリアット</a>&nbsp;<img id="note-2020190005" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2020190005" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
+
+</dt>
+<dd class="Age">セ6 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2020190005/?rf=shutuba_db" id="db_2020190005"><span>ゴリアットのデータベース</span></a></span></dd>
+
+<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/05271/?rf=shutuba"> <em>スミヨン</em> 58.0</a><!--05271--></dd>
+
+
+</dl>
+</td>
+<td class="Popular">
+<!-- <td class="Popular"> -->
+<span id="odds-1_17">---.-</span><br />
+<span id="ninki-1_17">**</span><span>人気</span>
+</td>
+<td class="Weight">
+
+</td>
+</tr>
+<tr class="HorseList" id="tr_13">
+
+<td class="Waku8">18</td>
+<td class="Horse_Select">
+<input type="checkbox" class="HorseCheck_Select" id="check_13" name="13" value="18_98" />
+<label for="check_13" class="HorseCheckBtn"></label>
+
+</td>
+<td class="Horse_Info">
+<dl class="fc">
+<dt class="Horse HorseLink">
+<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2020190008&i=17&rf=shutuba_modal"><span class="Icon_HorseMark Icon_KakuGai"></span>エシカルダイヤモンド</a>&nbsp;<img id="note-2020190008" class="Icon_Note disp_none" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_note.png" alt="" width="13" />&nbsp;<img id="myhorse_2020190008" class="disp_none Favorite" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/icon/icon_fav01.png" alt="お気に入り馬" width="14">
+
+</dt>
+<dd class="Age">セ6 <span class="db_link"><a href="https://db.sp.netkeiba.com/horse/2020190008/?rf=shutuba_db" id="db_2020190008"><span>エシカルダイヤモンドのデータベース</span></a></span></dd>
+
+<dd class="Jockey"><a href="https://db.sp.netkeiba.com/jockey/01163/?rf=shutuba"> <em>坂井</em> 58.0</a><!--01163--></dd>
+
+
+</dl>
+</td>
+<td class="Popular">
+<!-- <td class="Popular"> -->
+<span id="odds-1_18">---.-</span><br />
+<span id="ninki-1_18">**</span><span>人気</span>
+</td>
+<td class="Weight">
+
+</td>
 </tr>
 
 </table>
@@ -2136,10 +2324,10 @@ $('.sort_icon').show();
 /* Area created in the intern End */
 $.oddsUpdate({
 apiUrl:window.location.origin + '/?pid=api_get_jra_odds',
-raceId:'202605050811',
+raceId:'202605050812',
 isPremium:0,
 displayDiffTime:false,
-PremiumLinkReturnUrl : 'http%3A%2F%2Frace.sp.netkeiba.com%2Frace%2Fshutuba.html%3Frace_id%3D202605050811',
+PremiumLinkReturnUrl : 'http%3A%2F%2Frace.sp.netkeiba.com%2Frace%2Fshutuba.html%3Frace_id%3D202605050812',
 PremiumLinkReturnRf : 'shutuba',
 isBrackets : false,
 compress:true,
@@ -2181,7 +2369,7 @@ tableSorteAction();
 <form id="shutuba_form" method="get" action="">
 
 <input type="hidden" name="pid" id="shutuba_form_pid" value="">
-<input type="hidden" name="race_id" value="202605050811">
+<input type="hidden" name="race_id" value="202605050812">
 <div class="Shutuba_Form_Footer Phase01_Btn">
 <button class="SubmitBtn" type="submit">選んだ馬のオッズ</button>
 </div>
@@ -2197,7 +2385,7 @@ if (Object.keys(data).length>0) {
 $.each(data, function(i,v){
 var mark = v._cd.split('_');
 if (mark[1] != 99) {
-location.href = window.location.origin + '/generator/myyoso.html?race_id=202605050811';
+location.href = window.location.origin + '/generator/myyoso.html?race_id=202605050812';
 sharing = true;
 return false;
 }
@@ -2230,7 +2418,7 @@ $('.Icon_Share01').addClass('andro');
 <p>プレミアムサービスのご利用で<br>
 最新オッズをいち早くお届け！</p>
 <a href="https://regist.sp.netkeiba.com" class="mb20">登録済みの方はこちらからログイン</a>
-<div class="MoreLinkBtn Detail"><a href="https://regist.sp.netkeiba.com/?pid=premium&service=p16&return_url=http%3A%2F%2Frace.sp.netkeiba.com%2Frace%2Fshutuba.html%3Frace_id%3D202605050811" id="a_monthly_goods_link_12" data-theme="01022">プレミアムサービスの<br />詳細はこちら</a></div>
+<div class="MoreLinkBtn Detail"><a href="https://regist.sp.netkeiba.com/?pid=premium&service=p16&return_url=http%3A%2F%2Frace.sp.netkeiba.com%2Frace%2Fshutuba.html%3Frace_id%3D202605050812" id="a_monthly_goods_link_12" data-theme="01022">プレミアムサービスの<br />詳細はこちら</a></div>
 </div>
 -->
 
@@ -2291,7 +2479,7 @@ return false
 });
 $(window).load(function() {
 // race_titleのブロックからmyレース登録済か判定
-if($('#myrace_'+'202605050811').css('display') == 'block') {
+if($('#myrace_'+'202605050812').css('display') == 'block') {
 $("#my_race_check").prop("checked",true);
 $(".MyRaceCheckBtn label p").text('Myレースを解除する');
 }
@@ -2300,7 +2488,7 @@ var _url  = window.location.origin;
 var _data = { pid : 'api_post_my_race' };
 _data.input   = 'UTF-8';
 _data.output  = 'json';
-_data.race_id = '202605050811';
+_data.race_id = '202605050812';
 $.ajax( { type     : 'POST',
 url      : _url,
 data     : _data,
@@ -2641,7 +2829,7 @@ function showRaceSpecialDigest( _show_id )
 var _data = { pid : 'api_get_race_special_digest' };
 _data.input             = 'UTF-8';
 _data.output            = 'jsonp';
-_data.race_id           = '202605050811';
+_data.race_id           = '202605050812';
 $.ajax( { type     : 'GET',
 url      : window.location.origin,
 data     : _data,
@@ -2734,12 +2922,1264 @@ $("[class^='master_course_infoText'].AI_tenkai,[class^='master_course_infoLink']
 });
 </script>
 
-<!-- block=race_expect (cp) -->
-<!-- empty race expect -->
+<!-- block=race_expect (cg) -->
+<!-- レース展開予想 -->
+<script type="text/javascript" src="https://rcdnv2.netkeiba.com/img.sp/common/js/slick.min.js"></script>
+<section class="Sec_Deploy_Race">
+
+<div class="Title_Sec">
+<dl class="RacePace">
+<dt>ペース</dt>
+<dd class="Pace_S">S</dd>
+</dl>
+</div><!-- / .Title_Sec -->
+<p class="deploy_race_image"><img src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/race/05_t2400.png" alt=""></p>
+<div class="Btn_Group">
+<ul class="jyo_tab">
+<li class="Active"><a href="javascript:void(0);">スタート後</a></li><li><a href="javascript:void(0);">3コーナー</a></li><li><a href="javascript:void(0);">4コーナー</a></li>
+</ul>
+<span class="Btn_Group_ActiveBg" style="width: 92px; height: 25px; top: 0px; left: 25px;"></span>
+</div>
+<div class="DeployRace_Slide">
+<div class="DeployRace_SlideBox" id="DeployRace">
+<div class="DeployRace_SlideBoxItem">
+<ul>
+<li>
+<dl>
+<dt>先頭</dt>
+<dd>
+<ul>
+
+</ul>
+</dd>
+</dl>
+</li><li>
+<dl>
+<dt>先団</dt>
+<dd>
+<ul>
+
+</ul>
+</dd>
+</dl>
+</li><li>
+<dl>
+<dt>中団</dt>
+<dd>
+<ul>
+
+</ul>
+</dd>
+</dl>
+</li><li>
+<dl>
+<dt>後方</dt>
+<dd>
+<ul>
+
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div><!-- /.DeployRace_SlideBoxItem --><div class="DeployRace_SlideBoxItem">
+<ul>
+<li>
+<dl>
+<dt>先頭</dt>
+<dd>
+<ul>
+
+</ul>
+</dd>
+</dl>
+</li><li>
+<dl>
+<dt>先団</dt>
+<dd>
+<ul>
+
+</ul>
+</dd>
+</dl>
+</li><li>
+<dl>
+<dt>中団</dt>
+<dd>
+<ul>
+
+</ul>
+</dd>
+</dl>
+</li><li>
+<dl>
+<dt>後方</dt>
+<dd>
+<ul>
+
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div><!-- /.DeployRace_SlideBoxItem --><div class="DeployRace_SlideBoxItem">
+<ul>
+<li>
+<dl>
+<dt>先頭</dt>
+<dd>
+<ul>
+
+</ul>
+</dd>
+</dl>
+</li><li>
+<dl>
+<dt>先団</dt>
+<dd>
+<ul>
+
+</ul>
+</dd>
+</dl>
+</li><li>
+<dl>
+<dt>中団</dt>
+<dd>
+<ul>
+
+</ul>
+</dd>
+</dl>
+</li><li>
+<dl>
+<dt>後方</dt>
+<dd>
+<ul>
+
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div><!-- /.DeployRace_SlideBoxItem -->
+</div><!-- /.DeployRace_SlideBox -->
+</div><!-- /.DeployRace_Slide -->
+
+</section><!-- Sec_Deploy_Race -->
+<script>
+$(document).ready(function(){
+// レース展開予想
+var $slider = $('#DeployRace');
+if($slider.hasClass('slick-initialized')){
+$('.jyo_tab li').removeClass('Active');
+$('.jyo_tab li').eq(0).addClass('Active');
+$slider.slick('slickGoTo', parseInt(0));
+}else{
+$slider.on('touchstart', function() {
+if (typeof flickbrowser == 'object' && typeof flickbrowser.disableFlick == 'function') {
+flickbrowser.disableFlick();
+}
+});
+$slider.on('touchend', function() {
+if (typeof flickbrowser == 'object' && typeof flickbrowser.enableFlick == 'function') {
+flickbrowser.enableFlick();
+}
+});
+$slider.slick({
+slidesToShow: 1,
+dots: false,
+infinite: true,
+arrows: true,
+autoplay: false,
+speed: 300,
+adaptiveHeight: true
+});
+}
+// Activeメニューの幅と左位置に変更
+function ActiveDataGet() {
+var ActiveItem = $("ul.jyo_tab li.Active a");
+if(ActiveItem && ActiveItem.length>0){
+$("span.Btn_Group_ActiveBg").css({
+"width": ActiveItem.outerWidth(),
+"height": ActiveItem.height(),
+"top": ActiveItem.position().top,
+"left": ActiveItem.position().left
+});
+}
+}
+ActiveDataGet();
+$slider.on('afterChange', function(event, slick, currentSlide){
+$('.jyo_tab li').removeClass('Active');
+var curSlider = $(slick.$slides[currentSlide]);
+var ChangeslideIndex = curSlider.data('slick-index');
+$('.jyo_tab li').eq(ChangeslideIndex).addClass('Active');
+//スクロール位置調整
+var windowW = $('.Contents').width();
+var Active_offset_Left = $('.jyo_tab .Active').position().left;
+var Active_offset_Right = $('.jyo_tab .Active').position().left + $('.jyo_tab .Active').width();
+var Btn_Group_ListWidth = 0;
+for (var i = 0; i < $('.jyo_tab > li').length; i++) {
+var $liW = $($('.jyo_tab > li').get(i)).outerWidth();
+Btn_Group_ListWidth += $liW;
+}
+var Active_Left = 0;
+var ActiveIndex = $('.jyo_tab .Active').index('ul.jyo_tab > li');
+for (var i = 0; i < ActiveIndex; i++) {
+var $liW = $($('.jyo_tab > li').get(i)).outerWidth();
+Active_Left += $liW;
+}
+if( Btn_Group_ListWidth < windowW ){
+ActiveDataGet();
+} else if( Btn_Group_ListWidth > windowW ) {
+if( Active_offset_Right + 10 >= windowW + $('.Btn_Group').scrollLeft() ) { // 右移動
+$('.Btn_Group').animate( { scrollLeft : Active_Left + $('.jyo_tab .Active').width() - windowW + 15 }, 'fast' , 'linear',function(){
+ActiveDataGet();
+});
+} else if ( Active_offset_Left < $('.Btn_Group').scrollLeft() ) { // 左移動
+$('.Btn_Group').animate( { scrollLeft : Active_Left }, 'fast' , 'linear',function(){
+ActiveDataGet();
+});
+} else {
+ActiveDataGet();
+}
+}
+});
+$('.jyo_tab a').click(function(e){
+e.preventDefault();
+var activeLi = $(this).parent('li');
+var slideIndex = $('.jyo_tab li').index(activeLi);
+$slider.slick('slickGoTo', parseInt(slideIndex));
+});
+});
+</script>
 <!-- block=ai_tenkai (cg) -->
-<div class="Race_Infomation_Box">レース前日14時頃公開です。</div>
-<!-- block=top3data (cp) -->
-<!-- no data -->
+<div class="BalanceAna">
+<div class="TabMenu01">
+<ul class="Tab_Col3">
+<li data-tab="AiTenkaiArea01" class="Active"><a href="javascript:void(0);">展開予測</a></li>
+<li data-tab="AiTenkaiArea02"><a href="javascript:void(0);">タイム予測</a></li>
+<li data-tab="AiTenkaiArea03"><a href="javascript:void(0);">ポジション</a></li>
+</ul>
+</div><!-- /.TabMenu01 -->
+<section class="AiTenkaiArea01 Turf AntiClockwise">
+
+<div class="DevDataCheckBox isFreemium" id="master_info_new_aiTenkai01" data-id="master_info_new_aiTenkai">
+<div class="DevDataCheckBoxInner">
+<label class="CheckLabelWrap DevDataInput" title="出遅れ率を考慮">
+<span class="CheckboxWrap"><input type="checkbox" class="CheckboxInput" name="" value="" id=""><span class="CheckboxInner"></span></span>
+<span class="CheckLabel">出遅れ率</span>
+</label>
+<label class="CheckLabelWrap DevDataInput" title="騎手傾向を考慮">
+<span class="CheckboxWrap"><input type="checkbox" class="CheckboxInput" name="" value="" id=""><span class="CheckboxInner"></span></span>
+<span class="CheckLabel">騎手傾向</span>
+</label>
+<label class="CheckLabelWrap BiasSwitch" title="トラックバイアスを表示">
+<input class="notice_checkbox" type="checkbox" name="" value="" id="" checked="checked">
+<span class="Check_Switcher"></span>
+<span class="CheckLabel">トラックバイアス</span>
+</label>
+</div><!-- /.DevDataCheckBoxInner -->
+</div><!-- /.DevDataCheckBox -->
+<div class="DevAllArea">
+<div class="DevelopImgArea">
+<div class="PositionBtn_Group">
+<ul class="PositionTab" id="CornerSwitch">
+<li class="Active">
+<a href="javascript:void(0);" id="Corner01">
+<span class="Btn">スタート後</span>
+<span class="Pointer"></span>
+</a>
+</li>
+<li>
+<a href="javascript:void(0);" id="Corner02">
+<span class="Btn">3コーナー</span>
+<span class="Pointer"></span>
+</a>
+</li>
+<li>
+<a href="javascript:void(0);" id="Corner03">
+<span class="Btn">4コーナー</span>
+<span class="Pointer"></span>
+</a>
+</li>
+</ul>
+<span class="PositionBtn_ActiveBg"></span>
+<span class="ActiveLine"></span>
+</div>
+<div class="DevelopImg01 Turf AntiClockwise BiasPattern">
+<!--
+バイアスによってBiasPattern123
+三桁の最初の数字がインコース
+三桁の二番目の数字がセンター
+三桁の最後の数字がアウトコース
+BiasPattern123 インから有利普通不利
+BiasPattern111 全て有利
+BiasPattern223 インから普通普通不利
+-->
+<div class="DevelopBiasTxt">
+<span class="Txt01"></span>
+<span class="Txt01"></span>
+<span class="Txt01"></span>
+</div>
+<div class="DevelopImgWrap">
+<a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2021103272&rf=shutuba_modal">
+<span class="HorseIcon Color03" id="Horse3" style="top:-4%;left:0%">
+<span class="Waku Waku2">3</span>
+<span class="HorseName">メイシ</span>
+</span>
+</a><a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2022105102&rf=shutuba_modal">
+<span class="HorseIcon Color05" id="Horse4" style="top:12%;left:8.7%">
+<span class="Waku Waku2">4</span>
+<span class="HorseName">クロワ</span>
+</span>
+</a><a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2020190005&rf=shutuba_modal">
+<span class="HorseIcon Color03" id="Horse17" style="top:-4%;left:25.9%">
+<span class="Waku Waku8">17</span>
+<span class="HorseName">ゴリア</span>
+</span>
+</a><a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2021106787&rf=shutuba_modal">
+<span class="HorseIcon Color04" id="Horse2" style="top:12%;left:32.31%">
+<span class="Waku Waku1">2</span>
+<span class="HorseName">コスモ</span>
+</span>
+</a><a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2020103101&rf=shutuba_modal">
+<span class="HorseIcon Color01" id="Horse5" style="top:-4%;left:51.13%">
+<span class="Waku Waku3">5</span>
+<span class="HorseName">シェイ</span>
+</span>
+</a><a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2022105519&rf=shutuba_modal">
+<span class="HorseIcon Color04" id="Horse6" style="top:12%;left:47.68%">
+<span class="Waku Waku3">6</span>
+<span class="HorseName">マスカ</span>
+</span>
+</a><a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2022104720&rf=shutuba_modal">
+<span class="HorseIcon Color03" id="Horse7" style="top:30%;left:42.17%">
+<span class="Waku Waku4">7</span>
+<span class="HorseName">ファイ</span>
+</span>
+</a><a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2021190002&rf=shutuba_modal">
+<span class="HorseIcon Color03" id="Horse8" style="top:46%;left:43.42%">
+<span class="Waku Waku4">8</span>
+<span class="HorseName">オンブ</span>
+</span>
+</a><a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2021105143&rf=shutuba_modal">
+<span class="HorseIcon Color01" id="Horse16" style="top:64%;left:46.79%">
+<span class="Waku Waku8">16</span>
+<span class="HorseName">ダノン</span>
+</span>
+</a><a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2021190001&rf=shutuba_modal">
+<span class="HorseIcon Color03" id="Horse9" style="top:30%;left:55.46%">
+<span class="Waku Waku5">9</span>
+<span class="HorseName">カラン</span>
+</span>
+</a><a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2022190002&rf=shutuba_modal">
+<span class="HorseIcon Color03" id="Horse10" style="top:12%;left:62.86%">
+<span class="Waku Waku5">10</span>
+<span class="HorseName">ミニー</span>
+</span>
+</a><a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2021105436&rf=shutuba_modal">
+<span class="HorseIcon Color01" id="Horse13" style="top:80%;left:55.22%">
+<span class="Waku Waku7">13</span>
+<span class="HorseName">アーバ</span>
+</span>
+</a><a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2021106548&rf=shutuba_modal">
+<span class="HorseIcon Color03" id="Horse14" style="top:46%;left:57.4%">
+<span class="Waku Waku7">14</span>
+<span class="HorseName">タガノ</span>
+</span>
+</a><a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2022104614&rf=shutuba_modal">
+<span class="HorseIcon Color03" id="Horse15" style="top:64%;left:59.29%">
+<span class="Waku Waku7">15</span>
+<span class="HorseName">エキサ</span>
+</span>
+</a><a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2022190003&rf=shutuba_modal">
+<span class="HorseIcon Color07" id="Horse12" style="top:-4%;left:64.23%">
+<span class="Waku Waku6">12</span>
+<span class="HorseName">テアオ</span>
+</span>
+</a><a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2021105521&rf=shutuba_modal">
+<span class="HorseIcon Color04" id="Horse1" style="top:30%;left:75.35%">
+<span class="Waku Waku1">1</span>
+<span class="HorseName">ヘデン</span>
+</span>
+</a><a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2020190008&rf=shutuba_modal">
+<span class="HorseIcon Color04" id="Horse18" style="top:-4%;left:86.26%">
+<span class="Waku Waku8">18</span>
+<span class="HorseName">エシカ</span>
+</span>
+</a><a href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2020103060&rf=shutuba_modal">
+<span class="HorseIcon Color03" id="Horse11" style="top:-4%;left:100%">
+<span class="Waku Waku6">11</span>
+<span class="HorseName">ヴェル</span>
+</span>
+</a>
+</div><!-- /.DevelopImgWrap -->
+</div><!-- /.DevelopImg01 -->
+</div><!-- /.DevelopImgArea -->
+
+<div class="DevelopCourseDataWrap">
+<section class="CourseDataArea isFreemium" id="master_info_new_aiTenkai03" data-id="master_info_new_aiTenkai">
+<div class="CourseDataTitle"><h2>コース情報 東京2400m芝 Cコース</h2></div>
+<div class="CourseDataWrap">
+<ul>
+<li>
+<div class="T">ペース</div>
+<div class="Data Pace_S NoCheckData">S</div>
+</li>
+<li>
+<div class="T">推定タイム</div>
+<img src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/race/develop/pase_dummy.png" alt="" width="60" height="33">
+</li>
+<li>
+<div class="T">推定前半3F</div>
+<img src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/race/develop/pase_dummy.png" alt="" width="60" height="33">
+</li>
+<li>
+<div class="T">推定後半3F</div>
+<img src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/race/develop/pase_dummy.png" alt="" width="60" height="33">
+</li>
+</ul>
+</div>
+</section>
+<section class="CourseDataArea isFreemium" id="master_info_new_aiTenkai05" data-id="master_info_new_trackBias">
+<div class="CourseDataTitle"><h2>バイアス</h2></div>
+<div class="CourseDataWrap">
+<span class="TrackBiasTxt01"><img src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/race/develop/pase_dummy.png" alt="" width="60" height="33"></span>
+</div><!-- /.CourseDataWrap -->
+</section>
+</div><!-- /.DevelopCourseDataWrap -->
+
+<section class="DevelopOpinionArea isFreemium">
+<div class="DevTitle2nd"><h2><img src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/character/robot01_04.png" alt="AIロボ" width="39" height="41">AIによるこのレースの見解・推奨馬</h2></div>
+<dl>
+<dt>
+<span class="Icon_AI_01"></span>
+AI勝負<br>診断
+</dt>
+<dd class="NoCheckData">
+<p>ジャパンCはスローペースが予想されるため、前半の位置取りと終盤の切れ味が鍵を握る展開となりそうです。3.メイショウタバルは3コーナーで先...</p>
+<div class="DummyComment" id="master_info_new_aiTenkai06" data-id="master_info_new_aiTenkai"></div>
+<div class="DevelopOpinionArea_dummyWrap">
+<div class="Master_Regist_Box no_blurred">
+<div class="Master_Regist_MsgArea01">
+<p class="Master_Regist_Msg01">マスターコースに</p>
+<p class="Master_Regist_Msg02">登録するとご覧になれます。</p>
+</div>
+<p class="Master_Regist_Msg_Campaign01">今なら<em>14日間無料</em>でお試し</p>
+<a class="Master_Regist_Btn Master_Regist_Btn_02" id="master_info_new_aiTenkai09" data-id="master_info_new_aiTenkai" href="javascript:void(0)">AI展開予測を見る</a>
+<p class="Master_Regist_Txt02"><a href="https://regist.sp.netkeiba.com">登録済みの方はこちらからログイン</a></p>
+</div>
+</div>
+</dd>
+</dl>
+</section>
+<div class="Ai_TenkaiAchievements">
+<dl>
+<dt class="Ai_TenkaiAchievements_Title">推奨馬の直近実績</dt>
+<dd class="Ai_TenkaiAchievements_Item Ai_TenkaiAchievements_Item_Summary">
+<div class="Ai_TenkaiAchievements_Ticker js-ai-tenkai-ticker">
+<div class="Ai_TenkaiAchievements_TickerContent">
+<svg width="13" height="17" viewBox="0 0 13 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.3271 6.2085C12.1319 9.20497 9.92726 10.1441 9.92726 10.1441C12.7913 5.49427 5.58983 2.0287 6.78583 0C3.33278 1.43696 4.91355 2.87393 4.86429 5.34666C4.81506 7.81937 1.78607 7.10031 2.5977 4.9532C-2.16952 9.23012 -0.0734606 16.3867 6.42298 16.3867C12.2432 16.3867 14.6554 10.4074 11.3271 6.2085ZM6.20717 15.3666C3.85257 15.3666 3.11298 12.4831 4.76129 10.9405C4.76129 12.0467 6.06689 12.0816 6.06689 11.0466C6.06689 9.98236 4.8714 9.5881 5.94464 8.19338C5.94464 9.77828 7.91696 9.88137 8.73406 11.6955C9.36481 13.096 8.752 15.3666 6.20717 15.3666Z" fill="#E03D3C" />
+</svg>
+<!-- <span>2/10</span>&nbsp;<span>東京</span><span>11R</span>&nbsp;<span class="fb">ゲルチュタール</span>&nbsp;<em class="fb fc no01">1着</em><em class="fb fc no01">11番人気</em><span class="fb">&nbsp;他2頭</span> -->
+<span>11/23</span>&nbsp;<span>東京</span><span>9R</span>&nbsp;<span class="fb">スカイスプレンダー</span>&nbsp;<em class="fb fc no01">1着</em><em class="fb fc no01">4番人気</em><span class="fb">&nbsp;</span>&nbsp;&nbsp;&nbsp;<!-- <span>2/10</span>&nbsp;<span>東京</span><span>11R</span>&nbsp;<span class="fb">ゲルチュタール</span>&nbsp;<em class="fb fc no01">1着</em><em class="fb fc no01">11番人気</em><span class="fb">&nbsp;他2頭</span> -->
+<span>11/23</span>&nbsp;<span>福島</span><span>10R</span>&nbsp;<span class="fb">アイドクレース</span>&nbsp;<em class="fb fc no01">1着</em><em class="fb fc no01">13番人気</em><span class="fb">&nbsp;</span>&nbsp;&nbsp;&nbsp;<!-- <span>2/10</span>&nbsp;<span>東京</span><span>11R</span>&nbsp;<span class="fb">ゲルチュタール</span>&nbsp;<em class="fb fc no01">1着</em><em class="fb fc no01">11番人気</em><span class="fb">&nbsp;他2頭</span> -->
+<span>11/23</span>&nbsp;<span>福島</span><span>9R</span>&nbsp;<span class="fb">トラストボス</span>&nbsp;<em class="fb fc no01">1着</em><em class="fb fc no01">11番人気</em><span class="fb">&nbsp;</span>&nbsp;&nbsp;&nbsp;<!-- <span>2/10</span>&nbsp;<span>東京</span><span>11R</span>&nbsp;<span class="fb">ゲルチュタール</span>&nbsp;<em class="fb fc no01">1着</em><em class="fb fc no01">11番人気</em><span class="fb">&nbsp;他2頭</span> -->
+<span>11/23</span>&nbsp;<span>福島</span><span>5R</span>&nbsp;<span class="fb">マージナルゲイン</span>&nbsp;<em class="fb fc no01">1着</em><em class="fb fc no01">5番人気</em><span class="fb">&nbsp;</span>&nbsp;&nbsp;&nbsp;<!-- <span>2/10</span>&nbsp;<span>東京</span><span>11R</span>&nbsp;<span class="fb">ゲルチュタール</span>&nbsp;<em class="fb fc no01">1着</em><em class="fb fc no01">11番人気</em><span class="fb">&nbsp;他2頭</span> -->
+<span>11/22</span>&nbsp;<span>京都</span><span>10R</span>&nbsp;<span class="fb">ジョディーズマロン</span>&nbsp;<em class="fb fc no01">1着</em><em class="fb fc no01">8番人気</em><span class="fb">&nbsp;</span>&nbsp;&nbsp;&nbsp;
+</div>
+</div>
+<div class="Ai_TenkaiAchievements_Toggle" role="button" tabindex="0" aria-label="実績詳細の開閉">
+</div>
+</dd>
+<dd class="Ai_TenkaiAchievements_Item Ai_TenkaiAchievements_Item_Detail" style="display: none;">
+<ul class="Ai_TenkaiAchievements_Item_List">
+<li>
+<span>11/23</span><span>東京</span><span>9R</span><span class="fb fsL">Ｌジョッキーカップ</span>
+
+
+
+
+
+
+
+
+
+
+<br><span class="fb ml">スカイスプレンダー</span>&nbsp;<em class="fb fc no01">1着</em><em class="fb fc no01">4番人気</em>
+</li>
+</ul><ul class="Ai_TenkaiAchievements_Item_List">
+<li>
+<span>11/23</span><span>福島</span><span>10R</span><span class="fb fsL">五色沼特別</span>
+
+
+
+
+
+
+
+
+
+
+<br><span class="fb ml">アイドクレース</span>&nbsp;<em class="fb fc no01">1着</em><em class="fb fc no01">13番人気</em>
+</li>
+</ul><ul class="Ai_TenkaiAchievements_Item_List">
+<li>
+<span>11/23</span><span>福島</span><span>9R</span><span class="fb fsL">磐梯山特別</span>
+
+
+
+
+
+
+
+
+
+
+<br><span class="fb ml">トラストボス</span>&nbsp;<em class="fb fc no01">1着</em><em class="fb fc no01">11番人気</em>
+</li>
+</ul><ul class="Ai_TenkaiAchievements_Item_List">
+<li>
+<span>11/23</span><span>福島</span><span>5R</span><span class="fb fsL">２歳新馬</span>
+
+
+
+
+
+
+
+
+
+
+<br><span class="fb ml">マージナルゲイン</span>&nbsp;<em class="fb fc no01">1着</em><em class="fb fc no01">5番人気</em>
+</li>
+</ul><ul class="Ai_TenkaiAchievements_Item_List">
+<li>
+<span>11/22</span><span>京都</span><span>10R</span><span class="fb fsL">西陣Ｓ</span>
+
+
+
+
+
+
+
+
+
+
+<br><span class="fb ml">ジョディーズマロン</span>&nbsp;<em class="fb fc no01">1着</em><em class="fb fc no01">8番人気</em>
+</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="Description_Box TenkaiDescInfo">
+<dl>
+<dt>展開予測の見方<span class="Icon_ArrowB"></span></dt>
+<dd style="display: none;">
+<div class="ViewTitle">直線での各競走馬の伸び方を3段階で表現しています。</div>
+<div class="ViewInfo">
+<span class="SpeedIconInfo">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="19.098" height="15.37" viewBox="0 0 19.098 15.37"><defs><clipPath><rect width="19.098" height="15.37" fill="none"/></clipPath></defs><g transform="translate(19.098 15.37) rotate(180)"><g clip-path=""><path d="M31.247,110.882a1.248,1.248,0,0,1-.882-2.13l1.178-1.178L30.365,106.4a1.247,1.247,0,0,1,1.764-1.764l2.06,2.06a1.247,1.247,0,0,1,0,1.764l-2.06,2.06a1.243,1.243,0,0,1-.882.366" transform="translate(-28.74 -99.889)" fill="#d64242"/><path d="M2.507,75.525a1.243,1.243,0,0,1,.882.366l2.06,2.06a1.247,1.247,0,0,1,0,1.764l-2.06,2.06a1.247,1.247,0,0,1-1.764-1.764L2.8,78.833,1.625,77.655a1.248,1.248,0,0,1,.882-2.13m0-1.259a2.507,2.507,0,0,0-1.772,4.28l.287.287-.287.287A2.507,2.507,0,1,0,4.28,82.665l2.06-2.06a2.507,2.507,0,0,0,0-3.545L4.28,75a2.49,2.49,0,0,0-1.773-.734" transform="translate(0 -71.148)" fill="#fff"/><path d="M135.982,74.433a1.248,1.248,0,0,1-.882-2.13l2.848-2.848L135.1,66.607a1.247,1.247,0,0,1,1.764-1.764l3.73,3.73a1.247,1.247,0,0,1,0,1.764l-3.73,3.73a1.244,1.244,0,0,1-.882.365" transform="translate(-129.078 -61.77)" fill="#d64242"/><path d="M107.243,35.736a1.243,1.243,0,0,1,.882.366l3.73,3.73a1.247,1.247,0,0,1,0,1.764l-3.73,3.73a1.248,1.248,0,1,1-1.764-1.765l2.848-2.848-2.848-2.848a1.248,1.248,0,0,1,.882-2.13m0-1.259a2.507,2.507,0,0,0-1.772,4.28l1.957,1.958-1.958,1.957a2.507,2.507,0,0,0,3.545,3.546l3.73-3.73a2.507,2.507,0,0,0,0-3.546l-3.73-3.73a2.49,2.49,0,0,0-1.773-.734" transform="translate(-100.339 -33.03)" fill="#fff"/><path d="M243.373,42.851a1.248,1.248,0,0,1-.882-2.13l4.3-4.3-4.3-4.3a1.248,1.248,0,1,1,1.764-1.765l5.178,5.178a1.248,1.248,0,0,1,0,1.765l-5.178,5.178a1.244,1.244,0,0,1-.882.365" transform="translate(-231.961 -28.741)" fill="#d64242"/><path d="M214.633,1.259a1.243,1.243,0,0,1,.882.365L220.693,6.8a1.248,1.248,0,0,1,0,1.765l-5.178,5.178a1.248,1.248,0,0,1-1.764-1.765l4.3-4.3-4.3-4.3a1.248,1.248,0,0,1,.882-2.13m0-1.259h0a2.507,2.507,0,0,0-1.773,4.28l3.405,3.405L212.86,11.09a2.507,2.507,0,0,0,3.545,3.546l5.178-5.178a2.507,2.507,0,0,0,0-3.546L216.406.734A2.49,2.49,0,0,0,214.633,0" transform="translate(-203.221)" fill="#fff"/></g></g></svg>
+<span>&nbsp;大きく伸びる</span>
+</span>
+<span class="SpeedIconInfo">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13.142" height="15.37" viewBox="0 0 13.142 15.37"><defs><clipPath><rect width="13.142" height="15.37" fill="none"/></clipPath></defs><g transform="translate(13.142 15.37) rotate(180)"><g clip-path=""><path d="M31.247,110.882a1.248,1.248,0,0,1-.882-2.13l1.178-1.178L30.365,106.4a1.247,1.247,0,0,1,1.764-1.764l2.06,2.06a1.247,1.247,0,0,1,0,1.764l-2.06,2.06a1.243,1.243,0,0,1-.882.366" transform="translate(-28.74 -99.889)" fill="#d64242"/><path d="M2.507,75.525a1.243,1.243,0,0,1,.882.366l2.06,2.06a1.247,1.247,0,0,1,0,1.764l-2.06,2.06a1.247,1.247,0,0,1-1.764-1.764L2.8,78.833,1.625,77.655a1.248,1.248,0,0,1,.882-2.13m0-1.259a2.507,2.507,0,0,0-1.772,4.28l.287.287-.287.287A2.507,2.507,0,1,0,4.28,82.665l2.06-2.06a2.507,2.507,0,0,0,0-3.545L4.28,75a2.49,2.49,0,0,0-1.773-.734" transform="translate(0 -71.148)" fill="#fff"/><path d="M135.982,74.433a1.248,1.248,0,0,1-.882-2.13l2.848-2.848L135.1,66.607a1.247,1.247,0,0,1,1.764-1.764l3.73,3.73a1.247,1.247,0,0,1,0,1.764l-3.73,3.73a1.244,1.244,0,0,1-.882.365" transform="translate(-129.078 -61.77)" fill="#d64242"/><path d="M107.243,35.736a1.243,1.243,0,0,1,.882.366l3.73,3.73a1.247,1.247,0,0,1,0,1.764l-3.73,3.73a1.248,1.248,0,1,1-1.764-1.765l2.848-2.848-2.848-2.848a1.248,1.248,0,0,1,.882-2.13m0-1.259a2.507,2.507,0,0,0-1.772,4.28l1.957,1.958-1.958,1.957a2.507,2.507,0,0,0,3.545,3.546l3.73-3.73a2.507,2.507,0,0,0,0-3.546l-3.73-3.73a2.49,2.49,0,0,0-1.773-.734" transform="translate(-100.339 -33.03)" fill="#fff"/></g></g></svg>
+<span>&nbsp;伸びる</span>
+</span>
+<span class="SpeedIconInfo">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="7.074" height="15.37" viewBox="0 0 7.074 15.37"><defs><clipPath><rect width="7.074" height="15.37" fill="none"/></clipPath></defs><g transform="translate(7.074 15.37) rotate(180)"><g clip-path=""><path d="M31.247,110.882a1.248,1.248,0,0,1-.882-2.13l1.178-1.178L30.365,106.4a1.247,1.247,0,0,1,1.764-1.764l2.06,2.06a1.247,1.247,0,0,1,0,1.764l-2.06,2.06a1.243,1.243,0,0,1-.882.366" transform="translate(-28.74 -99.889)" fill="#d64242"/><path d="M2.507,75.525a1.243,1.243,0,0,1,.882.366l2.06,2.06a1.247,1.247,0,0,1,0,1.764l-2.06,2.06a1.247,1.247,0,0,1-1.764-1.764L2.8,78.833,1.625,77.655a1.248,1.248,0,0,1,.882-2.13m0-1.259a2.507,2.507,0,0,0-1.772,4.28l.287.287-.287.287A2.507,2.507,0,1,0,4.28,82.665l2.06-2.06a2.507,2.507,0,0,0,0-3.545L4.28,75a2.49,2.49,0,0,0-1.773-.734" transform="translate(0 -71.148)" fill="#fff"/></g></g></svg>
+<span>&nbsp;少し伸びる</span>
+</span>
+</div>
+</dd>
+</dl>
+</div>
+<div class="Description_Box BiasOfferRace mb10">
+<dl>
+<dt>トラックバイアスの提供レース</dt>
+<dd style="display: none;padding:0 10px 10px;">
+<div class="Inner">
+<div class="OpenTime mb00">
+<div class="OpenTime_Title">提供レース</div>
+<p>2025年以降のレース<br>※障害レースを除く中央競馬のみが対象となります</p>
+</div><!-- /OpenTime -->
+</div><!-- /Inner -->
+</dd>
+</dl>
+</div>
+<script>
+$(document).ready(function () {
+$('.Description_Box.TenkaiDescInfo > dl > dt').off('click');
+$('.Description_Box.TenkaiDescInfo > dl > dt').click(function() {
+$('.Description_Box.TenkaiDescInfo > dl > dt > span').toggleClass('Icon_ArrowT').toggleClass('Icon_ArrowB')
+$('+ dd', this).slideToggle('fast');
+});
+$('.Description_Box.BiasOfferRace > dl > dt').append('<span class="Icon_ArrowB"></span>');
+$('.Description_Box.BiasOfferRace > dl > dt').click(function () {
+$('.Description_Box.BiasOfferRace > dl > dt > span').toggleClass('Icon_ArrowT').toggleClass('Icon_ArrowB');
+$('+ dd', this).slideToggle('fast');
+});
+});
+</script>
+</div><!-- /.DevAllArea -->
+</section>
+<section class="AiTenkaiArea02" style="display:none">
+
+
+<div class="DevAllArea">
+
+<section class="CourseDataArea isFreemium" id="master_info_new_aiTenkai04" data-id="master_info_new_aiTenkai">
+<div class="CourseDataTitle"><h2>コース情報 東京2400m芝 Cコース</h2></div>
+<div class="CourseDataWrap">
+<ul>
+<li>
+<div class="T">ペース</div>
+<div class="Data Pace_S NoCheckData">S</div>
+</li>
+<li>
+<div class="T">推定タイム</div>
+<img src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/race/develop/pase_dummy.png" alt="" width="60" height="33">
+</li>
+<li>
+<div class="T">推定前半3F</div>
+<img src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/race/develop/pase_dummy.png" alt="" width="60" height="33">
+</li>
+<li>
+<div class="T">推定後半3F</div>
+<img src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/race/develop/pase_dummy.png" alt="" width="60" height="33">
+</li>
+</ul>
+</div>
+</section>
+<!-- /.CourseDataArea -->
+<div class="DevTitle2nd">
+<h2>レースラップ予測</h2>
+</div><!-- /.DevTitle2nd -->
+
+<table summary="予測ラップタイム" class="RaceCommon_Table Race_HaronTime isFreemium" id="master_info_new_aiTenkai07" data-id="master_info_new_aiTenkai">
+<tbody>
+<tr class="Header">
+<th>200m</th>
+<th>400m</th>
+<th>600m</th>
+<th>800m</th>
+</tr>
+<tr class="HaronTime NoCheckData" style="display: table-row;">
+<td><img src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/race/develop/pase_dummy.png" alt="" width="60" height="33"></td>
+<td><img src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/race/develop/pase_dummy.png" alt="" width="60" height="33"></td>
+<td><img src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/race/develop/pase_dummy.png" alt="" width="60" height="33"></td>
+<td><img src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/race/develop/pase_dummy.png" alt="" width="60" height="33"></td>
+</tr>
+</tbody>
+</table>
+<div class="DevTitle2nd">
+<h2>各出走馬の予測タイム</h2>
+</div><!-- /.DevTitle2nd -->
+
+<table class="Shutuba_Table PredictRap_Table NoCheckData isFreemium" sumarry="各馬予測タイム">
+<thead>
+<tr class="Header">
+<th class="Num">馬<br>番<br><span class="sort_icon"></span></th>
+<th class="Horse_Info"><div class="Horse_Name">馬名</div><span class="sort_icon"></span></th>
+<th class="">前半3F<br><span class="sort_icon"></span></th>
+<th class="">後半3F<br><span class="sort_icon"></span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="HorseList">
+<td class="Num Waku1 Sticky"><div>1</div></td>
+<td class="Horse_Info Horse_Link "><a  href="https://race.sp.netkeiba.com/modal/horse.html?race_id=202605050812&horse_id=2021105521&rf=shutuba_modal" >ヘデントール</a>
+</td>
+<td class="">36.7</td>
+<td class="">34.3</td>
+</tr>
+<tr class="HorseList" id="master_info_new_aiTenkai08" data-id="master_info_new_aiTenkai">
+<td><img src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/race/develop/table_dummy_01.png" alt=""></td>
+<td><img src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/race/develop/table_dummy_02.png" alt=""></td>
+<td><img src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/race/develop/table_dummy_03.png" alt=""></td>
+<td><img src="https://cdnv2.netkeiba.com/img.racev4.sp/common/img/race/develop/table_dummy_03.png" alt=""></td>
+</tr>
+</tbody>
+</table>
+<div class="Master_Regist_Box no_blurred">
+<div class="Master_Regist_MsgArea01">
+<p class="Master_Regist_Msg01">マスターコースに</p>
+<p class="Master_Regist_Msg02">登録するとご覧になれます。</p>
+</div>
+<p class="Master_Regist_Msg_Campaign01">今なら<em>14日間無料</em>でお試し</p>
+<a class="Master_Regist_Btn Master_Regist_Btn_02" id="master_info_new_aiTenkai10" data-id="master_info_new_aiTenkai" href="javascript:void(0)">AI展開予測を見る</a>
+<p class="Master_Regist_Txt02"><a href="https://regist.sp.netkeiba.com">登録済みの方はこちらからログイン</a></p>
+</div>
+</div><!-- /.DevAllArea -->
+</section>
+<section class="AiTenkaiArea03 PositionMap" style="display:none">
+<div class="DevTitle2nd"><h2>4コーナーポジション別の複勝率(%)</h2></div>
+<dl class="PositionMapImg AllDataBox01">
+<dt>中目有利</dt>
+<dd class="Turf AntiClockwise">
+<!--
+<dd class="AntiClockwise Turf">
+<dd class="Clockwise Dirt">
+<dd class="AntiClockwise Dirt">
+<dd class="Straight Turf">
+-->
+<div class="Position_HeatMap">
+<ul class="PositionMarkList">
+<li><!-- 前 -->
+<div class="Heat03"><span>29%</span></div><!-- 内 -->
+<div class="Heat03"><span>40%</span></div><!-- 中 -->
+<div class="Heat00"><span>0%</span></div><!-- 外 -->
+</li>
+<li><!-- 中 -->
+<div class="Heat04"><span>25%</span></div><!-- 内 -->
+<div class="Heat03"><span>29%</span></div><!-- 中 -->
+<div class="Heat00"><span>0%</span></div><!-- 外 -->
+</li>
+<li><!-- 後 -->
+<div class="Heat04"><span>8%</span></div><!-- 内 -->
+<div class="Heat03"><span>36%</span></div><!-- 中 -->
+<div class="Heat00"><span>0%</span></div><!-- 外 -->
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+<dl class="PositionMapColorInfo">
+<dt>複勝率の色分け</dt>
+<dd>
+<ul>
+<li><span class="Heat04"></span>1&#12316;25%</li>
+<li><span class="Heat03"></span>26&#12316;50%</li>
+<li><span class="Heat02"></span>51&#12316;75%</li>
+<li><span class="Heat01"></span>76&#12316;100%</li>
+</ul>
+</dd>
+</dl>
+<p class="PositionAbout_Notice01">※集計期間：直近1年</p>
+<div class="DevTitle2nd"><h2>推定ポジション有利馬</h2></div>
+<div class="PositionPickupHorseWrap">
+<ul>
+<li>
+<span class="Waku4 Umaban_Num">7</span><a href="https://db.sp.netkeiba.com/horse/2022104720/" class="data_top_horse_link">ファイアンクランツ</a>
+</li>
+</ul>
+<div class="DummyBox02" id="master_info_new_aiTenkai12" data-id="master_info_new_positionMap"></div>
+</div><!-- /.PositionPickupHorseWrap -->
+<div class="Master_Regist_Box no_blurred">
+<div class="Master_Regist_MsgArea01">
+<p class="Master_Regist_Msg01">マスターコースに</p>
+<p class="Master_Regist_Msg02">登録するとご覧になれます。</p>
+</div>
+<p class="Master_Regist_Msg_Campaign01">今なら<em>14日間無料</em>でお試し</p>
+<a class="Master_Regist_Btn_04 Master_Regist_Btn" id="master_info_new_aiTenkai11" data-id="master_info_new_positionMap" href="javascript:void(0)">ポジションマップを見る</a>
+<p class="Master_Regist_Txt02"><a href="https://regist.sp.netkeiba.com">登録済みの方はこちらからログイン</a></p>
+</div>
+</section>
+<script type="text/javascript">
+$(function(){
+const syncedCheckboxPairs = [
+['#dev_check_tenkai_01_02', '#dev_check_time_01_02'],
+['#dev_check_tenkai_01_03', '#dev_check_time_01_03']
+];
+function syncCheckboxPair(sourceSelector, targetSelector) {
+const $source = $(sourceSelector);
+const $target = $(targetSelector);
+if (!$source.length || !$target.length) {
+return;
+}
+$target.prop('checked', $source.prop('checked'));
+}
+window.syncAiTenkaiCheckboxesFromVisibleTab = function() {
+const isTenkaiVisible = $('.AiTenkaiArea01').is(':visible');
+syncedCheckboxPairs.forEach(function(pair) {
+const sourceSelector = isTenkaiVisible ? pair[0] : pair[1];
+const targetSelector = isTenkaiVisible ? pair[1] : pair[0];
+syncCheckboxPair(sourceSelector, targetSelector);
+});
+};
+window.syncAiTenkaiCheckboxesByInput = function($input) {
+syncedCheckboxPairs.forEach(function(pair) {
+if ($input.is(pair[0])) {
+syncCheckboxPair(pair[0], pair[1]);
+} else if ($input.is(pair[1])) {
+syncCheckboxPair(pair[1], pair[0]);
+}
+});
+};
+// タブ切替
+$('.TabMenu01 ul li').on('click', function () {
+window.syncAiTenkaiCheckboxesFromVisibleTab();
+$("[class^='AiTenkaiArea']").not($($(this).data('tab'))).hide();
+$('.' + $(this).data('tab')).show();
+$(this).addClass('Active').siblings().removeClass('Active');
+});
+});
+</script>
+</div>
+<script type="text/javascript">
+$(function(){
+function ActiveCornerGet() {
+$("#CornerSwitch a").on("click", function(){
+$("#CornerSwitch li").removeClass('Active');
+$(this).parent("li").addClass('Active');
+$(".HorseIcon,.DevelopImg01").addClass('Run');
+setTimeout(function(){
+$(".HorseIcon,.DevelopImg01").removeClass('Run');
+},1500);
+setTimeout(function(){
+ActiveDataGet();
+},200);
+});
+}
+ActiveCornerGet();
+// Activeメニューの幅と左位置に変更
+function ActiveDataGet() {
+var ActiveItem = $("#CornerSwitch li.Active .Pointer:visible");
+var ActiveWrap = $("#CornerSwitch:visible");
+var ActiveItemMarTop = parseInt(ActiveItem.css("margin-top"), 10);
+var ActiveItemMarLeft = parseInt(ActiveItem.css("margin-left"), 10);
+$("span.PositionBtn_ActiveBg:visible").css({
+"top": ActiveItem.position().top + ActiveWrap.position().top + ActiveItemMarTop,
+"left": ActiveItem.position().left + ActiveWrap.position().left + ActiveItemMarLeft
+});
+}
+$(window).resize(ActiveDataGet);
+ActiveDataGet();
+// チェックラップデータ
+function updateCheckRap() {
+$(".BalanceAna .NoCheckData,.BalanceAna .AllCheckData,.BalanceAna .StartLateData,.BalanceAna .JockeyData").hide();
+const showDataForGroup = (startLateChecked, jockeyChecked) => {
+if (startLateChecked && jockeyChecked) {
+$(".BalanceAna .AllCheckData").fadeIn("fast");
+} else if (startLateChecked) {
+$(".BalanceAna .StartLateData").fadeIn("fast");
+} else if (jockeyChecked) {
+$(".BalanceAna .JockeyData").fadeIn("fast");
+}
+};
+const tenkaiStartLateChecked = $('#dev_check_tenkai_01_02').is(':checked');
+const tenkaiJockeyChecked = $('#dev_check_tenkai_01_03').is(':checked');
+const timeStartLateChecked = $('#dev_check_time_01_02').is(':checked');
+const timeJockeyChecked = $('#dev_check_time_01_03').is(':checked');
+const tenkaiChecked = tenkaiStartLateChecked || tenkaiJockeyChecked;
+const timeChecked = timeStartLateChecked || timeJockeyChecked;
+if (tenkaiChecked) {
+showDataForGroup(tenkaiStartLateChecked, tenkaiJockeyChecked);
+}
+if (timeChecked) {
+showDataForGroup(timeStartLateChecked, timeJockeyChecked);
+}
+if (!tenkaiChecked && !timeChecked) {
+$(".BalanceAna .NoCheckData").fadeIn("fast");
+}
+}
+updateCheckRap();
+// チェック馬位置
+function updateHorsePosition() {
+var checkbox1_Checked1 = $('#dev_check_tenkai_01_02').is(':checked'); // 展開予測出遅れ率
+var checkbox1_Checked2 = $('#dev_check_tenkai_01_03').is(':checked'); // 展開予測騎手傾向
+var checkbox2_Checked1 = $('#dev_check_time_01_02').is(':checked'); // タイム予測出遅れ率
+var checkbox2_Checked2 = $('#dev_check_time_01_03').is(':checked'); // タイム予測騎手傾向
+var cornerCheck = $('#CornerSwitch li.Active > a').attr('id');
+if (!checkbox1_Checked1 && !checkbox1_Checked2 ) {
+// チェックなし
+switch (cornerCheck) {
+case 'Corner01':
+$("#Horse3").css({ 'top':'-4%', 'left':'0%', }).children('span[class*="Speed"]').remove();$("#Horse4").css({ 'top':'12%', 'left':'8.7%', }).children('span[class*="Speed"]').remove();$("#Horse17").css({ 'top':'-4%', 'left':'25.9%', }).children('span[class*="Speed"]').remove();$("#Horse2").css({ 'top':'12%', 'left':'32.31%', }).children('span[class*="Speed"]').remove();$("#Horse5").css({ 'top':'-4%', 'left':'51.13%', }).children('span[class*="Speed"]').remove();$("#Horse6").css({ 'top':'12%', 'left':'47.68%', }).children('span[class*="Speed"]').remove();$("#Horse7").css({ 'top':'30%', 'left':'42.17%', }).children('span[class*="Speed"]').remove();$("#Horse8").css({ 'top':'46%', 'left':'43.42%', }).children('span[class*="Speed"]').remove();$("#Horse16").css({ 'top':'64%', 'left':'46.79%', }).children('span[class*="Speed"]').remove();$("#Horse9").css({ 'top':'30%', 'left':'55.46%', }).children('span[class*="Speed"]').remove();$("#Horse10").css({ 'top':'12%', 'left':'62.86%', }).children('span[class*="Speed"]').remove();$("#Horse13").css({ 'top':'80%', 'left':'55.22%', }).children('span[class*="Speed"]').remove();$("#Horse14").css({ 'top':'46%', 'left':'57.4%', }).children('span[class*="Speed"]').remove();$("#Horse15").css({ 'top':'64%', 'left':'59.29%', }).children('span[class*="Speed"]').remove();$("#Horse12").css({ 'top':'-4%', 'left':'64.23%', }).children('span[class*="Speed"]').remove();$("#Horse1").css({ 'top':'30%', 'left':'75.35%', }).children('span[class*="Speed"]').remove();$("#Horse18").css({ 'top':'-4%', 'left':'86.26%', }).children('span[class*="Speed"]').remove();$("#Horse11").css({ 'top':'-4%', 'left':'100%', }).children('span[class*="Speed"]').remove();
+// console.log("チェックなし１コーナー");
+break;
+case 'Corner02':
+$("#Horse3").css({ 'top':'-4%', 'left':'0%', }).children('span[class*="Speed"]').remove();$("#Horse4").css({ 'top':'-4%', 'left':'13.41%', }).children('span[class*="Speed"]').remove();$("#Horse2").css({ 'top':'-4%', 'left':'28.7%', }).children('span[class*="Speed"]').remove();$("#Horse7").css({ 'top':'-4%', 'left':'50.45%', }).children('span[class*="Speed"]').remove();$("#Horse17").css({ 'top':'12%', 'left':'50.17%', }).children('span[class*="Speed"]').remove();$("#Horse15").css({ 'top':'30%', 'left':'55.39%', }).children('span[class*="Speed"]').remove();$("#Horse10").css({ 'top':'-4%', 'left':'64.46%', }).children('span[class*="Speed"]').remove();$("#Horse8").css({ 'top':'12%', 'left':'65.6%', }).children('span[class*="Speed"]').remove();$("#Horse9").css({ 'top':'30%', 'left':'69.52%', }).children('span[class*="Speed"]').remove();$("#Horse1").css({ 'top':'46%', 'left':'69.79%', }).children('span[class*="Speed"]').remove();$("#Horse5").css({ 'top':'64%', 'left':'76.87%', }).children('span[class*="Speed"]').remove();$("#Horse6").css({ 'top':'-4%', 'left':'77.54%', }).children('span[class*="Speed"]').remove();$("#Horse12").css({ 'top':'12%', 'left':'79.46%', }).children('span[class*="Speed"]').remove();$("#Horse13").css({ 'top':'80%', 'left':'79.42%', }).children('span[class*="Speed"]').remove();$("#Horse16").css({ 'top':'30%', 'left':'83.93%', }).children('span[class*="Speed"]').remove();$("#Horse14").css({ 'top':'-4%', 'left':'98.52%', }).children('span[class*="Speed"]').remove();$("#Horse18").css({ 'top':'12%', 'left':'98.64%', }).children('span[class*="Speed"]').remove();$("#Horse11").css({ 'top':'30%', 'left':'100%', }).children('span[class*="Speed"]').remove();
+// console.log("チェックなし３コーナー");
+break;
+case 'Corner03':
+$("#Horse2").css({ 'top':'-4%', 'left':'0%', }).append('<span class="SpeedUp_01"></span>');$("#Horse4").css({ 'top':'12%', 'left':'1.69%', }).append('<span class="SpeedUp_02"></span>');$("#Horse3").css({ 'top':'-4%', 'left':'12.5%', }).append('<span class="SpeedUp_02"></span>');$("#Horse7").css({ 'top':'-4%', 'left':'32.29%', }).append('<span class="SpeedUp_03"></span>');$("#Horse17").css({ 'top':'12%', 'left':'45.34%', }).append('<span class="SpeedUp_01"></span>');$("#Horse15").css({ 'top':'30%', 'left':'53.06%', }).append('<span class="SpeedUp_02"></span>');$("#Horse1").css({ 'top':'46%', 'left':'60.27%', }).append('<span class="SpeedUp_03"></span>');$("#Horse9").css({ 'top':'30%', 'left':'65.56%', }).append('<span class="SpeedUp_02"></span>');$("#Horse5").css({ 'top':'64%', 'left':'65.12%', }).append('<span class="SpeedUp_03"></span>');$("#Horse8").css({ 'top':'12%', 'left':'64.69%', }).append('<span class=""></span>');$("#Horse10").css({ 'top':'-4%', 'left':'68.79%', }).append('<span class="SpeedUp_01"></span>');$("#Horse6").css({ 'top':'-4%', 'left':'81.29%', }).append('<span class="SpeedUp_03"></span>');$("#Horse13").css({ 'top':'80%', 'left':'74.01%', }).append('<span class="SpeedUp_02"></span>');$("#Horse12").css({ 'top':'12%', 'left':'81%', }).append('<span class="SpeedUp_01"></span>');$("#Horse16").css({ 'top':'30%', 'left':'81.79%', }).append('<span class="SpeedUp_02"></span>');$("#Horse11").css({ 'top':'46%', 'left':'86.23%', }).append('<span class="SpeedUp_02"></span>');$("#Horse14").css({ 'top':'-4%', 'left':'93.79%', }).append('<span class="SpeedUp_02"></span>');$("#Horse18").css({ 'top':'12%', 'left':'100%', }).append('<span class="SpeedUp_02"></span>');
+// console.log("チェックなし４コーナー");
+break;
+}
+} else if (checkbox1_Checked1 && !checkbox1_Checked2) {
+// 出遅れ率チェック
+switch (cornerCheck) {
+case 'Corner01':
+$("#Horse4").css({ 'top':'-4%', 'left':'0%', }).children('span[class*="Speed"]').remove();$("#Horse3").css({ 'top':'12%', 'left':'6.87%', }).children('span[class*="Speed"]').remove();$("#Horse2").css({ 'top':'-4%', 'left':'15.83%', }).children('span[class*="Speed"]').remove();$("#Horse17").css({ 'top':'12%', 'left':'24.66%', }).children('span[class*="Speed"]').remove();$("#Horse7").css({ 'top':'-4%', 'left':'32.05%', }).children('span[class*="Speed"]').remove();$("#Horse13").css({ 'top':'-4%', 'left':'50.25%', }).children('span[class*="Speed"]').remove();$("#Horse15").css({ 'top':'12%', 'left':'47.57%', }).children('span[class*="Speed"]').remove();$("#Horse5").css({ 'top':'30%', 'left':'58.85%', }).children('span[class*="Speed"]').remove();$("#Horse6").css({ 'top':'46%', 'left':'58.64%', }).children('span[class*="Speed"]').remove();$("#Horse8").css({ 'top':'64%', 'left':'54.99%', }).children('span[class*="Speed"]').remove();$("#Horse9").css({ 'top':'80%', 'left':'52.21%', }).children('span[class*="Speed"]').remove();$("#Horse10").css({ 'top':'12%', 'left':'60.07%', }).children('span[class*="Speed"]').remove();$("#Horse14").css({ 'top':'-4%', 'left':'62.75%', }).children('span[class*="Speed"]').remove();$("#Horse16").css({ 'top':'80%', 'left':'64.71%', }).children('span[class*="Speed"]').remove();$("#Horse1").css({ 'top':'30%', 'left':'72.26%', }).children('span[class*="Speed"]').remove();$("#Horse12").css({ 'top':'64%', 'left':'67.49%', }).children('span[class*="Speed"]').remove();$("#Horse18").css({ 'top':'-4%', 'left':'89.67%', }).children('span[class*="Speed"]').remove();$("#Horse11").css({ 'top':'12%', 'left':'100%', }).children('span[class*="Speed"]').remove();
+// console.log("出遅れ率１コーナー");
+break;
+case 'Corner02':
+$("#Horse3").css({ 'top':'-4%', 'left':'0%', }).children('span[class*="Speed"]').remove();$("#Horse4").css({ 'top':'12%', 'left':'9.17%', }).children('span[class*="Speed"]').remove();$("#Horse2").css({ 'top':'-4%', 'left':'20.39%', }).children('span[class*="Speed"]').remove();$("#Horse17").css({ 'top':'-4%', 'left':'41.41%', }).children('span[class*="Speed"]').remove();$("#Horse7").css({ 'top':'12%', 'left':'52%', }).children('span[class*="Speed"]').remove();$("#Horse15").css({ 'top':'30%', 'left':'53.27%', }).children('span[class*="Speed"]').remove();$("#Horse8").css({ 'top':'-4%', 'left':'59.33%', }).children('span[class*="Speed"]').remove();$("#Horse9").css({ 'top':'46%', 'left':'58.82%', }).children('span[class*="Speed"]').remove();$("#Horse10").css({ 'top':'64%', 'left':'61.31%', }).children('span[class*="Speed"]').remove();$("#Horse1").css({ 'top':'80%', 'left':'64.16%', }).children('span[class*="Speed"]').remove();$("#Horse5").css({ 'top':'12%', 'left':'66.58%', }).children('span[class*="Speed"]').remove();$("#Horse12").css({ 'top':'30%', 'left':'67.83%', }).children('span[class*="Speed"]').remove();$("#Horse6").css({ 'top':'46%', 'left':'71.32%', }).children('span[class*="Speed"]').remove();$("#Horse16").css({ 'top':'-4%', 'left':'71.83%', }).children('span[class*="Speed"]').remove();$("#Horse13").css({ 'top':'64%', 'left':'73.81%', }).children('span[class*="Speed"]').remove();$("#Horse14").css({ 'top':'-4%', 'left':'88.47%', }).children('span[class*="Speed"]').remove();$("#Horse11").css({ 'top':'12%', 'left':'98.53%', }).children('span[class*="Speed"]').remove();$("#Horse18").css({ 'top':'30%', 'left':'100%', }).children('span[class*="Speed"]').remove();
+// console.log("出遅れ率３コーナー");
+break;
+case 'Corner03':
+$("#Horse4").css({ 'top':'12%', 'left':'0%', }).append('<span class="SpeedUp_01"></span>');$("#Horse2").css({ 'top':'-4%', 'left':'10.5%', }).append('<span class="SpeedUp_01"></span>');$("#Horse3").css({ 'top':'12%', 'left':'13.53%', }).append('<span class="SpeedUp_02"></span>');$("#Horse7").css({ 'top':'12%', 'left':'44.24%', }).append('<span class="SpeedUp_03"></span>');$("#Horse17").css({ 'top':'-4%', 'left':'54.01%', }).append('<span class="SpeedUp_01"></span>');$("#Horse5").css({ 'top':'12%', 'left':'60.17%', }).append('<span class="SpeedUp_03"></span>');$("#Horse9").css({ 'top':'46%', 'left':'66.56%', }).append('<span class="SpeedUp_02"></span>');$("#Horse15").css({ 'top':'30%', 'left':'66.82%', }).append('<span class="SpeedUp_02"></span>');$("#Horse1").css({ 'top':'80%', 'left':'70.35%', }).append('<span class="SpeedUp_03"></span>');$("#Horse10").css({ 'top':'64%', 'left':'76.02%', }).append('<span class="SpeedUp_01"></span>');$("#Horse8").css({ 'top':'-4%', 'left':'78.28%', }).append('<span class=""></span>');$("#Horse12").css({ 'top':'30%', 'left':'79.32%', }).append('<span class="SpeedUp_01"></span>');$("#Horse13").css({ 'top':'64%', 'left':'88.52%', }).append('<span class="SpeedUp_02"></span>');$("#Horse6").css({ 'top':'46%', 'left':'81.3%', }).append('<span class="SpeedUp_03"></span>');$("#Horse16").css({ 'top':'12%', 'left':'83.55%', }).append('<span class="SpeedUp_02"></span>');$("#Horse11").css({ 'top':'12%', 'left':'96.05%', }).append('<span class="SpeedUp_02"></span>');$("#Horse14").css({ 'top':'-4%', 'left':'93.63%', }).append('<span class="SpeedUp_02"></span>');$("#Horse18").css({ 'top':'30%', 'left':'100%', }).append('<span class="SpeedUp_01"></span>');
+// console.log("出遅れ率４コーナー");
+break;
+}
+} else if (!checkbox1_Checked1 && checkbox1_Checked2) {
+// 騎手傾向チェック
+switch (cornerCheck) {
+case 'Corner01':
+$("#Horse3").css({ 'top':'-4%', 'left':'0%', }).children('span[class*="Speed"]').remove();$("#Horse4").css({ 'top':'-4%', 'left':'14.91%', }).children('span[class*="Speed"]').remove();$("#Horse2").css({ 'top':'12%', 'left':'24.78%', }).children('span[class*="Speed"]').remove();$("#Horse17").css({ 'top':'-4%', 'left':'35.18%', }).children('span[class*="Speed"]').remove();$("#Horse7").css({ 'top':'12%', 'left':'45.3%', }).children('span[class*="Speed"]').remove();$("#Horse10").css({ 'top':'30%', 'left':'45.36%', }).children('span[class*="Speed"]').remove();$("#Horse15").css({ 'top':'46%', 'left':'38.93%', }).children('span[class*="Speed"]').remove();$("#Horse1").css({ 'top':'-4%', 'left':'55.94%', }).children('span[class*="Speed"]').remove();$("#Horse8").css({ 'top':'64%', 'left':'49.32%', }).children('span[class*="Speed"]').remove();$("#Horse9").css({ 'top':'46%', 'left':'54.09%', }).children('span[class*="Speed"]').remove();$("#Horse6").css({ 'top':'12%', 'left':'59.93%', }).children('span[class*="Speed"]').remove();$("#Horse12").css({ 'top':'30%', 'left':'61.86%', }).children('span[class*="Speed"]').remove();$("#Horse13").css({ 'top':'80%', 'left':'61.23%', }).children('span[class*="Speed"]').remove();$("#Horse16").css({ 'top':'64%', 'left':'61.82%', }).children('span[class*="Speed"]').remove();$("#Horse18").css({ 'top':'46%', 'left':'66.59%', }).children('span[class*="Speed"]').remove();$("#Horse5").css({ 'top':'-4%', 'left':'78.21%', }).children('span[class*="Speed"]').remove();$("#Horse14").css({ 'top':'-4%', 'left':'92.79%', }).children('span[class*="Speed"]').remove();$("#Horse11").css({ 'top':'12%', 'left':'100%', }).children('span[class*="Speed"]').remove();
+// console.log("騎手傾向１コーナー");
+break;
+case 'Corner02':
+$("#Horse3").css({ 'top':'-4%', 'left':'0%', }).children('span[class*="Speed"]').remove();$("#Horse4").css({ 'top':'12%', 'left':'2.32%', }).children('span[class*="Speed"]').remove();$("#Horse2").css({ 'top':'-4%', 'left':'13.52%', }).children('span[class*="Speed"]').remove();$("#Horse15").css({ 'top':'-4%', 'left':'37.25%', }).children('span[class*="Speed"]').remove();$("#Horse17").css({ 'top':'12%', 'left':'41.51%', }).children('span[class*="Speed"]').remove();$("#Horse7").css({ 'top':'30%', 'left':'42.36%', }).children('span[class*="Speed"]').remove();$("#Horse1").css({ 'top':'46%', 'left':'43.33%', }).children('span[class*="Speed"]').remove();$("#Horse10").css({ 'top':'64%', 'left':'49.52%', }).children('span[class*="Speed"]').remove();$("#Horse6").css({ 'top':'-4%', 'left':'51.27%', }).children('span[class*="Speed"]').remove();$("#Horse8").css({ 'top':'12%', 'left':'54.67%', }).children('span[class*="Speed"]').remove();$("#Horse9").css({ 'top':'30%', 'left':'56.36%', }).children('span[class*="Speed"]').remove();$("#Horse16").css({ 'top':'46%', 'left':'56.62%', }).children('span[class*="Speed"]').remove();$("#Horse18").css({ 'top':'80%', 'left':'56.47%', }).children('span[class*="Speed"]').remove();$("#Horse13").css({ 'top':'64%', 'left':'62.47%', }).children('span[class*="Speed"]').remove();$("#Horse12").css({ 'top':'-4%', 'left':'67.57%', }).children('span[class*="Speed"]').remove();$("#Horse5").css({ 'top':'12%', 'left':'77.01%', }).children('span[class*="Speed"]').remove();$("#Horse14").css({ 'top':'30%', 'left':'79.62%', }).children('span[class*="Speed"]').remove();$("#Horse11").css({ 'top':'-4%', 'left':'100%', }).children('span[class*="Speed"]').remove();
+// console.log("騎手傾向３コーナー");
+break;
+case 'Corner03':
+$("#Horse4").css({ 'top':'12%', 'left':'0%', }).append('<span class="SpeedUp_02"></span>');$("#Horse3").css({ 'top':'-4%', 'left':'6.52%', }).append('<span class="SpeedUp_02"></span>');$("#Horse2").css({ 'top':'-4%', 'left':'19.02%', }).append('<span class="SpeedUp_01"></span>');$("#Horse7").css({ 'top':'30%', 'left':'36.78%', }).append('<span class="SpeedUp_03"></span>');$("#Horse17").css({ 'top':'12%', 'left':'47.66%', }).append('<span class="SpeedUp_01"></span>');$("#Horse1").css({ 'top':'46%', 'left':'49.69%', }).append('<span class="SpeedUp_03"></span>');$("#Horse15").css({ 'top':'-4%', 'left':'49.92%', }).append('<span class="SpeedUp_02"></span>');$("#Horse6").css({ 'top':'-4%', 'left':'62.42%', }).append('<span class="SpeedUp_03"></span>');$("#Horse16").css({ 'top':'64%', 'left':'60.87%', }).append('<span class="SpeedUp_03"></span>');$("#Horse18").css({ 'top':'80%', 'left':'61.13%', }).append('<span class="SpeedUp_02"></span>');$("#Horse5").css({ 'top':'12%', 'left':'63.17%', }).append('<span class="SpeedUp_02"></span>');$("#Horse9").css({ 'top':'30%', 'left':'61.92%', }).append('<span class="SpeedUp_02"></span>');$("#Horse8").css({ 'top':'12%', 'left':'75.67%', }).append('<span class=""></span>');$("#Horse10").css({ 'top':'64%', 'left':'76.64%', }).append('<span class="SpeedUp_02"></span>');$("#Horse13").css({ 'top':'80%', 'left':'82.08%', }).append('<span class="SpeedUp_02"></span>');$("#Horse14").css({ 'top':'30%', 'left':'83.3%', }).append('<span class="SpeedUp_02"></span>');$("#Horse12").css({ 'top':'-4%', 'left':'85.63%', }).append('<span class="SpeedUp_01"></span>');$("#Horse11").css({ 'top':'-4%', 'left':'100%', }).append('<span class="SpeedUp_03"></span>');
+// console.log("騎手傾向４コーナー");
+break;
+}
+} else if (checkbox1_Checked1 && checkbox1_Checked2) {
+// 出遅れ騎手傾向チェック
+switch (cornerCheck) {
+case 'Corner01':
+$("#Horse3").css({ 'top':'-4%', 'left':'0%', }).children('span[class*="Speed"]').remove();$("#Horse4").css({ 'top':'12%', 'left':'3.37%', }).children('span[class*="Speed"]').remove();$("#Horse2").css({ 'top':'-4%', 'left':'17.54%', }).children('span[class*="Speed"]').remove();$("#Horse17").css({ 'top':'12%', 'left':'28.71%', }).children('span[class*="Speed"]').remove();$("#Horse7").css({ 'top':'-4%', 'left':'47.16%', }).children('span[class*="Speed"]').remove();$("#Horse8").css({ 'top':'12%', 'left':'44.94%', }).children('span[class*="Speed"]').remove();$("#Horse15").css({ 'top':'30%', 'left':'44.15%', }).children('span[class*="Speed"]').remove();$("#Horse16").css({ 'top':'46%', 'left':'46.25%', }).children('span[class*="Speed"]').remove();$("#Horse1").css({ 'top':'64%', 'left':'56.07%', }).children('span[class*="Speed"]').remove();$("#Horse5").css({ 'top':'30%', 'left':'57.13%', }).children('span[class*="Speed"]').remove();$("#Horse6").css({ 'top':'80%', 'left':'48.08%', }).children('span[class*="Speed"]').remove();$("#Horse10").css({ 'top':'12%', 'left':'57.44%', }).children('span[class*="Speed"]').remove();$("#Horse9").css({ 'top':'46%', 'left':'58.87%', }).children('span[class*="Speed"]').remove();$("#Horse12").css({ 'top':'-4%', 'left':'60.58%', }).children('span[class*="Speed"]').remove();$("#Horse13").css({ 'top':'80%', 'left':'60.58%', }).children('span[class*="Speed"]').remove();$("#Horse14").css({ 'top':'64%', 'left':'68.57%', }).children('span[class*="Speed"]').remove();$("#Horse18").css({ 'top':'30%', 'left':'69.63%', }).children('span[class*="Speed"]').remove();$("#Horse11").css({ 'top':'-4%', 'left':'100%', }).children('span[class*="Speed"]').remove();
+// console.log("出遅れ騎手１コーナー");
+break;
+case 'Corner02':
+$("#Horse3").css({ 'top':'-4%', 'left':'0%', }).children('span[class*="Speed"]').remove();$("#Horse4").css({ 'top':'12%', 'left':'9.63%', }).children('span[class*="Speed"]').remove();$("#Horse2").css({ 'top':'-4%', 'left':'14.43%', }).children('span[class*="Speed"]').remove();$("#Horse15").css({ 'top':'-4%', 'left':'41%', }).children('span[class*="Speed"]').remove();$("#Horse17").css({ 'top':'12%', 'left':'46.33%', }).children('span[class*="Speed"]').remove();$("#Horse1").css({ 'top':'30%', 'left':'48.64%', }).children('span[class*="Speed"]').remove();$("#Horse7").css({ 'top':'46%', 'left':'52.96%', }).children('span[class*="Speed"]').remove();$("#Horse8").css({ 'top':'-4%', 'left':'55.47%', }).children('span[class*="Speed"]').remove();$("#Horse10").css({ 'top':'64%', 'left':'55.61%', }).children('span[class*="Speed"]').remove();$("#Horse6").css({ 'top':'80%', 'left':'57.32%', }).children('span[class*="Speed"]').remove();$("#Horse18").css({ 'top':'12%', 'left':'59.09%', }).children('span[class*="Speed"]').remove();$("#Horse9").css({ 'top':'30%', 'left':'65.96%', }).children('span[class*="Speed"]').remove();$("#Horse16").css({ 'top':'46%', 'left':'66.08%', }).children('span[class*="Speed"]').remove();$("#Horse13").css({ 'top':'-4%', 'left':'68.87%', }).children('span[class*="Speed"]').remove();$("#Horse12").css({ 'top':'12%', 'left':'71.96%', }).children('span[class*="Speed"]').remove();$("#Horse5").css({ 'top':'30%', 'left':'78.9%', }).children('span[class*="Speed"]').remove();$("#Horse14").css({ 'top':'-4%', 'left':'86.31%', }).children('span[class*="Speed"]').remove();$("#Horse11").css({ 'top':'-4%', 'left':'100%', }).children('span[class*="Speed"]').remove();
+// console.log("出遅れ騎手３コーナー");
+break;
+case 'Corner03':
+$("#Horse4").css({ 'top':'12%', 'left':'0%', }).append('<span class="SpeedUp_02"></span>');$("#Horse2").css({ 'top':'-4%', 'left':'5.03%', }).append('<span class="SpeedUp_01"></span>');$("#Horse3").css({ 'top':'-4%', 'left':'17.53%', }).append('<span class="SpeedUp_02"></span>');$("#Horse7").css({ 'top':'46%', 'left':'35.95%', }).append('<span class="SpeedUp_03"></span>');$("#Horse17").css({ 'top':'12%', 'left':'52.38%', }).append('<span class="SpeedUp_01"></span>');$("#Horse15").css({ 'top':'-4%', 'left':'55.07%', }).append('<span class="SpeedUp_01"></span>');$("#Horse1").css({ 'top':'30%', 'left':'63.58%', }).append('<span class="SpeedUp_03"></span>');$("#Horse8").css({ 'top':'-4%', 'left':'67.57%', }).append('<span class=""></span>');$("#Horse6").css({ 'top':'80%', 'left':'68.57%', }).append('<span class="SpeedUp_03"></span>');$("#Horse9").css({ 'top':'46%', 'left':'69.54%', }).append('<span class="SpeedUp_02"></span>');$("#Horse18").css({ 'top':'12%', 'left':'71.87%', }).append('<span class="SpeedUp_02"></span>');$("#Horse10").css({ 'top':'64%', 'left':'73.08%', }).append('<span class="SpeedUp_01"></span>');$("#Horse16").css({ 'top':'46%', 'left':'82.04%', }).append('<span class="SpeedUp_03"></span>');$("#Horse12").css({ 'top':'30%', 'left':'79.18%', }).append('<span class="SpeedUp_01"></span>');$("#Horse5").css({ 'top':'30%', 'left':'91.68%', }).append('<span class="SpeedUp_02"></span>');$("#Horse13").css({ 'top':'-4%', 'left':'82.32%', }).append('<span class="SpeedUp_02"></span>');$("#Horse14").css({ 'top':'12%', 'left':'90.2%', }).append('<span class="SpeedUp_02"></span>');$("#Horse11").css({ 'top':'-4%', 'left':'100%', }).append('<span class="SpeedUp_03"></span>');
+// console.log("出遅れ騎手４コーナー");
+break;
+}
+}
+}
+// コーナーのクリックイベント
+$("#Corner01").on("click", function(){
+$(".PositionBtn_Group .ActiveLine").width(0);
+$(".HorseIcon .SpeedUp,.HorseIcon .SpeedDown").remove();
+ActiveCornerGet();
+updateHorsePosition();
+});
+$("#Corner02").on("click", function(){
+$(".PositionBtn_Group .ActiveLine").width("33.3%");
+$(".HorseIcon .SpeedUp,.HorseIcon .SpeedDown").remove();
+ActiveCornerGet();
+updateHorsePosition();
+});
+$("#Corner03").on("click", function(){
+$(".PositionBtn_Group .ActiveLine").width("67%");
+$(".HorseIcon .SpeedUp,.HorseIcon .SpeedDown").remove();
+ActiveCornerGet();
+updateHorsePosition();
+});
+updateHorsePosition();
+$('.DevDataCheckBox .DevDataInput input').change(function(){
+window.syncAiTenkaiCheckboxesByInput($(this));
+const ShowArea = $(".AiTenkaiArea01:visible .DevAllArea, .AiTenkaiArea02:visible .DevAllArea");
+$(".HorseIcon .SpeedUp,.HorseIcon .SpeedDown").remove();
+ShowArea.fadeOut("fast", function() {
+updateHorsePosition();
+updateCheckRap();
+ShowArea.fadeIn();
+});
+});
+window.syncAiTenkaiCheckboxesFromVisibleTab();
+if (!Boolean('')) {
+hideTrackBias();
+}
+// バイアス表示
+const element = $(".DevelopImg01");
+const pattern = /^BiasPattern/;
+let biasPatternClass = "";
+$('.DevDataCheckBox .BiasSwitch input').change(function(){
+element.attr('class').split(/\s+/).forEach(function(cls) {
+if (pattern.test(cls)) {
+biasPatternClass = cls;
+}
+});
+if ($(this).is(':checked')) {
+element.addClass(biasPatternClass);
+$(".DevelopBiasTxt").fadeIn("fast");
+} else {
+element.removeClass(biasPatternClass);
+$(".DevelopBiasTxt").fadeOut("fast");
+}
+});
+});
+/**
+* 非マスター会員の場合はトラックバイアスを表示させない
+* note : テキストも背景色消す
+*/
+function hideTrackBias() {
+const $img = $('.DevelopImg01');
+$img.attr('class').split(' ').forEach(function(name) {
+if (name.startsWith('BiasPattern')) $img.removeClass(name);
+});
+$('.DevelopBiasTxt').children().each(function (_, e) {
+$(e).removeClass();
+$(e).text('');
+});
+}
+// ラップ予測を「分:秒:ミリ秒」に変換
+$(document).ready(function () {
+$('tr.HaronTime td').each(function () {
+var cellContent = $(this).html();
+var parts = cellContent.split('<br>');
+if (parts.length > 1) {
+var totalValue = parseFloat(parts[0].trim());
+if (!isNaN(totalValue)) {
+var formattedTime = convertToTimeFormat(totalValue);
+$(this).html(formattedTime + '<br>' + parts[1].trim());
+}
+}
+});
+});
+function convertToTimeFormat(decimalTime) {
+var minutes = Math.floor(decimalTime / 60);
+var seconds = Math.floor(decimalTime % 60);
+var milliseconds = Math.round((decimalTime % 1) * 10);
+// 1分未満の場合は分の表示を省略して「秒.ミリ秒」にする
+if (minutes > 0) {
+return minutes + ':' + (seconds < 10 ? '0' + seconds : seconds) + '.' + milliseconds;
+} else {
+return seconds + '.' + milliseconds; // 1分未満なら分を省略
+}
+}
+// 推奨馬の直近実績
+(function initAiTenkaiAchievements() {
+function setDetailHorseNameMargin($ul) {
+var $firstLi = $ul.children('li').first();
+var marginLeft = 0;
+var $measureTarget = $firstLi;
+var $measureWrap = null;
+if (!$firstLi.length) {
+return;
+}
+if (!$firstLi.is(':visible')) {
+$measureWrap = $('<dd class="Ai_TenkaiAchievements_Item"><ul class="Ai_TenkaiAchievements_Item_List"></ul></dd>').css({
+position: 'absolute',
+left: '-9999px',
+top: '0',
+display: 'block',
+visibility: 'hidden'
+});
+$measureTarget = $firstLi.clone(true, true);
+$measureWrap.children('ul').append($measureTarget);
+$('body').append($measureWrap);
+}
+$measureTarget.children('span').slice(0, 3).each(function () {
+marginLeft += $(this).outerWidth() || 0;
+});
+marginLeft += parseFloat($measureTarget.children('span').eq(1).css('margin-left')) || 0;
+if ($measureWrap) {
+$measureWrap.remove();
+}
+$ul.find('span.fb.ml').css('margin-left', Math.round(marginLeft) + 6 + 'px');
+}
+$('.Ai_TenkaiAchievements_Item_List').each(function () {
+setDetailHorseNameMargin($(this));
+});
+$('.Ai_TenkaiAchievements dl').each(function (index) {
+var $dl = $(this);
+var $summary = $dl.children('.Ai_TenkaiAchievements_Item_Summary').first();
+var $detail = $dl.children('.Ai_TenkaiAchievements_Item_Detail').first();
+var $toggle = $summary.find('.Ai_TenkaiAchievements_Toggle').first();
+var $ticker = $summary.find('.js-ai-tenkai-ticker').first();
+var $tickerContent = $ticker.find('.Ai_TenkaiAchievements_TickerContent').first();
+if (!$summary.length || !$detail.length || !$toggle.length || !$ticker.length || !$tickerContent.length) {
+return;
+}
+var detailId = $detail.attr('id') || 'ai-tenkai-achievements-detail-' + index;
+var tickerTapClass = 'is-open-ticker-tapped';
+$detail.attr('id', detailId);
+$toggle.attr('aria-controls', detailId).attr('aria-expanded', 'false');
+function setAchievementsView(isExpanded, withAnimation) {
+$toggle.attr('aria-expanded', String(isExpanded));
+$summary.toggleClass(tickerTapClass, isExpanded);
+if (withAnimation) {
+if (isExpanded) {
+$ticker.stop(true, true).slideUp('fast');
+$detail.stop(true, true).slideDown('fast');
+} else {
+$detail.stop(true, true).slideUp('fast');
+$ticker.stop(true, true).slideDown('fast');
+}
+return;
+}
+$ticker.toggle(!isExpanded);
+$detail.toggle(isExpanded);
+}
+function toggleDetail() {
+var nextExpanded = $(this).attr('aria-expanded') !== 'true';
+setAchievementsView(nextExpanded, true);
+}
+$toggle.off('click.aiTenkai').on('click.aiTenkai', toggleDetail);
+$toggle.off('keydown.aiTenkai').on('keydown.aiTenkai', function (e) {
+if (e.key === 'Enter' || e.key === ' ') {
+e.preventDefault();
+toggleDetail.call(this);
+}
+});
+$ticker.off('click.aiTenkaiOpen').on('click.aiTenkaiOpen', function () {
+if ($toggle.attr('aria-expanded') !== 'true') {
+setAchievementsView(true, true);
+}
+});
+$detail.off('click.aiTenkaiClose').on('click.aiTenkaiClose', function () {
+if ($toggle.attr('aria-expanded') === 'true') {
+setAchievementsView(false, true);
+}
+});
+setAchievementsView(false, false);
+if ($ticker.data('tickerInitialized')) {
+return;
+}
+$ticker.data('tickerInitialized', true);
+var $clone = $tickerContent.clone().attr('aria-hidden', 'true');
+$ticker.append($clone);
+var scrollPos = 0;
+var speed = 0.84;
+var isPaused = false;
+var canHoverPause = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+if (canHoverPause) {
+$ticker.on('mouseenter.aiTenkaiTicker', function () {
+isPaused = true;
+}).on('mouseleave.aiTenkaiTicker', function () {
+isPaused = false;
+});
+}
+function tick() {
+if (!$ticker.is(':visible')) {
+window.requestAnimationFrame(tick);
+return;
+}
+if (!isPaused) {
+scrollPos += speed;
+if (scrollPos >= $tickerContent.outerWidth(true)) {
+scrollPos = 0;
+}
+$ticker.scrollLeft(scrollPos);
+}
+window.requestAnimationFrame(tick);
+}
+window.requestAnimationFrame(tick);
+});
+})();
+</script>
+<script>
+$(document).ready(function () {
+// sorter-falseとaria-disabledを削除
+$('.PredictRap_Table th').removeClass('sorter-false').removeAttr('aria-disabled');
+// テーブルを破棄して再初期化
+$(".PredictRap_Table").trigger("destroy").tablesorter({
+// オプションを追加
+headers: {
+0: { sorter: true }, // 各列のソートを有効化
+1: { sorter: true },
+2: { sorter: true },
+3: { sorter: true }
+}
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+if ($('#navi02_shutuba').hasClass('Active')) {
+$('.Master_Regist_Box.no_blurred').hide();
+}
+});
+</script>
+<!-- block=top3data (cg) -->
+<!-- 各データ上位3頭 -->
+<section class="">
+<div class="Title_Sec">
+<h2>各データ上位3頭</h2>
+</div><!-- / .Title_Sec -->
+<div class="PickupHorseArea">
+<table class="RaceCommon_Table PickupHorseTable01">
+<tbody>
+<tr>
+<th>
+<div class="PickupHorseTableTitle">能力</div><!-- /.PickupHorseTableTitle -->
+</th>
+<td>
+<a href="https://race.sp.netkeiba.com/?pid=speed&race_id=202605050812">
+<div class="Umaban_InBox">
+<span class="Waku2 Umaban_Num">4</span>クロワ
+</div><div class="Umaban_InBox">
+<span class="Waku3 Umaban_Num">6</span>マスカ
+</div><div class="Umaban_InBox">
+<span class="Waku8 Umaban_Num">16</span>ダノン
+</div>
+<span class="arrow"></span>
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="RaceCommon_Table PickupHorseTable01">
+<tbody>
+<tr>
+<th>
+<div class="PickupHorseTableTitle">上昇度</div><!-- /.PickupHorseTableTitle -->
+</th>
+<td>
+<a href="https://race.sp.netkeiba.com/barometer/score.html?race_id=202605050812">
+<div class="Umaban_InBox">
+<span class="Waku7 Umaban_Num">13</span>アーバ
+</div><div class="Umaban_InBox">
+<span class="Waku7 Umaban_Num">14</span>タガノ
+</div><div class="Umaban_InBox">
+<span class="Waku8 Umaban_Num">17</span>ゴリア
+</div>
+<span class="arrow"></span>
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="RaceCommon_Table PickupHorseTable01">
+<tbody>
+<tr>
+<th>
+<div class="PickupHorseTableTitle">騎手</div><!-- /.PickupHorseTableTitle -->
+</th>
+<td>
+
+<a href="https://regist.sp.netkeiba.com/?pid=premium">
+<div class="Umaban_InBox">
+<span class="Waku3 Umaban_Num">6</span>ルメー
+</div><div class="Umaban_InBox">
+<span class="Waku4 Umaban_Num">7</span>モレイ
+</div><div class="Umaban_InBox">
+<span class="Waku8 Umaban_Num">16</span>戸崎圭
+</div>
+<span class="arrow"></span>
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="RaceCommon_Table PickupHorseTable01">
+<tbody>
+<tr>
+<th>
+<div class="PickupHorseTableTitle">距離</div><!-- /.PickupHorseTableTitle -->
+</th>
+<td>
+
+<a href="https://regist.sp.netkeiba.com/?pid=premium">
+<div class="Umaban_InBox">
+<span class="Waku3 Umaban_Num">6</span>マスカ
+</div><div class="Umaban_InBox">
+<span class="Waku5 Umaban_Num">9</span>カラン
+</div><div class="Umaban_InBox">
+<span class="Waku6 Umaban_Num">12</span>テアオ
+</div>
+<span class="arrow"></span>
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 
 <!-- block=kyakusitu (d) -->
 
@@ -2780,7 +4220,7 @@ $( document ).ready( function() {
 var yoso_jra_nar = new YosoJraNar('https://yoso.sp.netkeiba.com');
 
 var _show_id = 'goods_view';
-var _race_id = '202605050811';
+var _race_id = '202605050812';
 var _limit = 10;
 var _device = ''; // defualt
 if (typeof NetkeibaAppli === 'object') {
@@ -2921,7 +4361,7 @@ console.log('textStatus: %O',textStatus);
 <script type="text/javascript">
 var lazy_obj = lazy_obj || {};
 $(document).ready(function() {
-var _race_id = '202605050811';
+var _race_id = '202605050812';
 var _show_id = 'umai_goods_list_f_view';
 var _is_apppli = '';
 if(_is_apppli){
@@ -2992,22 +4432,200 @@ console.log('textStatus: %O',textStatus);
 <!-- block=advertisement_fluct (d) -->
 
 
-<!-- block=comment_new (cp) -->
-
+<!-- block=comment_new (cg) -->
 <section>
 <div class="Title_Sec">
 <h2>厩舎コメント</h2>
+<span class="SideBtnMore01"><a href="https://race.sp.netkeiba.com?pid=comment&race_id=202605050812" title="厳選予想 ウマい馬券をもっと見る">もっと見る</a></span>
 </div><!-- / .Title_Sec -->
-<div class="Race_Infomation_Box">レース前日13時公開予定です。</div><!-- / .Stable_Comment_Wrap -->
-</section>
-<!-- block=oikiri_new (cp) -->
+<div class="Stable_Comment_List_Wrap">
+<ul>
+<li class="Stable_Comment_List">
+<table class="Stable_Comment Comment_Table_Show_All">
+<tbody>
+<tr>
+<td rowspan="2" class="Waku1">1</td>
+<td class="Horse_Info fc">
+<div class="Horse_Name">ヘデントール</div>
+<div class="Trainer">太田助手<span class="Icon_RaceInfo Icon_Mark_02"></span></div>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<dl class="Comment_Cell">
+<dt></dt>
+<dd>１週前はマーカンドが乗ってバランスや加速に使う時間を確認してもらった。感触は悪くなかったです。</dd>
 
-<section >
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</li><li class="Stable_Comment_List">
+<table class="Stable_Comment Comment_Table_Show_All">
+<tbody>
+<tr>
+<td rowspan="2" class="Waku1">2</td>
+<td class="Horse_Info fc">
+<div class="Horse_Name">コスモキュランダ</div>
+<div class="Trainer">加藤士師<span class="Icon_RaceInfo Icon_Mark_02"></span></div>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<dl class="Comment_Cell">
+<dt></dt>
+<dd>中間は在厩でここを目標に問題なく調整できた。距離延長はプラスだから、あとはどこまで粘れるかだね。</dd>
+
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</li><li class="Stable_Comment_List">
+<table class="Stable_Comment Comment_Table_Show_All">
+<tbody>
+<tr>
+<td rowspan="2" class="Waku2">3</td>
+<td class="Horse_Info fc">
+<div class="Horse_Name">メイショウタバル</div>
+<div class="Trainer">石橋師<span class="Icon_RaceInfo Icon_Mark_02"></span></div>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<dl class="Comment_Cell">
+<dt></dt>
+<dd>11月５日に栗東へ帰厩した。スタンド前から発走する二四は初めてだが、落ち着きが出たので大丈夫では。</dd>
+
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<div class="Stable_LastBox">
+<p class="Txt">続きはプレミアムコース<br>登録でご覧いただけます</p>
+<div class="Btn"><a href="https://regist.sp.netkeiba.com?pid=premium&service=&return_url=https%3A%2F%2Frace.sp.netkeiba.com%2Frace%2Fshutuba.html%3Frace_id%3D202605050812%26rf%3Dspecial" id="a_monthly_goods_link_9010" data-theme="01007">続きを見る</a></div>
+<p class="LoginTxt"><a href="https://regist.sp.netkeiba.com">登録済みの方はこちらからログイン</a></p>
+</div>
+</li>
+</ul>
+</div><!-- / .Stable_Comment_Wrap -->
+</section>
+
+<!-- block=oikiri_new (cg) -->
+<section class="ShutubaTraningArea" >
 <div class="Title_Sec">
 <h2>調教タイム</h2>
+<span class="SideBtnMore01"><a href="https://race.sp.netkeiba.com/?pid=oikiri&race_id=202605050812" title="">もっと見る</a></span>
 </div><!-- / .Title_Sec -->
-<div class="Race_Infomation_Box">レース前日13時公開予定です。</div>
+<div class="Stable_Time_List_Wrap">
+<ul>
+<li>
+<table class="Stable_Time">
+<tbody>
+<tr>
+<td rowspan="4" class="Waku1">1</td>
+<td class="Horse_Info fc" colspan="6">
+<div class="Horse_Name">ヘデントール</div>
+<a href="https://db.sp.netkeiba.com/horse/training/2021105521/" class="Btn">前走</a>
+</td>
+</tr>
+<tr>
+<td colspan="6" class="Training_Place">
+<div>
+<span class="Training_Day">26/11/25(水) 美Ｗ 稍 助手</span>
+<span class="Training_Critic">叩き良化<span class="Rank_B">B</span></span>
+</div>
+</td>
+</tr>
+<tr class="TrainingTimeData">
+<td>83.4</td><td>68.1</td><td>53.6</td><td class="TokeiColor02">38.8</td><td class="TokeiColor01">11.8</td>
+<td class="TrainingLoad">馬也<!--&#9314;--></td>
+</tr>
+<tr>
+<td colspan="6" class="Comment_Cell">
+<div>内アローメタル馬也と併入</div>
+<div>外ブルーベリーフィズ強めと併せ０秒３先着</div>
+
+</td>
+</tr>
+</tbody>
+</table>
+</li><li>
+<table class="Stable_Time">
+<tbody>
+<tr>
+<td rowspan="4" class="Waku1">2</td>
+<td class="Horse_Info fc" colspan="6">
+<div class="Horse_Name">コスモキュランダ</div>
+<a href="https://db.sp.netkeiba.com/horse/training/2021106787/" class="Btn">前走</a>
+</td>
+</tr>
+<tr>
+<td colspan="6" class="Training_Place">
+<div>
+<span class="Training_Day">26/11/25(水) 美坂 稍 丹内</span>
+<span class="Training_Critic">平行線<span class="Rank_C">C</span></span>
+</div>
+</td>
+</tr>
+<tr class="TrainingTimeData">
+<td>-</td><td class="TokeiColor02">53.1</td><td class="TokeiColor02">38.9</td><td>25.9</td><td class="TokeiColor02">12.7</td>
+<td class="TrainingLoad">馬也<!--&#9312;--></td>
+</tr>
+<tr>
+<td colspan="6" class="Comment_Cell">
+<div>中マジッククッキー馬也と併入</div>
+<div>外オテンバプリンセス馬也と併入</div>
+
+</td>
+</tr>
+</tbody>
+</table>
+</li><li>
+<table class="Stable_Time">
+<tbody>
+<tr>
+<td rowspan="4" class="Waku2">3</td>
+<td class="Horse_Info fc" colspan="6">
+<div class="Horse_Name">メイショウタバル</div>
+<a href="https://db.sp.netkeiba.com/horse/training/2021103272/" class="Btn">前走</a>
+</td>
+</tr>
+<tr>
+<td colspan="6" class="Training_Place">
+<div>
+<span class="Training_Day">26/11/25(水) ＣＷ 稍 太宰</span>
+<span class="Training_Critic">力強い<span class="Rank_B">B</span></span>
+</div>
+</td>
+</tr>
+<tr class="TrainingTimeData">
+<td class="TokeiColor02">80.8</td><td class="TokeiColor01">65.0</td><td class="TokeiColor01">50.6</td><td class="TokeiColor01">36.2</td><td class="TokeiColor01">11.6</td>
+<td class="TrainingLoad">馬也<!--&#9320;--></td>
+</tr>
+<tr>
+<td colspan="6" class="Comment_Cell">
+
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<div class="Stable_LastBox">
+<p class="Txt">続きはプレミアムコース<br>登録でご覧いただけます</p>
+<div class="Btn"><a href="https://regist.sp.netkeiba.com?pid=premium&service=p01&return_url=https%3A%2F%2Frace.sp.netkeiba.com%2Frace%2Fshutuba.html%3Frace_id%3D202605050812%26rf%3Dspecial" id="a_monthly_goods_link_9101" data-theme="01006">続きを見る</a></div>
+<p class="LoginTxt"><a href="https://regist.sp.netkeiba.com">登録済みの方はこちらからログイン</a></p>
+</div>
+</li>
+</ul>
+</div><!-- / .Stable_Time_List_Wrap -->
 </section>
+
 
 <!-- block=comment (d) -->
 
@@ -3017,7 +4635,7 @@ console.log('textStatus: %O',textStatus);
 <section class="ShutubaTraningArea mb20" id="AiPaddockArea">
 <div class="Title_Sec">
 <h2>AIパドック解析<span>(前走)</span></h2>
-<span class="SideBtnMore01"><a href="https://race.sp.netkeiba.com/?pid=ai_paddock&race_id=202605050811" title="">もっと見る</a></span>
+<span class="SideBtnMore01"><a href="https://race.sp.netkeiba.com/?pid=ai_paddock&race_id=202605050812" title="">もっと見る</a></span>
 </div>
 <div class="Stable_Time_List_Wrap PaddockAnalysis">
 <ul id="AiPaddock"></ul>
@@ -3053,7 +4671,7 @@ console.log('getAiPaddock');
 var _data = { pid : 'ajax_ai_paddock' };
 _data.input    = 'UTF-8';
 _data.output   = 'jsonp';
-_data.race_id  = '202605050811';
+_data.race_id  = '202605050812';
 _data.type  = 'horizon';
 $.ajax( { type     : 'POST',
 url      : window.location.origin + '/',
@@ -3088,249 +4706,241 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-23331086878-0'); }
 <!-- block=ad_gam_body_rectangle (d) -->
 
 <!-- block=shutuba_race_menu (cg) -->
-
 <div class="Contents_Box Top_RaceMenu">
-    <div class="Title_Sec">
-        <h2>ウェルカムＳメニュー</h2>
-    </div><!-- /.Title_Sec -->
-    <div class="Top_RaceMenu_Inner">
+<div class="Title_Sec">
+<h2>ジャパンＣメニュー</h2>
+</div><!-- /.Title_Sec -->
+<div class="Top_RaceMenu_Inner">
+<dl class="RaceMenuList RaceMenuSub fc">
+<dt>メインメニュー</dt>
+<dd>
+<ul class="col_5 fc">
+<li>
+<a href="https://race.sp.netkeiba.com/race/shutuba.html?race_id=202605050812">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_01"></span>
+</div>
+<span class="Icon_Label">出馬表</span>
+</a>
+</li>
+<li>
+<a href="https://race.sp.netkeiba.com/yoso/mark_list.html?race_id=202605050812">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_18"></span>
+</div>
+<span class="Icon_Label">予想</span>
+</a>
+</li>
+<li>
 
-        <dl class="RaceMenuList RaceMenuSub fc">
-            <dt>メインメニュー</dt>
-            <dd>
-                <ul class="col_5 fc">
-                    <li>
-                        <a href="https://race.sp.netkeiba.com/race/shutuba.html?race_id=202605050811">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_01"></span>
-                            </div>
-                            <span class="Icon_Label">出馬表</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://race.sp.netkeiba.com/yoso/mark_list.html?race_id=202605050811">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_18"></span>
-                            </div>
-                            <span class="Icon_Label">予想</span>
-                        </a>
-                    </li>
-                    <li>
-                        
-                        
-                        <a href="https://race.sp.netkeiba.com/?pid=odds_view&race_id=202605050811">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_32_3"></span>
-                            </div>
-                            <span class="Icon_Label">オッズ購入</span>
-                        </a>
-                        
-                    </li>
-                    <li>
-                        <a href="https://race.sp.netkeiba.com/race/data_top.html?race_id=202605050811" class="RaceMenuButton">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_07"></span>
-                                <!-- span class="NewIcon"></span -->
-                            </div>
-                            <span class="Icon_Label" style="white-space:nowrap;">データ分析</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://race.sp.netkeiba.com/?pid=race_result&race_id=202605050811">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_33"></span>
-                            </div>
-                            <span class="Icon_Label">結果払戻</span>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="col_5 fc">
-                    <li>
-                        <a href="https://race.sp.netkeiba.com/?pid=comment&amp;race_id=202605050811" class="RaceMenuButton" title="厩舎コメント">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_08"></span>
-                            </div>
-                            <span class="Icon_Label">厩舎コメント</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://race.sp.netkeiba.com/?pid=oikiri&amp;race_id=202605050811" class="RaceMenuButton" title="調教タイム">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_09"></span>
-                            </div>
-                            <span class="Icon_Label">調教タイム</span>
-                        </a>
-                    </li>
-                    <li>
-                        
-                        
-                        
-                        <a href="https://race.sp.netkeiba.com/?pid=bet&amp;race_id=202605050811" class="RaceMenuButton" title="IPAT連携">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_16"></span>
-                            </div>
-                            <span class="Icon_Label">IPAT連携</span>
-                        </a>
-                        
-                    </li>
-                    <li>
-                        <a href="https://race.sp.netkeiba.com/?pid=bbs&amp;race_id=202605050811" class="RaceMenuButton" title="掲示板">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_14"></span>
-                            </div>
-                            <span class="Icon_Label">掲示板</span>
-                        </a>
-                    </li>
-                </ul>
-            </dd>
-            <dt>レース攻略</dt>
-            <dd>
-                <ul class="col_5 fc">
-                    <li class="legacy_paper">
-                        <a href="https://race.sp.netkeiba.com/race/newspaper.html?race_id=202605050811" class="RaceMenuButton" title="競馬新聞">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_39"></span>
-                            </div>
-                            <span class="Icon_Label">競馬新聞</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://race.sp.netkeiba.com/?pid=speed&amp;race_id=202605050811" class="RaceMenuButton" title="タイム指数">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_10"></span>
-                            </div>
-                            <span class="Icon_Label">タイム指数</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://race.sp.netkeiba.com/?pid=bias&amp;race_id=202605050811" class="RaceMenuButton" title="血統">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_11"></span>
-                            </div>
-                            <span class="Icon_Label">血統</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://race.sp.netkeiba.com/race/match.html?race_id=202605050811" class="RaceMenuButton" title="対戦表">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_41"></span>
-                            </div>
-                            <span class="Icon_Label">対戦表</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://race.sp.netkeiba.com/race/holding_time.html?race_id=202605050811" class="RaceMenuButton" title="持ちタイム">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_43"></span>
-                            </div>
-                            <span class="Icon_Label">持ちタイム</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://race.sp.netkeiba.com/?pid=race_movie&amp;race_id=202605050811" class="RaceMenuButton" title="レース映像">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_13"></span>
-                            </div>
-                            <span class="Icon_Label">レース映像</span>
-                        </a>
-                    </li>
-                    <li class="legacy_course">
-                        <a href="https://race.sp.netkeiba.com/modal/course.html?race_id=202605050811&amp;tab=race-past" class="RaceMenuButton" title="過去の結果">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_36"></span>
-                            </div>
-                            <span class="Icon_Label">過去の結果</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://race.sp.netkeiba.com/barometer/score.html?race_id=202605050811" class="RaceMenuButton" title="調子偏差値">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_35"></span>
-                            </div>
-                            <span class="Icon_Label">調子偏差値</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://race.sp.netkeiba.com/?pid=paddock&race_id=202605050811" class="RaceMenuButton" title="パドック速報">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_44"></span>
-                            </div>
-                            <span class="Icon_Label">パドック速報</span>
-                        </a>
-                    </li>
-                </ul>
-            </dd>
-            <dt>その他</dt>
-            <dd>
-                <ul class="col_5 fc">
-                    <!-- <li class="legacy_course">
-                        <a href="https://race.sp.netkeiba.com/modal/course.html?race_id=202605050811" class="RaceMenuButton" title="レース実績">
-                            <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_37"></span>
-                            <span class="Icon_Label">レース実績</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://race.sp.netkeiba.com/modal/course.html?race_id=202605050811&amp;tab=course-perf" class="RaceMenuButton" title="コース実績">
-                            <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_38"></span>
-                            <span class="Icon_Label">コース実績</span>
-                        </a>
-                    </li -->
-                    <li>
-                        <a href="https://race.sp.netkeiba.com/?pid=special&amp;race_id=202605050811" class="RaceMenuButton" title="特集">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_12"></span>
-                            </div>
-                            <span class="Icon_Label">特集</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://yoso.sp.netkeiba.com/race/jra/yoso_list.html?race_id=202605050811&rf=shutuba_race_menu" class="RaceMenuButton" title="ウマい馬券">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_15"></span>
-                            </div>
-                            <span class="Icon_Label">ウマい馬券</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://orepro.netkeiba.com/bet/shutuba.html?race_id=202605050811&mode=init" class="RaceMenuButton" title="俺プロ">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_34"></span>
-                            </div>
-                            <span class="Icon_Label">俺プロ</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://tv.netkeiba.com/search/?genre_id=1&rf=race_menu" class="RaceMenuButton" title="参考映像">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_40"></span>
-                            </div>
-                            <span class="Icon_Label">参考映像</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://yoso.sp.netkeiba.com/senmonshi/jra/yoso_list.html?race_id=202605050811&amp;rf=racemenu_bottom" class="RaceMenuButton" title="競馬専門紙">
-                            <div class="Icon_Nk_New_bg">
-                                <span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_45"></span>
-                            </div>
-                            <span class="Icon_Label">競馬専門紙</span>
-                        </a>
-                    </li>
-                </ul>
-            </dd>
-        </dl>
+<a href="https://race.sp.netkeiba.com/?pid=odds_view&race_id=202605050812">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_32_3"></span>
+</div>
+<span class="Icon_Label">オッズ購入</span>
+</a>
+</li>
+<li>
+<a href="https://race.sp.netkeiba.com/race/data_top.html?race_id=202605050812" class="RaceMenuButton">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_07"></span>
+<!-- span class="NewIcon"></span -->
+</div>
+<span class="Icon_Label" style="white-space:nowrap;">データ分析</span>
+</a>
+</li>
+<li>
+<a href="https://race.sp.netkeiba.com/?pid=race_result&race_id=202605050812">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_33"></span>
+</div>
+<span class="Icon_Label">結果払戻</span>
+</a>
+</li>
+</ul>
+<ul class="col_5 fc">
+<li>
+<a href="https://race.sp.netkeiba.com/?pid=comment&amp;race_id=202605050812" class="RaceMenuButton" title="厩舎コメント">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_08"></span>
+</div>
+<span class="Icon_Label">厩舎コメント</span>
+</a>
+</li>
+<li>
+<a href="https://race.sp.netkeiba.com/?pid=oikiri&amp;race_id=202605050812" class="RaceMenuButton" title="調教タイム">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_09"></span>
+</div>
+<span class="Icon_Label">調教タイム</span>
+</a>
+</li>
+<li>
 
-    </div><!-- /.Top_RaceMenu_Inner -->
+
+<a href="https://race.sp.netkeiba.com/?pid=bet&amp;race_id=202605050812" class="RaceMenuButton" title="IPAT連携">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_16"></span>
+</div>
+<span class="Icon_Label">IPAT連携</span>
+</a>
+</li>
+<li>
+<a href="https://race.sp.netkeiba.com/?pid=bbs&amp;race_id=202605050812" class="RaceMenuButton" title="掲示板">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_14"></span>
+</div>
+<span class="Icon_Label">掲示板</span>
+</a>
+</li>
+</ul>
+</dd>
+<dt>レース攻略</dt>
+<dd>
+<ul class="col_5 fc">
+<li class="legacy_paper">
+<a href="https://race.sp.netkeiba.com/race/newspaper.html?race_id=202605050812" class="RaceMenuButton" title="競馬新聞">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_39"></span>
+</div>
+<span class="Icon_Label">競馬新聞</span>
+</a>
+</li>
+<li>
+<a href="https://race.sp.netkeiba.com/?pid=speed&amp;race_id=202605050812" class="RaceMenuButton" title="タイム指数">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_10"></span>
+</div>
+<span class="Icon_Label">タイム指数</span>
+</a>
+</li>
+<li>
+<a href="https://race.sp.netkeiba.com/?pid=bias&amp;race_id=202605050812" class="RaceMenuButton" title="血統">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_11"></span>
+</div>
+<span class="Icon_Label">血統</span>
+</a>
+</li>
+<li>
+<a href="https://race.sp.netkeiba.com/race/match.html?race_id=202605050812" class="RaceMenuButton" title="対戦表">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_41"></span>
+</div>
+<span class="Icon_Label">対戦表</span>
+</a>
+</li>
+<li>
+<a href="https://race.sp.netkeiba.com/race/holding_time.html?race_id=202605050812" class="RaceMenuButton" title="持ちタイム">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_43"></span>
+</div>
+<span class="Icon_Label">持ちタイム</span>
+</a>
+</li>
+<li>
+<a href="https://race.sp.netkeiba.com/?pid=race_movie&amp;race_id=202605050812" class="RaceMenuButton" title="レース映像">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_13"></span>
+</div>
+<span class="Icon_Label">レース映像</span>
+</a>
+</li>
+<li class="legacy_course">
+<a href="https://race.sp.netkeiba.com/modal/course.html?race_id=202605050812&amp;tab=race-past" class="RaceMenuButton" title="過去の結果">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_36"></span>
+</div>
+<span class="Icon_Label">過去の結果</span>
+</a>
+</li>
+<li>
+<a href="https://race.sp.netkeiba.com/barometer/score.html?race_id=202605050812" class="RaceMenuButton" title="調子偏差値">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_35"></span>
+</div>
+<span class="Icon_Label">調子偏差値</span>
+</a>
+</li>
+<li>
+<a href="https://race.sp.netkeiba.com/?pid=paddock&race_id=202605050812" class="RaceMenuButton" title="パドック速報">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_44"></span>
+</div>
+<span class="Icon_Label">パドック速報</span>
+</a>
+</li>
+</ul>
+</dd>
+<dt>その他</dt>
+<dd>
+<ul class="col_5 fc">
+<!-- <li class="legacy_course">
+<a href="https://race.sp.netkeiba.com/modal/course.html?race_id=202605050812" class="RaceMenuButton" title="レース実績">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_37"></span>
+<span class="Icon_Label">レース実績</span>
+</a>
+</li>
+<li>
+<a href="https://race.sp.netkeiba.com/modal/course.html?race_id=202605050812&amp;tab=course-perf" class="RaceMenuButton" title="コース実績">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_38"></span>
+<span class="Icon_Label">コース実績</span>
+</a>
+</li -->
+<li>
+<a href="https://race.sp.netkeiba.com/?pid=special&amp;race_id=202605050812" class="RaceMenuButton" title="特集">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_12"></span>
+</div>
+<span class="Icon_Label">特集</span>
+</a>
+</li>
+<li>
+<a href="https://yoso.sp.netkeiba.com/race/jra/yoso_list.html?race_id=202605050812&rf=shutuba_race_menu" class="RaceMenuButton" title="ウマい馬券">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_15"></span>
+</div>
+<span class="Icon_Label">ウマい馬券</span>
+</a>
+</li>
+<li>
+<a href="https://orepro.netkeiba.com/bet/shutuba.html?race_id=202605050812&mode=init" class="RaceMenuButton" title="俺プロ">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_34"></span>
+</div>
+<span class="Icon_Label">俺プロ</span>
+</a>
+</li>
+<li>
+<a href="https://tv.netkeiba.com/search/?genre_id=1&rf=race_menu" class="RaceMenuButton" title="参考映像">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_40"></span>
+</div>
+<span class="Icon_Label">参考映像</span>
+</a>
+</li>
+<li>
+<a href="https://yoso.sp.netkeiba.com/senmonshi/jra/yoso_list.html?race_id=202605050812&amp;rf=racemenu_bottom" class="RaceMenuButton" title="競馬専門紙">
+<div class="Icon_Nk_New_bg">
+<span class="Icon_Sprite_Nk_New Icon_RaceInfo_New_45"></span>
+</div>
+<span class="Icon_Label">競馬専門紙</span>
+</a>
+</li>
+</ul>
+</dd>
+</dl>
+</div><!-- /.Top_RaceMenu_Inner -->
 </div>
 <script>
 $(function(){
-  if (typeof isLegacyDevice === 'function') {
-    if (isLegacyDevice()) {
-      $('.legacy_paper, .legacy_course').remove();
-    }
-  }
+if (typeof isLegacyDevice === 'function') {
+if (isLegacyDevice()) {
+$('.legacy_paper, .legacy_course').remove();
+}
+}
 });
 </script>
-
 <!-- block=race_list_menu (d) -->
 <script type="text/javascript" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/js/race/race_list_menu.js?2017040701"></script>
 <script type="text/javascript" src="https://cdnv2.netkeiba.com/img.racev4.sp/common/js/race/api_ipat.action.js?20200420"></script>
