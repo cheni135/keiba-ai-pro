@@ -18,6 +18,29 @@ ng_words = {"データ","タイム","コース","ニュース","コラム","メ�
 
 if os.path.exists("sp_raw.txt"):
     with open("sp_raw.txt", "rb") as f:
+        chk_txt = f.read().decode("utf-8", errors="ignore")
+    if chk_txt.startswith("<!-- ODDS_ONLY -->") and os.path.exists("latest_races.csv"):
+        df_ex = pd.read_csv("latest_races.csv")
+        k_codes = [ln.strip() for ln in open("target_kaisai.txt", encoding="utf-8") if re.fullmatch(r'\d{10}', ln.strip())] if os.path.exists("target_kaisai.txt") else []
+        o_blks = [b for b in chk_txt.replace("<!-- ODDS_ONLY -->", "").split("<!-- RACE_SPLIT -->") if len(b.strip()) > 100]
+        for idx_b, blk in enumerate(o_blks):
+            c_idx, rnum = idx_b // 12, (idx_b % 12) + 1
+            if c_idx >= len(k_codes): continue
+            kc = k_codes[c_idx]
+            k_label = f"{int(kc[6:8])}回{p_map.get(kc[4:6], '東京')}{int(kc[8:10])}日"
+            o_flat = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', blk))
+            sec = o_flat.split("単勝・複勝", 1)[1] if "単勝・複勝" in o_flat else o_flat
+            for om in re.finditer(r'\b([1-8])\s+([1-9]|1[0-8])\s+[ァ-ヶー・A-Za-z0-9]{2,15}\s+(\d{1,3}\.\d)\b', sec):
+                u_no, o_v = int(om.group(2)), float(om.group(3))
+                if 1.1 <= o_v <= 999.9:
+                    mask = (df_ex["開催"] == k_label) & (df_ex["レース番号"] == rnum) & (df_ex["馬番"] == u_no)
+                    df_ex.loc[mask, "単勝オッズ"] = o_v
+        df_ex.to_csv("latest_races.csv", index=False, encoding="utf-8-sig")
+        print("Fast odds-only update completed.")
+        raise SystemExit(0)
+
+if os.path.exists("sp_raw.txt"):
+    with open("sp_raw.txt", "rb") as f:
         raw_b = f.read()
     txt = raw_b.decode("utf-8", errors="ignore")
     if "芝" not in txt and "ダ" not in txt:
