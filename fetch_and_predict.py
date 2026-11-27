@@ -17,8 +17,10 @@ p_map = {"01":"札幌","02":"函館","03":"福島","04":"新潟","05":"東京","
 ng_words = {"データ","タイム","コース","ニュース","コラム","メニュー","ログイン","マイページ","コメント","レースメニュー","結果払戻","オッズ","パドック","調教","血統","掲示板","マイ馬メモ","お気に入り","トップ","一覧","栗東","美浦","厩舎","前走","単勝","人気","出馬表","予想","傾向","データベース"}
 
 import subprocess
-changed_files = subprocess.check_output(["git", "show", "--name-only", "--pretty=", "HEAD"]).decode("utf-8", errors="ignore").splitlines()
-if ("odds_raw.txt" in changed_files or os.environ.get("UPDATE_MODE") == "odds") and os.path.exists("odds_raw.txt") and os.path.exists("latest_races.csv"):
+t_odds = int(subprocess.check_output(["git", "log", "-1", "--format=%ct", "odds_raw.txt"]).decode().strip() or 0)
+t_sp = int(subprocess.check_output(["git", "log", "-1", "--format=%ct", "sp_raw.txt"]).decode().strip() or 0)
+if t_odds > t_sp and os.path.exists("odds_raw.txt") and os.path.exists("latest_races.csv"):
+
 
 
     raw_o = open("odds_raw.txt", "rb").read()
