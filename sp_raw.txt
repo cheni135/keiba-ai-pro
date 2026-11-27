@@ -16798,7 +16798,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-23331091906-0'); }
 </div><!-- /. Contents -->
 </div><!-- /.Wrap -->
 <!-- フッター -->
-<!-- block=race_footer (cp) -->
+<!-- block=race_footer (cg) -->
 <footer>
 <div class="AppBanner AppBannerAndroid"  style="display: none; text-align: center; margin: 7px auto 0;width: 300px;">
 <a href="https://netkeiba.onelink.me/Wmzg/5f749nz3" style="display: block;">
