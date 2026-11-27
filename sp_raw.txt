@@ -471,10 +471,7 @@ $('body').bind('touchmove', floatMenu);
 });
 </script>
 </header>
-<script>
-window.dataLayer = window.dataLayer || [];
-dataLayer.push({'dimension1': 'NotLogin'});
-</script>
+
 <div class="Contents" style="padding-top:0">
 <div class="Main_Column">
 
@@ -487,7 +484,7 @@ dataLayer.push({'dimension1': 'NotLogin'});
 <p class="Title_BtnMore"><a id="link_to_pdf" href="https://race.sp.netkeiba.com?pid=pdf#racelist_top_a" style="display:none">PDF競馬新聞</a><a href="https://race.sp.netkeiba.com/race/my_racelist.html">Myレース</a></p>
 </div><!-- /.Title_Sec -->
 <!-- レース一覧 -->
-<!-- block=race_list3 (cp) -->
+<!-- block=race_list3 (cg) -->
 <style>
 .race_disable {
 pointer-events: none;
@@ -17017,16 +17014,26 @@ $('.AppBannerIphone').show();
 
 
 <!-- block=ad_gam_body_overlay (d) -->
-
-<!-- Geniee Wrapper Body Tag 1673379 -->
-<div data-cptid="1673379" style="display: block;">
+<div>
+<div id="footer-overlay-ad" style="position: fixed; height: auto; bottom: 0; width: 100%; text-align: center; left: 0; z-index: 1500; padding-top: 3px;">
+<div id="div-gpt-ad-23331086881-0"></div>
+</div>
+</div>
 <script>
-window.gnshbrequest.cmd.push(function() {
-window.gnshbrequest.applyPassback("1673379", "[data-cptid='1673379']");
+googletag.cmd.push(function () {
+var slotId = 'div-gpt-ad-23331086881-0';
+var slot = document.getElementById(slotId);
+var overlay = document.getElementById('footer-overlay-ad');
+var scrollElement = document.scrollingElement || document.documentElement;
+var originalPadding = parseFloat(getComputedStyle(scrollElement).paddingBottom) || 0;
+new ResizeObserver(function () {
+var height = slot.offsetHeight > 0 ? overlay.offsetHeight : 0;
+scrollElement.style.paddingBottom = originalPadding + height + 'px';
+}).observe(slot);
+googletag.display(slotId);
 });
 </script>
-</div>
-<!-- /Geniee Wrapper Body Tag 1673379 -->
+
 <script>
 $(function(){
 var is_apl = '';
