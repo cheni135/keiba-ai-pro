@@ -59,21 +59,13 @@ if "cloud_loaded" not in st.session_state:
 
 h1, h2 = st.columns((2, 1))
 h1.markdown("### 🏇 競馬AI Pro")
-if h2.button("🔄 最新オッズ更新", use_container_width=True):
-    if os.path.exists("latest_races.csv"):
-        df_r = pd.read_csv("latest_races.csv")
-        JST = timezone(timedelta(hours=9))
-        np.random.seed(int(datetime.now(JST).strftime("%H%M%S")))
-        df_r["単勝オッズ"] = np.round(np.clip(df_r["単勝オッズ"] * np.random.uniform(0.92, 1.08, len(df_r)), 1.2, 180.0), 1)
-        df_r["期待値スコア"] = np.round(((df_r["AI予測勝率"]/100.0)*df_r["単勝オッズ"]*0.5 + (df_r["AI予測3着内率"]/100.0)*(df_r["単勝オッズ"]*0.28+0.7)*0.5)*100.0, 1)
-        df_r["更新日時"] = datetime.now(JST).strftime("%Y/%m/%d %H:%M")
-        df_r.to_csv("latest_races.csv", index=False, encoding="utf-8-sig")
-    st.rerun()
+with h2:
+    st.link_button("🔄 最新オッズ更新", "shortcuts://run-shortcut?name=KeibaAIUpdate", use_container_width=True)
 
 page_mode = st.radio("メニュー", ("🔥 勝負レース", "📋 出馬表", "🤖 AI分析", "💰 買い目", "🌱 馬場傾向"), horizontal=True, label_visibility="collapsed")
 
 if not os.path.exists("latest_races.csv"):
-    st.error("データ未生成です。Actionsから実行してください。")
+    st.error("データ未生成です。")
     st.stop()
 all_df = pd.read_csv("latest_races.csv")
 if all_df.empty:
@@ -81,6 +73,7 @@ if all_df.empty:
     st.stop()
 upd_str = str(all_df["更新日時"].head(1).squeeze()) if "更新日時" in all_df.columns else "自動更新済"
 st.caption(f"🔄 最終更新: {upd_str}")
+
 def score_rank(v):
     return "S（超抜）" if v >= 70 else "A（優秀）" if v >= 60 else "B（平均以上）" if v >= 50 else "C（平均未満）"
 
