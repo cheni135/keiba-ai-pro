@@ -56,9 +56,9 @@ if "芝" not in txt and "ダ" not in txt:
         txt = raw_b.decode("euc-jp", errors="ignore")
 
 k_codes = []
-    if os.path.exists("target_kaisai.txt"):
-        with open("target_kaisai.txt", "r", encoding="utf-8") as kf:
-            k_codes = [ln.strip() for ln in kf if re.fullmatch(r'\d{10}', ln.strip())]
+if os.path.exists("target_kaisai.txt"):
+    with open("target_kaisai.txt", "r", encoding="utf-8") as kf:
+        k_codes = [ln.strip() for ln in kf if re.fullmatch(r'\d{10}', ln.strip())]
 
     blocks = txt.split("<!-- RACE_SPLIT -->") if "<!-- RACE_SPLIT -->" in txt else re.split(r'(?=netkeiba LIVE)', txt)
     valid_blks = [b for b in blocks if len(b.strip()) > 200]
