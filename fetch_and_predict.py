@@ -52,7 +52,7 @@ if os.path.exists("sp_raw.txt"):
     with open("sp_raw.txt", "rb") as f:
         raw_b = f.read()
     txt = raw_b.decode("utf-8", errors="ignore")
-    if "芝" not in txt and "ダ" not in txt:
+    if "芝" not in txt a nd "ダ" not in txt:
         txt = raw_b.decode("euc-jp", errors="ignore")
 
     k_codes = []
@@ -90,12 +90,13 @@ if os.path.exists("sp_raw.txt"):
             k_label = f"5回{place}7日"
 
         r_name = f"{rnum}R"
-        t_m = re.search(r'<title>([^|<]+)', locals().get('sp_part') or locals().get('blk') or '')
-
+        raw_html_src = next((v for v in locals().values() if isinstance(v, str) and "<title>" in v and len(v) > 500), "")
+        t_m = re.search(r'<title>([^|<]+)', raw_html_src)
         if t_m:
             raw_t = re.sub(r'^(?:\d{4}年\d+月\d+日\s*)?(?:\d+回[^\s\d]+\d+日\s*)?(?:\d+R\s*)?', '', t_m.group(1).strip())
             raw_t = re.sub(r'(?:出馬表|オッズ|レース結果).*$', '', raw_t).strip()
             if raw_t: r_name = raw_t
+
 
         cd_m = re.search(r'(芝|ダ)\s*(\d{4})m', flat[:1800])
         baba = "ダート" if cd_m and cd_m.group(1) == "ダ" else "芝"
