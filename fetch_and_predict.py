@@ -89,25 +89,21 @@ if os.path.exists("target_kaisai.txt"):
             place = next((p for p in p_map.values() if p in flat), "東京")
             k_label = f"5回{place}7日"
 
-        r_name = "一般戦"
-        rn_g = re.search(r'\b(J・GIII|J・GII|J・GI|J・G3|J・G2|J・G1|GIII|GII|GI|G3|G2|G1|L)\b\s*([^\s|<>]{2,22})', flat)
-        if not rn_g:
-            rn_g = re.search(r'(?!\d{1,2}R\b)([^\s|<>]{2,22})\s*[(（]?\b(J・GIII|J・GII|J・GI|J・G3|J・G2|J・G1|GIII|GII|GI|G3|G2|G1|L)\b[)）]?', flat)
-        if rn_g:
-           rn_c = re.search(r'(障害\d歳(?:以上)?(?:未勝利|オープン|OP)|\d歳(?:以上)?(?:新馬|未勝利|\d勝クラス|オープン)|(?!プロ予想家)[^\s|<>]{2,14}(?:特別|ステークス|賞|カップ|ハンデ|Ｓ|S))', flat)
-        if rn_c and "プロ予想家" not in rn_c.group(1): r_name = rn_c.group(1).strip()
-
-        else:
-            rn_c = re.search(r'(障害\d歳(?:以上)?(?:未勝利|オープン|OP)|\d歳(?:以上)?(?:新馬|未勝利|\d勝クラス|オープン)|(?<!プロ予想家デビュー＆)[^\s|<>]{2,14}(?:特別|ステークス|賞|カップ|ハンデ|Ｓ|S))', flat)
-            if rn_c: r_name = rn_c.group(1).strip()
+        r_name =      r_name = "一般戦"
+     rn_g = re.search(r'\b(J・GIII|J・GII|J・GI|J・G3|J・G2|J・G1|GIII|GII|GI|G3|G2|G1|L)\b\s*([^\s|<>]{2,22})', flat)
+     if not rn_g:
+         rn_g = re.search(r'(?!\d{1,2}R\b)([^\s|<>]{2,22})\s*[(（]?\b(J・GIII|J・GII|J・GI|J・G3|J・G2|J・G1|GIII|GII|GI|G3|G2|G1|L)\b[)）]?', flat)
+     if rn_g:
+         g_str, n_str = (rn_g.group(1), rn_g.group(2)) if "G" in rn_g.group(1) or rn_g.group(1) == "L" else (rn_g.group(2), rn_g.group(1))
+         r_name = f"{n_str}({g_str})"
+     else:
+         rn_c = re.search(r'(障害\d歳(?:以上)?(?:未勝利|オープン|OP)|\d歳(?:以上)?(?:新馬|未勝利|\d勝クラス|オープン)|(?!プロ予想家)[^\s|<>]{2,14}(?:特別|ステークス|賞|カップ|ハンデ|Ｓ|S))', flat)
+         if rn_c and "プロ予想家" not in rn_c.group(1): r_name = rn_c.group(1).strip()
 
         cd_m = re.search(r'(障|芝|ダ)\s*(\d{4})m', flat)
         baba = "障害" if cd_m and cd_m.group(1) == "障" else ("ダート" if cd_m and cd_m.group(1) == "ダ" else "芝")
         dist = int(cd_m.group(2)) if cd_m else 1600
 
-        cd_m = re.search(r'(芝|ダ)\s*(\d{4})m', flat[:1800])
-        baba = "ダート" if cd_m and cd_m.group(1) == "ダ" else "芝"
-        dist = int(cd_m.group(2)) if cd_m else 1600
         rcls, cbon = ("G1", 6.0) if ("G1" in flat[:1200] or "ジャパン" in r_name) and rnum >= 10 else ("G2", 4.5) if "G2" in flat[:1200] and rnum >= 10 else ("G3", 3.5) if "G3" in flat[:1200] and rnum >= 10 else ("OP", 2.5) if ("オープン" in r_name or "L" in flat[:600]) and rnum >= 9 else ("条件戦", 0.0)
 
         race_horses = []
