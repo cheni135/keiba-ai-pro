@@ -23,22 +23,25 @@ if os.path.exists("sp_raw.txt"):
     if "芝" not in txt and "ダ" not in txt:
         txt = raw_b.decode("euc-jp", errors="ignore")
 
-    blocks = re.split(r'(?=出馬表\s*\|\s*\d{4}年)', txt) if "<!-- RACE_SPLIT -->" not in txt else txt.split("<!-- RACE_SPLIT -->")
-    if len(blocks) <= 1:
-        blocks = re.split(r'(?=(?:1[0-2]|[1-9])R\s+[^\s]{2,15}\s+(?:芝|ダ))', txt)
+    blocks = txt.split("<!-- RACE_SPLIT -->") if "<!-- RACE_SPLIT -->" in txt else re.split(r'(?=出馬表)', txt)
     for idx_b, blk in enumerate(blocks, 1):
         flat = re.sub(r'\s+', ' ', blk).strip()
         if len(flat) < 80: continue
-        k_m = re.search(r'(\d{1,2})回(札幌|函館|福島|新潟|東京|中山|中京|京都|阪神|小倉)(\d{1,2})日', flat[:1000])
-        place = k_m.group(2) if k_m else next((p for p in p_map.values() if p in flat[:800]), "東京")
-        k_label = k_m.group(0) if k_m else f"5回{place}7日"
-        rn_all = re.search(r'(1[0-2]|[1-9])R\s+([^\s\(\)芝ダ障0-9]{2,18})', flat[:1000])
+        # 開催表記（例: 5回京都7日）を基準にし、それより前の他場リンクを完全に無視する
+        k_m = re.search(r'(\d{1,2})回(札幌|函館|福島|新潟|東京|中山|中京|京都|阪神|小倉)(\d{1,2})日', flat)
+        if not k_m: continue
+        place = k_m.group(2)
+        k_label = k_m.group(0)
+        body = flat[k_m.end():]
+        # 開催表記のすぐ後ろにある本物のレース番号（1R〜12R）と正式レース名を取得
+        rn_all = re.search(r'(1[0-2]|[1-9])R\s+([^\s\(\)芝ダ障0-9]{2,20})', body[:300])
         rnum = int(rn_all.group(1)) if rn_all else (((idx_b - 1) % 12) + 1)
-        cd_m = re.search(r'(?:発走|15:|14:|13:|12:|11:|10:|09:)\d{0,2}\s*(芝|ダ)\s*(\d{4})m', flat[:1200]) or re.search(r'(芝|ダ)\s*(\d{4})m', flat[:1000])
+        cd_m = re.search(r'(芝|ダ)\s*(\d{4})m', body[:500])
         baba = "ダート" if cd_m and cd_m.group(1) == "ダ" else "芝"
         dist = int(cd_m.group(2)) if cd_m else 1600
         cand_rn = rn_all.group(2) if rn_all else ""
         r_name = cand_rn if cand_rn and not any(ng in cand_rn for ng in ng_words) else f"{rnum}R"
+
 
         rcls, cbon = ("G1", 6.0) if ("G1" in flat[:1000] or "ジャパン" in r_name) and rnum >= 10 else ("G2", 4.5) if "G2" in flat[:1000] and rnum >= 10 else ("G3", 3.5) if "G3" in flat[:1000] and rnum >= 10 else ("OP", 2.5) if "オープン" in r_name else ("条件戦", 0.0)
 
