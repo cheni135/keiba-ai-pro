@@ -43,33 +43,32 @@ if os.path.exists("sp_raw.txt"):
             place = next((p for p in p_map.values() if p in flat), "東京")
             k_label = f"5回{place}7日"
 
-        # 特別・重賞（G1/G2/G3/L）含む正式レース名を取得
-        rn_all = re.search(rf'\b{rnum}R\s+([^\s\(\)芝ダ障]{{2,22}})(?=\s*(?:G[1-3]|L|\(|\[|発走|\d{{2}}:\d{{2}}|芝|ダ|障))', flat[:1500])
+        # 特別・重賞（9R〜12R）含む正式レース名を幅広く取得
+        rn_all = re.search(rf'\b{rnum}R\s+([^\s\(\)芝ダ障]{{2,22}})', flat[:1800])
         cand_rn = rn_all.group(1) if rn_all else ""
         r_name = cand_rn if cand_rn and not any(ng in cand_rn for ng in ng_words) else f"{rnum}R"
 
-        cd_m = re.search(r'(芝|ダ)\s*(\d{4})m', flat[:1500])
+        cd_m = re.search(r'(芝|ダ)\s*(\d{4})m', flat[:1800])
         baba = "ダート" if cd_m and cd_m.group(1) == "ダ" else "芝"
         dist = int(cd_m.group(2)) if cd_m else 1600
         rcls, cbon = ("G1", 6.0) if ("G1" in flat[:1200] or "ジャパン" in r_name) and rnum >= 10 else ("G2", 4.5) if "G2" in flat[:1200] and rnum >= 10 else ("G3", 3.5) if "G3" in flat[:1200] and rnum >= 10 else ("OP", 2.5) if ("オープン" in r_name or "L" in flat[:600]) and rnum >= 9 else ("条件戦", 0.0)
 
-        # 全出走馬（2〜14文字）と騎手・斤量・リアル前売り単勝オッズを抽出
+        # 全出走馬と騎手・斤量・本物のリアルタイム単勝オッズ（「〇〇人気」の直前）を抽出
         race_horses = []
         all_nms = {m.group(1) for m in re.finditer(r'([ァ-ヶー・]{2,14})\s*(?:牡|牝|セ)\d', flat)}
         for m in re.finditer(r'([ァ-ヶー・]{2,14})\s*(牡|牝|セ)(\d)', flat):
             nm, sa = m.group(1), m.group(2) + m.group(3)
             if nm in ng_words: continue
-            after = flat[m.end():m.end()+180]
+            after = flat[m.end():m.end()+220]
             next_pos = [after.find(onm) for onm in all_nms if onm != nm and onm in after]
             if next_pos:
                 after = after[:min(next_pos)]
-            kn_m = re.search(r'([▲△☆◇★]?[一-龠ァ-ヶーA-Za-z・]{2,6})\s+(4(?:\.5)?|5[0-9](?:\.5)?|6[0-2](?:\.5)?)', after)
+            kn_m = re.search(r'([▲△☆◇★]?[一-龠ァ-ヶーA-Za-z・]{1,6})\s*(4(?:\.5)?|5[0-9](?:\.5)?|6[0-2](?:\.5)?)', after)
             jk = kn_m.group(1) if kn_m and kn_m.group(1) not in ng_words else "騎手未定"
             kn = float(kn_m.group(2)) if kn_m else 56.0
-            # 斤量より後ろにあるリアルオッズ（1.1〜499.9）を優先抽出
-            tail = after[kn_m.end():] if kn_m else after
-            od_m = re.search(r'\b(\d{1,3}\.\d)\b', tail)
-            od_val = float(od_m.group(1)) if od_m and 1.1 <= float(od_m.group(1)) <= 499.9 else 0.0
+            # 「〇〇人気」の直前にある本物の単勝オッズ（例: 81.3 14人気）をピンポイント抽出
+            od_m = re.search(r'(\d{1,3}\.\d)\s*\d{1,2}人気', after)
+            od_val = float(od_m.group(1)) if od_m and float(od_m.group(1)) >= 1.1 else 0.0
             race_horses.append((nm, sa, kn, jk, od_val))
 
         seen_nm = set()
