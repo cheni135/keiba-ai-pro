@@ -95,7 +95,7 @@ if os.path.exists("target_kaisai.txt"):
             rn_g = re.search(r'(?!\d{1,2}R\b)([^\s|<>]{2,22})\s*[(（]?\b(J・GIII|J・GII|J・GI|J・G3|J・G2|J・G1|GIII|GII|GI|G3|G2|G1|L)\b[)）]?', flat)
         if rn_g:
            rn_c = re.search(r'(障害\d歳(?:以上)?(?:未勝利|オープン|OP)|\d歳(?:以上)?(?:新馬|未勝利|\d勝クラス|オープン)|(?!プロ予想家)[^\s|<>]{2,14}(?:特別|ステークス|賞|カップ|ハンデ|Ｓ|S))', flat)
-         if rn_c and "プロ予想家" not in rn_c.group(1): r_name = rn_c.group(1).strip()
+        if rn_c and "プロ予想家" not in rn_c.group(1): r_name = rn_c.group(1).strip()
 
         else:
             rn_c = re.search(r'(障害\d歳(?:以上)?(?:未勝利|オープン|OP)|\d歳(?:以上)?(?:新馬|未勝利|\d勝クラス|オープン)|(?<!プロ予想家デビュー＆)[^\s|<>]{2,14}(?:特別|ステークス|賞|カップ|ハンデ|Ｓ|S))', flat)
