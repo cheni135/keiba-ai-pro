@@ -14,7 +14,7 @@ def jra_waku(tot, uma):
 s = chr(47)
 rows = []
 p_map = {"01":"札幌","02":"函館","03":"福島","04":"新潟","05":"東京","06":"中山","07":"中京","08":"京都","09":"阪神","10":"小倉"}
-ng_words = {"データ","タイム","コース","ニュース","コラム","メニュー","ログイン","マイページ","コメント","レースメニュー","結果払戻","オッズ","パドック","調教","血統","掲示板","マイ馬メモ","お気に入り","トップ","一覧","栗東","美浦","厩舎","前走","単勝","人気","出馬表","予想","傾向"}
+ng_words = {"データ","タイム","コース","ニュース","コラム","メニュー","ログイン","マイページ","コメント","レースメニュー","結果払戻","オッズ","パドック","調教","血統","掲示板","マイ馬メモ","お気に入り","トップ","一覧","栗東","美浦","厩舎","前走","単勝","人気","出馬表","予想","傾向","データベース"}
 
 if os.path.exists("sp_raw.txt"):
     with open("sp_raw.txt", "rb") as f:
@@ -27,11 +27,12 @@ if os.path.exists("sp_raw.txt"):
     if os.path.exists("target_kaisai.txt"):
         with open("target_kaisai.txt", "r", encoding="utf-8") as kf:
             k_codes = [ln.strip() for ln in kf if re.fullmatch(r'\d{10}', ln.strip())]
+
     blocks = txt.split("<!-- RACE_SPLIT -->") if "<!-- RACE_SPLIT -->" in txt else re.split(r'(?=netkeiba LIVE)', txt)
     valid_blks = [b for b in blocks if len(b.strip()) > 200]
+
     for idx_b, blk in enumerate(valid_blks):
         flat = re.sub(r'\s+', ' ', blk).strip()
-        # 順番から開催コード（年4桁+場2桁+回2桁+日2桁）とレース番号（1〜12）を確定
         c_idx = idx_b // 12
         rnum = (idx_b % 12) + 1
         if c_idx < len(k_codes):
@@ -41,51 +42,42 @@ if os.path.exists("sp_raw.txt"):
         else:
             place = next((p for p in p_map.values() if p in flat), "東京")
             k_label = f"5回{place}7日"
-        # 正式レース名とコース・距離を抽出
-        rn_all = re.search(rf'\b{rnum}R\s+([^\s\(\)芝ダ障]{{2,20}})(?=\s*(?:\(|発走|\d{{2}}:\d{{2}}|芝|ダ|障))', flat[:1200])
+
+        # 特別・重賞（G1/G2/G3/L）含む正式レース名を取得
+        rn_all = re.search(rf'\b{rnum}R\s+([^\s\(\)芝ダ障]{{2,22}})(?=\s*(?:G[1-3]|L|\(|\[|発走|\d{{2}}:\d{{2}}|芝|ダ|障))', flat[:1500])
         cand_rn = rn_all.group(1) if rn_all else ""
         r_name = cand_rn if cand_rn and not any(ng in cand_rn for ng in ng_words) else f"{rnum}R"
 
-        cd_m = re.search(r'(芝|ダ)\s*(\d{4})m', flat)
+        cd_m = re.search(r'(芝|ダ)\s*(\d{4})m', flat[:1500])
         baba = "ダート" if cd_m and cd_m.group(1) == "ダ" else "芝"
         dist = int(cd_m.group(2)) if cd_m else 1600
+        rcls, cbon = ("G1", 6.0) if ("G1" in flat[:1200] or "ジャパン" in r_name) and rnum >= 10 else ("G2", 4.5) if "G2" in flat[:1200] and rnum >= 10 else ("G3", 3.5) if "G3" in flat[:1200] and rnum >= 10 else ("OP", 2.5) if ("オープン" in r_name or "L" in flat[:600]) and rnum >= 9 else ("条件戦", 0.0)
 
-
-        rcls, cbon = ("G1", 6.0) if ("G1" in flat[:1000] or "ジャパン" in r_name) and rnum >= 10 else ("G2", 4.5) if "G2" in flat[:1000] and rnum >= 10 else ("G3", 3.5) if "G3" in flat[:1000] and rnum >= 10 else ("OP", 2.5) if "オープン" in r_name else ("条件戦", 0.0)
-
-        # netkeibaスマホ版出馬表の正確な並び順：「馬名 ＋ 性齢 ＋ 騎手 ＋ 斤量 ＋ オッズ」をピンポイント抽出
+        # 全出走馬（2〜14文字）と騎手・斤量・リアル前売り単勝オッズを抽出
         race_horses = []
-        all_nms = {m.group(1) for m in re.finditer(r'([ァ-ヶー]{2,11})\s*(?:牡|牝|セ)\d', flat)}
-        for m in re.finditer(r'([ァ-ヶー]{2,11})\s*(牡|牝|セ)(\d)', flat):
+        all_nms = {m.group(1) for m in re.finditer(r'([ァ-ヶー・]{2,14})\s*(?:牡|牝|セ)\d', flat)}
+        for m in re.finditer(r'([ァ-ヶー・]{2,14})\s*(牡|牝|セ)(\d)', flat):
             nm, sa = m.group(1), m.group(2) + m.group(3)
             if nm in ng_words: continue
-            after = flat[m.end():m.end()+150]
-            # 次の馬名が出てくる手前までを切り出す（他の馬の情報を絶対に混ぜない）
+            after = flat[m.end():m.end()+180]
             next_pos = [after.find(onm) for onm in all_nms if onm != nm and onm in after]
             if next_pos:
                 after = after[:min(next_pos)]
-            # 1) 斤量（48.0〜62.5）
-            kn_m = re.search(r'\b(4[89](?:\.5)?|5[0-9](?:\.5)?|6[0-2](?:\.5)?)\b', after)
-            kn = float(kn_m.group(1)) if kn_m else 56.0
-            # 2) 本物の騎手名（斤量の前後にある漢字・カタカナ2〜6文字）
-            jk_clean = re.sub(r'\b\d{1,4}(?:\.\d)?\b|kg|栗東|美浦|厩舎|前走|単勝|人気|倍|結果|払戻|' + re.escape(nm), ' ', after)
-            kn_m = re.search(r'([▲△☆◇★]?[一-龠ァ-ヶーA-Za-z・]{2,6})\s+(4(?:\.5)?|5[0-9](?:\.5)?|6[0-2](?:\.5)?)\s*(\d{1,3}\.\d)?', after)
-            jk = kn_m.group(1) if kn_m and kn_m.group(1) not in ng_words and kn_m.group(1) != "データベース" else "騎手未定"
+            kn_m = re.search(r'([▲△☆◇★]?[一-龠ァ-ヶーA-Za-z・]{2,6})\s+(4(?:\.5)?|5[0-9](?:\.5)?|6[0-2](?:\.5)?)', after)
+            jk = kn_m.group(1) if kn_m and kn_m.group(1) not in ng_words else "騎手未定"
             kn = float(kn_m.group(2)) if kn_m else 56.0
-            od_m = re.search(r'(\d{1,3}\.\d)\s*\d{1,2}人気', after)
-            od_val = float(od_m.group(1)) if od_m and float(od_m.group(1)) >= 1.1 else 0.0
-
+            # 斤量より後ろにあるリアルオッズ（1.1〜499.9）を優先抽出
+            tail = after[kn_m.end():] if kn_m else after
+            od_m = re.search(r'\b(\d{1,3}\.\d)\b', tail)
+            od_val = float(od_m.group(1)) if od_m and 1.1 <= float(od_m.group(1)) <= 499.9 else 0.0
             race_horses.append((nm, sa, kn, jk, od_val))
-
-
 
         seen_nm = set()
         uniq_h = []
         for h in race_horses:
-            if h[0] not in seen_nm:
-                seen_nm.add(h[0])
+            if h not in seen_nm:
+                seen_nm.add(h)
                 uniq_h.append(h)
-
         tot = len(uniq_h)
         for uma, (nm, sa, kn, jk, od_val) in enumerate(uniq_h, 1):
             wk = jra_waku(tot, uma)
@@ -93,6 +85,7 @@ if os.path.exists("sp_raw.txt"):
             rows.append({"開催":k_label,"競馬場":place,"レース番号":rnum,"レースクラス":rcls,"クラス補正":cbon,"レース":f"{rnum}R {r_name} ({baba}{dist}m)","馬場":baba,"距離":dist,"枠番":wk,"馬番":uma,"馬名":nm,"性齢":sa,"netkeiba":nk,"騎手":jk,"父馬":"主要血統","斤量":kn,"実オッズ":od_val})
 
 print("Parsed horses from rich text:", len(rows))
+
 if rows:
     df = pd.DataFrame(rows).drop_duplicates(subset=["開催","レース番号","馬番"]).sort_values(["開催","レース番号","馬番"]).reset_index(drop=True)
     np.random.seed(int(now.strftime("%Y%m%d")))
