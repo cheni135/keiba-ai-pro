@@ -37,9 +37,13 @@ if os.path.exists("sp_raw.txt"):
         # オッズAPIのJSONから {馬番(int): 単勝オッズ(float)} の辞書を作成
         real_odds_map = {}
         if odds_part:
-            for tansho_m in re.finditer(r'"1"\s*:\s*\{(.*?)\}\s*,\s*"2"\s*:', odds_part, re.DOTALL):
-                for om in re.finditer(r'"(\d{2})"\s*:\s*\[\s*"(\d{1,3}\.\d)"', tansho_m.group(1)):
-                    real_odds_map[int(om.group(1))] = float(om.group(2))
+            o_flat = re.sub(r'<[^>]+>', ' ', odds_part)
+            o_flat = re.sub(r'\s+', ' ', o_flat)
+            sec = o_flat.split("単勝・複勝", 1)[1] if "単勝・複勝" in o_flat else o_flat
+            for om in re.finditer(r'\b([1-8])\s+([1-9]|1[0-8])\s+[ァ-ヶー・A-Za-z0-9]{2,15}\s+(\d{1,3}\.\d)\b', sec):
+                u_no, o_v = int(om.group(2)), float(om.group(3))
+                if 1.1 <= o_v <= 999.9 and u_no not in real_odds_map:
+                    real_odds_map[u_no] = o_v
 
 
         flat = re.sub(r'\s+', ' ', html_part).strip()
