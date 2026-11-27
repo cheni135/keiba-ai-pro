@@ -49,7 +49,7 @@ if os.path.exists("sp_raw.txt"):
         for uma in range(1, tot_h + 1):
             wk = jra_waku(tot_h, uma)
             nm = f"{place}{rnum}R_{uma}番"
-            nk = f"https:{s}{s}://netkeiba.com{s}?pid=shutuba&race_id={rid}"
+            nk = f"https:{s}{s}race.sp.netkeiba.com{s}?pid=shutuba&race_id={rid}"
             rows.append({"開催":k_label,"競馬場":place,"レース番号":rnum,"レースクラス":rcls,"クラス補正":cbon,"レース":f"{rnum}R {r_name} ({baba}{dist}m)","馬場":baba,"距離":dist,"枠番":wk,"馬番":uma,"馬名":nm,"性齢":"牡3","netkeiba":nk,"騎手":"確定騎手","父馬":"主要血統","斤量":56.0})
 
 print("Parsed races from iPhone:", len(rows))
