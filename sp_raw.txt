@@ -428,7 +428,7 @@ $(function(){
 //お知らせのベルマーク対応
 var c_info_id = '0';
 var is_header_bell = '';//1:cookieあり、0:cookieなし
-var latest_info_id = '1728';
+var latest_info_id = '1730';
 if(latest_info_id > c_info_id){
 //新着お知らせあり
 $('#header_bell').addClass('active'); //バッジ
