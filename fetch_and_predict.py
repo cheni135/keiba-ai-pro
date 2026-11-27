@@ -42,9 +42,10 @@ if os.path.exists("sp_raw.txt"):
             place = next((p for p in p_map.values() if p in flat), "東京")
             k_label = f"5回{place}7日"
         # 正式レース名とコース・距離を抽出
-        rn_all = re.search(rf'\b{rnum}R\s+([^\s\(\)芝ダ障0-9]{{2,20}})', flat)
+        rn_all = re.search(rf'\b{rnum}R\s+([^\s\(\)芝ダ障]{{2,20}})(?=\s*(?:\(|発走|\d{{2}}:\d{{2}}|芝|ダ|障))', flat[:1200])
         cand_rn = rn_all.group(1) if rn_all else ""
         r_name = cand_rn if cand_rn and not any(ng in cand_rn for ng in ng_words) else f"{rnum}R"
+
         cd_m = re.search(r'(芝|ダ)\s*(\d{4})m', flat)
         baba = "ダート" if cd_m and cd_m.group(1) == "ダ" else "芝"
         dist = int(cd_m.group(2)) if cd_m else 1600
