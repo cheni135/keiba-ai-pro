@@ -54,7 +54,7 @@ if "cloud_loaded" not in st.session_state:
 
 h1, h2 = st.columns((2, 1))
 h1.markdown("### 🏇 競馬AI Pro")
-    with h2:
+with h2:
     c_btn1, c_btn2 = st.columns(2)
     with c_btn1:
         st.link_button("🔄 全体データ更新 (出馬表+オッズ)", "shortcuts://run-shortcut?name=KeibaAIUpdate", use_container_width=True)
