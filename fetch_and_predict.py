@@ -92,7 +92,7 @@ if os.path.exists("target_kaisai.txt"):
         r_name = "一般戦"
         rn_m = re.search(rf'\b{rnum}R\s+([^\s]+(?:\(G[123]\)|\(L\))?)', flat)
         if not rn_m:
-            rn_m = re.search(r'((?:[23]歳以上|[23]歳)?(?:新馬|未勝利|[123]勝クラス|オープン)|[^\s]{2,14}(?:\(G[123]\)|\(L\)|特別|ステークス|賞|カップ|ハンデ))', flat)
+            rn_m = re.search(r'([^\s]{2,20}\s*[(（]\s*(?:G1|G2|G3|L|J・G1|J・G2|J・G3)\s*[)）]|(?:歳以上|歳)?(?:新馬|未勝利|勝クラス|オープン)|[^\s]{2,14}(?:特別|ステークス|賞|カップ|ハンデ))', flat)
         if rn_m:
             r_name = rn_m.group(1).strip()
 
