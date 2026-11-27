@@ -29,7 +29,8 @@ if os.path.exists("sp_raw.txt"):
             kc = k_codes[c_idx]
             k_label = f"{int(kc[6:8])}回{p_map.get(kc[4:6], '東京')}{int(kc[8:10])}日"
             o_flat = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', blk))
-            sec = o_flat.split("単勝・複勝", 1) if "単勝・複勝" in o_flat else o_flat
+            sec = o_flat.split("単勝・複勝", 1)[1] if "単勝・複勝" in o_flat else o_flat
+
             for om in re.finditer(r'\b([1-8])\s+([1-9]|1[0-8])\s+[ァ-ヶー・A-Za-z0-9]{2,15}\s+(\d{1,3}\.\d)\b', sec):
                 u_no, o_v = int(om.group(2)), float(om.group(3))
                 if 1.1 <= o_v <= 999.9:
