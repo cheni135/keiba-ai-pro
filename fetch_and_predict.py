@@ -83,7 +83,9 @@ if os.path.exists("sp_raw.txt"):
                 uniq_h.append(h)
         tot = len(uniq_h)
         for uma, (nm, sa, kn, jk, od_val) in enumerate(uniq_h, 1):
+            od_val = real_odds_map.get(uma, 0.0)
             wk = jra_waku(tot, uma)
+
             nk = f"https:{s}{s}://netkeiba.com{s}?pid=horse_list&word=" + urllib.parse.quote(nm, encoding="euc-jp", errors="ignore")
             rows.append({"開催":k_label,"競馬場":place,"レース番号":rnum,"レースクラス":rcls,"クラス補正":cbon,"レース":f"{rnum}R {r_name} ({baba}{dist}m)","馬場":baba,"距離":dist,"枠番":wk,"馬番":uma,"馬名":nm,"性齢":sa,"netkeiba":nk,"騎手":jk,"父馬":"主要血統","斤量":kn,"実オッズ":od_val})
 
