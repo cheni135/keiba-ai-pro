@@ -55,7 +55,7 @@ if os.path.exists("sp_raw.txt"):
 if "芝" not in txt and "ダ" not in txt:
         txt = raw_b.decode("euc-jp", errors="ignore")
 
-    k_codes = []
+k_codes = []
     if os.path.exists("target_kaisai.txt"):
         with open("target_kaisai.txt", "r", encoding="utf-8") as kf:
             k_codes = [ln.strip() for ln in kf if re.fullmatch(r'\d{10}', ln.strip())]
