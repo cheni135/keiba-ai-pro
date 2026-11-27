@@ -14,7 +14,7 @@ def jra_waku(tot, uma):
 s = chr(47)
 rows = []
 p_map = {"01":"札幌","02":"函館","03":"福島","04":"新潟","05":"東京","06":"中山","07":"中京","08":"京都","09":"阪神","10":"小倉"}
-ng_words = {"データ","タイム","コース","ニュース","コラム","メニュー","ログイン","マイページ","コメント","レースメニュー","結果払戻","オッズ","パドック","調教","血統","掲示板","マイ馬メモ","お気に入り","トップ","一覧"}
+ng_words = {"データ","タイム","コース","ニュース","コラム","メニュー","ログイン","マイページ","コメント","レースメニュー","結果払戻","オッズ","パドック","調教","血統","掲示板","マイ馬メモ","お気に入り","トップ","一覧","栗東","美浦","厩舎","前走","単勝","人気","出馬表","予想","傾向"}
 
 if os.path.exists("sp_raw.txt"):
     with open("sp_raw.txt", "rb") as f:
@@ -31,27 +31,37 @@ if os.path.exists("sp_raw.txt"):
         place = next((p for p in p_map.values() if p in flat[:600]), "東京")
         k_m = re.search(r'(\d{1,2}回' + place + r'\d{1,2}日)', flat[:800])
         k_label = k_m.group(1) if k_m else f"5回{place}8日"
-        cd_m = re.search(r'(芝|ダ)\s*(\d{4})m', flat[:1200])
+
+        # 距離・馬場：発走時刻の近くにある「芝2400m」「ダ1600m」を正確に抽出
+        cd_m = re.search(r'(?:発走|15:|14:|13:|12:|11:|10:|09:)\d{0,2}\s*(芝|ダ)\s*(\d{4})m', flat[:1200]) or re.search(r'(芝|ダ)\s*(\d{4})m', flat[:1000])
         baba = "ダート" if cd_m and cd_m.group(1) == "ダ" else "芝"
         dist = int(cd_m.group(2)) if cd_m else 1600
-        rn_m = re.search(r'(?:1[0-2]|[1-9])R\s*([^\s\(\)芝ダ障]{2,18}(?:ステークス|S|賞|杯|カップ|記念|未勝利|新馬|1勝|2勝|3勝|オープン)?)', flat[:800])
-        r_name = rn_m.group(1) if rn_m and not any(ng in rn_m.group(1) for ng in ng_words) else f"{rnum}R"
-        rcls, cbon = ("G1", 6.0) if "G1" in flat[:1000] and rnum >= 10 else ("G2", 4.5) if "G2" in flat[:1000] and rnum >= 10 else ("G3", 3.5) if "G3" in flat[:1000] and rnum >= 10 else ("OP", 2.5) if "オープン" in r_name else ("条件戦", 0.0)
 
-        # テキスト全体から「馬名（カタカナ2〜11文字）＋ 性齢（牡/牝/セ＋数字）」を直接すべて抽出
+        # 正式レース名を抽出
+        rn_m = re.search(r'(?:1[0-2]|[1-9])R\s+([^\s\(\)芝ダ障0-9]{2,18})', flat[:800])
+        cand_rn = rn_m.group(1) if rn_m else ""
+        r_name = cand_rn if cand_rn and not any(ng in cand_rn for ng in ng_words) else f"{rnum}R"
+        rcls, cbon = ("G1", 6.0) if ("G1" in flat[:1000] or "ジャパン" in r_name) and rnum >= 10 else ("G2", 4.5) if "G2" in flat[:1000] and rnum >= 10 else ("G3", 3.5) if "G3" in flat[:1000] and rnum >= 10 else ("OP", 2.5) if "オープン" in r_name else ("条件戦", 0.0)
+
+        # 各馬の「馬名 ＋ 性齢」の後ろ側から、斤量・本物の騎手名・本物のオッズを抽出
         race_horses = []
         for m in re.finditer(r'([ァ-ヶー]{2,11})\s*(牡|牝|セ)(\d)', flat):
             nm, sa = m.group(1), m.group(2) + m.group(3)
             if nm in ng_words: continue
-            after = flat[m.end():m.end()+120]
-            kn_m = re.search(r'\b(5[0-9](?:\.5)?|6[0-2](?:\.5)?)\b', after)
+            after = flat[m.end():m.end()+140]
+            # 斤量（48.0〜62.5）
+            kn_m = re.search(r'\b(4[89](?:\.5)?|5[0-9](?:\.5)?|6[0-2](?:\.5)?)\b', after)
             kn = float(kn_m.group(1)) if kn_m else 56.0
-            clean_after = re.sub(r'\b\d{1,3}(?:\.\d)?\b|kg|栗東|美浦|厩舎|前走|単勝|人気|倍|結果|払戻|[^\w一-龠ァ-ヶー・]', ' ', after)
-            jk_m = re.search(r'([一-龠ァ-ヶーA-Za-z・]{2,7})', clean_after)
+            # 性齢・斤量・馬名を除いた文字列から本物の騎手名を取得
+            jk_area = after[kn_m.end():] if kn_m else after
+            jk_area = re.sub(r'\b\d{1,4}(?:\.\d)?\b|kg|栗東|美浦|厩舎|前走|単勝|人気|倍|結果|払戻|' + re.escape(nm), ' ', jk_area)
+            jk_m = re.search(r'([一-龠ァ-ヶーA-Za-z・]{2,7})', jk_area)
             jk = jk_m.group(1) if jk_m and jk_m.group(1) not in ng_words else "騎手未定"
-            odds_cands = [float(x) for x in re.findall(r'\b(\d{1,3}\.\d)\b', after) if 1.1 <= float(x) <= 499.9 and abs(float(x) - kn) > 0.05]
-            od_val = odds_cands[0] if odds_cands else 0.0
+            # 単勝オッズ：斤量（48〜62の.0/.5）を除外し、本物のオッズ（または発売前なら0.0→AIリアル予測オッズ）を採用
+            odds_cands = [float(x) for x in re.findall(r'\b(\d{1,3}\.\d)\b', after) if 1.1 <= float(x) <= 499.9 and not (48.0 <= float(x) <= 62.5 and str(x).endswith((".0", ".5")))]
+            od_val = odds_cands if odds_cands else 0.0
             race_horses.append((nm, sa, kn, jk, od_val))
+
 
         seen_nm = set()
         uniq_h = []
