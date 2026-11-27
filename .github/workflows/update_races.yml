@@ -1,27 +1,41 @@
 name: Auto Update JRA Races
+
 on:
   push:
+    branches:
+      - main
     paths:
       - 'sp_raw.txt'
-  schedule:
-    - cron: '0 3 * * 5,6,0'
+      - 'odds_raw.txt'
+      - 'target_kaisai.txt'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  update-data:
+  update:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install requests beautifulsoup4 pandas numpy lxml html5lib
-      - run: python fetch_and_predict.py
-      - run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add latest_races.csv
-          git commit -m "Auto update JRA races" || exit 0
-          git push
+
+      - name: Install dependencies
+        run: |
+          pip install pandas numpy beautifulsoup4 requests lxml
+
+      - name: Fetch and predict races
+        run: |
+          python fetch_and_predict.py
+
+      - name: Commit and push updated data
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add latest_races.csv target_kaisai.txt
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto update JRA race data" && git push)
