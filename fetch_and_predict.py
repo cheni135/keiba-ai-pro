@@ -17,9 +17,10 @@ p_map = {"01":"札幌","02":"函館","03":"福島","04":"新潟","05":"東京","
 ng_words = {"データ","タイム","コース","ニュース","コラム","メニュー","ログイン","マイページ","コメント","レースメニュー","結果払戻","オッズ","パドック","調教","血統","掲示板","マイ馬メモ","お気に入り","トップ","一覧","栗東","美浦","厩舎","前走","単勝","人気","出馬表","予想","傾向","データベース"}
 
 if os.path.exists("sp_raw.txt"):
-    with open("sp_raw.txt", "rb") as f:
-        chk_txt = f.read().decode("utf-8", errors="ignore")
-if "単勝・複勝" in chk_txt and "牡2" not in chk_txt and "牡3" not in chk_txt and os.path.exists("latest_races.csv"):
+    raw_chk = open("sp_raw.txt", "rb").read()
+    chk_txt = raw_chk.decode("utf-8", errors="ignore")
+    if "単勝" not in chk_txt and "単勝" in raw_chk.decode("euc-jp", errors="ignore"): chk_txt = raw_chk.decode("euc-jp", errors="ignore")
+    if ("<!-- ODDS_ONLY -->" in chk_txt or ("単勝・複勝" in chk_txt and "牡2" not in chk_txt)) and os.path.exists("latest_races.csv"):
 
         df_ex = pd.read_csv("latest_races.csv")
         k_codes = [ln.strip() for ln in open("target_kaisai.txt", encoding="utf-8") if re.fullmatch(r'\d{10}', ln.strip())] if os.path.exists("target_kaisai.txt") else []
