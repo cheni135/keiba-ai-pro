@@ -43,14 +43,25 @@ if os.path.exists("sp_raw.txt"):
 
         # netkeibaスマホ版出馬表の正確な並び順：「馬名 ＋ 性齢 ＋ 騎手 ＋ 斤量 ＋ オッズ」をピンポイント抽出
         race_horses = []
-        for m in re.finditer(r'([ァ-ヶー]{2,11})\s*(牡|牝|セ)(\d)[^▲△☆◇★一-龠ァ-ヶーA-Za-z0-9]{0,8}([▲△☆◇★一-龠ァ-ヶーA-Za-z・]{2,7})\s*(4[89](?:\.5)?|5[0-9](?:\.5)?|6[0-2](?:\.5)?)\s*(\d{1,3}\.\d)?', flat):
-
-            nm = m.group(1)
+        all_nms = {m.group(1) for m in re.finditer(r'([ァ-ヶー]{2,11})\s*(?:牡|牝|セ)\d', flat)}
+        for m in re.finditer(r'([ァ-ヶー]{2,11})\s*(牡|牝|セ)(\d)', flat):
+            nm, sa = m.group(1), m.group(2) + m.group(3)
             if nm in ng_words: continue
-            sa = m.group(2) + m.group(3)
-            jk = m.group(4)
-            kn = float(m.group(5))
-            od_val = float(m.group(6)) if m.group(6) and float(m.group(6)) >= 1.1 else 0.0
+            after = flat[m.end():m.end()+150]
+            # 次の馬名が出てくる手前までを切り出す（他の馬の情報を絶対に混ぜない）
+            next_pos = [after.find(onm) for onm in all_nms if onm != nm and onm in after]
+            if next_pos:
+                after = after[:min(next_pos)]
+            # 1) 斤量（48.0〜62.5）
+            kn_m = re.search(r'\b(4[89](?:\.5)?|5[0-9](?:\.5)?|6[0-2](?:\.5)?)\b', after)
+            kn = float(kn_m.group(1)) if kn_m else 56.0
+            # 2) 本物の騎手名（斤量の前後にある漢字・カタカナ2〜6文字）
+            jk_clean = re.sub(r'\b\d{1,4}(?:\.\d)?\b|kg|栗東|美浦|厩舎|前走|単勝|人気|倍|結果|払戻', ' ', after)
+            jk_m = re.search(r'([▲△☆◇★]?[一-龠ァ-ヶーA-Za-z・]{2,6})', jk_clean)
+            jk = jk_m.group(1) if jk_m and jk_m.group(1) not in ng_words else "騎手未定"
+            # 3) 本物のオッズ（斤量とは別の小数1.1〜499.9）
+            od_cands = [float(x) for x in re.findall(r'\b(\d{1,3}\.\d)\b', after) if 1.1 <= float(x) <= 499.9 and abs(float(x) - kn) > 0.05]
+            od_val = od_cands[0] if od_cands else 0.0
             race_horses.append((nm, sa, kn, jk, od_val))
 
 
