@@ -90,7 +90,8 @@ if os.path.exists("sp_raw.txt"):
             k_label = f"5回{place}7日"
 
         r_name = f"{rnum}R"
-        t_m = re.search(r'<title>([^|<]+)', shutuba_part)
+        t_m = re.search(r'<title>([^|<]+)', locals().get('sp_part') or locals().get('blk') or '')
+
         if t_m:
             raw_t = re.sub(r'^(?:\d{4}年\d+月\d+日\s*)?(?:\d+回[^\s\d]+\d+日\s*)?(?:\d+R\s*)?', '', t_m.group(1).strip())
             raw_t = re.sub(r'(?:出馬表|オッズ|レース結果).*$', '', raw_t).strip()
