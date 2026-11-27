@@ -82,8 +82,9 @@ if os.path.exists("sp_raw.txt"):
                 seen_nm.add(h)
                 uniq_h.append(h)
         tot = len(uniq_h)
-        for uma, (nm, sa, kn, jk, od_val) in enumerate(uniq_h, 1):
+        for uma, (nm, sa, kn, jk) in enumerate(uniq_h, 1):
             od_val = real_odds_map.get(uma, 0.0)
+
             wk = jra_waku(tot, uma)
 
             nk = f"https:{s}{s}://netkeiba.com{s}?pid=horse_list&word=" + urllib.parse.quote(nm, encoding="euc-jp", errors="ignore")
