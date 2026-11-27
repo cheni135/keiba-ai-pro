@@ -30,9 +30,18 @@ if os.path.exists("sp_raw.txt"):
 
     blocks = txt.split("<!-- RACE_SPLIT -->") if "<!-- RACE_SPLIT -->" in txt else re.split(r'(?=netkeiba LIVE)', txt)
     valid_blks = [b for b in blocks if len(b.strip()) > 200]
-
     for idx_b, blk in enumerate(valid_blks):
-        flat = re.sub(r'\s+', ' ', blk).strip()
+        parts = blk.split("<!-- ODDS_JSON -->")
+        html_part = parts[0]
+        odds_part = parts[1] if len(parts) > 1 else ""
+        # オッズAPIのJSONから {馬番(int): 単勝オッズ(float)} の辞書を作成
+        real_odds_map = {}
+        for om in re.finditer(r'"(\d{2})"\s*:\s*\[\s*"(\d{1,3}\.\d)"', odds_part):
+            u_no, o_v = int(om.group(1)), float(om.group(2))
+            if 1.0 <= o_v <= 999.9:
+                real_odds_map[u_no] = o_v
+
+        flat = re.sub(r'\s+', ' ', html_part).strip()
         c_idx = idx_b // 12
         rnum = (idx_b % 12) + 1
         if c_idx < len(k_codes):
@@ -43,7 +52,6 @@ if os.path.exists("sp_raw.txt"):
             place = next((p for p in p_map.values() if p in flat), "東京")
             k_label = f"5回{place}7日"
 
-        # 特別・重賞（9R〜12R）含む正式レース名を幅広く取得
         rn_all = re.search(rf'\b{rnum}R\s+([^\s\(\)芝ダ障]{{2,22}})', flat[:1800])
         cand_rn = rn_all.group(1) if rn_all else ""
         r_name = cand_rn if cand_rn and not any(ng in cand_rn for ng in ng_words) else f"{rnum}R"
@@ -53,7 +61,6 @@ if os.path.exists("sp_raw.txt"):
         dist = int(cd_m.group(2)) if cd_m else 1600
         rcls, cbon = ("G1", 6.0) if ("G1" in flat[:1200] or "ジャパン" in r_name) and rnum >= 10 else ("G2", 4.5) if "G2" in flat[:1200] and rnum >= 10 else ("G3", 3.5) if "G3" in flat[:1200] and rnum >= 10 else ("OP", 2.5) if ("オープン" in r_name or "L" in flat[:600]) and rnum >= 9 else ("条件戦", 0.0)
 
-        # 全出走馬と騎手・斤量・本物のリアルタイム単勝オッズ（「〇〇人気」の直前）を抽出
         race_horses = []
         all_nms = {m.group(1) for m in re.finditer(r'([ァ-ヶー・]{2,14})\s*(?:牡|牝|セ)\d', flat)}
         for m in re.finditer(r'([ァ-ヶー・]{2,14})\s*(牡|牝|セ)(\d)', flat):
@@ -66,10 +73,7 @@ if os.path.exists("sp_raw.txt"):
             kn_m = re.search(r'([▲△☆◇★]?[一-龠ァ-ヶーA-Za-z・]{1,6})\s*(4(?:\.5)?|5[0-9](?:\.5)?|6[0-2](?:\.5)?)', after)
             jk = kn_m.group(1) if kn_m and kn_m.group(1) not in ng_words else "騎手未定"
             kn = float(kn_m.group(2)) if kn_m else 56.0
-            # 「〇〇人気」の直前にある本物の単勝オッズ（例: 81.3 14人気）をピンポイント抽出
-            od_m = re.search(r'(\d{1,3}\.\d)\s*\d{1,2}人気', after)
-            od_val = float(od_m.group(1)) if od_m and float(od_m.group(1)) >= 1.1 else 0.0
-            race_horses.append((nm, sa, kn, jk, od_val))
+            race_horses.append((nm, sa, kn, jk))
 
         seen_nm = set()
         uniq_h = []
