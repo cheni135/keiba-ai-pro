@@ -175,7 +175,7 @@ if "勝負レース" in page_mode:
             </div>
         </div>
         """, unsafe_allow_html=True)
-    elif "出馬表" in page_mode:
+elif "出馬表" in page_mode:
     sel_ks, sel_rc, rdf = select_race_ui(all_df)
     st.subheader(f"📋 {sel_ks} {sel_rc}")
     ai_marks = assign_ai_marks(rdf)
