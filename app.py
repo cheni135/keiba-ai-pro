@@ -129,18 +129,28 @@ else:
         elif sort_by == "期待値順": rdf = rdf.sort_values("期待値スコア", ascending=False)
         elif sort_by == "オッズ人気順": rdf = rdf.sort_values("単勝オッズ", ascending=True)
 
-        with st.expander("✏️ My印・Myメモを登録・保存する"):
-            mc1, mc2, mc3 = st.columns(3)
-            sel_u = mc1.selectbox("馬番を選択", tuple(f"{int(r['馬番'])} {r['馬名']}" for r in rdf.sort_values("馬番").to_dict("records")))
-            u_num = int(next(iter(sel_u.split())))
-            new_m = mc2.selectbox("My印", ("", "◎", "○", "▲", "△", "☆", "✓", "消"), index=("", "◎", "○", "▲", "△", "☆", "✓", "消").index(smk.get(u_num, "")))
-            new_txt = mc3.text_input("Myメモ", value=smm.get(u_num, ""))
-            if st.button("💾 保存する", type="primary"):
-                op = pdf.query("not (開催 == @sk and レース == @sr and 馬番 == @u_num)")
-                nr = [{"開催": sk, "レース": sr, "馬番": u_num, "My印": new_m, "Myメモ": new_txt}] if (new_m or new_txt) else []
-                upd = pd.concat([op, pd.DataFrame(nr)], ignore_index=True)
+        with st.expander("✏️ My印を一括登録する（全頭リスト）"):
+            edit_df = rdf.sort_values("馬番")[["馬番", "馬名"]].copy()
+            edit_df["馬番"] = edit_df["馬番"].astype(int)
+            edit_df["My印"] = edit_df["馬番"].map(lambda u: smk.get(u, ""))
+            edited = st.data_editor(
+                edit_df,
+                hide_index=True,
+                use_container_width=True,
+                disabled=["馬番", "馬名"],
+                column_config={
+                    "馬番": st.column_config.NumberColumn("番", width="small"),
+                    "馬名": st.column_config.TextColumn("馬名", width="medium"),
+                    "My印": st.column_config.SelectboxColumn("印", options=["", "◎", "○", "▲", "△", "☆", "✓", "消"], width="small"),
+                },
+                key=f"mk_ed_{sk}_{sr}",
+            )
+            if st.button("💾 My印を一括保存", type="primary", use_container_width=True, key=f"sv_all_{sk}_{sr}"):
+                op = pdf.query("not (開催 == @sk and レース == @sr)")
+                nr = [{"開催": sk, "レース": sr, "馬番": int(r["馬番"]), "My印": r["My印"], "Myメモ": ""} for _, r in edited.iterrows() if r["My印"]]
+                upd = pd.concat([op, pd.DataFrame(nr, columns=["開催", "レース", "馬番", "My印", "Myメモ"])], ignore_index=True)
                 st.session_state["my_preds_df"] = upd
-                save_csv("my_predictions.csv", upd, f"Save {sk} {sr} #{u_num}")
+                save_csv("my_predictions.csv", upd, f"Save {sk} {sr} all marks")
                 st.rerun()
 
         for r in rdf.to_dict("records"):
