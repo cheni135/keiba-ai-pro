@@ -89,9 +89,12 @@ if os.path.exists("sp_raw.txt"):
             place = next((p for p in p_map.values() if p in flat), "東京")
             k_label = f"5回{place}7日"
 
-        rn_all = re.search(rf'\b{rnum}R\s+([^\s\(\)芝ダ障]{{2,22}})', flat[:1800])
-        cand_rn = rn_all.group(1) if rn_all else ""
-        r_name = cand_rn if cand_rn and not any(ng in cand_rn for ng in ng_words) else f"{rnum}R"
+        r_name = f"{rnum}R"
+        t_m = re.search(r'<title>([^|<]+)', shutuba_part)
+        if t_m:
+            raw_t = re.sub(r'^(?:\d{4}年\d+月\d+日\s*)?(?:\d+回[^\s\d]+\d+日\s*)?(?:\d+R\s*)?', '', t_m.group(1).strip())
+            raw_t = re.sub(r'(?:出馬表|オッズ|レース結果).*$', '', raw_t).strip()
+            if raw_t: r_name = raw_t
 
         cd_m = re.search(r'(芝|ダ)\s*(\d{4})m', flat[:1800])
         baba = "ダート" if cd_m and cd_m.group(1) == "ダ" else "芝"
