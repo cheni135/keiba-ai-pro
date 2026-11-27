@@ -19,7 +19,8 @@ ng_words = {"データ","タイム","コース","ニュース","コラム","メ�
 if os.path.exists("sp_raw.txt"):
     with open("sp_raw.txt", "rb") as f:
         chk_txt = f.read().decode("utf-8", errors="ignore")
-    if "<!-- ODDS_ONLY -->" in chk_txt and os.path.exists("latest_races.csv"):
+if "単勝・複勝" in chk_txt and "牡2" not in chk_txt and "牡3" not in chk_txt and os.path.exists("latest_races.csv"):
+
         df_ex = pd.read_csv("latest_races.csv")
         k_codes = [ln.strip() for ln in open("target_kaisai.txt", encoding="utf-8") if re.fullmatch(r'\d{10}', ln.strip())] if os.path.exists("target_kaisai.txt") else []
         o_blks = [b for b in chk_txt.replace("<!-- ODDS_ONLY -->", "").split("<!-- RACE_SPLIT -->") if len(b.strip()) > 100]
