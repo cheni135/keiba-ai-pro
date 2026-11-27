@@ -16,33 +16,31 @@ rows = []
 p_map = {"01":"札幌","02":"函館","03":"福島","04":"新潟","05":"東京","06":"中山","07":"中京","08":"京都","09":"阪神","10":"小倉"}
 ng_words = {"データ","タイム","コース","ニュース","コラム","メニュー","ログイン","マイページ","コメント","レースメニュー","結果払戻","オッズ","パドック","調教","血統","掲示板","マイ馬メモ","お気に入り","トップ","一覧","栗東","美浦","厩舎","前走","単勝","人気","出馬表","予想","傾向","データベース"}
 
-if os.path.exists("sp_raw.txt"):
-    raw_chk = open("sp_raw.txt", "rb").read()
-    chk_txt = raw_chk.decode("utf-8", errors="ignore")
-    if "単勝" not in chk_txt and "単勝" in raw_chk.decode("euc-jp", errors="ignore"): chk_txt = raw_chk.decode("euc-jp", errors="ignore")
-    if ("<!-- ODDS_ONLY -->" in chk_txt or ("単勝・複勝" in chk_txt and "牡2" not in chk_txt)) and os.path.exists("latest_races.csv"):
-
-        df_ex = pd.read_csv("latest_races.csv")
-        k_codes = [ln.strip() for ln in open("target_kaisai.txt", encoding="utf-8") if re.fullmatch(r'\d{10}', ln.strip())] if os.path.exists("target_kaisai.txt") else []
-        o_blks = [b for b in chk_txt.replace("<!-- ODDS_ONLY -->", "").split("<!-- RACE_SPLIT -->") if len(b.strip()) > 100]
-        for idx_b, blk in enumerate(o_blks):
-            c_idx, rnum = idx_b // 12, (idx_b % 12) + 1
-            if c_idx >= len(k_codes): continue
-            kc = k_codes[c_idx]
-            k_label = f"{int(kc[6:8])}回{ {'01':'札幌','02':'函館','03':'福島','04':'新潟','05':'東京','06':'中山','07':'中京','08':'京都','09':'阪神','10':'小倉'}.get(kc[4:6], '東京') }{int(kc[8:10])}日"
-
-            o_flat = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', blk))
-            sec = o_flat.split("単勝・複勝", 1)[1] if "単勝・複勝" in o_flat else o_flat
-
-            for om in re.finditer(r'\b([1-8])\s+([1-9]|1[0-8])\s+[ァ-ヶー・A-Za-z0-9]{2,15}\s+(\d{1,3}\.\d)\b', sec):
-                u_no, o_v = int(om.group(2)), float(om.group(3))
-                if 1.1 <= o_v <= 999.9:
-                    mask = (df_ex["開催"] == k_label) & (df_ex["レース番号"] == rnum) & (df_ex["馬番"] == u_no)
-                    df_ex.loc[mask, "単勝オッズ"] = o_v
-        df_ex.to_csv("latest_races.csv", index=False, encoding="utf-8-sig")
-        with open("last_updated.txt", "w", encoding="utf-8") as lf: lf.write(now.strftime("%Y/%m/%d %H:%M"))
-        print("Fast odds-only update completed.")
-        raise SystemExit(0)
+import subprocess
+last_msg = subprocess.check_output(["git", "log", "-1", "--pretty=%B"]).decode("utf-8", errors="ignore")
+if ("odds_raw.txt" in last_msg or os.environ.get("UPDATE_MODE") == "odds") and os.path.exists("odds_raw.txt") and os.path.exists("latest_races.csv"):
+    raw_o = open("odds_raw.txt", "rb").read()
+    chk_txt = raw_o.decode("utf-8", errors="ignore")
+    if "単勝" not in chk_txt and "単勝" in raw_o.decode("euc-jp", errors="ignore"): chk_txt = raw_o.decode("euc-jp", errors="ignore")
+    df_ex = pd.read_csv("latest_races.csv")
+    k_codes = [ln.strip() for ln in open("target_kaisai.txt", encoding="utf-8") if re.fullmatch(r'\d{10}', ln.strip())] if os.path.exists("target_kaisai.txt") else []
+    p_map_f = {'01':'札幌','02':'函館','03':'福島','04':'新潟','05':'東京','06':'中山','07':'中京','08':'京都','09':'阪神','10':'小倉'}
+    o_blks = [b for b in chk_txt.split("<!-- RACE_SPLIT -->") if len(b.strip()) > 100]
+    for idx_b, blk in enumerate(o_blks):
+        c_idx, rnum = idx_b // 12, (idx_b % 12) + 1
+        if c_idx >= len(k_codes): continue
+        kc = k_codes[c_idx]
+        k_label = f"{int(kc[6:8])}回{p_map_f.get(kc[4:6], '東京')}{int(kc[8:10])}日"
+        o_flat = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', blk))
+        sec = o_flat.split("単勝・複勝", 1)[1] if "単勝・複勝" in o_flat else o_flat
+        for om in re.finditer(r'\b([1-8])\s+([1-9]|1[0-8])\s+[ァ-ヶー・A-Za-z0-9]{2,15}\s+(\d{1,3}\.\d)\b', sec):
+            u_no, o_v = int(om.group(2)), float(om.group(3))
+            if 1.1 <= o_v <= 999.9:
+                mask = (df_ex["開催"] == k_label) & (df_ex["レース番号"] == rnum) & (df_ex["馬番"] == u_no)
+                df_ex.loc[mask, "単勝オッズ"] = o_v
+    df_ex.to_csv("latest_races.csv", index=False, encoding="utf-8-sig")
+    print("Fast odds-only update completed via odds_raw.txt.")
+    raise SystemExit(0)
 
 if os.path.exists("sp_raw.txt"):
     with open("sp_raw.txt", "rb") as f:
