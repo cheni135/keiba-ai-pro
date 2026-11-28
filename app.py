@@ -130,23 +130,37 @@ else:
         elif sort_by == "オッズ人気順": rdf = rdf.sort_values("単勝オッズ", ascending=True)
 
         st.markdown("""<style>
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box){display:flex !important;flex-direction:row !important;flex-wrap:nowrap !important;align-items:center !important;gap:8px !important;background:#1e293b;border-radius:10px;padding:12px 12px !important;margin-bottom:8px !important;width:100% !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]{min-width:0 !important;padding:0 !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(1){flex:0 0 30px !important;width:30px !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(2){flex:0 0 36px !important;width:36px !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(3){flex:0 0 36px !important;width:36px !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(4){flex:1 1 auto !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) button{width:36px !important;height:36px !important;min-height:36px !important;padding:0 !important;margin:0 !important;border-radius:6px !important;font-size:15px !important;font-weight:bold !important;background:#0f172a !important;color:#fbbf24 !important;border:1.5px solid #fbbf24 !important;}
-.ai-sq{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:6px;font-weight:bold;font-size:15px;border:1.5px solid #475569;color:#94a3b8;background:#0f172a;}
+div[data-testid="stHorizontalBlock"]:has(.my-out-btn){display:flex !important;flex-direction:row !important;flex-wrap:nowrap !important;align-items:center !important;gap:8px !important;margin-bottom:8px !important;width:100% !important;}
+div[data-testid="stHorizontalBlock"]:has(.my-out-btn) > div[data-testid="stColumn"]{min-width:0 !important;padding:0 !important;}
+div[data-testid="stHorizontalBlock"]:has(.my-out-btn) > div[data-testid="stColumn"]:nth-child(1){flex:0 0 42px !important;width:42px !important;}
+div[data-testid="stHorizontalBlock"]:has(.my-out-btn) > div[data-testid="stColumn"]:nth-child(2){flex:1 1 auto !important;}
+div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !important;height:48px !important;min-height:48px !important;padding:0 !important;margin:0 !important;border-radius:10px !important;font-size:17px !important;font-weight:bold !important;background:#1e293b !important;color:#fbbf24 !important;border:2px solid #fbbf24 !important;}
+.ai-sq{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;font-weight:bold;font-size:13px;border:1.5px solid #475569;color:#94a3b8;background:#0f172a;margin-right:8px;flex-shrink:0;}
 .ai-◎{border-color:#ef4444;color:#ef4444;background:rgba(239,68,68,.15);}
 .ai-○{border-color:#3b82f6;color:#60a5fa;background:rgba(59,130,246,.15);}
 .ai-▲{border-color:#22c55e;color:#4ade80;background:rgba(34,197,94,.15);}
 .ai-△{border-color:#eab308;color:#facc15;background:rgba(234,179,8,.15);}
 .ai-☆{border-color:#a855f7;color:#c084fc;background:rgba(168,85,247,.15);}
-</style>
-<div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#9ca3af;padding:4px 12px;border-bottom:1px solid #374151;margin-bottom:8px;">
-<div style="width:30px;text-align:center;">番</div><div style="width:36px;text-align:center;">My印</div><div style="width:36px;text-align:center;">AI印</div><div style="flex:1;">馬名・騎手・斤量</div><div style="text-align:right;">オッズ/能力</div>
-</div>""", unsafe_allow_html=True)
+</style>""", unsafe_allow_html=True)
+
+        mk_cycle = ["", "◎", "○", "▲", "△", "☆", "✓", "消"]
+        for r in rdf.to_dict("records"):
+            u_no = int(r["馬番"])
+            cur_my = smk.get(u_no, "")
+            ai_m = r["AI印"] if r["AI印"] else "--"
+            c_my, c_card = st.columns(2)
+            with c_my:
+                st.markdown('<span class="my-out-btn" style="display:none;"></span>', unsafe_allow_html=True)
+                if st.button(cur_my if cur_my else "--", key=f"btn_mk_{sk}_{sr}_{u_no}"):
+                    nxt_m = mk_cycle[(mk_cycle.index(cur_my) + 1) % len(mk_cycle)] if cur_my in mk_cycle else "◎"
+                    op = pdf.query("not (開催 == @sk and レース == @sr and 馬番 == @u_no)")
+                    nr = [{"開催": sk, "レース": sr, "馬番": u_no, "My印": nxt_m, "Myメモ": ""}] if nxt_m else []
+                    upd = pd.concat([op, pd.DataFrame(nr, columns=["開催", "レース", "馬番", "My印", "Myメモ"])], ignore_index=True)
+                    st.session_state["my_preds_df"] = upd
+                    save_csv("my_predictions.csv", upd, f"Save {sk} {sr} #{u_no}")
+                    st.rerun()
+            with c_card:
+                st.markdown(f"""<div class="nk-card" style="margin-bottom:0;"><div style="display:flex;align-items:center;"><div class="waku-box w{int(r.get('枠番',1))}">{u_no}</div><div class="ai-sq ai-{ai_m}">{ai_m}</div><div><div><a href="{r['netkeiba']}" target="_blank" style="color:#fff;font-weight:bold;text-decoration:none;">{r['馬名']}</a></div><div style="font-size:12px;color:#9ca3af;">{r.get('性齢','')} ｜ {r['騎手']} {r['斤量']} ｜ {r['脚質']}</div></div></div><div style="text-align:right;"><div class="odds-txt">{r['単勝オッズ']}倍</div><span class="score-pill">能力 {r['能力スコア']}</span></div></div>""", unsafe_allow_html=True)
 
         mk_cycle = ["", "◎", "○", "▲", "△", "☆", "✓", "消"]
         for r in rdf.to_dict("records"):
