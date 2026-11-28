@@ -130,27 +130,26 @@ else:
         elif sort_by == "オッズ人気順": rdf = rdf.sort_values("単勝オッズ", ascending=True)
 
         st.markdown("""<style>
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box){display:flex !important;flex-direction:row !important;flex-wrap:nowrap !important;align-items:center !important;gap:4px !important;background:#1e293b;border-radius:8px;padding:6px;margin-bottom:5px;width:100% !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]{min-width:0 !important;padding:0 !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"] div[data-testid="stVerticalBlock"]{gap:0 !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"] div[data-testid="stElementContainer"]{margin-bottom:0 !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box){display:flex !important;flex-direction:row !important;flex-wrap:nowrap !important;align-items:center !important;gap:6px !important;background:#1e293b;border-radius:8px;padding:8px 6px;margin-bottom:6px;width:100% !important;min-height:48px !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]{min-width:0 !important;padding:0 !important;display:flex !important;align-items:center !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"] > div{width:100% !important;}
 div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(1){flex:0 0 28px !important;width:28px !important;max-width:28px !important;}
 div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(2){flex:0 0 38px !important;width:38px !important;max-width:38px !important;}
 div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(3){flex:0 0 32px !important;width:32px !important;max-width:32px !important;}
 div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(4){flex:1 1 auto !important;width:auto !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-baseweb="select"] > div{min-height:32px !important;height:32px !important;padding:0 !important;font-size:14px !important;font-weight:bold !important;justify-content:center !important;text-align:center !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-baseweb="select"] > div > div{padding:0 !important;justify-content:center !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-testid="stSelectbox"]{margin:0 !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-baseweb="select"] > div{min-height:32px !important;height:32px !important;padding:0 !important;font-size:14px !important;font-weight:bold !important;display:flex !important;align-items:center !important;justify-content:center !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-baseweb="select"] > div > div{padding:0 !important;margin:0 !important;display:flex !important;justify-content:center !important;}
 div[data-testid="stHorizontalBlock"]:has(.nk-row-box) svg{display:none !important;}
-.ai-sq{display:flex;align-items:center;justify-content:center;width:30px;height:32px;border-radius:6px;font-weight:bold;font-size:14px;border:1.5px solid #475569;color:#94a3b8;background:#0f172a;}
+.ai-sq{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:6px;font-weight:bold;font-size:14px;border:1.5px solid #475569;color:#94a3b8;background:#0f172a;}
 .ai-◎{border-color:#ef4444;color:#ef4444;background:rgba(239,68,68,.15);}
 .ai-○{border-color:#3b82f6;color:#60a5fa;background:rgba(59,130,246,.15);}
 .ai-▲{border-color:#22c55e;color:#4ade80;background:rgba(34,197,94,.15);}
 .ai-△{border-color:#eab308;color:#facc15;background:rgba(234,179,8,.15);}
 .ai-☆{border-color:#a855f7;color:#c084fc;background:rgba(168,85,247,.15);}
 </style>
-
-<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#9ca3af;padding:4px 6px;border-bottom:1px solid #374151;margin-bottom:6px;">
-<div style="width:28px;text-align:center;">番</div><div style="width:58px;text-align:center;">My印</div><div style="width:32px;text-align:center;">AI印</div><div style="flex:1;">馬名・騎手・斤量</div><div style="text-align:right;">オッズ/能力</div>
+<div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#9ca3af;padding:4px 6px;border-bottom:1px solid #374151;margin-bottom:6px;">
+<div style="width:28px;text-align:center;">番</div><div style="width:38px;text-align:center;">My印</div><div style="width:32px;text-align:center;">AI印</div><div style="flex:1;padding-left:2px;">馬名・騎手・斤量</div><div style="text-align:right;">オッズ/能力</div>
 </div>""", unsafe_allow_html=True)
 
         mk_opts = ("--", "◎", "○", "▲", "△", "☆", "✓", "消")
