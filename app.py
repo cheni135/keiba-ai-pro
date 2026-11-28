@@ -210,6 +210,7 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
 
     elif "買い目" in page_mode:
         c_bt, c_fm = st.columns([1.4, 1.6])
+        st.markdown("<style>div[data-testid='stHorizontalBlock']{flex-wrap:nowrap !important;gap:4px !important;}div[data-testid='stHorizontalBlock']>div{min-width:0 !important;}</style>", unsafe_allow_html=True)
         bt = c_bt.selectbox("券種", ("3連複", "3連単", "馬連", "馬単", "ワイド", "枠連", "単勝", "複勝"), label_visibility="collapsed", key="nk_bt")
         fm = c_fm.radio("方式", ("フォーメ", "ボックス"), horizontal=True, label_visibility="collapsed", key="nk_fm")
         c_so, c_bg, c_cl = st.columns([1.3, 1.2, 0.8])
