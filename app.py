@@ -195,14 +195,14 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
 
                 st.markdown("---")
                 st.subheader("🤖 全頭AI評価一覧（AI能力順）")
-                md = st.radio("評価基準", ("🎯 的中重視(能力順)", "💎 期待値重視(妙味順)"), horizontal=True, label_visibility="collapsed")
+                md = st.radio("評価基準", ("🎯 的中重視(能力順)", "💎 期待値重視(妙味順)"), horizontal=True, label_visibility="collapsed", key="ai_eval_md")
                 sc = "能力スコア" if "的中" in md else "期待値スコア"
                 rk = rdf.sort_values(sc, ascending=False).copy()
                 avg = round(float(rk["能力スコア"].mean()), 1)
                 for r in rk.to_dict("records"):
                     mk_s = f"**{r['AI印']}** " if r["AI印"] else ""
                     st.info(f"{mk_s}**{int(r['馬番'])} {r['馬名']}**（単勝{r['単勝オッズ']}倍 / 勝率{r['AI予測勝率']}% / 期待値{r['期待値スコア']}%）\n\n{ai_comment(r, avg)}")
-                sh = st.selectbox("📊 詳細内訳グラフを見る馬を選択", tuple(rk["馬名"]))
+                    sh = st.selectbox("📊 詳細内訳グラフを見る馬を選択", tuple(rk["馬名"]), key="ai_detail_sh")
                 inf = rk.query("馬名 == @sh").squeeze()
                 fv = (float(inf["着順着差指数"]), float(inf["ラップタイム指数"]), float(inf["厩舎騎手勝負度"]), float(inf["枠順展開適合"]), float(inf["調教指数"]), float(inf["血統適性"]))
                 st.bar_chart(pd.DataFrame({"項目": ("1_着順着差", "2_ラップ", "3_騎手勝負度", "4_枠順展開", "5_調教", "6_血統"), "スコア": fv}).set_index("項目"))
