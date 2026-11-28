@@ -153,21 +153,27 @@ elif "AI検証" in page_mode:
         vdf["勝率帯"] = pd.cut(vdf["AI予測勝率"], bins=pbins, labels=plbls)
         p_tbl = vdf.groupby("勝率帯", observed=False).agg(頭数=("馬番", "count"), 平均予測勝率=("AI予測勝率", lambda x: round(x.mean(), 1)), 実際の勝率=("1着", lambda x: round(x.mean()*100, 1)), 複勝率=("3着内", lambda x: round(x.mean()*100, 1))).reset_index().iloc[::-1]
         st.dataframe(p_tbl, hide_index=True, use_container_width=True)
-        st.markdown("#### ③ AI印別 成績＆回収率（◎○の信頼度 ＆ ☆穴馬の爆発力）")
-        mk_col = next((c for c in vdf.columns if vdf[c].astype(str).isin(["◎", "○", "▲", "△", "☆"]).any()), vdf.columns)
+        st.markdown("#### ③ AI印別 成績＆回収率（◎○の信頼度 ＆ ☆穴馬の爆発力）")        vdf["_ai"] = ""
+        for _, g in vdf.groupby(["開催", "レース"]):
+            idxs = g.sort_values("能力スコア", ascending=False).index.tolist()
+            for rank_i, ix in enumerate(idxs[:4]):
+                vdf.loc[ix, "_ai"] = ["◎", "○", "▲", "△"][rank_i]
+            rem = g.loc[idxs[4:]].query("単勝オッズ >= 10.0")
+            if not rem.empty:
+                vdf.loc[rem.sort_values("期待値スコア", ascending=False).index[0], "_ai"] = "☆"
         m_list = []
         for mk in ["◎", "○", "▲", "△", "☆"]:
-            sub = vdf[vdf[mk_col] == mk]
+            sub = vdf[vdf["_ai"] == mk]
             if not sub.empty:
                 m_list.append({"AI印": mk, "頭数": len(sub), "勝率%": round(sub["1着"].mean()*100, 1), "複勝率%": round(sub["3着内"].mean()*100, 1), "単勝回収%": round(sub["単勝払戻"].sum()/(len(sub)*100)*100, 1), "平均オッズ": round(sub["単勝オッズ"].mean(), 1)})
         st.dataframe(pd.DataFrame(m_list), hide_index=True, use_container_width=True)
         st.markdown("#### ④ ☆穴馬 激走・好走ピックアップ（3着以内）")
-        hoshi_hit = vdf[(vdf[mk_col] == "☆") & (vdf["実着順"] <= 3)].sort_values("単勝オッズ", ascending=False)
+        hoshi_hit = vdf[(vdf["_ai"] == "☆") & (vdf["実着順"] <= 3)].sort_values("単勝オッズ", ascending=False)
         if hoshi_hit.empty:
             st.caption("本日の☆印の3着以内好走はまだありません。")
         else:
             for r in hoshi_hit.to_dict("records"):
-                st.markdown(f"<div class='nk-card'><div><b>{r['開催']} {r['レース']}</b> ｜ <b>{int(r['実着順'])}着</b><br><span style='color:#fbbf24;'>☆ {int(r['馬番'])}{r['馬名']}</span>（単勝 {r['単勝オッズ']}倍 / 能力 {r['能力スコア']}点 / 期待値 {r['期待値スコア']}%）</div></div>", unsafe_allow_html=True)
+                st.markdown(f"<div class='nk-card'><div><b>{r['開催']} {r['レース']}</b> ｜ <b>{int(r['実着順'])}着</b><br><span style='color:#fbbf24;'>☆ {int(r['馬番'])}{r['馬名']}</span>（単勝 {r['単勝オッズ']}倍 / 能力 {r['能力スコア']}点）</div></div>", unsafe_allow_html=True)
 
 else:
     k_opts = list(all_df["開催"].unique())
