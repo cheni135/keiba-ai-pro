@@ -63,7 +63,7 @@ with h2:
 
 
 if "jump_page" in st.session_state:
-    st.session_state["nav_radio"] = st.session_state.pop("jump_page")
+st.session_state["main_nav"] = st.session_state.pop("jump_page")
 st.markdown("<style>div.st-key-main_nav,div.st-key-main_nav>div,div.st-key-main_nav>div>div,div.st-key-main_nav div[data-testid='stButtonGroup']{width:100% !important;max-width:100% !important;display:block !important;}div.st-key-main_nav div[role='radiogroup']{display:grid !important;grid-template-columns:repeat(6,1fr) !important;width:100% !important;background:transparent !important;padding:0 !important;border:none !important;gap:6px !important;margin:6px 0 10px 0 !important;}div.st-key-main_nav button{width:100% !important;min-width:0 !important;background:#1e293b !important;color:#f8fafc !important;border:1px solid #334155 !important;border-radius:8px !important;padding:9px 2px !important;font-size:12px !important;font-weight:bold !important;white-space:nowrap !important;justify-content:center !important;}div.st-key-main_nav button:nth-of-type(1){grid-column:span 2 !important;border-left:4px solid #ef4444 !important;}div.st-key-main_nav button:nth-of-type(2){grid-column:span 2 !important;border-left:4px solid #0ea5e9 !important;}div.st-key-main_nav button:nth-of-type(3){grid-column:span 2 !important;border-left:4px solid #f59e0b !important;}div.st-key-main_nav button:nth-of-type(4){grid-column:span 3 !important;border-left:4px solid #10b981 !important;}div.st-key-main_nav button:nth-of-type(5){grid-column:span 3 !important;border-left:4px solid #8b5cf6 !important;}div.st-key-main_nav button:nth-of-type(1):is([aria-checked='true'],[aria-pressed='true'],[kind='segmented_controlActive'],[data-testid='stBaseButton-segmented_controlActive']){background:#dc2626 !important;border:1px solid #f87171 !important;box-shadow:0 0 8px rgba(239,68,68,0.5) !important;}div.st-key-main_nav button:nth-of-type(2):is([aria-checked='true'],[aria-pressed='true'],[kind='segmented_controlActive'],[data-testid='stBaseButton-segmented_controlActive']){background:#0284c7 !important;border:1px solid #38bdf8 !important;box-shadow:0 0 8px rgba(14,165,233,0.5) !important;}div.st-key-main_nav button:nth-of-type(3):is([aria-checked='true'],[aria-pressed='true'],[kind='segmented_controlActive'],[data-testid='stBaseButton-segmented_controlActive']){background:#d97706 !important;border:1px solid #fbbf24 !important;box-shadow:0 0 8px rgba(245,158,11,0.5) !important;}div.st-key-main_nav button:nth-of-type(4):is([aria-checked='true'],[aria-pressed='true'],[kind='segmented_controlActive'],[data-testid='stBaseButton-segmented_controlActive']){background:#059669 !important;border:1px solid #34d399 !important;box-shadow:0 0 8px rgba(16,185,129,0.5) !important;}div.st-key-main_nav button:nth-of-type(5):is([aria-checked='true'],[aria-pressed='true'],[kind='segmented_controlActive'],[data-testid='stBaseButton-segmented_controlActive']){background:#7c3aed !important;border:1px solid #a78bfa !important;box-shadow:0 0 8px rgba(139,92,246,0.5) !important;}</style>", unsafe_allow_html=True)
 page_mode = st.segmented_control("メニュー", ["勝負レース", "出馬表", "買い目", "馬場傾向", "AI検証"], default=None, label_visibility="collapsed", key="main_nav")
 
@@ -150,29 +150,27 @@ if not page_mode:
         with ecols[idx_e]:
             st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-top:3px solid #fbbf24;border-radius:8px;padding:8px 9px;margin-bottom:10px;'><div style='font-size:10.5px;color:#38bdf8;font-weight:bold;margin-bottom:3px;'>{er['開催']} {int(er['レース番号'])}R</div><div style='font-size:12px;font-weight:bold;color:#f8fafc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>{int(er['馬番'])} {er['馬名']}</div><div style='font-size:10.5px;color:#cbd5e1;margin-top:3px;'>単勝 <b style='color:#f87171;'>{float(er['単勝オッズ']):.1f}倍</b> / 期待 <b style='color:#fbbf24;'>{float(er['期待値スコア']):.0f}%</b></div></div>", unsafe_allow_html=True)
     st.markdown("#### 開催レース一覧（タップで出馬表へ）")
-    st.markdown("<style>div.st-key-hm_rgrid button{width:100% !important;background:#1e293b !important;color:#f8fafc !important;border:1px solid #334155 !important;border-left:4px solid #0284c7 !important;border-radius:7px !important;padding:6px 8px !important;margin-bottom:4px !important;font-size:11px !important;line-height:1.35 !important;text-align:left !important;justify-content:flex-start !important;}div.st-key-hm_rgrid button:hover{border-color:#38bdf8 !important;background:#0f172a !important;}</style>", unsafe_allow_html=True)
+    st.markdown("<style>div.st-key-hm_rgrid>div[data-testid='stVerticalBlock']{display:grid !important;grid-template-columns:1fr 1fr !important;gap:6px !important;align-items:start !important;}div.st-key-hm_rgrid button{width:100% !important;min-width:0 !important;background:#1e293b !important;color:#f8fafc !important;border:1px solid #334155 !important;border-left:3px solid #0284c7 !important;border-radius:6px !important;padding:5px 5px !important;margin-bottom:3px !important;font-size:10px !important;line-height:1.25 !important;text-align:left !important;justify-content:flex-start !important;}div.st-key-hm_rgrid button:hover{border-color:#38bdf8 !important;background:#0f172a !important;}</style>", unsafe_allow_html=True)
     all_pls = list(dict.fromkeys(all_df.get("開催", ())))
     latest_pls = tuple(dict.fromkeys(next((p for p in reversed(all_pls) if trk in str(p)), None) for trk in ("東京","京都","中山","阪神","中京","新潟","福島","小倉","札幌","函館")))
     show_pls = [p for p in latest_pls if p] or all_pls
     with st.container(key="hm_rgrid"):
-        rcols = st.columns(max(1, len(show_pls)))
-        for c_i, pl_nm in enumerate(show_pls):
-            with rcols[c_i]:
+        for pl_nm in show_pls:
+            with st.container():
                 sub_p = all_df[all_df.get("開催") == pl_nm].sort_values("レース番号")
                 s_c = next((str(x.get("馬場状態","")) for x in sub_p.to_dict("records") if "芝" in str(x.get("馬場","")) and str(x.get("馬場状態","")) not in ("","nan")), "良")
                 d_c = next((str(x.get("馬場状態","")) for x in sub_p.to_dict("records") if "ダ" in str(x.get("馬場","")) and str(x.get("馬場状態","")) not in ("","nan")), "良")
-                st.markdown(f"<div style='background:#0f172a;border:1px solid #334155;border-radius:7px;padding:6px 8px;margin-bottom:6px;text-align:center;'><div style='font-size:12px;font-weight:bold;color:#f8fafc;'>{pl_nm}</div><div style='font-size:10px;color:#38bdf8;'>芝:{s_c} ／ ダ:{d_c}</div></div>", unsafe_allow_html=True)
+                st.markdown(f"<div style='background:#0f172a;border:1px solid #334155;border-radius:6px;padding:5px 4px;margin-bottom:4px;text-align:center;'><div style='font-size:11px;font-weight:bold;color:#f8fafc;'>{pl_nm}</div><div style='font-size:9.5px;color:#38bdf8;'>芝:{s_c} ／ ダ:{d_c}</div></div>", unsafe_allow_html=True)
                 for rno, grp in sub_p.groupby("レース番号", sort=True):
                     r0 = next(iter(grp.to_dict("records")), {})
                     r_str = str(r0.get("レース", ""))
                     r_tit = r_str.split("R ", 1).__getitem__(-1).split(" (").__getitem__(0)
                     r_crs = r_str.split("(").__getitem__(-1).replace(")", "") if "(" in r_str else ""
-                    if st.button(f"{int(rno)}R {r_tit}（{r_crs} {len(grp)}頭）", key=f"hm_go_{pl_nm}_{int(rno)}", use_container_width=True):
+                    if st.button(f"{int(rno)}R {r_tit}\n{r_crs} {len(grp)}頭", key=f"hm_go_{pl_nm}_{int(rno)}", use_container_width=True):
                         st.session_state["jump_place"] = pl_nm
-                        st.session_state["jump_page"] = "出馬表"
+                        st.session_state["jump_rno"] = int(rno)
                         st.session_state["jump_page"] = "出馬表"
                         st.rerun()
-
     st.subheader("🔥 本日のAI厳選 勝負レース（発走順）")
     picked = 0
     for idx_g, ((rno, ks, rn), g) in enumerate(all_df.sort_values(["レース番号", "開催"]).groupby(["レース番号", "開催", "レース"], sort=False)):
