@@ -101,8 +101,8 @@ if os.path.exists("target_kaisai.txt"):
 
 
         flat = re.sub(r'\s+', ' ', html_part).strip()
-        wt_m = re.search(r"天気[：:]\s*(晴|曇|雨|小雨|雪|小雪)", flat)
-        st_m = re.search(r"馬場[：:]\s*(良|稍重|重|不良)", flat)
+        wt_m = re.search(r"天気[：:\s<>/a-zA-Z0-9=\"'-]{0,40}(晴|曇|雨|小雨|雪|小雪)", flat)
+        st_m = re.search(r"馬場[：:\s<>/a-zA-Z0-9=\"'-]{0,40}(良|稍重|重|不良)", flat)
         wt_val = wt_m.group(1) if wt_m else "晴"
         st_val = st_m.group(1) if st_m else "良"
 
