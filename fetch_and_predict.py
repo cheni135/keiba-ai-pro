@@ -206,16 +206,19 @@ if rows:
             kl = f"{int(kc[6:8])}回{p_map_r.get(kc[4:6],'')}{int(kc[8:10])}日"
             for rn in range(1, 13):
                 cid = f"{kc}{rn:02d}"
+                try:                cid = f"{kc[2:]}{rn:02d}"
                 try:
                     r_html = requests.get(f"https://yahoo.co.jp{cid}", headers=HEADERS, timeout=8).text
                     for tr in BeautifulSoup(r_html, "html.parser").select("tr"):
                         tds = [td.get_text(strip=True) for td in tr.find_all(["td", "th"])]
-                        c0 = next(iter(tds), "")
-                        c2 = next(iter(tds[2:3]), "")
-                        if c0.isdigit() and c2.isdigit() and 1 <= int(c0) <= 18 and 1 <= int(c2) <= 18:
-                            res_map[(kl, rn, int(c2))] = int(c0)
+                        nums = [int(x) for x in tds if x.isdigit() and 1 <= int(x) <= 18]
+                        if len(nums) >= 3:
+                            res_map[(kl, rn, nums[2])] = nums[0]
+                        elif len(nums) == 2:
+                            res_map[(kl, rn, nums[1])] = nums[0]
                 except Exception:
                     pass
+
         df["実着順"] = [res_map.get((str(r["開催"]), int(r["レース番号"]), int(r["馬番"])), 0) for _, r in df.iterrows()]
 
 
