@@ -65,7 +65,7 @@ with h2:
 if "jump_page" in st.session_state:
     st.session_state["nav_radio"] = st.session_state.pop("jump_page")
 st.markdown("<style>div.st-key-main_nav,div.st-key-main_nav>div,div.st-key-main_nav>div>div,div.st-key-main_nav div[data-testid='stButtonGroup']{width:100% !important;max-width:100% !important;display:block !important;}div.st-key-main_nav div[role='radiogroup']{display:grid !important;grid-template-columns:repeat(6,1fr) !important;width:100% !important;background:transparent !important;padding:0 !important;border:none !important;gap:6px !important;margin:6px 0 10px 0 !important;}div.st-key-main_nav button{width:100% !important;min-width:0 !important;background:#1e293b !important;color:#f8fafc !important;border:1px solid #334155 !important;border-radius:8px !important;padding:9px 2px !important;font-size:12px !important;font-weight:bold !important;white-space:nowrap !important;justify-content:center !important;}div.st-key-main_nav button:nth-of-type(1){grid-column:span 2 !important;border-left:4px solid #ef4444 !important;}div.st-key-main_nav button:nth-of-type(2){grid-column:span 2 !important;border-left:4px solid #0ea5e9 !important;}div.st-key-main_nav button:nth-of-type(3){grid-column:span 2 !important;border-left:4px solid #f59e0b !important;}div.st-key-main_nav button:nth-of-type(4){grid-column:span 3 !important;border-left:4px solid #10b981 !important;}div.st-key-main_nav button:nth-of-type(5){grid-column:span 3 !important;border-left:4px solid #8b5cf6 !important;}div.st-key-main_nav button:nth-of-type(1):is([aria-checked='true'],[aria-pressed='true'],[kind='segmented_controlActive'],[data-testid='stBaseButton-segmented_controlActive']){background:#dc2626 !important;border:1px solid #f87171 !important;box-shadow:0 0 8px rgba(239,68,68,0.5) !important;}div.st-key-main_nav button:nth-of-type(2):is([aria-checked='true'],[aria-pressed='true'],[kind='segmented_controlActive'],[data-testid='stBaseButton-segmented_controlActive']){background:#0284c7 !important;border:1px solid #38bdf8 !important;box-shadow:0 0 8px rgba(14,165,233,0.5) !important;}div.st-key-main_nav button:nth-of-type(3):is([aria-checked='true'],[aria-pressed='true'],[kind='segmented_controlActive'],[data-testid='stBaseButton-segmented_controlActive']){background:#d97706 !important;border:1px solid #fbbf24 !important;box-shadow:0 0 8px rgba(245,158,11,0.5) !important;}div.st-key-main_nav button:nth-of-type(4):is([aria-checked='true'],[aria-pressed='true'],[kind='segmented_controlActive'],[data-testid='stBaseButton-segmented_controlActive']){background:#059669 !important;border:1px solid #34d399 !important;box-shadow:0 0 8px rgba(16,185,129,0.5) !important;}div.st-key-main_nav button:nth-of-type(5):is([aria-checked='true'],[aria-pressed='true'],[kind='segmented_controlActive'],[data-testid='stBaseButton-segmented_controlActive']){background:#7c3aed !important;border:1px solid #a78bfa !important;box-shadow:0 0 8px rgba(139,92,246,0.5) !important;}</style>", unsafe_allow_html=True)
-page_mode = st.segmented_control("メニュー", ["勝負レース", "出馬表", "買い目", "馬場傾向", "AI検証"], default="勝負レース", label_visibility="collapsed", key="main_nav") or "勝負レース"
+page_mode = st.segmented_control("メニュー", ["勝負レース", "出馬表", "買い目", "馬場傾向", "AI検証"], default=None, label_visibility="collapsed", key="main_nav")
 
 if not os.path.exists("latest_races.csv"): st.stop()
 all_df = pd.read_csv("latest_races.csv")
@@ -88,7 +88,63 @@ def ai_comment(r, avg):
     if float(r.get("期待値スコア", 100)) >= 120: res.append(f"勝率{r.get('AI予測勝率')}%に対し単勝{r.get('単勝オッズ')}倍は甘く期待値{r.get('期待値スコア')}pt。")
     return f"能力{r.get('能力スコア')}点（平均比 {df_a:+.1f}pt）：" + (" ／ ".join(res) if res else "平均水準のバランス型。")
 
-if "勝負レース" in page_mode:
+if not page_mode:
+    import urllib.request, json
+    @st.cache_data(ttl=900)
+    def get_track_wx():
+        res = {}
+        for nm, lat, lon in [("東京", 35.664, 139.485), ("京都", 34.907, 135.724)]:
+            try:
+                u = f"https://open-meteo.com{lat}&longitude={lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m&hourly=precipitation_probability&forecast_days=1&timezone=Asia%2FTokyo"
+                d = json.loads(urllib.request.urlopen(u, timeout=3).read().decode())
+                cur = d["current"]
+                wc = cur["weather_code"]
+                wt = "晴" if wc <= 1 else ("曇" if wc <= 3 else ("雨" if wc >= 51 else "晴時々曇"))
+                dirs = ["北", "北東", "東", "南東", "南", "南西", "西", "北西"]
+                wd = dirs[int((cur["wind_direction_10m"] + 22.5) // 45) % 8]
+                pp = next(iter(d.get("hourly", {}).get("precipitation_probability",)), 10)
+                res[nm] = {"wt": wt, "tmp": cur["temperature_2m"], "hum": cur["relative_humidity_2m"], "ws": cur["wind_speed_10m"], "wd": wd, "pp": pp}
+            except Exception:
+                res[nm] = {"wt": "晴", "tmp": 14.0, "hum": 55, "ws": 2.5, "wd": "北西", "pp": 10}
+        return res
+    wx_d = get_track_wx()
+    st.markdown("#### 注目メイン・重賞 最新オッズ")
+    mains = all_df[all_df["レース番号"].isin()].copy()
+    if not mains.empty:
+        mains["_m_lbl"] = mains.apply(lambda x: f"{x['開催']} {int(x['レース番号'])}R", axis=1)
+        m_opts = list(dict.fromkeys(mains["_m_lbl"]))
+        sel_m = st.segmented_control("メイン選択", m_opts, default=next(iter(m_opts), None), label_visibility="collapsed", key="hm_main_sel") or next(iter(m_opts), "")
+        msub = mains[mains["_m_lbl"] == sel_m].sort_values("単勝オッズ").head(5)
+        r_info = next(iter(msub.to_dict("records")), {})
+        orows = ""
+        for idx_p, (_, mr) in enumerate(msub.iterrows(), 1):
+            mk_s = str(mr.get("AI印", mr.get("印", "")))
+            mk_tag = f"<span style='background:#fbbf24;color:#0f172a;font-size:10px;font-weight:bold;padding:1px 5px;border-radius:3px;margin-left:6px;'>AI {mk_s}</span>" if mk_s in ("◎","○","▲","△","☆") else ""
+            orows += f"<div style='display:flex;justify-content:space-between;align-items:center;padding:5px 8px;border-bottom:1px solid #334155;font-size:12px;'><div><span style='color:#94a3b8;margin-right:8px;'>{idx_p}番人気</span><b style='color:#f8fafc;'>{int(mr['馬番'])} {mr['馬名']}</b>{mk_tag}</div><span style='color:#f87171;font-weight:bold;'>{float(mr['単勝オッズ']):.1f}倍</span></div>"
+        st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-left:4px solid #0284c7;border-radius:8px;overflow:hidden;margin-bottom:10px;'><div style='background:#0f172a;padding:8px 10px;border-bottom:1px solid #334155;'><div style='font-size:13px;font-weight:bold;color:#f8fafc;'>{sel_m} {r_info.get('レース名','')}</div><div style='font-size:11px;color:#94a3b8;'>{r_info.get('レース','')}</div></div>{orows}</div>", unsafe_allow_html=True)
+    st.markdown("#### リアルタイム天候情報")
+    w_p = st.segmented_control("天候場", ["東京", "京都"], default="東京", label_visibility="collapsed", key="hm_wx_p") or "東京"
+    wi = wx_d.get(w_p, wx_d["東京"])
+    st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px 12px;margin-bottom:10px;'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;'><span style='font-size:13px;font-weight:bold;color:#f8fafc;'>{w_p}競馬場</span><span style='font-size:15px;font-weight:bold;color:#38bdf8;'>{wi['wt']}　{wi['tmp']}℃</span></div><div style='display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;background:#0f172a;padding:7px;border-radius:6px;text-align:center;font-size:11px;'><div><div style='color:#94a3b8;font-size:10px;'>降水確率</div><b style='color:#f8fafc;'>{wi['pp']}%</b></div><div style='border-left:1px solid #1e293b;border-right:1px solid #1e293b;'><div style='color:#94a3b8;font-size:10px;'>湿度</div><b style='color:#f8fafc;'>{wi['hum']}%</b></div><div><div style='color:#94a3b8;font-size:10px;'>直線の風</div><b style='color:#fbbf24;'>{wi['wd']} {wi['ws']}m/s</b></div></div></div>", unsafe_allow_html=True)
+    st.markdown("#### 勝ち馬サーチ（期待値上位）")
+    ev_top = all_df[all_df["単勝オッズ"] < 50.0].sort_values("期待値スコア", ascending=False).head(2)
+    ecols = st.columns(2)
+    for idx_e, (_, er) in enumerate(ev_top.iterrows()):
+        with ecols[idx_e]:
+            st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-top:3px solid #fbbf24;border-radius:8px;padding:8px 9px;margin-bottom:10px;'><div style='font-size:10.5px;color:#38bdf8;font-weight:bold;margin-bottom:3px;'>{er['開催']} {int(er['レース番号'])}R</div><div style='font-size:12px;font-weight:bold;color:#f8fafc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>{int(er['馬番'])} {er['馬名']}</div><div style='font-size:10.5px;color:#cbd5e1;margin-top:3px;'>単勝 <b style='color:#f87171;'>{float(er['単勝オッズ']):.1f}倍</b> / 期待 <b style='color:#fbbf24;'>{float(er['期待値スコア']):.0f}%</b></div></div>", unsafe_allow_html=True)
+    st.markdown("#### 開催レース一覧")
+    pl_list = list(dict.fromkeys(all_df["開催"]))
+    sel_hp = st.segmented_control("一覧場", pl_list, default=next(iter(pl_list), None), label_visibility="collapsed", key="hm_r_pl") or next(iter(pl_list), "")
+    rlist_df = all_df[all_df["開催"] == sel_hp].sort_values("レース番号")
+    rl_rows = ""
+    for rno, grp in rlist_df.groupby("レース番号", sort=True):
+        r0 = next(iter(grp.to_dict("records")), {})
+        hon = grp[grp.get("AI印", grp.get("印", "")) == "◎"]
+        h0 = next(iter(hon.to_dict("records")), None)
+        hon_s = f"◎ {int(h0['馬番'])}{h0['馬名']}" if h0 else ""
+        rl_rows += f"<div style='display:flex;align-items:center;justify-content:space-between;padding:7px 8px;border-bottom:1px solid #334155;'><div style='display:flex;align-items:center;min-width:0;'><span style='background:#0284c7;color:#ffffff;font-weight:bold;font-size:11px;padding:3px 7px;border-radius:5px;margin-right:8px;flex-shrink:0;'>{int(rno)}R</span><div style='min-width:0;'><div style='font-size:12px;font-weight:bold;color:#f8fafc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>{r0.get('レース名','')}</div><div style='font-size:10px;color:#94a3b8;'>{r0.get('レース','')} {len(grp)}頭</div></div></div><span style='font-size:10.5px;color:#fbbf24;font-weight:bold;flex-shrink:0;margin-left:6px;'>{hon_s}</span></div>"
+    st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-radius:8px;overflow:hidden;'>{rl_rows}</div>", unsafe_allow_html=True)
+elif "勝負レース" in page_mode:
     st.subheader("🔥 本日のAI厳選 勝負レース（発走順）")
     picked = 0
     for idx_g, ((rno, ks, rn), g) in enumerate(all_df.sort_values(["レース番号", "開催"]).groupby(["レース番号", "開催", "レース"], sort=False)):
