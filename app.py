@@ -107,16 +107,16 @@ elif "馬場傾向" in page_mode:
     tdf = sdf.query(f"馬場 == '{'芝' if bs == '芝コース' else 'ダート'}'")
     for r in tdf.query("枠番 <= 4 and 脚質 in ('逃げ','先行')" if bs == "芝コース" else "枠番 >= 5 and 脚質 in ('逃げ','先行')").sort_values("能力スコア", ascending=False).head(8).to_dict("records"):
         st.markdown(f"""<div class="nk-card"><div style="display:flex;align-items:center;"><div class="waku-box w{int(r['枠番'])}">{int(r['馬番'])}</div><div><div style="font-size:11px;color:#9ca3af;">{r['レース']}</div><b>{r['馬名']}</b> ({r['脚質']})</div></div><div class="odds-txt">{r['単勝オッズ']}倍</div></div>""", unsafe_allow_html=True)
-    else:
-        k_opts = list(all_df["開催"].unique())
-        sk = st.segmented_control("開催場", k_opts, default=k_opts[0], label_visibility="collapsed") or k_opts[0]
-        sdf = all_df.query("開催 == @sk").sort_values("レース番号")
-        r_map = {f"{int(r['レース番号'])}R": r["レース"] for _, r in sdf.drop_duplicates("レース番号").iterrows()}
-        r_keys = list(r_map.keys())
-        sel_rk = st.segmented_control("レース", r_keys, default=r_keys[0], label_visibility="collapsed") or r_keys[0]
-        sr = r_map[sel_rk]
-        st.markdown(f"<div style='font-size:15px;font-weight:bold;color:#f8fafc;background:#1e293b;padding:8px 12px;border-radius:8px;border-left:4px solid #38bdf8;margin:4px 0 8px 0;'>📍 {sk} {sr}</div>", unsafe_allow_html=True)
-        rdf = sdf.query("レース == @sr").sort_values("馬番").copy()
+else:
+    k_opts = list(all_df["開催"].unique())
+    sk = st.segmented_control("開催場", k_opts, default=k_opts[0], label_visibility="collapsed") or k_opts[0]
+    sdf = all_df.query("開催 == @sk").sort_values("レース番号")
+    r_map = {f"{int(r['レース番号'])}R": r["レース"] for _, r in sdf.drop_duplicates("レース番号").iterrows()}
+    r_keys = list(r_map.keys())
+    sel_rk = st.segmented_control("レース", r_keys, default=r_keys[0], label_visibility="collapsed") or r_keys[0]
+    sr = r_map[sel_rk]
+    st.markdown(f"<div style='font-size:15px;font-weight:bold;color:#f8fafc;background:#1e293b;padding:8px 12px;border-radius:8px;border-left:4px solid #38bdf8;margin:4px 0 8px 0;'>📍 {sk} {sr}</div>", unsafe_allow_html=True)
+    rdf = sdf.query("レース == @sr").sort_values("馬番").copy()
 
     rb = rdf.sort_values("能力スコア", ascending=False).reset_index(drop=True)
     aim = ("◎", "○", "▲", "△", "☆")
