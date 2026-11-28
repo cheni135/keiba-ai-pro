@@ -121,8 +121,7 @@ if "勝負レース" in page_mode:
                st.session_state["jump_kaisai"] = r["開催"]
                st.session_state["jump_rkey"] = f"{int(r['レース番号'])}R"
                st.rerun()
-
-    elif "馬場傾向" in page_mode:
+elif "馬場傾向" in page_mode:
         b_all = pd.read_csv("history_races.csv", encoding="utf-8-sig") if os.path.exists("history_races.csv") else pd.DataFrame()
         cur_b = all_df[all_df["実着順"] > 0].copy() if "実着順" in all_df.columns else pd.DataFrame()
         if not cur_b.empty:
