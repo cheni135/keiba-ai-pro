@@ -229,8 +229,7 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
             st.rerun()
         mk_st = st.session_state[rk_key]
         cols_n = 1 if (bt in ("単勝", "複勝") or fm == "ボックス") else (2 if bt not in ("3連複", "3連単") else 3)
-        h_cols = st.columns([2.7] + [0.65] * cols_n)
-        h_cols.markdown("<div style='font-size:11px;color:#94a3b8;padding:2px 4px;'>枠 / 印 / 馬名・オッズ</div>", unsafe_allow_html=True)
+        next(iter(h_cols)).markdown("<div style='font-size:11px;color:#94a3b8;padding:2px 4px;'>枠 / 印 / 馬名・オッズ</div>", unsafe_allow_html=True)
         for ci in range(cols_n):
             lbl = "軸/BOX" if fm == "ボックス" else f"馬{ci+1}"
             h_cols[ci+1].markdown(f"<div style='text-align:center;font-size:11px;color:#38bdf8;font-weight:bold;'>{lbl}</div>", unsafe_allow_html=True)
@@ -239,8 +238,7 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
             u = int(r["馬番"])
             w = int(r.get("枠番", 1))
             mk_txt = f"{r['AI印']}{r['My印']}" or "--"
-            rc = st.columns([2.7] + [0.65] * cols_n)
-            rc.markdown(f"<div style='display:flex;align-items:center;background:#1e293b;padding:5px 7px;border-radius:6px;margin-bottom:2px;'><div class='waku-box w{w}' style='margin-right:6px;'>{u}</div><div style='font-size:11px;color:#fbbf24;width:24px;'>{mk_txt}</div><div style='line-height:1.15;'><div style='font-size:13px;font-weight:bold;color:#f8fafc;'>{r['馬名']}</div><div style='font-size:11px;color:#f87171;'>{r['単勝オッズ']}倍 <span style='color:#94a3b8;'>(AI {r['能力スコア']})</span></div></div></div>", unsafe_allow_html=True)
+            next(iter(rc)).markdown(f"<div style='display:flex;align-items:center;background:#1e293b;padding:5px 7px;border-radius:6px;margin-bottom:2px;'><div class='waku-box w{w}' style='margin-right:6px;'>{u}</div><div style='font-size:11px;color:#fbbf24;width:24px;'>{mk_txt}</div><div style='line-height:1.15;'><div style='font-size:13px;font-weight:bold;color:#f8fafc;'>{r['馬名']}</div><div style='font-size:11px;color:#f87171;'>{r['単勝オッズ']}倍 <span style='color:#94a3b8;'>(AI {r['能力スコア']})</span></div></div></div>", unsafe_allow_html=True)
             for ci in range(cols_n):
                 c_idx = ci + 1
                 on = u in mk_st[c_idx]
@@ -248,7 +246,7 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
                     if on: mk_st[c_idx].remove(u)
                     else: mk_st[c_idx].add(u)
                     st.rerun()
-        n1, n2, n3 = sorted(mk_st), sorted(mk_st if fm == "ボックス" else mk_st), sorted(mk_st if fm == "ボックス" else mk_st)
+        n1, n2, n3 = sorted(mk_st.get(1, set())), sorted(mk_st.get(1 if fm == "ボックス" else 2, set())), sorted(mk_st.get(1 if fm == "ボックス" else 3, set()))
         n2o = {int(r["馬番"]): float(r["単勝オッズ"]) for r in rdf.to_dict("records")}
         n2w = {int(r["馬番"]): int(r.get("枠番", 1)) for r in rdf.to_dict("records")}
         n2nm = {int(r["馬番"]): str(r["馬名"])[:3] for r in rdf.to_dict("records")}
