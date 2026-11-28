@@ -138,6 +138,7 @@ div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColum
 div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(3){flex:0 0 32px !important;width:32px !important;max-width:32px !important;}
 div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(4){flex:1 1 auto !important;width:auto !important;}
 div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-testid="stSelectbox"] *{min-height:0 !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-testid="stSelectbox"] label{display:none !important;}
 div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-baseweb="select"],
 div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-baseweb="select"] > div{height:32px !important;min-height:32px !important;max-height:32px !important;padding:0 !important;font-size:14px !important;font-weight:bold !important;display:flex !important;align-items:center !important;justify-content:center !important;}
 div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-baseweb="select"] > div > div{padding:0 !important;margin:0 !important;line-height:32px !important;justify-content:center !important;}
