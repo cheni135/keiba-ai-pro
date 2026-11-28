@@ -154,14 +154,15 @@ elif "AI検証" in page_mode:
         p_tbl = vdf.groupby("勝率帯", observed=False).agg(頭数=("馬番", "count"), 平均予測勝率=("AI予測勝率", lambda x: round(x.mean(), 1)), 実際の勝率=("1着", lambda x: round(x.mean()*100, 1)), 複勝率=("3着内", lambda x: round(x.mean()*100, 1))).reset_index().iloc[::-1]
         st.dataframe(p_tbl, hide_index=True, use_container_width=True)
         st.markdown("#### ③ AI印別 成績＆回収率（◎○の信頼度 ＆ ☆穴馬の爆発力）")
+        mk_col = "AI印" if "AI印" in vdf.columns else ("印" if "印" in vdf.columns else "AI予想印")
         m_list = []
         for mk in ["◎", "○", "▲", "△", "☆"]:
-            sub = vdf[vdf["AI印"] == mk]
+            sub = vdf[vdf[mk_col] == mk]
             if not sub.empty:
                 m_list.append({"AI印": mk, "頭数": len(sub), "勝率%": round(sub["1着"].mean()*100, 1), "複勝率%": round(sub["3着内"].mean()*100, 1), "単勝回収%": round(sub["単勝払戻"].sum()/(len(sub)*100)*100, 1), "平均オッズ": round(sub["単勝オッズ"].mean(), 1)})
         st.dataframe(pd.DataFrame(m_list), hide_index=True, use_container_width=True)
         st.markdown("#### ④ ☆穴馬 激走・好走ピックアップ（3着以内）")
-        hoshi_hit = vdf.query("AI印 == '☆' and 実着順 <= 3").sort_values("単勝オッズ", ascending=False)
+        hoshi_hit = vdf[(vdf[mk_col] == "☆") & (vdf["実着順"] <= 3)].sort_values("単勝オッズ", ascending=False)
         if hoshi_hit.empty:
             st.caption("本日の☆印の3着以内好走はまだありません。")
         else:
