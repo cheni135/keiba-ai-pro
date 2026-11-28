@@ -421,7 +421,7 @@ else:
                     nr = [{"開催": sk, "レース": sr, "馬番": u_no, "馬名": r["馬名"], "印": nxt_m}] if nxt_m else []
                     upd = pd.concat([op, pd.DataFrame(nr)], ignore_index=True) if nr else op
                     st.session_state["my_predictions"] = upd
-                save_csv(upd)
+                    save_csv(upd)
                     st.rerun()
             with c_card:
                 st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-left:5px solid {wc};border-radius:8px;padding:9px 11px;'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;'><div style='display:flex;align-items:center;min-width:0;'><span class='waku-box w{int(r.get('枠番',1))}' style='margin-right:6px;flex-shrink:0;'>{u_no}</span><span style='font-size:14px;font-weight:bold;color:#f8fafc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>{r['馬名']}</span>{mk_b}</div><span style='font-size:12px;font-weight:bold;flex-shrink:0;margin-left:4px;'>{top_r}</span></div><div style='font-size:11px;color:#94a3b8;margin-bottom:5px;'>{meta_s}</div><div style='display:flex;justify-content:space-between;font-size:10px;color:#94a3b8;background:#0f172a;padding:4px 6px;border-radius:5px;margin-bottom:5px;white-space:nowrap;'>{sub_r}</div><div style='font-size:11px;color:#cbd5e1;line-height:1.4;'>{cmt}</div><details style='margin-top:5px;border-top:1px solid #334155;padding-top:4px;'><summary class='ai-det-sum'>▾ 6項目スコア内訳を展開</summary><div style='padding-top:6px;'>{bars_h}</div></details></div>", unsafe_allow_html=True)
