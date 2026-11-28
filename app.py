@@ -300,27 +300,24 @@ else:
                     save_csv("my_predictions.csv", upd)
                     st.rerun()
             with c_card:
-                st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-left:5px solid {wc};border-radius:8px;padding:9px 11px;'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;'><div style='display:flex;align-items:center;min-width:0;'><span class='waku-box w{int(r.get('枠番',1))}' style='margin-right:6px;flex-shrink:0;'>{u_no}</span><span style='font-size:14px;font-weight:bold;color:#f8fafc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>{r['馬名']}</span>{mk_b}</div><span style='font-size:12px;font-weight:bold;flex-shrink:0;margin-left:4px;'>{top_r}</span></div><div style='font-size:11px;color:#94a3b8;margin-bottom:5px;'>{meta_s}</div><div style='display:flex;justify-content:space-between;font-size:10px;color:#94a3b8;background:#0f172a;padding:4px 6px;border-radius:5px;margin-bottom:5px;white-space:nowrap;'>{sub_r}</div><div style='font-size:11px;color:#cbd5e1;line-height:1.4;'>{cmt}</div><details style='margin-top:5px;border-top:1px solid #334155;padding-top:4px;'><summary class='ai-det-sum'>▾ 6項目スコア内訳を展開</summary><div style='padding-top:6px;'>{bars_h}</div></details></div>", unsafe_allow_html=True)
-        top3_wr = set(rdf.nlargest(3, "AI予測勝率")["馬番"].astype(int))
+        st.markdown("#### 印・数値サマリー表")
+        rdf["_wr_rk"] = rdf["AI予測勝率"].rank(method="min", ascending=False).astype(int)
+        rdf["_ev_rk"] = rdf["期待値スコア"].rank(method="min", ascending=False).astype(int)
+        def rk_bg(rk_v):
+            return "background:#facc15;color:#0f172a;font-weight:bold;" if rk_v==1 else ("background:#38bdf8;color:#0f172a;font-weight:bold;" if rk_v==2 else ("background:#fb923c;color:#0f172a;font-weight:bold;" if rk_v==3 else "color:#e2e8f0;"))
         sum_rows = ""
         for r in rdf.to_dict("records"):
             u_no = int(r["馬番"])
             my_m = str(smk.get(u_no, "-")) or "-"
             ai_m = str(r.get("AI印", r.get("印", "-"))) or "-"
             wc = w_hex_a.get(int(r.get("枠番", 1)), "#f8fafc")
-            pop_n = int(r["_pop"])
-            od_v = float(r["単勝オッズ"])
-            wr_v = float(r["AI予測勝率"])
-            ev_v = float(r["期待値スコア"])
-            pop_st = "color:#fbbf24;font-weight:bold;" if pop_n <= 3 else "color:#e2e8f0;"
-            od_st = "color:#f87171;font-weight:bold;" if od_v < 10.0 else "color:#f87171;"
-            wr_st = "color:#38bdf8;font-weight:bold;" if u_no in top3_wr else "color:#38bdf8;"
-            ev_c = "#fbbf24" if ev_v >= 100 else "#cbd5e1"
+            pop_n, wr_rk, ev_rk = int(r["_pop"]), int(r["_wr_rk"]), int(r["_ev_rk"])
+            od_v, wr_v, ev_v = float(r["単勝オッズ"]), float(r["AI予測勝率"]), float(r["期待値スコア"])
+            od_st = "color:#f87171;font-weight:bold;" if od_v < 10.0 else "color:#e2e8f0;"
             my_c = "#38bdf8" if my_m != "-" else "#64748b"
             ai_c = "#fbbf24" if ai_m in ("◎","○","▲","△","☆") else "#64748b"
-            sum_rows += f"<tr style='border-bottom:1px solid #334155;white-space:nowrap;'><td style='text-align:center;color:{my_c};font-weight:bold;padding:5px 2px;'>{my_m}</td><td style='text-align:center;color:{ai_c};font-weight:bold;padding:5px 2px;'>{ai_m}</td><td style='border-left:4px solid {wc};padding:5px 2px 5px 5px;font-weight:bold;color:#f8fafc;'>{u_no} {r['馬名']}</td><td style='text-align:center;padding:5px 4px;{pop_st}'>{pop_n}</td><td style='text-align:right;padding:5px 3px;{od_st}'>{od_v:.1f}</td><td style='text-align:right;padding:5px 3px;{wr_st}'>{wr_v:.1f}%</td><td style='text-align:right;color:{ev_c};font-weight:bold;padding:5px 4px 5px 2px;'>{ev_v:.0f}%</td></tr>"
-        st.markdown(f"<table style='width:100%;border-collapse:collapse;background:#1e293b;color:#f8fafc;font-size:10.5px;border-radius:8px;overflow:hidden;'><thead><tr style='background:#0f172a;color:#94a3b8;white-space:nowrap;'><th style='padding:6px 2px;text-align:center;'>自</th><th style='padding:6px 2px;text-align:center;'>AI</th><th style='text-align:left;padding:6px 2px 6px 5px;'>馬番・馬名</th><th style='text-align:center;padding:6px 4px;'>人気</th><th style='text-align:right;padding:6px 3px;'>オッズ</th><th style='text-align:right;padding:6px 3px;'>勝率</th><th style='text-align:right;padding:6px 4px 6px 2px;'>期待</th></tr></thead><tbody>{sum_rows}</tbody></table>", unsafe_allow_html=True)
-
+            sum_rows += f"<tr style='border-bottom:1px solid #334155;white-space:nowrap;'><td style='text-align:center;color:{my_c};font-weight:bold;padding:5px 2px;'>{my_m}</td><td style='text-align:center;color:{ai_c};font-weight:bold;padding:5px 2px;'>{ai_m}</td><td style='border-left:4px solid {wc};padding:5px 2px 5px 5px;font-weight:bold;color:#f8fafc;'>{u_no} {r['馬名']}</td><td style='text-align:center;padding:5px 3px;{rk_bg(pop_n)}'>{pop_n}</td><td style='text-align:right;padding:5px 4px;{od_st}'>{od_v:.1f}</td><td style='text-align:right;padding:5px 3px;{rk_bg(wr_rk)}'>{wr_v:.1f}%</td><td style='text-align:right;padding:5px 4px 5px 2px;{rk_bg(ev_rk)}'>{ev_v:.0f}%</td></tr>"
+        st.markdown(f"<table style='width:100%;border-collapse:collapse;background:#1e293b;color:#f8fafc;font-size:10.5px;border-radius:8px;overflow:hidden;'><thead><tr style='background:#0f172a;color:#94a3b8;white-space:nowrap;'><th style='padding:6px 2px;text-align:center;'>自</th><th style='padding:6px 2px;text-align:center;'>AI</th><th style='text-align:left;padding:6px 2px 6px 5px;'>馬番・馬名</th><th style='text-align:center;padding:6px 3px;'>人気</th><th style='text-align:right;padding:6px 4px;'>オッズ</th><th style='text-align:right;padding:6px 3px;'>勝率</th><th style='text-align:right;padding:6px 4px 6px 2px;'>期待</th></tr></thead><tbody>{sum_rows}</tbody></table>", unsafe_allow_html=True)
 
     elif "買い目" in page_mode:
         c_bt, c_fm = st.columns([1.4, 1.6])
