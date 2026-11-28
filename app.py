@@ -117,10 +117,10 @@ if "勝負レース" in page_mode:
             st.markdown(f"""<div class="nk-card" style="margin-bottom:4px;"><div style="display:flex;align-items:center;"><div class="waku-box w{int(r.get('枠番',1))}">{int(r['馬番'])}</div><div><div style="font-size:11px;color:#9ca3af;">{r['開催']} {r['レース']}</div><a href="{r['netkeiba']}" target="_blank" style="color:#fff;font-weight:bold;text-decoration:none;">{r['馬名']} 🔗</a></div></div><div class="odds-txt">{r['単勝オッズ']}倍<br><span class="score-pill">能力{r['能力スコア']} / 期待値{r['期待値スコア']}%</span></div></div>""", unsafe_allow_html=True)
         with c_mb:
             if st.button("📋 出馬表", key=f"jmpm_{idx_m}_{r['開催']}_{int(r['レース番号'])}", use_container_width=True):
-                 st.session_state["jump_page"] = "📋 出馬表・AI分析"
-                st.session_state["jump_kaisai"] = r["開催"]
-                st.session_state["jump_rkey"] = f"{int(r['レース番号'])}R"
-                st.rerun()
+               st.session_state["jump_page"] = "📋 出馬表・AI分析"
+               st.session_state["jump_kaisai"] = r["開催"]
+               st.session_state["jump_rkey"] = f"{int(r['レース番号'])}R"
+               st.rerun()
 
 elif "馬場傾向" in page_mode:
     sk = st.selectbox("開催場を選択", tuple(all_df["開催"].unique()))
