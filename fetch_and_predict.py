@@ -199,6 +199,20 @@ if rows:
             od = np.where(real_od > 1.0, real_od, sim_od)
             wp[ix], t3p[ix], odds[ix], exps[ix] = np.round(w*100, 1), np.round(t3*100, 1), od, np.round(((w*od*0.65) + (t3*(od*0.25+0.6)*0.35))*100, 1)
         df["AI予測勝率"], df["AI予測3着内率"], df["単勝オッズ"], df["期待値スコア"], df["更新日時"] = wp, t3p, odds, exps, now.strftime("%Y/%m/%d %H:%M")
+        res_map = {}
+for cid in df["race_id"].dropna().unique():
+    try:
+        r_html = requests.get(f"https://yahoo.co.jp{cid}", headers=HEADERS, timeout=8).text
+        for tr in BeautifulSoup(r_html, "html.parser").select("tr"):
+            tds = [td.get_text(strip=True) for td in tr.find_all(["td", "th"])]
+            if len(tds) >= 3 and tds[0].isdigit() and 1 <= int(tds[0]) <= 18:
+                u_cand = tds[2] if tds[2].isdigit() else (tds[1] if tds[1].isdigit() else "")
+                if u_cand.isdigit():
+                    res_map[(str(cid), int(u_cand))] = int(tds[0])
+    except Exception:
+        pass
+df["実着順"] = [res_map.get((str(r["race_id"]), int(r["馬番"])), 0) for _, r in df.iterrows()]
+
         df.to_csv("latest_races.csv", index=False, encoding="utf-8-sig")
         print("Saved rows:", len(df))
 
