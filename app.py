@@ -316,10 +316,12 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
         for r in rk.to_dict("records"):
             mk_s = f"**{r['AI印']}** " if r["AI印"] else ""
             st.info(f"{mk_s}**{int(r['馬番'])} {r['馬名']}**（単勝{r['単勝オッズ']}倍 / 勝率{r['AI予測勝率']}% / 期待値{r['期待値スコア']}%）\n\n{ai_comment(r, avg)}")
-        sh = st.pills("📊 詳細内訳グラフを見る馬を選択", rk["馬名"].tolist(), default=next(iter(rk["馬名"]), ""), key="g_h_pill") or next(iter(rk["馬名"]), "")
-        inf = rk.query("馬名 == @sh").squeeze()
-        fv = (float(inf["着順着差指数"]), float(inf["ラップタイム指数"]), float(inf["厩舎騎手勝負度"]), float(inf["枠順展開適合"]), float(inf["調教指数"]), float(inf["血統適性"]))
-        st.bar_chart(pd.DataFrame({"項目": ("1_着順着差", "2_ラップ", "3_騎手勝負度", "4_枠順展開", "5_調教", "6_血統"), "スコア": fv}).set_index("項目"))
+        rk["_lbl"] = rk.apply(lambda x: f"{int(x['馬番'])} {x['馬名']}", axis=1)
+        sh_lbl = st.pills("📊 詳細内訳を見る馬を選択", rk["_lbl"].tolist(), default=next(iter(rk["_lbl"]), ""), key="g_h_pill") or next(iter(rk["_lbl"]), "")
+        inf = next(iter(rk[rk["_lbl"] == sh_lbl].to_dict("records")), {})
+        items_v = [("1. 着順着差", float(inf.get("着順着差指数",0))), ("2. ラップ", float(inf.get("ラップタイム指数",0))), ("3. 騎手勝負度", float(inf.get("厩舎・騎手勝負度",0))), ("4. 枠順展開", float(inf.get("枠順・展開適合",0))), ("5. 調教", float(inf.get("調教指数",0))), ("6. 血統", float(inf.get("血統適性",0)))]
+        bars_h = "".join(f"<div style='margin-bottom:7px;'><div style='display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px;'><span style='color:#cbd5e1;'>{k}</span><span style='color:#38bdf8;font-weight:bold;'>{v:.1f}点</span></div><div style='background:#0f172a;border-radius:4px;height:8px;overflow:hidden;'><div style='background:linear-gradient(90deg,#0284c7,#38bdf8);width:{min(100,max(0,v))}%;height:100%;border-radius:4px;'></div></div></div>" for k, v in items_v)
+        st.markdown(f"<div style='background:#1e293b;padding:12px 14px;border-radius:10px;border:1px solid #334155;margin-top:4px;'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;'><span style='font-size:14px;font-weight:bold;color:#f8fafc;'><span class='waku-box w{int(inf.get('枠番',1))}' style='margin-right:6px;'>{int(inf.get('馬番',0))}</span>{inf.get('馬名','')}</span><span style='font-size:13px;color:#fbbf24;font-weight:bold;'>総合 {float(inf.get('能力スコア',0)):.1f}点</span></div>{bars_h}</div>", unsafe_allow_html=True)
 
     elif "買い目" in page_mode:
         c_bt, c_fm = st.columns([1.4, 1.6])
