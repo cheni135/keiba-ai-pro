@@ -103,7 +103,7 @@ if "勝負レース" in page_mode:
             with c_left:
                 st.markdown(f"""<div class="nk-card" style="margin-bottom:4px;"><div><b>{ks} {rn}</b> <span style="color:#fbbf24;font-weight:bold;">{bg}</span><br><span style="font-size:13px;">◎{int(t1['馬番'])}{t1['馬名']}（能力{sc1}点 / 2位差+{d12} / 単勝{od1}倍 / 期待値{ev1}%）</span></div></div>""", unsafe_allow_html=True)
             with c_btn:
-                if              if st.button("📋 出馬表", key=f"jmp_{idx_g}_{ks}_{rno}", use_container_width=True):
+             if st.button("📋 出馬表", key=f"jmp_{idx_g}_{ks}_{rno}", use_container_width=True):
                  st.session_state["jump_page"] = "📋 出馬表・AI分析"
                     st.session_state["jump_kaisai"] = ks
                     st.session_state["jump_rkey"] = f"{int(rno)}R"
