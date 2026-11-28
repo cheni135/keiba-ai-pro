@@ -142,8 +142,8 @@ print("Parsed horses from rich text:", len(rows))
 
 if rows:
         df = pd.DataFrame(rows).drop_duplicates(subset=["開催","レース番号","馬番"]).sort_values(["開催","レース番号","馬番"]).reset_index(drop=True)
-    np.random.seed(int(now.strftime("%Y%m%d")))
-    n = len(df)
+        np.random.seed(int(now.strftime("%Y%m%d")))
+        n = len(df)
     tjk = {"ルメ":12,"モレイラ":13,"川田":11,"レーン":12,"デムー":10,"戸崎":8,"坂井":9,"横山武":8,"武豊":7,"松山":8,"菅原":6,"岩田望":7,"三浦":5,"鮫島":5,"団野":5,"西村":6,"北村友":5,"マーカンド":10}
     df["脚質"] = [("逃げ","先行","差し","追込")[i%4] for i in range(n)]
     df["当日馬場状態"] = "良"
