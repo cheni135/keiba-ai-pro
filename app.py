@@ -90,23 +90,26 @@ def ai_comment(r, avg):
 
 if not page_mode:
     import urllib.request, json
-    @st.cache_data(ttl=900)
+    @st.cache_data(ttl=600)
     def get_track_wx():
+        coords = {"東京":(35.664,139.485),"京都":(34.907,135.724),"中山":(35.725,139.960),"阪神":(34.779,135.362),"中京":(35.066,136.988),"新潟":(37.948,139.184),"福島":(37.766,140.483),"小倉":(33.841,130.873),"札幌":(43.076,141.326),"函館":(41.782,140.793)}
         res = {}
-        for nm, lat, lon in [("東京", 35.664, 139.485), ("京都", 34.907, 135.724)]:
+        for nm, (lat, lon) in coords.items():
             try:
                 u = f"https://open-meteo.com{lat}&longitude={lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m&hourly=precipitation_probability&forecast_days=1&timezone=Asia%2FTokyo"
-                d = json.loads(urllib.request.urlopen(u, timeout=3).read().decode())
-                cur = d["current"]
-                wc = cur["weather_code"]
-                wt = "晴" if wc <= 1 else ("曇" if wc <= 3 else ("雨" if wc >= 51 else "晴時々曇"))
-                dirs = ["北", "北東", "東", "南東", "南", "南西", "西", "北西"]
-                wd = dirs[int((cur["wind_direction_10m"] + 22.5) // 45) % 8]
-                pp = next(iter(d.get("hourly", {}).get("precipitation_probability",)), 10)
-                res[nm] = {"wt": wt, "tmp": cur["temperature_2m"], "hum": cur["relative_humidity_2m"], "ws": cur["wind_speed_10m"], "wd": wd, "pp": pp}
-            except Exception:
-                res[nm] = {"wt": "晴", "tmp": 14.0, "hum": 55, "ws": 2.5, "wd": "北西", "pp": 10}
+                d = json.loads(urllib.request.urlopen(u, timeout=4).read().decode())
+                cur = d.get("current", {})
+                wc = int(cur.get("weather_code", 0))
+                wt = "快晴" if wc == 0 else ("晴" if wc <= 2 else ("曇" if wc <= 48 else ("雨" if wc <= 67 or wc >= 80 else "雪")))
+                dirs = ("北", "北東", "東", "南東", "南", "南西", "西", "北西")
+                wd = dirs.__getitem__(int((float(cur.get("wind_direction_10m", 0)) + 22.5) // 45) % 8)
+                pp_list = d.get("hourly", {}).get("precipitation_probability", (0,))
+                pp = next(iter(pp_list), 0)
+                res[nm] = {"wt": wt, "tmp": round(float(cur.get("temperature_2m", 0)), 1), "hum": int(cur.get("relative_humidity_2m", 0)), "ws": round(float(cur.get("wind_speed_10m", 0)), 1), "wd": wd, "pp": int(pp)}
+            except Exception as e:
+                res[nm] = {"wt": "取得中", "tmp": "-", "hum": "-", "ws": "-", "wd": "-", "pp": "-"}
         return res
+
     wx_d = get_track_wx()
     st.markdown("#### 注目メイン・重賞 最新オッズ")
     mains = all_df[all_df.apply(lambda x: any(k in f"{x.get('レース名','')} {x.get('レース','')}" for k in ("(GI)", "(GII)", "(GIII)", "(G1)", "(G2)", "(G3)", "(L)", "(OP)", "オープン", "JGI", "JGII", "JGIII")) and not any(ng in f"{x.get('レース名','')} {x.get('レース','')}" for ng in ("3勝", "2勝", "1勝", "未勝利", "新馬")), axis=1)].copy()
@@ -124,7 +127,8 @@ if not page_mode:
             orows += f"<div style='display:flex;justify-content:space-between;align-items:center;padding:5px 8px;border-bottom:1px solid #334155;font-size:12px;'><div><span style='color:#94a3b8;margin-right:8px;'>{idx_p}番人気</span><b style='color:#f8fafc;'>{int(mr['馬番'])} {mr['馬名']}</b>{mk_tag}</div><span style='color:#f87171;font-weight:bold;'>{float(mr['単勝オッズ']):.1f}倍</span></div>"
         st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-left:4px solid #0284c7;border-radius:8px;overflow:hidden;margin-bottom:10px;'><div style='background:#0f172a;padding:8px 10px;border-bottom:1px solid #334155;'><div style='font-size:13px;font-weight:bold;color:#f8fafc;'>{r_info.get('開催','')} {int(r_info.get('レース番号',0))}R {r_info.get('レース名','')}</div><div style='font-size:11px;color:#94a3b8;'>{r_info.get('レース','')}</div></div>{orows}</div>", unsafe_allow_html=True)
     st.markdown("#### リアルタイム天候情報")
-    w_p = st.segmented_control("天候場", ["東京", "京都"], default="東京", label_visibility="collapsed", key="hm_wx_p") or "東京"
+    wx_places = list(dict.fromkeys(p for p in ("東京","京都","中山","阪神","中京","新潟","福島","小倉","札幌","函館") if any(p in str(h) for h in all_df.get("開催", ())))) or ["東京", "京都"]
+    w_p = st.segmented_control("天候場", wx_places, default=next(iter(wx_places), "東京"), label_visibility="collapsed", key="hm_wx_p") or next(iter(wx_places), "東京")
     wi = wx_d.get(w_p, wx_d["東京"])
     st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px 12px;margin-bottom:10px;'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;'><span style='font-size:13px;font-weight:bold;color:#f8fafc;'>{w_p}競馬場</span><span style='font-size:15px;font-weight:bold;color:#38bdf8;'>{wi['wt']}　{wi['tmp']}℃</span></div><div style='display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;background:#0f172a;padding:7px;border-radius:6px;text-align:center;font-size:11px;'><div><div style='color:#94a3b8;font-size:10px;'>降水確率</div><b style='color:#f8fafc;'>{wi['pp']}%</b></div><div style='border-left:1px solid #1e293b;border-right:1px solid #1e293b;'><div style='color:#94a3b8;font-size:10px;'>湿度</div><b style='color:#f8fafc;'>{wi['hum']}%</b></div><div><div style='color:#94a3b8;font-size:10px;'>直線の風</div><b style='color:#fbbf24;'>{wi['wd']} {wi['ws']}m/s</b></div></div></div>", unsafe_allow_html=True)
     st.markdown("#### 勝ち馬サーチ（期待値上位）")
