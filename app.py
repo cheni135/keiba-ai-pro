@@ -129,36 +129,45 @@ else:
         elif sort_by == "期待値順": rdf = rdf.sort_values("期待値スコア", ascending=False)
         elif sort_by == "オッズ人気順": rdf = rdf.sort_values("単勝オッズ", ascending=True)
 
-        with st.expander("✏️ My印を一括登録する（全頭リスト）"):
-            edit_df = rdf.sort_values("馬番")[["馬番", "馬名"]].copy()
-            edit_df["馬番"] = edit_df["馬番"].astype(int)
-            edit_df["My印"] = edit_df["馬番"].map(lambda u: smk.get(u, ""))
-            edited = st.data_editor(
-                edit_df,
-                hide_index=True,
-                use_container_width=True,
-                disabled=["馬番", "馬名"],
-                column_config={
-                    "馬番": st.column_config.NumberColumn("番", width="small"),
-                    "馬名": st.column_config.TextColumn("馬名", width="medium"),
-                    "My印": st.column_config.SelectboxColumn("印", options=["", "◎", "○", "▲", "△", "☆", "✓", "消"], width="small"),
-                },
-                key=f"mk_ed_{sk}_{sr}",
-            )
-            if st.button("💾 My印を一括保存", type="primary", use_container_width=True, key=f"sv_all_{sk}_{sr}"):
-                op = pdf.query("not (開催 == @sk and レース == @sr)")
-                nr = [{"開催": sk, "レース": sr, "馬番": int(r["馬番"]), "My印": r["My印"], "Myメモ": ""} for _, r in edited.iterrows() if r["My印"]]
-                upd = pd.concat([op, pd.DataFrame(nr, columns=["開催", "レース", "馬番", "My印", "Myメモ"])], ignore_index=True)
-                st.session_state["my_preds_df"] = upd
-                save_csv("my_predictions.csv", upd, f"Save {sk} {sr} all marks")
-                st.rerun()
+        st.markdown("""<style>
+        div[data-testid="stHorizontalBlock"]:has(.nk-row-box){align-items:center;background:#1e293b;border-radius:8px;padding:4px 8px;margin-bottom:6px;}
+        .ai-sq{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:6px;font-weight:bold;font-size:15px;border:1.5px solid #475569;color:#94a3b8;background:#0f172a;}
+        .ai-◎{border-color:#ef4444;color:#ef4444;background:rgba(239,68,68,.15);}
+        .ai-○{border-color:#3b82f6;color:#60a5fa;background:rgba(59,130,246,.15);}
+        .ai-▲{border-color:#22c55e;color:#4ade80;background:rgba(34,197,94,.15);}
+        .ai-△{border-color:#eab308;color:#facc15;background:rgba(234,179,8,.15);}
+        .ai-☆{border-color:#a855f7;color:#c084fc;background:rgba(168,85,247,.15);}
+        </style>
+        <div style="display:flex;font-size:11px;color:#9ca3af;padding:4px 8px;border-bottom:1px solid #374151;margin-bottom:6px;">
+          <div style="width:36px;">番</div><div style="width:68px;">My印</div><div style="width:38px;">AI印</div><div style="flex:1;">馬名・騎手・斤量</div><div style="text-align:right;">オッズ/能力</div>
+        </div>""", unsafe_allow_html=True)
 
+        mk_opts = ("", "◎", "○", "▲", "△", "☆", "✓", "消")
         for r in rdf.to_dict("records"):
-            ai_b = f"<span style='color:#f87171;font-weight:bold;margin-right:4px;'>{r['AI印']}</span>" if r["AI印"] else ""
-            my_b = f"<span style='color:#fbbf24;font-weight:bold;margin-right:4px;'>[My:{r['My印']}]</span>" if r["My印"] else ""
-            memo_h = f"<div style='font-size:11px;color:#fbbf24;'>📝 {r['Myメモ']}</div>" if r["Myメモ"] else ""
-            st.markdown(f"""<div class="nk-card"><div style="display:flex;align-items:center;"><div class="waku-box w{int(r.get('枠番',1))}">{int(r['馬番'])}</div><div><div>{ai_b}{my_b}<a href="{r['netkeiba']}" target="_blank" style="color:#fff;font-weight:bold;text-decoration:none;">{r['馬名']}</a></div><div style="font-size:12px;color:#9ca3af;">{r.get('性齢','')} ｜ {r['騎手']} {r['斤量']} ｜ {r['脚質']}</div>{memo_h}</div></div><div style="text-align:right;"><div class="odds-txt">{r['単勝オッズ']}倍</div><span class="score-pill">能力 {r['能力スコア']}</span></div></div>""", unsafe_allow_html=True)
-    elif "AI分析" in page_mode:
+            u_no = int(r["馬番"])
+            cur_my = smk.get(u_no, "")
+            ai_m = r["AI印"] if r["AI印"] else "--"
+            c_no, c_my, c_ai, c_info = st.columns([0.9, 1.7, 1.0, 6.4], gap="small")
+            with c_no:
+                st.markdown(f'<div class="nk-row-box waku-box w{int(r.get("枠番",1))}" style="margin:0;">{u_no}</div>', unsafe_allow_html=True)
+            with c_my:
+                sel_m = st.selectbox(f"my_{u_no}", mk_opts, index=mk_opts.index(cur_my) if cur_my in mk_opts else 0, label_visibility="collapsed", key=f"sel_mk_{sk}_{sr}_{u_no}")
+                if sel_m != cur_my:
+                    op = pdf.query("not (開催 == @sk and レース == @sr and 馬番 == @u_no)")
+                    nr = [{"開催": sk, "レース": sr, "馬番": u_no, "My印": sel_m, "Myメモ": ""}] if sel_m else []
+                    upd = pd.concat([op, pd.DataFrame(nr, columns=["開催", "レース", "馬番", "My印", "Myメモ"])], ignore_index=True)
+                    st.session_state["my_preds_df"] = upd
+                    save_csv("my_predictions.csv", upd, f"Save {sk} {sr} #{u_no}")
+                    st.rerun()
+            with c_ai:
+                st.markdown(f'<div class="ai-sq ai-{ai_m}">{ai_m}</div>', unsafe_allow_html=True)
+            with c_info:
+                st.markdown(f'''<div style="display:flex;justify-content:space-between;align-items:center;">
+                  <div><div><a href="{r['netkeiba']}" target="_blank" style="color:#fff;font-weight:bold;text-decoration:none;font-size:14px;">{r['馬名']}</a></div>
+                  <div style="font-size:11px;color:#9ca3af;">{r.get('性齢','')} ｜ {r['騎手']} {r['斤量']} ｜ {r['脚質']}</div></div>
+                  <div style="text-align:right;"><div class="odds-txt" style="font-size:14px;">{r['単勝オッズ']}倍</div><span class="score-pill" style="font-size:10px;">能力 {r['能力スコア']}</span></div>
+                </div>''', unsafe_allow_html=True)
+
         md = st.radio("モード", ("🎯 的中重視（能力スコア）", "💰 回収率重視（期待値スコア）"), horizontal=True)
         sc = "能力スコア" if "的中" in md else "期待値スコア"
         rk = rdf.sort_values(sc, ascending=False).reset_index(drop=True)
