@@ -173,39 +173,59 @@ if "ホーム" in page_mode:
         with ecols[idx_e]:
             st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-top:3px solid #38bdf8;border-radius:8px;padding:8px 9px;margin-bottom:10px;'><div style='font-size:10.5px;color:#38bdf8;font-weight:bold;margin-bottom:3px;'>{er['開催']} {int(er['レース番号'])}R</div><div style='font-size:12px;font-weight:bold;color:#f8fafc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>{int(er['馬番'])} {er['馬名']}</div><div style='font-size:10.5px;color:#cbd5e1;margin-top:3px;'>単勝 <b style='color:#f87171;'>{float(er['単勝オッズ']):.1f}倍</b> / 能力 <b style='color:#4ade80;'>{float(er.get('能力スコア',0)):.1f}点</b></div></div>", unsafe_allow_html=True)
 
-    st.subheader("🔥 本日のAI厳選 勝負レース（発走順）")
-    picked = 0
-    for idx_g, ((rno, ks, rn), g) in enumerate(all_df.sort_values(["レース番号", "開催"]).groupby(["レース番号", "開催", "レース"], sort=False)):
-        sg = g.sort_values("能力スコア", ascending=False)
-        t1 = sg.head(1).squeeze()
-        t2 = sg.head(2).tail(1).squeeze() if len(sg) > 1 else t1
-        d12 = round(float(t1["能力スコア"]) - float(t2["能力スコア"]), 1)
-        sc1, od1, ev1 = float(t1["能力スコア"]), float(t1["単勝オッズ"]), float(t1["期待値スコア"])
-        bg = "👑 AI鉄板・1強軸" if (sc1 >= 71.0 and d12 >= 5.5) else ("💎 激アツ中穴・期待値◎" if (ev1 >= 120.0 and 4.0 <= od1 <= 25.0) else ("🔥 有力軸・好勝負" if (sc1 >= 68.0 and d12 >= 4.5 and ev1 >= 105.0) else ""))
-        if bg:
-            picked += 1
-            c_left, c_btn = st.columns([4.2, 1.3])
-            with c_left:
-                st.markdown(f"""<div class="nk-card" style="margin-bottom:4px;"><div><b>{ks} {rn}</b> <span style="color:#fbbf24;font-weight:bold;">{bg}</span><br><span style="font-size:13px;">◎{int(t1['馬番'])}{t1['馬名']}（能力{sc1}点 / 2位差+{d12} / 単勝{od1}倍 / 期待値{ev1}%）</span></div></div>""", unsafe_allow_html=True)
-            with c_btn:
-             if st.button("📋 出馬表", key=f"jmp_{idx_g}_{ks}_{rno}", use_container_width=True):
-                st.session_state["jump_page"] = "📋 出馬表・AI分析"
-                st.session_state["jump_kaisai"] = ks
-                st.session_state["jump_rkey"] = f"{int(rno)}R"
-                st.rerun()
-    if picked == 0:
-        st.info("本日の全レースは混戦傾向のため、突出した勝負レースはありません。")
-    st.subheader("🏆 厳選！期待値Sランク お宝中穴 TOP5（単勝4〜30倍）")
-    for idx_m, r in enumerate(all_df.query("期待値スコア >= 115.0 and 4.0 <= 単勝オッズ <= 30.0").sort_values(["レース番号", "期待値スコア"], ascending=[True, False]).head(5).to_dict("records")):
-        c_ml, c_mb = st.columns([4.2, 1.3])
-        with c_ml:
-            st.markdown(f"""<div class="nk-card" style="margin-bottom:4px;"><div style="display:flex;align-items:center;"><div class="waku-box w{int(r.get('枠番',1))}">{int(r['馬番'])}</div><div><div style="font-size:11px;color:#9ca3af;">{r['開催']} {r['レース']}</div><a href="{r['netkeiba']}" target="_blank" style="color:#fff;font-weight:bold;text-decoration:none;">{r['馬名']} 🔗</a></div></div><div class="odds-txt">{r['単勝オッズ']}倍<br><span class="score-pill">能力{r['能力スコア']} / 期待値{r['期待値スコア']}%</span></div></div>""", unsafe_allow_html=True)
-        with c_mb:
-            if st.button("📋 出馬表", key=f"jmpm_{idx_m}_{r['開催']}_{int(r['レース番号'])}", use_container_width=True):
-               st.session_state["jump_page"] = "📋 出馬表・AI分析"
-               st.session_state["jump_kaisai"] = r["開催"]
-               st.session_state["jump_rkey"] = f"{int(r['レース番号'])}R"
-               st.rerun()
+elif "勝負レース" in page_mode:
+    st.markdown("<style>div.st-key-sr_day_sel,div.st-key-sr_day_sel>div,div.st-key-sr_day_sel div[data-testid='stButtonGroup']{width:100% !important;}div.st-key-sr_day_sel div[role='radiogroup']{display:grid !important;grid-template-columns:1fr 1fr !important;width:100% !important;background:#0f172a !important;padding:4px !important;border-radius:8px !important;border:1px solid #334155 !important;gap:4px !important;margin-bottom:6px !important;}div.st-key-sr_day_sel button{width:100% !important;background:transparent !important;color:#94a3b8 !important;border:1px solid transparent !important;border-radius:6px !important;padding:6px 0 !important;font-size:12px !important;font-weight:bold !important;justify-content:center !important;}div.st-key-sr_day_sel button:is([aria-checked='true'],[aria-pressed='true'],[kind='segmented_controlActive']){background:#0284c7 !important;border-color:#38bdf8 !important;color:#ffffff !important;}div.st-key-sr_cat_sel,div.st-key-sr_cat_sel>div,div.st-key-sr_cat_sel div[data-testid='stButtonGroup']{width:100% !important;}div.st-key-sr_cat_sel div[role='radiogroup']{display:grid !important;grid-template-columns:1fr 1fr 1fr !important;width:100% !important;background:#0f172a !important;padding:4px !important;border-radius:8px !important;border:1px solid #334155 !important;gap:4px !important;margin-bottom:8px !important;}div.st-key-sr_cat_sel button{width:100% !important;min-width:0 !important;background:transparent !important;color:#94a3b8 !important;border:1px solid transparent !important;border-radius:6px !important;padding:6px 2px !important;font-size:11px !important;font-weight:bold !important;white-space:nowrap !important;justify-content:center !important;}div.st-key-sr_cat_sel button:is([aria-checked='true'],[aria-pressed='true'],[kind='segmented_controlActive']){background:#dc2626 !important;border-color:#f87171 !important;color:#ffffff !important;}div.st-key-sr_list button{width:100% !important;background:#0f172a !important;color:#38bdf8 !important;border:1px solid #334155 !important;border-radius:6px !important;padding:5px 0 !important;font-size:11.5px !important;font-weight:bold !important;margin-bottom:8px !important;}</style>", unsafe_allow_html=True)
+    def get_dow(ks_str):
+        m = re.search(r"(\d+)日", str(ks_str))
+        return "土曜日" if (m and int(m.group(1)) % 2 == 1) else "日曜日"
+    all_df_sr = all_df.assign(_dow=all_df.get("開催", "").apply(get_dow))
+    avail_days = [d for d in ("土曜日", "日曜日") if d in set(all_df_sr.get("_dow", ()))] or ["日曜日"]
+    sel_day = st.segmented_control("曜日選択", avail_days, default=avail_days.__getitem__(-1), label_visibility="collapsed", key="sr_day_sel") or avail_days.__getitem__(-1)
+    sr_cat = st.segmented_control("種別選択", ["🔥 勝負レース", "🏆 お宝中穴", "🎯 高配当狙い"], default="🔥 勝負レース", label_visibility="collapsed", key="sr_cat_sel") or "🔥 勝負レース"
+    day_df = all_df_sr[all_df_sr.get("_dow") == sel_day].copy()
+    with st.container(key="sr_list"):
+        if "勝負レース" in sr_cat:
+            picked = 0
+            for idx_g, ((rno, ks, rn), g) in enumerate(day_df.sort_values(["レース番号", "開催"]).groupby(["レース番号", "開催", "レース"], sort=False)):
+                sg = g.sort_values("能力スコア", ascending=False)
+                if len(sg) < 2:
+                    continue
+                t1 = next(iter(sg.to_dict("records")))
+                t2 = sg.head(2).tail(1).squeeze()
+                sc1 = round(float(t1.get("能力スコア", 0)), 1)
+                d12 = round(sc1 - float(t2.get("能力スコア", 0)), 1)
+                od1 = float(t1.get("単勝オッズ", 0))
+                ev1 = round(float(t1.get("期待値スコア", 0)), 1)
+                bg = "👑 AI鉄板・1強軸" if (sc1 >= 70.0 and d12 >= 6.0) else ("🔥 有力軸・好勝負" if (sc1 >= 68.0 and d12 >= 4.0 and ev1 >= 105.0) else "")
+                if bg:
+                    picked += 1
+                    st.markdown(f"<div class='nk-card' style='margin-bottom:3px;'><div><b>{ks} {rn}</b> <span style='color:#fbbf24;font-weight:bold;'>{bg}</span><br><span style='font-size:12.5px;'>◎{int(t1['馬番'])}{t1['馬名']}（能力{sc1}点 / 2位差+{d12} / 単勝{od1}倍 / 期待値{ev1}%）</span></div></div>", unsafe_allow_html=True)
+                    if st.button("📋 出馬表・AI分析を開く", key=f"jmp_{idx_g}_{ks}_{rno}", use_container_width=True):
+                        st.session_state["jump_page"] = "出馬表"
+                        st.session_state["jump_kaisai"] = ks
+                        st.session_state["jump_rkey"] = f"{int(rno)}R"
+                        st.rerun()
+            if picked == 0:
+                st.info(f"{sel_day}は混戦傾向のため、突出した勝負レースはありません。")
+        elif "お宝中穴" in sr_cat:
+            sub_m = day_df.query("期待値スコア >= 115.0 and 4.0 <= 単勝オッズ <= 30.0").sort_values(["レース番号", "期待値スコア"], ascending=[True, False]).head(8)
+            for idx_m, r in enumerate(sub_m.to_dict("records")):
+                st.markdown(f"<div class='nk-card' style='margin-bottom:3px;'><div style='display:flex;align-items:center;'><div class='waku-box w{int(r.get('枠番',1))}'>{int(r['馬番'])}</div><div><div style='font-size:11px;color:#9ca3af;'>{r['開催']} {r['レース']}</div><b style='color:#fff;'>{r['馬名']}</b></div><div class='odds-txt'>{r['単勝オッズ']}倍<br><span class='score-pill'>能力{r['能力スコア']} / 期待値{r['期待値スコア']}%</span></div></div></div>", unsafe_allow_html=True)
+                if st.button("📋 出馬表・AI分析を開く", key=f"jmpm_{idx_m}_{r['開催']}_{int(r['レース番号'])}", use_container_width=True):
+                    st.session_state["jump_page"] = "出馬表"
+                    st.session_state["jump_kaisai"] = r["開催"]
+                    st.session_state["jump_rkey"] = f"{int(r['レース番号'])}R"
+                    st.rerun()
+        else:
+            sub_h = day_df.query("期待値スコア >= 130.0 and 15.0 <= 単勝オッズ <= 80.0").sort_values(["期待値スコア"], ascending=False).head(8)
+            for idx_h, r in enumerate(sub_h.to_dict("records")):
+                st.markdown(f"<div class='nk-card' style='margin-bottom:3px;'><div style='display:flex;align-items:center;'><div class='waku-box w{int(r.get('枠番',1))}'>{int(r['馬番'])}</div><div><div style='font-size:11px;color:#9ca3af;'>{r['開催']} {r['レース']}</div><b style='color:#fff;'>{r['馬名']}</b></div><div class='odds-txt'>{r['単勝オッズ']}倍<br><span class='score-pill'>能力{r['能力スコア']} / 期待値{r['期待値スコア']}%</span></div></div></div>", unsafe_allow_html=True)
+                if st.button("📋 出馬表・AI分析を開く", key=f"jmph_{idx_h}_{r['開催']}_{int(r['レース番号'])}", use_container_width=True):
+                    st.session_state["jump_page"] = "出馬表"
+                    st.session_state["jump_kaisai"] = r["開催"]
+                    st.session_state["jump_rkey"] = f"{int(r['レース番号'])}R"
+                    st.rerun()
+
 elif "馬場傾向" in page_mode:
         b_all = pd.read_csv("history_races.csv", encoding="utf-8-sig") if os.path.exists("history_races.csv") else pd.DataFrame()
         cur_b = all_df[all_df["実着順"] > 0].copy() if "実着順" in all_df.columns else pd.DataFrame()
