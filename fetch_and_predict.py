@@ -219,6 +219,12 @@ if os.path.exists("result_raw.txt"):
 df["実着順"] = [res_map.get((str(r["開催"]), int(r["レース番号"]), int(r["馬番"])), 0) for _, r in df.iterrows()]
 
 df.to_csv("latest_races.csv", index=False, encoding="utf-8-sig")
+done_df = df[df["実着順"] > 0].copy()
+if not done_df.empty:
+    if os.path.exists("history_races.csv"):
+        old_h = pd.read_csv("history_races.csv", encoding="utf-8-sig")
+        done_df = pd.concat([old_h, done_df], ignore_index=True).drop_duplicates(subset=["開催", "レース番号", "馬番"], keep="last")
+    done_df.to_csv("history_races.csv", index=False, encoding="utf-8-sig")
 print("Saved rows:", len(df))
 
 # 毎週自動で来週の開催候補コードを target_kaisai.txt に更新（JRA月別標準ローテーション）
