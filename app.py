@@ -124,11 +124,11 @@ if not page_mode:
                     if sv and sv != "nan":
                         return sv
         return "-"
-    s_st = find_baba(p_df, "芝")
-    d_st = find_baba(p_df, "ダ")
+    s_st = next((str(x.get("馬場状態","")) for x in p_df.to_dict("records") if "芝" in str(x.get("馬場","")) and str(x.get("馬場状態","")) not in ("","nan")), "良")
+    d_st = next((str(x.get("馬場状態","")) for x in p_df.to_dict("records") if "ダ" in str(x.get("馬場","")) and str(x.get("馬場状態","")) not in ("","nan")), "良")
     cush = find_val(p_df, "クッション")
     gansui = find_val(p_df, "含水")
-    wt_st = find_val(p_df, "天候") if find_val(p_df, "天候") != "-" else find_val(p_df, "天気")
+    wt_st = next((str(x.get("天候","")) for x in p_df.to_dict("records") if str(x.get("天候","")) not in ("","nan")), "晴")
     try:
         hb = pd.read_csv("history_races.csv")
         if "着順" in all_df.columns:
