@@ -129,7 +129,7 @@ elif "馬場傾向" in page_mode:
         if b_all.empty:
             st.info("確定着順データがありません。「📊 AI検証」タブでレース結果を取得すると自動集計されます。")
         else:
-            b_all["場名"] = b_all["開催"].astype(str).str.replace(r"^\d+回|\d+日$", "", regex=True)
+            b_all["場名"] = b_all["開催"].astype(str).apply(lambda s: next((p for p in ("東京", "京都", "中山", "阪神", "中京", "新潟", "福島", "小倉", "札幌", "函館") if p in s), s))
             b_all["馬場区分"] = b_all["レース"].astype(str).apply(lambda s: "芝" if "芝" in s else "ダート")
             c_p, c_s = st.columns([1.4, 1.2])
             sel_p = c_p.radio("場", tuple(b_all["場名"].unique()), horizontal=True, label_visibility="collapsed", key="bb_p")
