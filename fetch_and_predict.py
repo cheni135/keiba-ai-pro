@@ -19,7 +19,7 @@ ng_words = {"データ","タイム","コース","ニュース","コラム","メ�
 import subprocess
 t_odds = int(subprocess.check_output(["git", "log", "-1", "--format=%ct", "odds_raw.txt"]).decode().strip() or 0)
 t_sp = int(subprocess.check_output(["git", "log", "-1", "--format=%ct", "sp_raw.txt"]).decode().strip() or 0)
-if t_odds > t_sp and (t_odds - t_sp) < 300 and os.path.exists("odds_raw.txt"):
+if t_odds > t_sp and (t_odds - t_sp) < 1:
 
 
 
