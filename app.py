@@ -153,8 +153,7 @@ div[data-testid="stHorizontalBlock"]:has(.nk-row-box) button{width:32px !importa
             u_no = int(r["馬番"])
             cur_my = smk.get(u_no, "")
             ai_m = r["AI印"] if r["AI印"] else "--"
-            c_no, c_my, c_ai, c_info = st.columns(c_no, c_my, c_ai, c_info = st.columns(4)
-)
+            c_no, c_my, c_ai, c_info = st.columns(4)
             with c_no:
                 st.markdown(f'<div class="nk-row-box waku-box w{int(r.get("枠番",1))}" style="margin:0;width:28px;height:32px;line-height:32px;font-size:13px;">{u_no}</div>', unsafe_allow_html=True)
             with c_my:
