@@ -315,7 +315,8 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
         avg = round(float(rk["能力スコア"].mean()), 1)
         for r in rk.to_dict("records"):
             mk_s = f"**{r['AI印']}** " if r["AI印"] else ""
-            st.info(f"{mk_s}**{int(r['馬番'])} {r['馬名']}**（単勝{r['単勝オッズ']}倍 / 勝率{r['AI予測勝率']}% / 期待値{r['期待値スコア']}%）\n\n{ai_comment(r, avg)}")        w_hex = {1:"#f8fafc", 2:"#0f172a", 3:"#ef4444", 4:"#3b82f6", 5:"#eab308", 6:"#22c55e", 7:"#f97316", 8:"#ec4899"}
+            st.info(f"{mk_s}**{int(r['馬番'])} {r['馬名']}**（単勝{r['単勝オッズ']}倍 / 勝率{r['AI予測勝率']}% / 期待値{r['期待値スコア']}%）\n\n{ai_comment(r, avg)}")
+            w_hex = {1:"#f8fafc", 2:"#0f172a", 3:"#ef4444", 4:"#3b82f6", 5:"#eab308", 6:"#22c55e", 7:"#f97316", 8:"#ec4899"}
         b_css = "".join(f"div[data-testid='stButtonGroup'] button:nth-of-type({i+1}){{border-left:5px solid {w_hex.get(int(r.get('枠番',1)),'#f8fafc')} !important;}}" for i, r in enumerate(rk.to_dict("records")))
         st.markdown(f"<style>div[data-testid='stButtonGroup'] div[role='radiogroup']{{display:grid !important;grid-template-columns:1fr 1fr !important;gap:5px !important;}}div[data-testid='stButtonGroup'] button{{background:#1e293b !important;color:#f8fafc !important;border:1px solid #334155 !important;border-radius:6px !important;font-size:12px !important;padding:6px 8px !important;width:100% !important;justify-content:flex-start !important;overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important;}}div[data-testid='stButtonGroup'] button[kind='pillsActive']{{background:#0284c7 !important;border-top-color:#38bdf8 !important;border-right-color:#38bdf8 !important;border-bottom-color:#38bdf8 !important;font-weight:bold !important;}}{b_css}</style>", unsafe_allow_html=True)
         rk["_lbl"] = rk.apply(lambda x: f"{int(x['馬番'])} {x['馬名']}", axis=1)
