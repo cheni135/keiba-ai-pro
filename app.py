@@ -106,7 +106,8 @@ elif "馬場傾向" in page_mode:
     st.bar_chart(pd.DataFrame({"枠区分": ("1〜2枠", "3〜4枠", "5〜6枠", "7〜8枠"), "3着内率(%)": (28.5, 24.0, 19.5, 16.0) if bs == "芝コース" else (18.0, 21.5, 25.0, 27.5)}).set_index("枠区分"))
     tdf = sdf.query(f"馬場 == '{'芝' if bs == '芝コース' else 'ダート'}'")
     for r in tdf.query("枠番 <= 4 and 脚質 in ('逃げ','先行')" if bs == "芝コース" else "枠番 >= 5 and 脚質 in ('逃げ','先行')").sort_values("能力スコア", ascending=False).head(8).to_dict("records"):
-        st.markdown(f"""<div class="nk-card"><div style="display:flex;align-items:center;"><div class="waku-box w{int(r['枠番'])}">{int(r['馬番'])}</div><div><div style="font-size:11px;color:#9ca3af;">{r['レース']}</div><b>{r['馬名']}</b> ({r['脚質']})</div></div><div class="odds-txt">{r['単勝オッズ']}倍</div></div>""", unsafe_allow_html=True)else:
+        st.markdown(f"""<div class="nk-card"><div style="display:flex;align-items:center;"><div class="waku-box w{int(r['枠番'])}">{int(r['馬番'])}</div><div><div style="font-size:11px;color:#9ca3af;">{r['レース']}</div><b>{r['馬名']}</b> ({r['脚質']})</div></div><div class="odds-txt">{r['単勝オッズ']}倍</div></div>""", unsafe_allow_html=True)
+        else:
     k_opts = list(all_df["開催"].unique())
     sk = st.segmented_control("開催場", k_opts, default=k_opts[0], label_visibility="collapsed") or k_opts[0]
     sdf = all_df.query("開催 == @sk").sort_values("レース番号")
