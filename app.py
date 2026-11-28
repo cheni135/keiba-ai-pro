@@ -122,14 +122,60 @@ if "勝負レース" in page_mode:
                st.session_state["jump_rkey"] = f"{int(r['レース番号'])}R"
                st.rerun()
 
-elif "馬場傾向" in page_mode:
-    sk = st.selectbox("開催場を選択", tuple(all_df["開催"].unique()))
-    sdf = all_df.query("開催 == @sk").sort_values("レース番号")
-    bs = st.radio("コース", ("芝コース", "ダートコース"), horizontal=True)
-    st.bar_chart(pd.DataFrame({"枠区分": ("1〜2枠", "3〜4枠", "5〜6枠", "7〜8枠"), "3着内率(%)": (28.5, 24.0, 19.5, 16.0) if bs == "芝コース" else (18.0, 21.5, 25.0, 27.5)}).set_index("枠区分"))
-    tdf = sdf.query(f"馬場 == '{'芝' if bs == '芝コース' else 'ダート'}'")
-    for r in tdf.query("枠番 <= 4 and 脚質 in ('逃げ','先行')" if bs == "芝コース" else "枠番 >= 5 and 脚質 in ('逃げ','先行')").sort_values("能力スコア", ascending=False).head(8).to_dict("records"):
-        st.markdown(f"""<div class="nk-card"><div style="display:flex;align-items:center;"><div class="waku-box w{int(r['枠番'])}">{int(r['馬番'])}</div><div><div style="font-size:11px;color:#9ca3af;">{r['レース']}</div><b>{r['馬名']}</b> ({r['脚質']})</div></div><div class="odds-txt">{r['単勝オッズ']}倍</div></div>""", unsafe_allow_html=True)
+    elif "馬場傾向" in page_mode:
+        b_all = pd.read_csv("history_races.csv", encoding="utf-8-sig") if os.path.exists("history_races.csv") else pd.DataFrame()
+        cur_b = all_df[all_df["実着順"] > 0].copy() if "実着順" in all_df.columns else pd.DataFrame()
+        if not cur_b.empty:
+            b_all = pd.concat([b_all, cur_b], ignore_index=True).drop_duplicates(subset=["開催", "レース番号", "馬番"], keep="last") if not b_all.empty else cur_b
+        if b_all.empty:
+            st.info("確定着順データがありません。「📊 AI検証」タブでレース結果を取得すると自動集計されます。")
+        else:
+            b_all["場名"] = b_all["開催"].astype(str).str.replace(r"^\d+回|\d+日$", "", regex=True)
+            b_all["馬場区分"] = b_all["レース"].astype(str).apply(lambda s: "芝" if "芝" in s else "ダート")
+            c_p, c_s = st.columns([1.4, 1.2])
+            sel_p = c_p.radio("場", tuple(b_all["場名"].unique()), horizontal=True, label_visibility="collapsed", key="bb_p")
+            sel_s = c_s.radio("馬場", ("芝", "ダート"), horizontal=True, label_visibility="collapsed", key="bb_s")
+            sub = b_all[(b_all["場名"] == sel_p) & (b_all["馬場区分"] == sel_s)].copy()
+            if sub.empty:
+                st.caption("該当コースの結果データがまだありません。")
+            else:
+                k_uniq = list(dict.fromkeys(sub["開催"]))
+                cur_ks = k_uniq[-2:] if len(k_uniq) >= 3 else k_uniq[-1:]
+                prev_ks = [k for k in k_uniq if k not in cur_ks]
+                df_now = sub[sub["開催"].isin(cur_ks)].copy()
+                df_old = sub[sub["開催"].isin(prev_ks)].copy() if prev_ks else sub.copy()
+                old_lbl = "先週" if prev_ks else "累計"
+                df_now["枠ゾーン"] = pd.cut(df_now["枠番"], [0, 2, 5, 8], labels=["内(1-2枠)", "中(3-5枠)", "外(6-8枠)"])
+                df_old["枠ゾーン"] = pd.cut(df_old["枠番"], [0, 2, 5, 8], labels=["内(1-2枠)", "中(3-5枠)", "外(6-8枠)"])
+                best_w = max(["内(1-2枠)", "中(3-5枠)", "外(6-8枠)"], key=lambda z: df_now[df_now["枠ゾーン"]==z]["実着順"].le(3).mean() if not df_now[df_now["枠ゾーン"]==z].empty else -1)
+                best_k = max(["逃げ", "先行", "差し", "追込"], key=lambda q: df_now[df_now["脚質"]==q]["実着順"].le(3).mean() if not df_now[df_now["脚質"]==q].empty else -1)
+                bw_r = round(df_now[df_now["枠ゾーン"]==best_w]["実着順"].le(3).mean()*100, 1)
+                bk_r = round(df_now[df_now["脚質"]==best_k]["実着順"].le(3).mean()*100, 1)
+                st.markdown(f"<div style='background:#1e293b;border-left:4px solid #38bdf8;padding:8px 10px;border-radius:6px;margin-bottom:8px;font-size:13px;color:#f8fafc;'><b>🔄 今週トレンド：</b><span style='color:#fbbf24;font-weight:bold;'>{best_w}({bw_r}%)</span> × <span style='color:#f87171;font-weight:bold;'>{best_k}({bk_r}%)</span></div>", unsafe_allow_html=True)
+                st.markdown("#### ① 枠順バイアス（先週 vs 今週）")
+                wh = ""
+                for z in ["内(1-2枠)", "中(3-5枠)", "外(6-8枠)"]:
+                    n_s, o_s = df_now[df_now["枠ゾーン"]==z], df_old[df_old["枠ゾーン"]==z]
+                    nf = round(n_s["実着順"].le(3).mean()*100, 1) if not n_s.empty else 0.0
+                    of = round(o_s["実着順"].le(3).mean()*100, 1) if not o_s.empty else 0.0
+                    nr = round((n_s["実着順"].eq(1)*n_s["単勝オッズ"]).sum()/len(n_s)*100, 1) if not n_s.empty else 0.0
+                    or_ = round((o_s["実着順"].eq(1)*o_s["単勝オッズ"]).sum()/len(o_s)*100, 1) if not o_s.empty else 0.0
+                    cf = "#f87171" if nf > of else "#f8fafc"
+                    cr = "#f87171" if nr >= 100 else "#cbd5e1"
+                    wh += f"<tr style='border-bottom:1px solid #334155;text-align:right;'><td style='text-align:left;font-weight:bold;color:#38bdf8;padding:6px 6px;'>{z}</td><td>{of}%</td><td style='color:{cf};font-weight:bold;'>{nf}%</td><td>{or_}%</td><td style='color:{cr};font-weight:bold;padding-right:6px;'>{nr}%</td></tr>"
+                st.markdown(f"<table style='width:100%;border-collapse:collapse;background:#1e293b;color:#f8fafc;font-size:12px;border-radius:8px;overflow:hidden;'><thead><tr style='background:#0f172a;color:#94a3b8;text-align:right;'><th style='text-align:left;padding:6px 6px;'>枠ゾーン</th><th>{old_lbl}複</th><th>今週複</th><th>{old_lbl}単回</th><th style='padding-right:6px;'>今週単回</th></tr></thead><tbody>{wh}</tbody></table>", unsafe_allow_html=True)
+                st.markdown("#### ② 脚質バイアス（先週 vs 今週）")
+                kh = ""
+                for q in ["逃げ", "先行", "差し", "追込"]:
+                    n_s, o_s = df_now[df_now["脚質"]==q], df_old[df_old["脚質"]==q]
+                    nf = round(n_s["実着順"].le(3).mean()*100, 1) if not n_s.empty else 0.0
+                    of = round(o_s["実着順"].le(3).mean()*100, 1) if not o_s.empty else 0.0
+                    nr = round((n_s["実着順"].eq(1)*n_s["単勝オッズ"]).sum()/len(n_s)*100, 1) if not n_s.empty else 0.0
+                    or_ = round((o_s["実着順"].eq(1)*o_s["単勝オッズ"]).sum()/len(o_s)*100, 1) if not o_s.empty else 0.0
+                    cf = "#f87171" if nf > of else "#f8fafc"
+                    cr = "#f87171" if nr >= 100 else "#cbd5e1"
+                    kh += f"<tr style='border-bottom:1px solid #334155;text-align:right;'><td style='text-align:left;font-weight:bold;color:#38bdf8;padding:6px 6px;'>{q}</td><td>{of}%</td><td style='color:{cf};font-weight:bold;'>{nf}%</td><td>{or_}%</td><td style='color:{cr};font-weight:bold;padding-right:6px;'>{nr}%</td></tr>"
+                st.markdown(f"<table style='width:100%;border-collapse:collapse;background:#1e293b;color:#f8fafc;font-size:12px;border-radius:8px;overflow:hidden;'><thead><tr style='background:#0f172a;color:#94a3b8;text-align:right;'><th style='text-align:left;padding:6px 6px;'>脚質</th><th>{old_lbl}複</th><th>今週複</th><th>{old_lbl}単回</th><th style='padding-right:6px;'>今週単回</th></tr></thead><tbody>{kh}</tbody></table>", unsafe_allow_html=True)
 elif "AI検証" in page_mode:
     st.link_button("🏁 本日のレース結果を取得 (約15秒)", "shortcuts://run-shortcut?name=%E7%AB%B6%E9%A6%AC%E7%B5%90%E6%9E%9C%E6%9B%B4%E6%96%B0", use_container_width=True)
     st.subheader("📊 能力スコア・予測勝率・実着順 三者比較分析")
