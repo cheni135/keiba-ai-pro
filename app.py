@@ -268,74 +268,39 @@ else:
     rdf = rdf.assign(AI印=tuple(amap.get(int(u), "") for u in rdf["馬番"]), My印=tuple(smk.get(int(u), "") for u in rdf["馬番"]), Myメモ=tuple(smm.get(int(u), "") for u in rdf["馬番"]))
 
     if "出馬表" in page_mode:
-        sort_by = st.radio("並べ替え", ("馬番順", "AI能力順", "期待値順", "オッズ人気順"), horizontal=True)
-        if sort_by == "AI能力順": rdf = rdf.sort_values("能力スコア", ascending=False)
-        elif sort_by == "期待値順": rdf = rdf.sort_values("期待値スコア", ascending=False)
-        elif sort_by == "オッズ人気順": rdf = rdf.sort_values("単勝オッズ", ascending=True)
-
-        st.markdown("""<style>
-div[data-testid="stHorizontalBlock"]:has(.my-out-btn){display:flex !important;flex-direction:row !important;flex-wrap:nowrap !important;align-items:center !important;gap:8px !important;margin-bottom:8px !important;width:100% !important;}
-div[data-testid="stHorizontalBlock"]:has(.my-out-btn) > div[data-testid="stColumn"]{min-width:0 !important;padding:0 !important;}
-div[data-testid="stHorizontalBlock"]:has(.my-out-btn) > div[data-testid="stColumn"]:nth-child(1){flex:0 0 42px !important;width:42px !important;}
-div[data-testid="stHorizontalBlock"]:has(.my-out-btn) > div[data-testid="stColumn"]:nth-child(2){flex:1 1 auto !important;}
-div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !important;height:48px !important;min-height:48px !important;padding:0 !important;margin:0 !important;border-radius:10px !important;font-size:17px !important;font-weight:bold !important;background:#1e293b !important;color:#fbbf24 !important;border:2px solid #fbbf24 !important;}
-.ai-sq{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;font-weight:bold;font-size:13px;border:1.5px solid #475569;color:#94a3b8;background:#0f172a;margin-right:8px;flex-shrink:0;}
-.ai-◎{border-color:#ef4444;color:#ef4444;background:rgba(239,68,68,.15);}
-.ai-○{border-color:#3b82f6;color:#60a5fa;background:rgba(59,130,246,.15);}
-.ai-▲{border-color:#22c55e;color:#4ade80;background:rgba(34,197,94,.15);}
-.ai-△{border-color:#eab308;color:#facc15;background:rgba(234,179,8,.15);}
-.ai-☆{border-color:#a855f7;color:#c084fc;background:rgba(168,85,247,.15);}
-</style>""", unsafe_allow_html=True)
-
-        mk_cycle = ["", "◎", "○", "▲", "△", "☆", "✓", "消"]
+        st.markdown("<style>div.st-key-all_h_sort,div.st-key-all_h_sort>div,div.st-key-all_h_sort div[data-testid='stButtonGroup']{width:100% !important;}div.st-key-all_h_sort div[role='radiogroup']{display:grid !important;grid-template-columns:repeat(4,1fr) !important;width:100% !important;background:#0f172a !important;padding:4px !important;border-radius:8px !important;border:1px solid #334155 !important;gap:4px !important;margin-bottom:8px !important;}div.st-key-all_h_sort button{width:100% !important;min-width:0 !important;background:transparent !important;color:#94a3b8 !important;border:1px solid transparent !important;border-radius:6px !important;padding:6px 0 !important;font-size:11px !important;font-weight:bold !important;white-space:nowrap !important;justify-content:center !important;}div.st-key-all_h_sort button[kind='segmented_controlActive'],div.st-key-all_h_sort button[aria-pressed='true'],div.st-key-all_h_sort button[aria-checked='true']{background:#0284c7 !important;border-color:#38bdf8 !important;color:#ffffff !important;box-shadow:0 0 6px rgba(56,189,248,0.4) !important;}div[data-testid='stHorizontalBlock']:has(span.my-mk-anchor){display:flex !important;flex-direction:row !important;flex-wrap:nowrap !important;align-items:stretch !important;gap:6px !important;margin-bottom:7px !important;}div[data-testid='stHorizontalBlock']:has(span.my-mk-anchor)>div:nth-child(1){flex:0 0 42px !important;width:42px !important;min-width:42px !important;max-width:42px !important;}div[data-testid='stHorizontalBlock']:has(span.my-mk-anchor)>div:nth-child(2){flex:1 1 auto !important;min-width:0 !important;}div[data-testid='stHorizontalBlock']:has(span.my-mk-anchor) button{height:100% !important;min-height:46px !important;padding:0 !important;background:#1e293b !important;border:1px solid #334155 !important;border-radius:8px !important;color:#fbbf24 !important;font-size:16px !important;font-weight:bold !important;}summary.ai-det-sum{list-style:none;cursor:pointer;font-size:11px;color:#38bdf8;font-weight:bold;padding:5px 0 1px 0;user-select:none;}summary.ai-det-sum::-webkit-details-marker{display:none;}</style>", unsafe_allow_html=True)
+        a_so = st.segmented_control("一覧並替", ["馬番順", "能力順", "期待値", "人気順"], default="馬番順", label_visibility="collapsed", key="all_h_sort") or "馬番順"
+        rdf["_pop"] = rdf["単勝オッズ"].rank(method="min", ascending=True).astype(int)
+        avg = float(rdf["能力スコア"].mean())
+        rdf = rdf.sort_values("馬番" if a_so=="馬番順" else ("能力スコア" if a_so=="能力順" else ("期待値スコア" if a_so=="期待値" else "単勝オッズ")), ascending=(a_so in ("馬番順", "人気順"))).copy()
+        w_hex_a = {1:"#f8fafc", 2:"#0f172a", 3:"#ef4444", 4:"#3b82f6", 5:"#eab308", 6:"#22c55e", 7:"#f97316", 8:"#ec4899"}
+        mk_cycle = ["", "◎", "○", "▲", "△", "☆", "✓"]
         for r in rdf.to_dict("records"):
             u_no = int(r["馬番"])
             cur_my = smk.get(u_no, "")
-            ai_m = r["AI印"] if r["AI印"] else "--"
-            c_my, c_card = st.columns(2)
-            with c_my:
-                st.markdown('<span class="my-out-btn" style="display:none;"></span>', unsafe_allow_html=True)
-                if st.button(cur_my if cur_my else "--", key=f"btn_mk_{sk}_{sr}_{u_no}"):
-                    nxt_m = mk_cycle[(mk_cycle.index(cur_my) + 1) % len(mk_cycle)] if cur_my in mk_cycle else "◎"
-                    op = pdf.query("not (開催 == @sk and レース == @sr and 馬番 == @u_no)")
-                    nr = [{"開催": sk, "レース": sr, "馬番": u_no, "My印": nxt_m, "Myメモ": ""}] if nxt_m else []
-                    upd = pd.concat([op, pd.DataFrame(nr, columns=["開催", "レース", "馬番", "My印", "Myメモ"])], ignore_index=True)
-                    st.session_state["my_preds_df"] = upd
-                    save_csv("my_predictions.csv", upd, f"Save {sk} {sr} #{u_no}")
-                    st.rerun()
-            with c_card:
-                nk_url = bytes.fromhex("68747470733a2f2f64622e73702e6e65746b656962612e636f6d2f3f7069643d686f7273655f6c69737426776f72643d").decode() + __import__("urllib.parse").parse.quote(str(r["馬名"]))
-                st.markdown(f"""<div class="nk-card" style="margin-bottom:0;"><div style="display:flex;align-items:center;"><div class="waku-box w{int(r.get('枠番',1))}">{u_no}</div><div class="ai-sq ai-{ai_m}">{ai_m}</div><div><div><a href="{nk_url}" target="_blank" style="color:#fff;font-weight:bold;text-decoration:none;">{r['馬名']} 🔗</a></div><div style="font-size:12px;color:#9ca3af;">{r.get('性齢','')} ｜ {r['騎手']} {r['斤量']} ｜ {r['脚質']}</div></div></div><div style="text-align:right;"><div class="odds-txt">{r['単勝オッズ']}倍</div><span class="score-pill">能力 {r['能力スコア']}</span></div></div>""", unsafe_allow_html=True)
-        rk = rdf.copy(); avg = float(rk["能力スコア"].mean())
-        st.markdown("#### 全頭AI評価一覧")
-        st.markdown("<style>div.st-key-all_h_sort,div.st-key-all_h_sort>div,div.st-key-all_h_sort div[data-testid='stButtonGroup']{width:100% !important;}div.st-key-all_h_sort div[role='radiogroup']{display:grid !important;grid-template-columns:repeat(4,1fr) !important;width:100% !important;background:#0f172a !important;padding:4px !important;border-radius:8px !important;border:1px solid #334155 !important;gap:4px !important;margin-bottom:8px !important;}div.st-key-all_h_sort button{width:100% !important;min-width:0 !important;background:transparent !important;color:#94a3b8 !important;border:1px solid transparent !important;border-radius:6px !important;padding:6px 0 !important;font-size:11px !important;font-weight:bold !important;white-space:nowrap !important;justify-content:center !important;}div.st-key-all_h_sort button[kind='segmented_controlActive'],div.st-key-all_h_sort button[aria-pressed='true'],div.st-key-all_h_sort button[aria-checked='true']{background:#0284c7 !important;border-color:#38bdf8 !important;color:#ffffff !important;box-shadow:0 0 6px rgba(56,189,248,0.4) !important;}</style>", unsafe_allow_html=True)
-        a_so = st.segmented_control("一覧並替", ["馬番順", "能力順", "期待値", "人気順"], default="馬番順", label_visibility="collapsed", key="all_h_sort") or "馬番順"
-        rk["_pop"] = rk["単勝オッズ"].rank(method="min", ascending=True).astype(int)
-        rk_a = rk.sort_values("馬番" if a_so=="馬番順" else ("能力スコア" if a_so=="能力順" else ("期待値スコア" if a_so=="期待値" else "単勝オッズ")), ascending=(a_so in ("馬番順", "人気順"))).copy()
-        w_hex_a = {1:"#f8fafc", 2:"#0f172a", 3:"#ef4444", 4:"#3b82f6", 5:"#eab308", 6:"#22c55e", 7:"#f97316", 8:"#ec4899"}
-        for r in rk_a.to_dict("records"):
             wc = w_hex_a.get(int(r.get("枠番", 1)), "#f8fafc")
-            my_m = str(smk.get(int(r["馬番"]), ""))
             mk_t = str(r.get("AI印", r.get("印", "")))
-            mk_b = (f"<span style='background:#0284c7;color:#ffffff;font-weight:bold;font-size:10px;padding:1px 5px;border-radius:4px;margin-left:5px;'>自 {my_m}</span>" if my_m in ("◎","○","▲","△","☆","✓") else "") + (f"<span style='background:#fbbf24;color:#0f172a;font-weight:bold;font-size:10px;padding:1px 5px;border-radius:4px;margin-left:4px;'>AI {mk_t}</span>" if mk_t in ("◎","○","▲","△","☆") else "")
+            mk_b = f"<span style='background:#fbbf24;color:#0f172a;font-weight:bold;font-size:10px;padding:1px 5px;border-radius:4px;margin-left:5px;'>AI {mk_t}</span>" if mk_t in ("◎","○","▲","△","☆") else ""
             ev_a = float(r.get("期待値スコア", 0)); ev_ca = "#fbbf24" if ev_a >= 100 else "#cbd5e1"; pop_n = int(r["_pop"])
             top_r = f"<span style='color:#38bdf8;'>勝率 {float(r['AI予測勝率']):.1f}%</span>" if a_so=="馬番順" else (f"<span style='color:#fbbf24;'>能力 {float(r['能力スコア']):.1f}点</span>" if a_so=="能力順" else (f"<span style='color:{ev_ca};'>期待値 {ev_a:.1f}%</span>" if a_so=="期待値" else f"<span style='color:#f87171;'>{pop_n}番人気 ({float(r['単勝オッズ']):.1f}倍)</span>"))
             sub_r = f"<span><b style='color:#e2e8f0;'>{pop_n}番人気</b></span><span>単勝 <b style='color:#f87171;'>{float(r['単勝オッズ']):.1f}倍</b></span><span>勝率 <b style='color:#38bdf8;'>{float(r['AI予測勝率']):.1f}%</b></span><span>能力 <b style='color:#fbbf24;'>{float(r['能力スコア']):.1f}</b></span><span>期待値 <b style='color:{ev_ca};'>{ev_a:.1f}%</b></span>"
             cmt = "<br>".join(f"<div style='margin-top:3px;'>{' '.join(f'<span style=\"display:inline-block;background:#0f172a;padding:2px 6px;border-radius:4px;margin:2px 4px 2px 0;\">{w}</span>' for w in seg.split('・'))}</div>" for seg in ai_comment(r, avg).replace("：", "\n").replace("／", "\n").splitlines() if seg.strip()).replace("【プラス】", "<span style='color:#4ade80;font-weight:bold;'>【プラス】</span>").replace("【マイナス】", "<span style='color:#fb7185;font-weight:bold;'>【マイナス】</span>")
-            st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-left:5px solid {wc};border-radius:8px;padding:10px 12px;margin-bottom:7px;'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;'><div style='display:flex;align-items:center;'><span class='waku-box w{int(r.get('枠番',1))}' style='margin-right:7px;'>{int(r['馬番'])}</span><span style='font-size:14px;font-weight:bold;color:#f8fafc;'>{r['馬名']}</span>{mk_b}</div><span style='font-size:12px;font-weight:bold;'>{top_r}</span></div><div style='display:flex;justify-content:space-between;font-size:10px;color:#94a3b8;background:#0f172a;padding:4px 6px;border-radius:5px;margin-bottom:6px;white-space:nowrap;'>{sub_r}</div><div style='font-size:11.5px;color:#cbd5e1;line-height:1.45;'>{cmt}</div></div>", unsafe_allow_html=True)
-        st.markdown("<style>div.st-key-g_h_sort,div.st-key-g_h_sort>div,div.st-key-g_h_sort div[data-testid='stButtonGroup']{width:100% !important;}div.st-key-g_h_sort div[role='radiogroup']{display:grid !important;grid-template-columns:repeat(4,1fr) !important;width:100% !important;background:#0f172a !important;padding:4px !important;border-radius:8px !important;border:1px solid #334155 !important;gap:4px !important;}div.st-key-g_h_sort button{width:100% !important;min-width:0 !important;background:transparent !important;color:#94a3b8 !important;border:1px solid transparent !important;border-radius:6px !important;padding:6px 0 !important;font-size:11px !important;font-weight:bold !important;white-space:nowrap !important;justify-content:center !important;}div.st-key-g_h_sort button:active{background:#1e3a8a !important;}div.st-key-g_h_sort button[kind='segmented_controlActive'],div.st-key-g_h_sort button[aria-pressed='true'],div.st-key-g_h_sort button[aria-checked='true']{background:#0284c7 !important;border-color:#38bdf8 !important;color:#ffffff !important;box-shadow:0 0 6px rgba(56,189,248,0.4) !important;}</style>", unsafe_allow_html=True)
-        g_so = st.segmented_control("内訳並替", ["馬番順", "能力順", "期待値", "人気順"], default="馬番順", label_visibility="collapsed", key="g_h_sort") or "馬番順"
-        rk_g = rk.sort_values("馬番" if g_so=="馬番順" else ("能力スコア" if g_so=="能力順" else ("期待値スコア" if g_so=="期待値" else "単勝オッズ")), ascending=(g_so in ("馬番順", "人気順"))).copy()
-        w_hex = {1:"#f8fafc", 2:"#0f172a", 3:"#ef4444", 4:"#3b82f6", 5:"#eab308", 6:"#22c55e", 7:"#f97316", 8:"#ec4899"}
-        b_css = "".join(f"div.st-key-g_h_pill button:nth-of-type({i+1}){{border-left:5px solid {w_hex.get(int(r.get('枠番',1)),'#f8fafc')} !important;}}" for i, r in enumerate(rk_g.to_dict("records")))
-        st.markdown(f"<style>div.st-key-g_h_pill div[role='radiogroup']{{display:grid !important;grid-template-columns:1fr 1fr !important;gap:5px !important;}}div.st-key-g_h_pill button{{background:#1e293b !important;color:#f8fafc !important;border:1px solid #334155 !important;border-radius:6px !important;font-size:12px !important;padding:6px 8px !important;width:100% !important;justify-content:flex-start !important;overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important;}}div.st-key-g_h_pill button[kind='pillsActive']{{background:#0284c7 !important;border-top-color:#38bdf8 !important;border-right-color:#38bdf8 !important;border-bottom-color:#38bdf8 !important;font-weight:bold !important;}}{b_css}</style>", unsafe_allow_html=True)
-        rk_g["_lbl"] = rk_g.apply(lambda x: f"{int(x['馬番'])} {x['馬名']}", axis=1)
-        sh_lbl = st.pills("詳細内訳を見る馬を選択", rk_g["_lbl"].tolist(), default=next(iter(rk_g["_lbl"]), ""), key="g_h_pill") or next(iter(rk_g["_lbl"]), "")
-        inf = next(iter(rk_g[rk_g["_lbl"] == sh_lbl].to_dict("records")), {})
-        items_v = [("1. 着順着差", float(inf.get("着順着差指数",0))), ("2. ラップ", float(inf.get("ラップタイム指数",0))), ("3. 騎手勝負度", float(inf.get("厩舎・騎手勝負度",0))), ("4. 枠順展開", float(inf.get("枠順・展開適合",0))), ("5. 調教", float(inf.get("調教指数",0))), ("6. 血統", float(inf.get("血統適性",0)))]
-        bars_h = "".join(f"<div style='margin-bottom:7px;'><div style='display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px;'><span style='color:#cbd5e1;'>{k}</span><span style='color:#38bdf8;font-weight:bold;'>{v:.1f}点</span></div><div style='background:#0f172a;border-radius:4px;height:8px;overflow:hidden;'><div style='background:linear-gradient(90deg,#0284c7,#38bdf8);width:{min(100,max(0,v))}%;height:100%;border-radius:4px;'></div></div></div>" for k, v in items_v)
-        ev_v = float(inf.get("期待値スコア", 0)); ev_c = "#fbbf24" if ev_v >= 100 else "#cbd5e1"
-        st.markdown(f"<div style='background:#1e293b;padding:12px 14px;border-radius:10px;border:1px solid #334155;margin-top:6px;'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;'><div style='display:flex;align-items:center;gap:8px;'><span class='waku-box w{int(inf.get('枠番',1))}'>{int(inf.get('馬番',0))}</span><span style='font-size:15px;font-weight:bold;color:#f8fafc;'>{inf.get('馬名','')}</span></div><span style='font-size:13px;color:#fbbf24;font-weight:bold;'>総合 {float(inf.get('能力スコア',0)):.1f}点</span></div><div style='display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;background:#0f172a;padding:7px 8px;border-radius:6px;margin-bottom:10px;text-align:center;'><div><div style='font-size:10px;color:#94a3b8;'>単勝オッズ</div><div style='font-size:13px;font-weight:bold;color:#f87171;'>{float(inf.get('単勝オッズ',0)):.1f}倍</div></div><div style='border-left:1px solid #1e293b;border-right:1px solid #1e293b;'><div style='font-size:10px;color:#94a3b8;'>AI予測勝率</div><div style='font-size:13px;font-weight:bold;color:#38bdf8;'>{float(inf.get('AI予測勝率',0)):.1f}%</div></div><div><div style='font-size:10px;color:#94a3b8;'>期待値</div><div style='font-size:13px;font-weight:bold;color:{ev_c};'>{ev_v:.1f}%</div></div></div>{bars_h}</div>", unsafe_allow_html=True)
+            items_v = [("1. 着順着差", float(r.get("着順着差指数",0))), ("2. ラップ", float(r.get("ラップタイム指数",0))), ("3. 騎手勝負度", float(r.get("厩舎・騎手勝負度",0))), ("4. 枠順展開", float(r.get("枠順・展開適合",0))), ("5. 調教", float(r.get("調教指数",0))), ("6. 血統", float(r.get("血統適性",0)))]
+            bars_h = "".join(f"<div style='margin-bottom:5px;'><div style='display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;'><span style='color:#cbd5e1;'>{k}</span><span style='color:#38bdf8;font-weight:bold;'>{v:.1f}点</span></div><div style='background:#0f172a;border-radius:4px;height:6px;overflow:hidden;'><div style='background:linear-gradient(90deg,#0284c7,#38bdf8);width:{min(100,max(0,v))}%;height:100%;border-radius:4px;'></div></div></div>" for k, v in items_v)
+            meta_s = f"{r.get('性齢','')} ｜ {r.get('騎手','')} {r.get('斤量','')} ｜ {r.get('脚質','')}"
+            c_my, c_card = st.columns([1, 7])
+            with c_my:
+                st.markdown('<span class="my-mk-anchor"></span>', unsafe_allow_html=True)
+                if st.button(cur_my if cur_my else "－", key=f"mk_{sk}_{sr}_{u_no}", use_container_width=True):
+                    nxt_m = mk_cycle[(mk_cycle.index(cur_my) + 1) % len(mk_cycle)] if cur_my in mk_cycle else "◎"
+                    op = pdf.query("not (開催 == @sk and レース == @sr and 馬番 == @u_no)")
+                    nr = [{"開催": sk, "レース": sr, "馬番": u_no, "馬名": r["馬名"], "印": nxt_m}] if nxt_m else []
+                    upd = pd.concat([op, pd.DataFrame(nr)], ignore_index=True) if nr else op
+                    st.session_state["my_predictions"] = upd
+                    save_csv("my_predictions.csv", upd)
+                    st.rerun()
+            with c_card:
+                st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-left:5px solid {wc};border-radius:8px;padding:9px 11px;'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;'><div style='display:flex;align-items:center;min-width:0;'><span class='waku-box w{int(r.get('枠番',1))}' style='margin-right:6px;flex-shrink:0;'>{u_no}</span><span style='font-size:14px;font-weight:bold;color:#f8fafc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>{r['馬名']}</span>{mk_b}</div><span style='font-size:12px;font-weight:bold;flex-shrink:0;margin-left:4px;'>{top_r}</span></div><div style='font-size:11px;color:#94a3b8;margin-bottom:5px;'>{meta_s}</div><div style='display:flex;justify-content:space-between;font-size:10px;color:#94a3b8;background:#0f172a;padding:4px 6px;border-radius:5px;margin-bottom:5px;white-space:nowrap;'>{sub_r}</div><div style='font-size:11px;color:#cbd5e1;line-height:1.4;'>{cmt}</div><details style='margin-top:5px;border-top:1px solid #334155;padding-top:4px;'><summary class='ai-det-sum'>▾ 6項目スコア内訳を展開</summary><div style='padding-top:6px;'>{bars_h}</div></details></div>", unsafe_allow_html=True)
 
     elif "買い目" in page_mode:
         c_bt, c_fm = st.columns([1.4, 1.6])
