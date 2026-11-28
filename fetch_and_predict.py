@@ -101,6 +101,11 @@ if os.path.exists("target_kaisai.txt"):
 
 
         flat = re.sub(r'\s+', ' ', html_part).strip()
+        wt_m = re.search(r"天気[：:]\s*(晴|曇|雨|小雨|雪|小雪)", flat)
+        st_m = re.search(r"馬場[：:]\s*(良|稍重|重|不良)", flat)
+        wt_val = wt_m.group(1) if wt_m else "晴"
+        st_val = st_m.group(1) if st_m else "良"
+
         c_idx = idx_b // 12
         rnum = (idx_b % 12) + 1
         if c_idx < len(k_codes):
@@ -158,7 +163,7 @@ if os.path.exists("target_kaisai.txt"):
             wk = jra_waku(tot, uma)
 
             nk = f"https:{s}{s}://netkeiba.com{s}?pid=horse_list&word=" + urllib.parse.quote(nm, encoding="euc-jp", errors="ignore")
-            rows.append({"開催":k_label,"競馬場":place,"レース番号":rnum,"レースクラス":rcls,"クラス補正":cbon,"レース":f"{rnum}R {r_name} ({baba}{dist}m)","馬場":baba,"距離":dist,"枠番":wk,"馬番":uma,"馬名":nm,"性齢":sa,"netkeiba":nk,"騎手":jk,"父馬":"主要血統","斤量":kn,"実オッズ":od_val})
+            rows.append({"開催":k_label,"競馬場":place,"レース番号":rnum,"レースクラス":rcls,"クラス補正":cbon,"レース":f"{rnum}R {r_name} ({baba}{dist}m)","馬場":baba,"距離":dist,"天候":wt_val,"馬場状態":st_val,"枠番":wk,"馬番":uma,"馬名":nm,"性齢":sa,"netkeiba":nk,"騎手":jk,"父馬":"主要血統","斤量":kn,"実オッズ":od_val})
 
 print("Parsed horses from rich text:", len(rows))
 
