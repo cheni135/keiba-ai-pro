@@ -237,9 +237,9 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
             h_cols[ci+1].markdown(f"<div style='text-align:center;font-size:11px;color:#38bdf8;font-weight:bold;'>{lbl}</div>", unsafe_allow_html=True)
         bdf = rdf.sort_values("馬番" if so_m == "枠番順" else ("単勝オッズ" if so_m == "人気順" else "能力スコア"), ascending=(so_m != "AI順"))
         for r in bdf.to_dict("records"):
+            u = int(r["馬番"])
             mk_txt = f"<div style='line-height:1.1;text-align:center;'><div style='color:#fbbf24;font-size:11px;'>{r['AI印'] or '－'}</div><div style='color:#38bdf8;font-size:11px;font-weight:bold;'>{r['My印'] or '－'}</div></div>"
             w = int(r.get("枠番", 1))
-            mk_txt = f"{r['AI印']}{r['My印']}" or "--"
             rc = st.columns([2.7] + [0.65] * cols_n)
             next(iter(rc)).markdown(f"<div style='display:flex;align-items:center;background:#1e293b;padding:5px 7px;border-radius:6px;margin-bottom:2px;'><div class='waku-box w{w}' style='margin-right:6px;'>{u}</div><div style='font-size:11px;color:#fbbf24;width:24px;'>{mk_txt}</div><div style='line-height:1.15;'><div style='font-size:13px;font-weight:bold;color:#f8fafc;'>{r['馬名']}</div><div style='font-size:11px;color:#f87171;'>{r['単勝オッズ']}倍 <span style='color:#94a3b8;'>(AI {r['能力スコア']})</span></div></div></div>", unsafe_allow_html=True)
             for ci in range(cols_n):
