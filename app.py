@@ -149,18 +149,30 @@ if not page_mode:
     for idx_e, (_, er) in enumerate(ev_top.iterrows()):
         with ecols[idx_e]:
             st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-top:3px solid #fbbf24;border-radius:8px;padding:8px 9px;margin-bottom:10px;'><div style='font-size:10.5px;color:#38bdf8;font-weight:bold;margin-bottom:3px;'>{er['開催']} {int(er['レース番号'])}R</div><div style='font-size:12px;font-weight:bold;color:#f8fafc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>{int(er['馬番'])} {er['馬名']}</div><div style='font-size:10.5px;color:#cbd5e1;margin-top:3px;'>単勝 <b style='color:#f87171;'>{float(er['単勝オッズ']):.1f}倍</b> / 期待 <b style='color:#fbbf24;'>{float(er['期待値スコア']):.0f}%</b></div></div>", unsafe_allow_html=True)
-    st.markdown("#### 開催レース一覧")
-    pl_list = list(dict.fromkeys(all_df["開催"]))
-    sel_hp = st.segmented_control("一覧場", pl_list, default=next(iter(pl_list), None), label_visibility="collapsed", key="hm_r_pl") or next(iter(pl_list), "")
-    rlist_df = all_df[all_df["開催"] == sel_hp].sort_values("レース番号")
-    rl_rows = ""
-    for rno, grp in rlist_df.groupby("レース番号", sort=True):
-        r0 = next(iter(grp.to_dict("records")), {})
-        h0 = next((x for x in grp.to_dict("records") if str(x.get("AI印", x.get("印", ""))) == "◎"), None)
-        hon_s = f"◎ {int(h0['馬番'])}{h0['馬名']}" if h0 else ""
-        rl_rows += f"<div style='display:flex;align-items:center;justify-content:space-between;padding:7px 8px;border-bottom:1px solid #334155;'><div style='display:flex;align-items:center;min-width:0;'><span style='background:#0284c7;color:#ffffff;font-weight:bold;font-size:11px;padding:3px 7px;border-radius:5px;margin-right:8px;flex-shrink:0;'>{int(rno)}R</span><div style='min-width:0;'><div style='font-size:12px;font-weight:bold;color:#f8fafc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>{r0.get('レース名','')}</div><div style='font-size:10px;color:#94a3b8;'>{r0.get('レース','')} {len(grp)}頭</div></div></div><span style='font-size:10.5px;color:#fbbf24;font-weight:bold;flex-shrink:0;margin-left:6px;'>{hon_s}</span></div>"
-    st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px 12px;margin-bottom:10px;'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;'><span style='font-size:13px;font-weight:bold;color:#f8fafc;'>{w_p}競馬場</span><span style='font-size:11px;color:#94a3b8;'>JRA馬場・気象</span></div><div style='display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;background:#0f172a;padding:7px;border-radius:6px;text-align:center;font-size:11px;margin-bottom:6px;'><div><div style='color:#94a3b8;font-size:10px;'>天候</div><b style='color:#38bdf8;font-size:13px;'>{wt_st}</b></div><div style='border-left:1px solid #1e293b;border-right:1px solid #1e293b;'><div style='color:#94a3b8;font-size:10px;'>芝状態</div><b style='color:#4ade80;font-size:13px;'>{s_st}</b></div><div><div style='color:#94a3b8;font-size:10px;'>ダート状態</div><b style='color:#fbbf24;font-size:13px;'>{d_st}</b></div></div><div style='display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#0f172a;padding:7px;border-radius:6px;font-size:11px;'><div><div style='color:#4ade80;font-weight:bold;margin-bottom:2px;'>芝 トレンド</div><div style='color:#cbd5e1;'>枠：<b style='color:#f8fafc;'>{sw_b}</b> / 脚：<b style='color:#f8fafc;'>{sk_b}</b></div></div><div style='border-left:1px solid #1e293b;padding-left:8px;'><div style='color:#fbbf24;font-weight:bold;margin-bottom:2px;'>ダート トレンド</div><div style='color:#cbd5e1;'>枠：<b style='color:#f8fafc;'>{dw_b}</b> / 脚：<b style='color:#f8fafc;'>{dk_b}</b></div></div></div></div>", unsafe_allow_html=True)
-elif "勝負レース" in page_mode:
+    st.markdown("#### 開催レース一覧（タップで出馬表へ）")
+    st.markdown("<style>div.st-key-hm_rgrid button{width:100% !important;background:#1e293b !important;color:#f8fafc !important;border:1px solid #334155 !important;border-left:4px solid #0284c7 !important;border-radius:7px !important;padding:6px 8px !important;margin-bottom:4px !important;font-size:11px !important;line-height:1.35 !important;text-align:left !important;justify-content:flex-start !important;}div.st-key-hm_rgrid button:hover{border-color:#38bdf8 !important;background:#0f172a !important;}</style>", unsafe_allow_html=True)
+    all_pls = list(dict.fromkeys(all_df.get("開催", ())))
+    latest_pls = tuple(dict.fromkeys(next((p for p in reversed(all_pls) if trk in str(p)), None) for trk in ("東京","京都","中山","阪神","中京","新潟","福島","小倉","札幌","函館")))
+    show_pls = [p for p in latest_pls if p] or all_pls
+    with st.container(key="hm_rgrid"):
+        rcols = st.columns(max(1, len(show_pls)))
+        for c_i, pl_nm in enumerate(show_pls):
+            with rcols[c_i]:
+                sub_p = all_df[all_df.get("開催") == pl_nm].sort_values("レース番号")
+                s_c = next((str(x.get("馬場状態","")) for x in sub_p.to_dict("records") if "芝" in str(x.get("馬場","")) and str(x.get("馬場状態","")) not in ("","nan")), "良")
+                d_c = next((str(x.get("馬場状態","")) for x in sub_p.to_dict("records") if "ダ" in str(x.get("馬場","")) and str(x.get("馬場状態","")) not in ("","nan")), "良")
+                st.markdown(f"<div style='background:#0f172a;border:1px solid #334155;border-radius:7px;padding:6px 8px;margin-bottom:6px;text-align:center;'><div style='font-size:12px;font-weight:bold;color:#f8fafc;'>{pl_nm}</div><div style='font-size:10px;color:#38bdf8;'>芝:{s_c} ／ ダ:{d_c}</div></div>", unsafe_allow_html=True)
+                for rno, grp in sub_p.groupby("レース番号", sort=True):
+                    r0 = next(iter(grp.to_dict("records")), {})
+                    r_str = str(r0.get("レース", ""))
+                    r_tit = r_str.split("R ", 1).__getitem__(-1).split(" (").__getitem__(0)
+                    r_crs = r_str.split("(").__getitem__(-1).replace(")", "") if "(" in r_str else ""
+                    if st.button(f"{int(rno)}R {r_tit}（{r_crs} {len(grp)}頭）", key=f"hm_go_{pl_nm}_{int(rno)}", use_container_width=True):
+                        st.session_state["jump_place"] = pl_nm
+                        st.session_state["jump_rno"] = int(rno)
+                        st.session_state["main_nav"] = "出馬表"
+                        st.rerun()
+
     st.subheader("🔥 本日のAI厳選 勝負レース（発走順）")
     picked = 0
     for idx_g, ((rno, ks, rn), g) in enumerate(all_df.sort_values(["レース番号", "開催"]).groupby(["レース番号", "開催", "レース"], sort=False)):
