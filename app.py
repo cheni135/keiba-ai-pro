@@ -162,31 +162,6 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
             with c_card:
                 st.markdown(f"""<div class="nk-card" style="margin-bottom:0;"><div style="display:flex;align-items:center;"><div class="waku-box w{int(r.get('枠番',1))}">{u_no}</div><div class="ai-sq ai-{ai_m}">{ai_m}</div><div><div><a href="{r['netkeiba']}" target="_blank" style="color:#fff;font-weight:bold;text-decoration:none;">{r['馬名']}</a></div><div style="font-size:12px;color:#9ca3af;">{r.get('性齢','')} ｜ {r['騎手']} {r['斤量']} ｜ {r['脚質']}</div></div></div><div style="text-align:right;"><div class="odds-txt">{r['単勝オッズ']}倍</div><span class="score-pill">能力 {r['能力スコア']}</span></div></div>""", unsafe_allow_html=True)
 
-        mk_cycle = ["", "◎", "○", "▲", "△", "☆", "✓", "消"]
-        for r in rdf.to_dict("records"):
-            u_no = int(r["馬番"])
-            cur_my = smk.get(u_no, "")
-            ai_m = r["AI印"] if r["AI印"] else "--"
-            c_no, c_my, c_ai, c_info = st.columns(4)
-            with c_no:
-                st.markdown(f'<div class="nk-row-box waku-box w{int(r.get("枠番",1))}" style="margin:0;width:30px;height:36px;line-height:36px;font-size:14px;">{u_no}</div>', unsafe_allow_html=True)
-            with c_my:
-                if st.button(cur_my if cur_my else "--", key=f"btn_mk_{sk}_{sr}_{u_no}"):
-                    nxt_m = mk_cycle[(mk_cycle.index(cur_my) + 1) % len(mk_cycle)] if cur_my in mk_cycle else "◎"
-                    op = pdf.query("not (開催 == @sk and レース == @sr and 馬番 == @u_no)")
-                    nr = [{"開催": sk, "レース": sr, "馬番": u_no, "My印": nxt_m, "Myメモ": ""}] if nxt_m else []
-                    upd = pd.concat([op, pd.DataFrame(nr, columns=["開催", "レース", "馬番", "My印", "Myメモ"])], ignore_index=True)
-                    st.session_state["my_preds_df"] = upd
-                    save_csv("my_predictions.csv", upd, f"Save {sk} {sr} #{u_no}")
-                    st.rerun()
-            with c_ai:
-                st.markdown(f'<div class="ai-sq ai-{ai_m}">{ai_m}</div>', unsafe_allow_html=True)
-            with c_info:
-                st.markdown(f'''<div style="display:flex;justify-content:space-between;align-items:center;">
-<div style="min-width:0;overflow:hidden;"><div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><a href="{r['netkeiba']}" target="_blank" style="color:#fff;font-weight:bold;text-decoration:none;font-size:15px;">{r['馬名']}</a></div>
-<div style="font-size:12px;color:#9ca3af;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px;">{r.get('性齢','')} ｜ {r['騎手']} {r['斤量']} ｜ {r['脚質']}</div></div>
-<div style="text-align:right;flex-shrink:0;margin-left:6px;"><div class="odds-txt">{r['単勝オッズ']}倍</div><span class="score-pill">能力 {r['能力スコア']}</span></div>
-</div>''', unsafe_allow_html=True)
 
 
         md = st.radio("モード", ("🎯 的中重視（能力スコア）", "💰 回収率重視（期待値スコア）"), horizontal=True)
