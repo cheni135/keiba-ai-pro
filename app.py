@@ -256,7 +256,7 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
                 elif bt == "3連複": eo, lb = round(max(3.0, 0.75/max(0.0001, wp[a]*wp[b]*wp[c]*8)), 1), f"{a}-{b}-{c}"
                 else: eo, lb = round(max(5.0, 0.725/max(0.00005, wp[a]*wp[b]*wp[c]*1.5)), 1), f"{a}→{b}→{c}"
                 brows.append({"選択": True, "買い目": lb, "想定オッズ": eo})
-                        brows.append({"買": True, "買い目": lb, "倍": eo, "円": 100})
+                brows.append({"買": True, "買い目": lb, "倍": eo, "円": 100})
         ed_exp = st.data_editor(pd.DataFrame(brows), column_config={"買": st.column_config.CheckboxColumn("買", width="small"), "買い目": st.column_config.TextColumn("買い目", width="medium", disabled=True), "倍": st.column_config.NumberColumn("倍", format="%.1f", width="small", disabled=True), "円": st.column_config.NumberColumn("円", width="small")}, hide_index=True, use_container_width=True, key=f"ed_exp_{sk}_{sr}_{bt}")
         act = ed_exp.query("買 == True").copy()
         if not act.empty:
