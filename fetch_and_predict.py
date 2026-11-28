@@ -210,13 +210,14 @@ if rows:
                     r_html = requests.get(f"https://yahoo.co.jp{cid}", headers=HEADERS, timeout=8).text
                     for tr in BeautifulSoup(r_html, "html.parser").select("tr"):
                         tds = [td.get_text(strip=True) for td in tr.find_all(["td", "th"])]
-                        if len(tds) >= 3 and tds.isdigit() and 1 <= int(tds) <= 18:
-                            u_cand = tds if tds.isdigit() else (tds if tds.isdigit() else "")
-                            if u_cand.isdigit():
-                                res_map[(kl, rn, int(u_cand))] = int(tds)
+                        c0 = next(iter(tds), "")
+                        c2 = next(iter(tds[2:3]), "")
+                        if c0.isdigit() and c2.isdigit() and 1 <= int(c0) <= 18 and 1 <= int(c2) <= 18:
+                            res_map[(kl, rn, int(c2))] = int(c0)
                 except Exception:
                     pass
         df["実着順"] = [res_map.get((str(r["開催"]), int(r["レース番号"]), int(r["馬番"])), 0) for _, r in df.iterrows()]
+
 
         df.to_csv("latest_races.csv", index=False, encoding="utf-8-sig")
         print("Saved rows:", len(df))
