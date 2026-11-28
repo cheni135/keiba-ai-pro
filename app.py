@@ -133,10 +133,15 @@ elif "馬場傾向" in page_mode:
 elif "AI検証" in page_mode:
     st.link_button("🏁 本日のレース結果を取得 (約15秒)", "shortcuts://run-shortcut?name=%E7%AB%B6%E9%A6%AC%E7%B5%90%E6%9E%9C%E6%9B%B4%E6%96%B0", use_container_width=True)
     st.subheader("📊 能力スコア・予測勝率・実着順 三者比較分析")
-    if "実着順" not in all_df.columns or all_df.query("実着順 > 0").empty:
-        st.info("まだ確定着順データがありません。レース終了後に「🔄 全体データ更新」を実行すると自動集計されます。")
+    hist_df = pd.read_csv("history_races.csv", encoding="utf-8-sig") if os.path.exists("history_races.csv") else pd.DataFrame()
+    cur_done = all_df[all_df["実着順"] > 0].copy() if "実着順" in all_df.columns else pd.DataFrame()
+    if not cur_done.empty:
+        hist_df = pd.concat([hist_df, cur_done], ignore_index=True).drop_duplicates(subset=["開催", "レース番号", "馬番"], keep="last") if not hist_df.empty else cur_done
+    if hist_df.empty:
+        st.info("まだ確定着順データがありません。レース終了後に「🏁 本日のレース結果を取得」を実行すると自動蓄積されます。")
     else:
-        vdf = all_df.query("実着順 > 0").copy()
+        sc_mode = st.radio("集計期間", ("📈 全期間累計", "📅 直近開催のみ"), horizontal=True, label_visibility="collapsed", key="v_scope")
+        vdf = (hist_df if sc_mode == "📈 全期間累計" else (cur_done if not cur_done.empty else hist_df)).copy()
         vdf["1着"] = (vdf["実着順"] == 1).astype(int)
         vdf["3着内"] = (vdf["実着順"] <= 3).astype(int)
         vdf["単勝払戻"] = vdf["1着"] * vdf["単勝オッズ"] * 100
