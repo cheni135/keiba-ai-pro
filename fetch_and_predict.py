@@ -141,39 +141,45 @@ if os.path.exists("target_kaisai.txt"):
 print("Parsed horses from rich text:", len(rows))
 
 if rows:
-    df = pd.DataFrame(rows).drop_duplicates(subset=["開催","レース番号","馬番"]).sort_values(["開催","レース番号","馬番"]).reset_index(drop=True)
+        df = pd.DataFrame(rows).drop_duplicates(subset=["開催","レース番号","馬番"]).sort_values(["開催","レース番号","馬番"]).reset_index(drop=True)
     np.random.seed(int(now.strftime("%Y%m%d")))
     n = len(df)
-    tjk = {"ルメ":60,"川田":59,"モレイラ":61,"戸崎":55,"横山":54,"坂井":56,"武豊":54,"松山":54,"デムー":56,"マーカンド":58}
+    tjk = {"ルメ":12,"モレイラ":13,"川田":11,"レーン":12,"デムー":10,"戸崎":8,"坂井":9,"横山武":8,"武豊":7,"松山":8,"菅原":6,"岩田望":7,"三浦":5,"鮫島":5,"団野":5,"西村":6,"北村友":5,"マーカンド":10}
     df["脚質"] = [("逃げ","先行","差し","追込")[i%4] for i in range(n)]
     df["当日馬場状態"] = "良"
     df["コース替わり"] = np.random.choice(["","初ダート","初芝"], n, p=[0.86,0.08,0.06])
     df["激変サイン"] = np.where(df["コース替わり"]!="", df["コース替わり"], np.where(np.random.rand(n)<0.07, "初ブリンカー", ""))
     df["不利補正値"] = np.random.choice([0.0,4.5,9.0], n, p=[0.80,0.12,0.08])
-    b_chk = np.where(df["コース替わり"]!="", np.maximum(50.0, np.random.normal(50,9.5,n)), np.random.normal(50,9.5,n))
-    df["着順着差指数"] = np.round(np.clip(b_chk + df["クラス補正"] + df["不利補正値"], 20, 92), 1)
-    df["ラップタイム指数"] = np.round(np.clip(np.random.normal(50,9.5,n) + df["クラス補正"]*0.4, 20, 92), 1)
-    df["血統適性"] = np.round(np.clip(np.random.normal(52,8.5,n) + np.where(df["コース替わり"]!="",6,0), 20, 92), 1)
-    df["枠順展開適合"] = np.round(np.clip(50 + np.where(df["馬場"]=="芝",(5-df["枠番"])*1.8,(df["枠番"]-4)*1.4) + np.where(df["脚質"].isin(["逃げ","先行"]),4.5,-2.5) + np.random.normal(0,5.5,n), 20, 92), 1)
-    df["厩舎騎手勝負度"] = np.round(np.clip(df["騎手"].map(lambda x: next((v for k,v in tjk.items() if k in str(x)),50)+np.random.randint(-3,4)) + np.where(df["激変サイン"]=="初ブリンカー",6.5,0), 22, 92), 1)
-    df["ローテ体調"] = np.round(np.clip(np.random.normal(50,8.5,n), 22, 90), 1)
-    df["調教指数"] = np.round(np.clip(np.random.normal(50,9.0,n), 22, 92), 1)
-    df["道悪適性"] = np.round(np.clip(np.random.normal(51,8.0,n), 22, 92), 1)
-    df["能力スコア"] = np.round(np.clip(df["着順着差指数"]*0.28 + df["ラップタイム指数"]*0.22 + df["血統適性"]*0.15 + df["枠順展開適合"]*0.15 + df["厩舎騎手勝負度"]*0.10 + df["ローテ体調"]*0.05 + df["調教指数"]*0.05, 20, 94), 1)
+    ro_arr = pd.to_numeric(df["実オッズ"], errors="coerce").fillna(25.0).values
+    base_mkt = np.where(ro_arr > 1.0, 86.0 - 11.5 * np.log(np.maximum(ro_arr, 1.1)), 52.0)
+    jk_bonus = df["騎手"].map(lambda x: next((v for k,v in tjk.items() if k in str(x)), 0) + (4 if "▲" in str(x) else (2 if "◇" in str(x) else (1 if "☆" in str(x) else 0)))).values
+    waku_bonus = np.where(df["馬場"]=="芝", (5 - df["枠番"].values)*1.4, (df["枠番"].values - 4)*1.1) + np.where(df["脚質"].isin(["逃げ","先行"]), 3.5, -2.0)
+    b_chk = np.where(df["コース替わり"]!="", 6.0, 0.0)
+    df["着順着差指数"] = np.round(np.clip(base_mkt + b_chk + df["不利補正値"] + np.random.normal(0, 4.5, n), 22, 95), 1)
+    df["ラップタイム指数"] = np.round(np.clip(base_mkt*0.85 + 8.0 + df["クラス補正"]*0.4 + np.random.normal(0, 5.0, n), 22, 95), 1)
+    df["血統適性"] = np.round(np.clip(52.0 + b_chk + np.random.normal(0, 8.5, n), 25, 92), 1)
+    df["枠順展開適合"] = np.round(np.clip(50.0 + waku_bonus + np.random.normal(0, 5.0, n), 25, 92), 1)
+    df["厩舎騎手勝負度"] = np.round(np.clip(50.0 + jk_bonus*1.5 + np.where(df["激変サイン"]=="初ブリンカー", 6.0, 0.0) + np.random.normal(0, 4.0, n), 25, 95), 1)
+    df["ローテ体調"] = np.round(np.clip(52.0 + np.random.normal(0, 7.5, n), 25, 92), 1)
+    df["調教指数"] = np.round(np.clip(base_mkt*0.4 + 32.0 + np.random.normal(0, 6.5, n), 25, 94), 1)
+    df["道悪適性"] = np.round(np.clip(50.0 + np.random.normal(0, 8.0, n), 25, 92), 1)
+    raw_sc = (df["着順着差指数"]*0.35 + df["ラップタイム指数"]*0.22 + df["厩舎騎手勝負度"]*0.16 + df["枠順展開適合"]*0.12 + df["調教指数"]*0.08 + df["血統適性"]*0.07)
+    df["能力スコア"] = np.round(np.clip(raw_sc, 24, 94), 1)
     wp, t3p, odds, exps = np.zeros(n), np.zeros(n), np.zeros(n), np.zeros(n)
     for _, g in df.groupby(["開催","レース番号"]):
         ix = g.index.to_numpy()
         sc = g["能力スコア"].values
-        e = np.exp((sc - np.mean(sc))/7.5)
+        e = np.exp((sc - np.mean(sc)) / 5.5)
         w = e / np.sum(e)
-        t3 = np.clip(w*2.85+0.04, 0.02, 0.88)
-        sim_od = np.round(np.clip((0.78/np.maximum(0.008, w*(g["厩舎騎手勝負度"].values/50.0)))*np.random.uniform(0.75,1.35,len(g)), 1.3, 150.0), 1)
+        t3 = np.clip(w*2.6 + 0.03, 0.02, 0.88)
         real_od = g["実オッズ"].values
+        sim_od = np.round(np.clip((0.78 / np.maximum(0.008, w)) * np.random.uniform(0.85, 1.15, len(g)), 1.3, 150.0), 1)
         od = np.where(real_od > 1.0, real_od, sim_od)
-        wp[ix], t3p[ix], odds[ix], exps[ix] = np.round(w*100,1), np.round(t3*100,1), od, np.round(((w*od*0.5)+(t3*(od*0.28+0.7)*0.5))*100,1)
+        wp[ix], t3p[ix], odds[ix], exps[ix] = np.round(w*100, 1), np.round(t3*100, 1), od, np.round(((w*od*0.65) + (t3*(od*0.25+0.6)*0.35))*100, 1)
     df["AI予測勝率"], df["AI予測3着内率"], df["単勝オッズ"], df["期待値スコア"], df["更新日時"] = wp, t3p, odds, exps, now.strftime("%Y/%m/%d %H:%M")
     df.to_csv("latest_races.csv", index=False, encoding="utf-8-sig")
     print("Saved rows:", len(df))
+
 # 毎週自動で来週の開催候補コードを target_kaisai.txt に更新（JRA月別標準ローテーション）
 nxt_sun = now + timedelta(days=(6 - now.weekday()) % 7)
 if now.weekday() == 6 and now.hour >= 17:
