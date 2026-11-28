@@ -199,6 +199,7 @@ if rows:
             od = np.where(real_od > 1.0, real_od, sim_od)
             wp[ix], t3p[ix], odds[ix], exps[ix] = np.round(w*100, 1), np.round(t3*100, 1), od, np.round(((w*od*0.65) + (t3*(od*0.25+0.6)*0.35))*100, 1)
         df["AI予測勝率"], df["AI予測3着内率"], df["単勝オッズ"], df["期待値スコア"], df["更新日時"] = wp, t3p, odds, exps, now.strftime("%Y/%m/%d %H:%M")
+     from bs4 import BeautifulSoup
         p_map_r = {'01':'札幌','02':'函館','03':'福島','04':'新潟','05':'東京','06':'中山','07':'中京','08':'京都','09':'阪神','10':'小倉'}
         k_list = [ln.strip() for ln in open("target_kaisai.txt", encoding="utf-8") if ln.strip()] if os.path.exists("target_kaisai.txt") else []
         res_map = {}
