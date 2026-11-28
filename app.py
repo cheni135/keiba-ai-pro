@@ -99,7 +99,7 @@ if not page_mode:
         for nm in places:
             lat, lon, q_city = coords.get(nm, (35.664, 139.485, "Fuchu,Tokyo"))
             try:
-                u = f"https://open-meteo.com{lat}&longitude={lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m&hourly=precipitation_probability&forecast_days=1&timezone=Asia%2FTokyo"
+                u = f"https://open-meteo.com{lat}&longitude={lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m&hourly=precipitation_probability&forecast_days=1&timezone=GMT"
                 req = urllib.request.Request(u, headers={"User-Agent": "curl/8.0"})
                 d = json.loads(urllib.request.urlopen(req, timeout=6, context=ctx).read().decode())
                 cur = d.get("current", {})
