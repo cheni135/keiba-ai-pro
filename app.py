@@ -212,12 +212,12 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
         bt = st.radio("券種", ("単勝", "複勝", "枠連", "馬連", "ワイド", "馬単", "3連複", "3連単"), horizontal=True)
         bg = st.number_input("総予算(円)", 100, 1000000, 3000, 100)
         ms_df = rdf.loc[:, ("枠番", "馬番", "AI印", "My印", "馬名", "単勝オッズ")].copy()
-        ms_df["馬"] = ms_df.apply(lambda r: f"{int(r['馬番']):02d} {str(r['馬名'])[:5]} ({r['AI印'] or '-'}/{r['My印'] or '-'})", axis=1)
+        ms_df["馬"] = ms_df.apply(lambda r: f"{int(r['馬番']):02d}{str(r['馬名'])[:4]}{r['AI印']}{r['My印']}", axis=1)
         ms_df["1頭目"] = ms_df["My印"].isin(("◎", "○")) if ms_df["My印"].ne("").any() else ms_df["AI印"].isin(("◎", "○"))
         ms_df["2頭目"] = ms_df["My印"].isin(("◎", "○", "▲", "△")) if ms_df["My印"].ne("").any() else ms_df["AI印"].isin(("◎", "○", "▲", "△"))
         ms_df["3頭目"] = ms_df["My印"].ne("") if ms_df["My印"].ne("").any() else ms_df["AI印"].ne("")
         vis_c = ["馬", "単勝オッズ", "1頭目"] + ([] if bt in ("単勝", "複勝") else (["2頭目"] if bt not in ("3連複", "3連単") else ["2頭目", "3頭目"])) 
-        ed_ms = st.data_editor(ms_df, column_order=vis_c, column_config={"馬": st.column_config.TextColumn("馬(AI/My)", width="medium", disabled=True), "単勝オッズ": st.column_config.NumberColumn("倍", format="%.1f", width="small", disabled=True), "1頭目": st.column_config.CheckboxColumn("1", width="small"), "2頭目": st.column_config.CheckboxColumn("2", width="small"), "3頭目": st.column_config.CheckboxColumn("3", width="small")}, hide_index=True, use_container_width=True, key=f"ed_ms_{sk}_{sr}_{bt}")
+        ed_ms = st.data_editor(ms_df, column_order=vis_c, column_config={"馬": st.column_config.TextColumn("馬", width="small", disabled=True), "単勝オッズ": st.column_config.NumberColumn("倍", format="%.1f", width="small", disabled=True), "1頭目": st.column_config.CheckboxColumn("1", width="small"), "2頭目": st.column_config.CheckboxColumn("2", width="small"), "3頭目": st.column_config.CheckboxColumn("3", width="small")}, hide_index=True, use_container_width=True, key=f"ed_ms_{sk}_{sr}_{bt}")
         n1 = list(ed_ms.query("`1頭目` == True")["馬番"].astype(int))
         n2 = list(ed_ms.query("`2頭目` == True")["馬番"].astype(int)) if "2頭目" in ed_ms.columns else []
         n3 = list(ed_ms.query("`3頭目` == True")["馬番"].astype(int)) if "3頭目" in ed_ms.columns else []
@@ -255,7 +255,6 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
                 elif bt == "馬単": eo, lb = round(max(2.0, 0.75/max(0.0003, wp[a]*wp[b])), 1), f"{a}→{b}"
                 elif bt == "3連複": eo, lb = round(max(3.0, 0.75/max(0.0001, wp[a]*wp[b]*wp[c]*8)), 1), f"{a}-{b}-{c}"
                 else: eo, lb = round(max(5.0, 0.725/max(0.00005, wp[a]*wp[b]*wp[c]*1.5)), 1), f"{a}→{b}→{c}"
-                brows.append({"選択": True, "買い目": lb, "想定オッズ": eo})
                 brows.append({"買": True, "買い目": lb, "倍": eo, "円": 100})
         ed_exp = st.data_editor(pd.DataFrame(brows), column_config={"買": st.column_config.CheckboxColumn("買", width="small"), "買い目": st.column_config.TextColumn("買い目", width="medium", disabled=True), "倍": st.column_config.NumberColumn("倍", format="%.1f", width="small", disabled=True), "円": st.column_config.NumberColumn("円", width="small")}, hide_index=True, use_container_width=True, key=f"ed_exp_{sk}_{sr}_{bt}")
         act = ed_exp.query("買 == True").copy()
