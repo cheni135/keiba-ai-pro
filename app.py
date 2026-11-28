@@ -92,14 +92,16 @@ if not page_mode:
     import urllib.request, json
     @st.cache_data(ttl=600)
     def get_track_wx(places):
-        coords = {"東京":(35.664,139.485,"130000"),"京都":(34.907,135.724,"260000"),"中山":(35.725,139.960,"120000"),"阪神":(34.779,135.362,"280000"),"中京":(35.066,136.988,"230000"),"新潟":(37.948,139.184,"150000"),"福島":(37.766,140.483,"070000"),"小倉":(33.841,130.873,"400000"),"札幌":(43.076,141.326,"016000"),"函館":(41.782,140.793,"017000")}
+        import ssl
+        ctx = ssl._create_unverified_context()
+        coords = {"東京":(35.664,139.485,"Fuchu,Tokyo"),"京都":(34.907,135.724,"Fushimi,Kyoto"),"中山":(35.725,139.960,"Funabashi"),"阪神":(34.779,135.362,"Takarazuka"),"中京":(35.066,136.988,"Toyoake"),"新潟":(37.948,139.184,"Niigata"),"福島":(37.766,140.483,"Fukushima"),"小倉":(33.841,130.873,"Kitakyushu"),"札幌":(43.076,141.326,"Sapporo"),"函館":(41.782,140.793,"Hakodate")}
         res = {}
         for nm in places:
-            lat, lon, jma_c = coords.get(nm, (35.664, 139.485, "130000"))
+            lat, lon, q_city = coords.get(nm, (35.664, 139.485, "Fuchu,Tokyo"))
             try:
                 u = f"https://open-meteo.com{lat}&longitude={lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m&hourly=precipitation_probability&forecast_days=1&timezone=Asia%2FTokyo"
-                req = urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0"})
-                d = json.loads(urllib.request.urlopen(req, timeout=5).read().decode())
+                req = urllib.request.Request(u, headers={"User-Agent": "curl/8.0"})
+                d = json.loads(urllib.request.urlopen(req, timeout=6, context=ctx).read().decode())
                 cur = d.get("current", {})
                 wc = int(cur.get("weather_code", 0))
                 wt = "快晴" if wc == 0 else ("晴" if wc <= 2 else ("曇" if wc <= 48 else ("雨" if wc <= 67 or wc >= 80 else "雪")))
@@ -107,17 +109,19 @@ if not page_mode:
                 wd = dirs.__getitem__(int((float(cur.get("wind_direction_10m", 0)) + 22.5) // 45) % 8)
                 pp = next(iter(d.get("hourly", {}).get("precipitation_probability", (0,))), 0)
                 res[nm] = {"wt": wt, "tmp": round(float(cur.get("temperature_2m", 0)), 1), "hum": int(cur.get("relative_humidity_2m", 0)), "ws": round(float(cur.get("wind_speed_10m", 0)), 1), "wd": wd, "pp": int(pp)}
-            except Exception:
+            except Exception as e1:
                 try:
-                    ju = f"https://jma.go.jp{jma_c}.json"
-                    jd = json.loads(urllib.request.urlopen(ju, timeout=5).read().decode())
-                    ts0 = next(iter(jd)).get("timeSeries", ())
-                    ar0 = next(iter(next(iter(ts0)).get("areas", ())))
-                    w_txt = next(iter(ar0.get("weathers", ("晴",)))).split("　").__getitem__(0)
-                    wd_txt = next(iter(ar0.get("winds", ("北の風",)))).split("の風").__getitem__(0)
-                    res[nm] = {"wt": w_txt, "tmp": "13.5", "hum": "55", "ws": "2.5", "wd": wd_txt, "pp": "10"}
-                except Exception:
-                    res[nm] = {"wt": "晴", "tmp": "13.5", "hum": "55", "ws": "2.5", "wd": "北西", "pp": "10"}
+                    wu = f"https://wttr.in{q_city}?format=j1"
+                    wreq = urllib.request.Request(wu, headers={"User-Agent": "curl/8.0"})
+                    wd_j = json.loads(urllib.request.urlopen(wreq, timeout=6, context=ctx).read().decode())
+                    cc = next(iter(wd_j.get("current_condition", ())))
+                    w_en = next(iter(cc.get("weatherDesc", ()))).get("value", "").lower()
+                    wt = "雨" if "rain" in w_en or "drizzle" in w_en else ("曇" if "cloud" in w_en or "overcast" in w_en else "晴")
+                    ws_ms = round(float(cc.get("windspeedKmph", 10)) / 3.6, 1)
+                    pp_w = next(iter(next(iter(wd_j.get("weather", ()))).get("hourly", ()))).get("chanceofrain", "10")
+                    res[nm] = {"wt": wt, "tmp": cc.get("temp_C", "-"), "hum": cc.get("humidity", "-"), "ws": ws_ms, "wd": cc.get("winddir16Point", "-"), "pp": pp_w}
+                except Exception as e2:
+                    res[nm] = {"wt": f"ERR:{type(e1).__name__}", "tmp": "-", "hum": "-", "ws": "-", "wd": "-", "pp": "-"}
         return res
 
     wx_places = tuple(dict.fromkeys(p for p in ("東京","京都","中山","阪神","中京","新潟","福島","小倉","札幌","函館") if any(p in str(h) for h in all_df.get("開催", ())))) or ("東京", "京都")
