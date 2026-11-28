@@ -174,7 +174,7 @@ if not page_mode:
                         if st.button(f"{int(rno)}R {r_tit}{st_tag}\n{r_crs} {len(grp)}頭", key=f"hm_go_{pl_nm}_{int(rno)}", use_container_width=True):
                             st.session_state["jump_page"] = "出馬表"
                             st.session_state["jump_kaisai"] = pl_nm
-                            st.session_state["jump_rkey"] = r_str
+                            st.session_state["jump_rkey"] = f"{int(rno)}R"
                             st.rerun()
     st.subheader("🔥 本日のAI厳選 勝負レース（発走順）")
     picked = 0
