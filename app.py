@@ -416,17 +416,26 @@ else:
             with st.container(key=f"my_row_{sk}_{sr}_{u_no}"):
                 c_my, c_card = st.columns((1, 7))
                 with c_my:
-                    disp_m = cur_my if cur_my in ("◎", "○", "▲", "△", "☆") else "－"
+                    pdf_now = st.session_state.get("my_preds_df", pd.DataFrame(columns=("開催","レース","馬番","印")))
+                    cur_v = ""
+                    if not pdf_now.empty and "馬番" in pdf_now.columns:
+                        m_rows = pdf_now[(pdf_now["開催"].astype(str) == str(sk)) & (pdf_now["レース"].astype(str) == str(sr)) & (pdf_now["馬番"].astype(str).str.replace(".0","",regex=False) == str(u_no))]
+                        if not m_rows.empty:
+                            cur_v = str(m_rows.iloc[-1].get("印", "")).strip()
+                    disp_m = cur_v if cur_v in ("◎", "○", "▲", "△", "☆") else "－"
                     if st.button(disp_m, key=f"btn_m_{sk}_{sr}_{u_no}", use_container_width=True):
                         c_list = ("", "◎", "○", "▲", "△", "☆")
-                        nxt_m = c_list.__getitem__((c_list.index(cur_my) + 1) % len(c_list)) if cur_my in c_list else "◎"
-                        pdf = st.session_state.get("my_preds_df", pd.DataFrame(columns=("開催","レース","馬番","印")))
-                        op = pdf[~((pdf["開催"] == sk) & (pdf["レース"] == sr) & (pdf["馬番"].astype(int) == u_no))]
-                        nr = pd.DataFrame([{"開催": sk, "レース": sr, "馬番": u_no, "印": nxt_m}]) if nxt_m else pd.DataFrame()
+                        nxt_m = c_list.__getitem__((c_list.index(cur_v) + 1) % len(c_list)) if cur_v in c_list else "◎"
+                        op = pdf_now[~((pdf_now["開催"].astype(str) == str(sk)) & (pdf_now["レース"].astype(str) == str(sr)) & (pdf_now["馬番"].astype(str).str.replace(".0","",regex=False) == str(u_no)))] if not pdf_now.empty else pd.DataFrame(columns=("開催","レース","馬番","印"))
+                        nr = pd.DataFrame([{"開催": str(sk), "レース": str(sr), "馬番": int(u_no), "印": nxt_m}]) if nxt_m else pd.DataFrame()
                         upd = pd.concat([op, nr], ignore_index=True)
                         st.session_state["my_preds_df"] = upd
-                        save_csv("my_predictions.csv", upd, "update mark")
+                        try:
+                            save_csv("my_predictions.csv", upd, "update mark")
+                        except Exception:
+                            pass
                         st.rerun()
+
                 with c_card:
                     st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-radius:8px;padding:9px 10px;margin-bottom:6px;'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;'><div style='display:flex;align-items:center;gap:6px;'><span style='background:{wc};color:{'#0f172a' if int(r.get('枠番',1)) in (1,5) else '#ffffff'};font-weight:bold;padding:2px 7px;border-radius:4px;font-size:12px;'>{u_no}</span><b style='color:#f8fafc;font-size:14px;'>{r['馬名']}</b>{mk_b}</div>{top_r}</div><div style='font-size:11px;color:#94a3b8;margin-bottom:5px;'>{meta_s}</div><div style='background:#0f172a;padding:5px 7px;border-radius:5px;margin-bottom:5px;'>{sub_r}</div><div style='font-size:11px;color:#cbd5e1;line-height:1.45;margin-bottom:5px;'>{cmt}</div><details style='font-size:11px;color:#38bdf8;'><summary style='cursor:pointer;'>6項目スコア内訳を展開</summary><div style='margin-top:5px;'>{bars_h}</div></details></div>", unsafe_allow_html=True)
 
