@@ -213,8 +213,8 @@ if rows:
                 pass
         df["実着順"] = [res_map.get((str(r["race_id"]), int(r["馬番"])), 0) for _, r in df.iterrows()]
 
-    df.to_csv("latest_races.csv", index=False, encoding="utf-8-sig")
-    print("Saved rows:", len(df))
+        df.to_csv("latest_races.csv", index=False, encoding="utf-8-sig")
+        print("Saved rows:", len(df))
 
 # 毎週自動で来週の開催候補コードを target_kaisai.txt に更新（JRA月別標準ローテーション）
 nxt_sun = now + timedelta(days=(6 - now.weekday()) % 7)
