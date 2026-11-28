@@ -350,17 +350,35 @@ elif "AI検証" in page_mode:
                 st.markdown(f"<div class='nk-card'><div><b>{r['開催']} {r['レース']}</b> ｜ <b>{int(r['実着順'])}着</b><br><span style='color:#fbbf24;'>☆ {int(r['馬番'])}{r['馬名']}</span>（単勝 {r['単勝オッズ']}倍 / 能力 {r['能力スコア']}点）</div></div>", unsafe_allow_html=True)
 
 else:
-    k_opts = list(all_df["開催"].unique())
-    def_k = st.session_state.pop("jump_kaisai", k_opts[0])
-    if def_k not in k_opts: def_k = k_opts[0]
-    sk = st.segmented_control("開催場", k_opts, default=def_k, label_visibility="collapsed") or def_k
+    import re
+    st.markdown("<style>div.st-key-race_dow_sel,div.st-key-race_dow_sel>div,div.st-key-race_dow_sel div[data-testid='stButtonGroup']{width:100% !important;}div.st-key-race_dow_sel div[role='radiogroup']{display:grid !important;grid-template-columns:1fr 1fr !important;width:100% !important;background:#0f172a !important;padding:4px !important;border-radius:8px !important;border:1px solid #334155 !important;gap:4px !important;margin-bottom:5px !important;}div.st-key-race_dow_sel button{width:100% !important;background:transparent !important;color:#94a3b8 !important;border:1px solid transparent !important;border-radius:6px !important;padding:6px 0 !important;font-size:12px !important;font-weight:bold !important;justify-content:center !important;}div.st-key-race_dow_sel button:is([aria-checked='true'],[aria-pressed='true'],[kind='segmented_controlActive']){background:#0284c7 !important;border-color:#38bdf8 !important;color:#ffffff !important;}div.st-key-race_ks_sel,div.st-key-race_ks_sel>div,div.st-key-race_ks_sel div[data-testid='stButtonGroup']{width:100% !important;}div.st-key-race_ks_sel div[role='radiogroup']{display:grid !important;grid-template-columns:1fr 1fr !important;width:100% !important;gap:5px !important;margin-bottom:5px !important;}div.st-key-race_ks_sel button{width:100% !important;background:#1e293b !important;color:#f8fafc !important;border:1px solid #334155 !important;border-left:4px solid #38bdf8 !important;border-radius:7px !important;padding:6px 4px !important;font-size:12px !important;font-weight:bold !important;justify-content:center !important;}div.st-key-race_ks_sel button:is([aria-checked='true'],[aria-pressed='true'],[kind='segmented_controlActive']){background:#0284c7 !important;border-color:#38bdf8 !important;color:#ffffff !important;}div.st-key-race_no_sel,div.st-key-race_no_sel>div,div.st-key-race_no_sel div[data-testid='stButtonGroup']{width:100% !important;}div.st-key-race_no_sel div[role='radiogroup']{display:grid !important;grid-template-columns:repeat(6,1fr) !important;width:100% !important;gap:4px !important;margin-bottom:8px !important;}div.st-key-race_no_sel button{width:100% !important;min-width:0 !important;background:#1e293b !important;color:#cbd5e1 !important;border:1px solid #334155 !important;border-radius:6px !important;padding:6px 0 !important;font-size:11.5px !important;font-weight:bold !important;justify-content:center !important;}div.st-key-race_no_sel button:is([aria-checked='true'],[aria-pressed='true'],[kind='segmented_controlActive']){background:#dc2626 !important;border-color:#f87171 !important;color:#ffffff !important;}</style>", unsafe_allow_html=True)
+    all_k_opts = list(all_df["開催"].unique())
+    def get_k_dow(ks_s):
+        m = re.search(r"(\d+)日", str(ks_s))
+        return "土曜日" if (m and int(m.group(1)) % 2 == 1) else "日曜日"
+    def_k = st.session_state.pop("jump_kaisai", None)
+    dow_opts = [d for d in ("土曜日", "日曜日") if any(get_k_dow(k) == d for k in all_k_opts)] or ["日曜日"]
+    def_dow = get_k_dow(def_k) if (def_k and def_k in all_k_opts) else dow_opts.__getitem__(-1)
+    if def_k and def_k in all_k_opts:
+        st.session_state["race_dow_sel"] = def_dow
+    sel_dow = st.segmented_control("曜日", dow_opts, default=def_dow, label_visibility="collapsed", key="race_dow_sel") or def_dow
+    k_opts = [k for k in all_k_opts if get_k_dow(k) == sel_dow] or all_k_opts
+    if not def_k or def_k not in k_opts:
+        def_k = next(iter(k_opts))
+    else:
+        st.session_state["race_ks_sel"] = def_k
+    sk = st.segmented_control("開催場", k_opts, default=def_k, label_visibility="collapsed", key="race_ks_sel") or def_k
     sdf = all_df.query("開催 == @sk").sort_values("レース番号")
     r_map = {f"{int(r['レース番号'])}R": r["レース"] for _, r in sdf.drop_duplicates("レース番号").iterrows()}
     r_keys = list(r_map.keys())
-    def_rk = st.session_state.pop("jump_rkey", r_keys[0])
-    if def_rk not in r_keys: def_rk = r_keys[0]
-    sel_rk = st.segmented_control("レース", r_keys, default=def_rk, label_visibility="collapsed") or def_rk
-    sr = r_map[sel_rk]
+    def_rk = st.session_state.pop("jump_rkey", None)
+    if not def_rk or def_rk not in r_keys:
+        def_rk = next(iter(r_keys))
+    else:
+        st.session_state["race_no_sel"] = def_rk
+    sel_rk = st.segmented_control("レース", r_keys, default=def_rk, label_visibility="collapsed", key="race_no_sel") or def_rk
+    sr = r_map.get(sel_rk, next(iter(r_map.values())))
+
     st.markdown(f"<div style='font-size:15px;font-weight:bold;color:#f8fafc;background:#1e293b;padding:8px 12px;border-radius:8px;border-left:4px solid #38bdf8;margin:4px 0 8px 0;'>📍 {sk} {sr}</div>", unsafe_allow_html=True)
     rdf = sdf.query("レース == @sr").sort_values("馬番").copy()
 
