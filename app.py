@@ -312,9 +312,9 @@ else:
             od_v = float(r["単勝オッズ"])
             wr_v = float(r["AI予測勝率"])
             ev_v = float(r["期待値スコア"])
-            pop_st = "color:#fbbf24;font-weight:bold;" if pop_n==1 else ("color:#f87171;font-weight:bold;" if pop_n in (2, 3) else "color:#94a3b8;")
-            od_st = "color:#f87171;font-weight:bold;" if od_v < 10.0 else "color:#cbd5e1;"
-            wr_st = "color:#38bdf8;font-weight:bold;" if u_no in top3_wr else "color:#94a3b8;"
+            pop_st = "color:#fbbf24;font-weight:bold;" if pop_n <= 3 else "color:#e2e8f0;"
+            od_st = "color:#f87171;font-weight:bold;" if od_v < 10.0 else "color:#f87171;"
+            wr_st = "color:#38bdf8;font-weight:bold;" if u_no in top3_wr else "color:#38bdf8;"
             ev_c = "#fbbf24" if ev_v >= 100 else "#cbd5e1"
             my_c = "#38bdf8" if my_m != "-" else "#64748b"
             ai_c = "#fbbf24" if ai_m in ("◎","○","▲","△","☆") else "#64748b"
