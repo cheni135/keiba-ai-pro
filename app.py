@@ -90,16 +90,16 @@ def ai_comment(r, avg):
 
 if not page_mode:
     import urllib.request, json
-    @st.cache_data(ttl=600)
+    @st.cache_data(ttl=300)
     def get_track_wx(places):
-        import ssl
+        import ssl, urllib.parse
         ctx = ssl._create_unverified_context()
-        coords = {"東京":(35.664,139.485,"Fuchu,Tokyo"),"京都":(34.907,135.724,"Fushimi,Kyoto"),"中山":(35.725,139.960,"Funabashi"),"阪神":(34.779,135.362,"Takarazuka"),"中京":(35.066,136.988,"Toyoake"),"新潟":(37.948,139.184,"Niigata"),"福島":(37.766,140.483,"Fukushima"),"小倉":(33.841,130.873,"Kitakyushu"),"札幌":(43.076,141.326,"Sapporo"),"函館":(41.782,140.793,"Hakodate")}
+        coords = {"東京":(35.664,139.485),"京都":(34.907,135.724),"中山":(35.725,139.960),"阪神":(34.779,135.362),"中京":(35.066,136.988),"新潟":(37.948,139.184),"福島":(37.766,140.483),"小倉":(33.841,130.873),"札幌":(43.076,141.326),"函館":(41.782,140.793)}
         res = {}
         for nm in places:
-            lat, lon, q_city = coords.get(nm, (35.664, 139.485, "Fuchu,Tokyo"))
+            lat, lon = coords.get(nm, (35.664, 139.485))
             try:
-                u = f"https://open-meteo.com{lat}&longitude={lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m&hourly=precipitation_probability&forecast_days=1&timezone=GMT"
+                u = urllib.parse.quote(f"https://open-meteo.com{lat}&longitude={lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m&hourly=precipitation_probability&forecast_days=1&timezone=GMT", safe=":/?=&,.")
                 req = urllib.request.Request(u, headers={"User-Agent": "curl/8.0"})
                 d = json.loads(urllib.request.urlopen(req, timeout=6, context=ctx).read().decode())
                 cur = d.get("current", {})
