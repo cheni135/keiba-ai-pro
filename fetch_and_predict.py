@@ -166,7 +166,7 @@ if rows:
         raw_sc = (df["着順着差指数"]*0.35 + df["ラップタイム指数"]*0.22 + df["厩舎騎手勝負度"]*0.16 + df["枠順展開適合"]*0.12 + df["調教指数"]*0.08 + df["血統適性"]*0.07)
         df["能力スコア"] = np.round(np.clip(raw_sc, 24, 94), 1)
         wp, t3p, odds, exps = np.zeros(n), np.zeros(n), np.zeros(n), np.zeros(n) 
-    for _, g in df.groupby(["開催","レース番号"]):
+        for _, g in df.groupby(["開催","レース番号"]):
         ix = g.index.to_numpy()
         sc = g["能力スコア"].values
         e = np.exp((sc - np.mean(sc)) / 5.5)
