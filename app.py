@@ -64,7 +64,8 @@ with h2:
 
 if "jump_page" in st.session_state:
     st.session_state["nav_radio"] = st.session_state.pop("jump_page")
-page_mode = st.radio("メニュー", ("🔥 勝負レース", "📋 出馬表・AI分析", "💰 買い目", "🌱 馬場傾向", "📊 AI検証"), horizontal=True, label_visibility="collapsed", key="nav_radio")
+st.markdown("<style>div.st-key-main_nav,div.st-key-main_nav>div,div.st-key-main_nav div[data-testid='stButtonGroup']{width:100% !important;}div.st-key-main_nav div[role='radiogroup']{display:grid !important;grid-template-columns:repeat(5,1fr) !important;width:100% !important;background:#0f172a !important;padding:4px !important;border-radius:10px !important;border:1px solid #334155 !important;gap:3px !important;margin:6px 0 8px 0 !important;}div.st-key-main_nav button{width:100% !important;min-width:0 !important;background:transparent !important;color:#94a3b8 !important;border:1px solid transparent !important;border-radius:7px !important;padding:7px 0 !important;font-size:11px !important;font-weight:bold !important;white-space:nowrap !important;justify-content:center !important;}div.st-key-main_nav button[kind='segmented_controlActive'],div.st-key-main_nav button[aria-pressed='true'],div.st-key-main_nav button[aria-checked='true']{background:#0284c7 !important;border-color:#38bdf8 !important;color:#ffffff !important;box-shadow:0 0 8px rgba(56,189,248,0.4) !important;}</style>", unsafe_allow_html=True)
+page_mode = st.segmented_control("メニュー", ["勝負レース", "出馬表", "買い目", "馬場傾向", "AI検証"], default="勝負レース", label_visibility="collapsed", key="main_nav") or "勝負レース"
 
 if not os.path.exists("latest_races.csv"): st.stop()
 all_df = pd.read_csv("latest_races.csv")
