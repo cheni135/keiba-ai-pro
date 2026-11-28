@@ -162,12 +162,17 @@ elif "AI検証" in page_mode:
             rem = g.loc[idxs[4:]].query("単勝オッズ >= 10.0")
             if not rem.empty:
                 vdf.loc[rem.sort_values("期待値スコア", ascending=False).index[0], "_ai"] = "☆"
-        m_list = []
+        rows_h = ""
         for mk in ["◎", "○", "▲", "△", "☆"]:
             sub = vdf[vdf["_ai"] == mk]
             if not sub.empty:
-                m_list.append({"AI印": mk, "頭数": len(sub), "勝率%": round(sub["1着"].mean()*100, 1), "複勝率%": round(sub["3着内"].mean()*100, 1), "単勝回収%": round(sub["単勝払戻"].sum()/(len(sub)*100)*100, 1), "平均オッズ": round(sub["単勝オッズ"].mean(), 1)})
-        st.dataframe(pd.DataFrame(m_list), hide_index=True, use_container_width=True)
+                w_r = round(sub["1着"].mean()*100, 1)
+                f_r = round(sub["3着内"].mean()*100, 1)
+                roi = round(sub["単勝払戻"].sum()/(len(sub)*100)*100, 1)
+                avo = round(sub["単勝オッズ"].mean(), 1)
+                c_roi = "#f87171" if roi >= 100 else "#cbd5e1"
+                rows_h += f"<tr style='border-bottom:1px solid #334155;text-align:right;'><td style='text-align:center;font-weight:bold;color:#fbbf24;padding:6px 4px;'>{mk}</td><td>{len(sub)}</td><td>{w_r}%</td><td style='font-weight:bold;'>{f_r}%</td><td style='color:{c_roi};font-weight:bold;'>{roi}%</td><td style='padding-right:4px;'>{avo}倍</td></tr>"
+        st.markdown(f"<table style='width:100%;border-collapse:collapse;background:#1e293b;color:#f8fafc;font-size:12px;border-radius:8px;overflow:hidden;'><thead><tr style='background:#0f172a;color:#94a3b8;text-align:right;'><th style='text-align:center;padding:6px 4px;'>印</th><th>数</th><th>勝率</th><th>複勝</th><th>単回収</th><th style='padding-right:4px;'>平均倍</th></tr></thead><tbody>{rows_h}</tbody></table>", unsafe_allow_html=True)
         st.markdown("#### ④ ☆穴馬 激走・好走ピックアップ（3着以内）")
         hoshi_hit = vdf[(vdf["_ai"] == "☆") & (vdf["実着順"] <= 3)].sort_values("単勝オッズ", ascending=False)
         if hoshi_hit.empty:
