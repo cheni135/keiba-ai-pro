@@ -137,9 +137,10 @@ div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColum
 div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(2){flex:0 0 38px !important;width:38px !important;max-width:38px !important;}
 div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(3){flex:0 0 32px !important;width:32px !important;max-width:32px !important;}
 div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(4){flex:1 1 auto !important;width:auto !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-testid="stSelectbox"]{margin:0 !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-baseweb="select"] > div{min-height:32px !important;height:32px !important;padding:0 !important;font-size:14px !important;font-weight:bold !important;display:flex !important;align-items:center !important;justify-content:center !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-baseweb="select"] > div > div{padding:0 !important;margin:0 !important;display:flex !important;justify-content:center !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-testid="stSelectbox"] *{min-height:0 !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-baseweb="select"],
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-baseweb="select"] > div{height:32px !important;min-height:32px !important;max-height:32px !important;padding:0 !important;font-size:14px !important;font-weight:bold !important;display:flex !important;align-items:center !important;justify-content:center !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-baseweb="select"] > div > div{padding:0 !important;margin:0 !important;line-height:32px !important;justify-content:center !important;}
 div[data-testid="stHorizontalBlock"]:has(.nk-row-box) svg{display:none !important;}
 .ai-sq{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:6px;font-weight:bold;font-size:14px;border:1.5px solid #475569;color:#94a3b8;background:#0f172a;}
 .ai-◎{border-color:#ef4444;color:#ef4444;background:rgba(239,68,68,.15);}
