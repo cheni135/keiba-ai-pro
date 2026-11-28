@@ -169,7 +169,7 @@ if not page_mode:
                     r_crs = r_str.split("(").__getitem__(-1).replace(")", "") if "(" in r_str else ""
                     if st.button(f"{int(rno)}R {r_tit}（{r_crs} {len(grp)}頭）", key=f"hm_go_{pl_nm}_{int(rno)}", use_container_width=True):
                         st.session_state["jump_place"] = pl_nm
-                        st.session_state["jump_rno"] = int(rno)
+                        st.session_state["jump_page"] = "出馬表"
                         st.session_state["main_nav"] = "出馬表"
                         st.rerun()
 
