@@ -109,7 +109,7 @@ if not page_mode:
         return res
     wx_d = get_track_wx()
     st.markdown("#### 注目メイン・重賞 最新オッズ")
-    mains = all_df[all_df["レース番号"].isin(11,12)].copy()
+    mains = all_df[all_df["レース番号"].isin((11,12))].copy()
     if not mains.empty:
         mains = all_df[all_df["レース番号"].isin((11, 12))].copy()
         m_opts = list(dict.fromkeys(mains["_m_lbl"]))
