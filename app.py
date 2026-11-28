@@ -412,18 +412,23 @@ else:
             items_v = [("1. 着順着差", float(r.get("着順着差指数",0))), ("2. ラップ", float(r.get("ラップタイム指数",0))), ("3. 騎手勝負度", float(r.get("厩舎・騎手勝負度",0))), ("4. 枠順展開", float(r.get("枠順・展開適合",0))), ("5. 調教", float(r.get("調教指数",0))), ("6. 血統", float(r.get("血統適性",0)))]
             bars_h = "".join(f"<div style='margin-bottom:5px;'><div style='display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;'><span style='color:#cbd5e1;'>{k}</span><span style='color:#38bdf8;font-weight:bold;'>{v:.1f}点</span></div><div style='background:#0f172a;border-radius:4px;height:6px;overflow:hidden;'><div style='background:linear-gradient(90deg,#0284c7,#38bdf8);width:{min(100,max(0,v))}%;height:100%;border-radius:4px;'></div></div></div>" for k, v in items_v)
             meta_s = f"{r.get('性齢','')} ｜ {r.get('騎手','')} {r.get('斤量','')} ｜ {r.get('脚質','')}"
+        st.markdown("<style>div[class*='st-key-my_row_'] div[data-testid='stHorizontalBlock']{display:flex !important;flex-direction:row !important;flex-wrap:nowrap !important;gap:6px !important;align-items:stretch !important;}div[class*='st-key-my_row_'] div[data-testid='column']:first-child,div[class*='st-key-my_row_'] div[data-testid='stColumn']:first-child{flex:0 0 42px !important;width:42px !important;min-width:42px !important;}div[class*='st-key-my_row_'] div[data-testid='column']:last-child,div[class*='st-key-my_row_'] div[data-testid='stColumn']:last-child{flex:1 1 auto !important;min-width:0 !important;}div[class*='st-key-my_row_'] button{width:100% !important;min-width:0 !important;height:100% !important;min-height:48px !important;background:#1e293b !important;color:#fbbf24 !important;border:1px solid #475569 !important;border-radius:8px !important;padding:0 !important;font-size:18px !important;font-weight:bold !important;justify-content:center !important;}</style>", unsafe_allow_html=True)
+        with st.container(key=f"my_row_{sk}_{sr}_{u_no}"):
             c_my, c_card = st.columns([1, 7])
             with c_my:
-                st.markdown('<span class="my-mk-anchor"></span>', unsafe_allow_html=True)
-                if st.button(cur_my if cur_my else "－", key=f"mk_{sk}_{sr}_{u_no}", use_container_width=True):
-                    nxt_m = mk_cycle[(mk_cycle.index(cur_my) + 1) % len(mk_cycle)] if cur_my in mk_cycle else "◎"
-                    op = pdf.query("not (開催 == @sk and レース == @sr and 馬番 == @u_no)")
-                    nr = [{"開催": sk, "レース": sr, "馬番": u_no, "馬名": r["馬名"], "印": nxt_m}] if nxt_m else []
-                    upd = pd.concat([op, pd.DataFrame(nr)], ignore_index=True) if nr else op
-                    st.session_state["my_predictions"] = upd
+                disp_m = cur_my if cur_my in ("◎", "○", "▲", "△", "☆") else "－"
+                if st.button(disp_m, key=f"btn_m_{sk}_{sr}_{u_no}", use_container_width=True):
+                    c_list = ["", "◎", "○", "▲", "△", "☆"]
+                    nxt_m = c_list[(c_list.index(cur_my) + 1) % len(c_list)] if cur_my in c_list else "◎"
+                    pdf = st.session_state.get("my_preds_df", pd.DataFrame(columns=["開催","レース","馬番","印"]))
+                    op = pdf[~((pdf["開催"] == sk) & (pdf["レース"] == sr) & (pdf["馬番"].astype(int) == u_no))]
+                    nr = pd.DataFrame([{"開催": sk, "レース": sr, "馬番": u_no, "印": nxt_m}]) if nxt_m else pd.DataFrame()
+                    upd = pd.concat([op, nr], ignore_index=True)
+                    st.session_state["my_preds_df"] = upd
                     save_csv("my_predictions.csv", upd, "update mark")
                     st.rerun()
             with c_card:
+
                 st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-left:5px solid {wc};border-radius:8px;padding:9px 11px;'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;'><div style='display:flex;align-items:center;min-width:0;'><span class='waku-box w{int(r.get('枠番',1))}' style='margin-right:6px;flex-shrink:0;'>{u_no}</span><span style='font-size:14px;font-weight:bold;color:#f8fafc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>{r['馬名']}</span>{mk_b}</div><span style='font-size:12px;font-weight:bold;flex-shrink:0;margin-left:4px;'>{top_r}</span></div><div style='font-size:11px;color:#94a3b8;margin-bottom:5px;'>{meta_s}</div><div style='display:flex;justify-content:space-between;font-size:10px;color:#94a3b8;background:#0f172a;padding:4px 6px;border-radius:5px;margin-bottom:5px;white-space:nowrap;'>{sub_r}</div><div style='font-size:11px;color:#cbd5e1;line-height:1.4;'>{cmt}</div><details style='margin-top:5px;border-top:1px solid #334155;padding-top:4px;'><summary class='ai-det-sum'>▾ 6項目スコア内訳を展開</summary><div style='padding-top:6px;'>{bars_h}</div></details></div>", unsafe_allow_html=True)
         st.markdown("#### 印・数値サマリー表")
         rdf["_wr_rk"] = rdf["AI予測勝率"].rank(method="min", ascending=False).astype(int)
