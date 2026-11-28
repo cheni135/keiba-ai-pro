@@ -132,14 +132,14 @@ elif "馬場傾向" in page_mode:
         st.markdown(f"""<div class="nk-card"><div style="display:flex;align-items:center;"><div class="waku-box w{int(r['枠番'])}">{int(r['馬番'])}</div><div><div style="font-size:11px;color:#9ca3af;">{r['レース']}</div><b>{r['馬名']}</b> ({r['脚質']})</div></div><div class="odds-txt">{r['単勝オッズ']}倍</div></div>""", unsafe_allow_html=True)
 else:
     k_opts = list(all_df["開催"].unique())
-    def_k = st.session_state.pop("jump_kaisai", k_opts)
-    if def_k not in k_opts: def_k = k_opts
+    def_k = st.session_state.pop("jump_kaisai", k_opts[0])
+    if def_k not in k_opts: def_k = k_opts[0]
     sk = st.segmented_control("開催場", k_opts, default=def_k, label_visibility="collapsed") or def_k
     sdf = all_df.query("開催 == @sk").sort_values("レース番号")
     r_map = {f"{int(r['レース番号'])}R": r["レース"] for _, r in sdf.drop_duplicates("レース番号").iterrows()}
     r_keys = list(r_map.keys())
-    def_rk = st.session_state.pop("jump_rkey", r_keys)
-    if def_rk not in r_keys: def_rk = r_keys
+    def_rk = st.session_state.pop("jump_rkey", r_keys[0])
+    if def_rk not in r_keys: def_rk = r_keys[0]
     sel_rk = st.segmented_control("レース", r_keys, default=def_rk, label_visibility="collapsed") or def_rk
     sr = r_map[sel_rk]
     st.markdown(f"<div style='font-size:15px;font-weight:bold;color:#f8fafc;background:#1e293b;padding:8px 12px;border-radius:8px;border-left:4px solid #38bdf8;margin:4px 0 8px 0;'>📍 {sk} {sr}</div>", unsafe_allow_html=True)
