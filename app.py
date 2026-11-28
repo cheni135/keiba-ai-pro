@@ -195,9 +195,9 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
 
         st.markdown("---")
         st.subheader("🤖 全頭AI評価一覧（AI能力順）")
-        md = st.radio("評価基準", ("🎯 的中重視(能力順)", "💎 期待値重視(妙味順)"), horizontal=True, label_visibility="collapsed", key="ai_eval_md")
-        sc = "能力スコア" if "的中" in md else "期待値スコア"
-        rk = rdf.sort_values(sc, ascending=False).copy()
+        md = st.radio("評価基準", ("🔢 枠番(馬番)順", "🎯 的中重視(能力順)", "💎 期待値重視(妙味順)"), horizontal=True, label_visibility="collapsed", key="ai_eval_md")
+        sc = "馬番" if "枠番" in md else ("能力スコア" if "的中" in md else "期待値スコア")
+        rk = rdf.sort_values(sc, ascending=("枠番" in md)).copy()
         avg = round(float(rk["能力スコア"].mean()), 1)
         for r in rk.to_dict("records"):
             mk_s = f"**{r['AI印']}** " if r["AI印"] else ""
