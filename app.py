@@ -131,6 +131,7 @@ elif "馬場傾向" in page_mode:
     for r in tdf.query("枠番 <= 4 and 脚質 in ('逃げ','先行')" if bs == "芝コース" else "枠番 >= 5 and 脚質 in ('逃げ','先行')").sort_values("能力スコア", ascending=False).head(8).to_dict("records"):
         st.markdown(f"""<div class="nk-card"><div style="display:flex;align-items:center;"><div class="waku-box w{int(r['枠番'])}">{int(r['馬番'])}</div><div><div style="font-size:11px;color:#9ca3af;">{r['レース']}</div><b>{r['馬名']}</b> ({r['脚質']})</div></div><div class="odds-txt">{r['単勝オッズ']}倍</div></div>""", unsafe_allow_html=True)
 elif "AI検証" in page_mode:
+    st.link_button("🏁 本日のレース結果を取得 (約15秒)", "shortcuts://run-shortcut?name=%E7%AB%B6%E9%A6%AC%E7%B5%90%E6%9E%9C%E6%9B%B4%E6%96%B0", use_container_width=True)
     st.subheader("📊 能力スコア・予測勝率・実着順 三者比較分析")
     if "実着順" not in all_df.columns or all_df.query("実着順 > 0").empty:
         st.info("まだ確定着順データがありません。レース終了後に「🔄 全体データ更新」を実行すると自動集計されます。")
