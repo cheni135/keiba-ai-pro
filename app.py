@@ -64,7 +64,7 @@ with h2:
 
 if "jump_page" in st.session_state:
     st.session_state["nav_radio"] = st.session_state.pop("jump_page")
-page_mode = st.radio("メニュー", ("🔥 勝負レース", "📋 出馬表", "🤖 AI分析", "💰 買い目", "🌱 馬場傾向"), horizontal=True, label_visibility="collapsed", key="nav_radio")
+page_mode = st.radio("メニュー", ("🔥 勝負レース", "📋 出馬表・AI分析", "💰 買い目", "🌱 馬場傾向"), horizontal=True, label_visibility="collapsed", key="nav_radio")
 
 if not os.path.exists("latest_races.csv"): st.stop()
 all_df = pd.read_csv("latest_races.csv")
@@ -103,8 +103,8 @@ if "勝負レース" in page_mode:
             with c_left:
                 st.markdown(f"""<div class="nk-card" style="margin-bottom:4px;"><div><b>{ks} {rn}</b> <span style="color:#fbbf24;font-weight:bold;">{bg}</span><br><span style="font-size:13px;">◎{int(t1['馬番'])}{t1['馬名']}（能力{sc1}点 / 2位差+{d12} / 単勝{od1}倍 / 期待値{ev1}%）</span></div></div>""", unsafe_allow_html=True)
             with c_btn:
-                if st.button("📋 出馬表", key=f"jmp_{idx_g}_{ks}_{rno}", use_container_width=True):
-                    st.session_state["jump_page"] = "📋 出馬表"
+                if              if st.button("📋 出馬表", key=f"jmp_{idx_g}_{ks}_{rno}", use_container_width=True):
+                 st.session_state["jump_page"] = "📋 出馬表・AI分析"
                     st.session_state["jump_kaisai"] = ks
                     st.session_state["jump_rkey"] = f"{int(rno)}R"
                     st.rerun()
@@ -117,7 +117,7 @@ if "勝負レース" in page_mode:
             st.markdown(f"""<div class="nk-card" style="margin-bottom:4px;"><div style="display:flex;align-items:center;"><div class="waku-box w{int(r.get('枠番',1))}">{int(r['馬番'])}</div><div><div style="font-size:11px;color:#9ca3af;">{r['開催']} {r['レース']}</div><a href="{r['netkeiba']}" target="_blank" style="color:#fff;font-weight:bold;text-decoration:none;">{r['馬名']} 🔗</a></div></div><div class="odds-txt">{r['単勝オッズ']}倍<br><span class="score-pill">能力{r['能力スコア']} / 期待値{r['期待値スコア']}%</span></div></div>""", unsafe_allow_html=True)
         with c_mb:
             if st.button("📋 出馬表", key=f"jmpm_{idx_m}_{r['開催']}_{int(r['レース番号'])}", use_container_width=True):
-                st.session_state["jump_page"] = "📋 出馬表"
+                 st.session_state["jump_page"] = "📋 出馬表・AI分析"
                 st.session_state["jump_kaisai"] = r["開催"]
                 st.session_state["jump_rkey"] = f"{int(r['レース番号'])}R"
                 st.rerun()
@@ -193,18 +193,20 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
             with c_card:
                 st.markdown(f"""<div class="nk-card" style="margin-bottom:0;"><div style="display:flex;align-items:center;"><div class="waku-box w{int(r.get('枠番',1))}">{u_no}</div><div class="ai-sq ai-{ai_m}">{ai_m}</div><div><div><a href="{r['netkeiba']}" target="_blank" style="color:#fff;font-weight:bold;text-decoration:none;">{r['馬名']}</a></div><div style="font-size:12px;color:#9ca3af;">{r.get('性齢','')} ｜ {r['騎手']} {r['斤量']} ｜ {r['脚質']}</div></div></div><div style="text-align:right;"><div class="odds-txt">{r['単勝オッズ']}倍</div><span class="score-pill">能力 {r['能力スコア']}</span></div></div>""", unsafe_allow_html=True)
 
-    elif "AI分析" in page_mode:
-        md = st.radio("モード", ("🎯 的中重視（能力スコア）", "💰 回収率重視（期待値スコア）"), horizontal=True)
-        sc = "能力スコア" if "的中" in md else "期待値スコア"
-        rk = rdf.sort_values(sc, ascending=False).reset_index(drop=True)
-        rk = rk.assign(AI印=tuple(aim[i] if i < 5 else "" for i in range(len(rk))))
-        avg = round(float(rk["能力スコア"].mean()), 1)
-        for r in rk.head(5).to_dict("records"):
-            st.info(f"**{r['AI印']} {int(r['馬番'])}番 {r['馬名']}（{r['単勝オッズ']}倍 / 勝率{r['AI予測勝率']}%）**\n\n{ai_comment(r, avg)}")
-        sh = st.selectbox("詳細内訳を見る馬", rk["馬名"])
-        inf = rk.query("馬名 == @sh").squeeze()
-        fv = (float(inf["着順着差指数"]), float(inf["ラップタイム指数"]), float(inf["血統適性"]), float(inf["枠順展開適合"]), float(inf["厩舎騎手勝負度"]), float(inf["ローテ体調"]), float(inf["調教指数"]), float(inf["道悪適性"]))
-        st.bar_chart(pd.DataFrame({"項目": ("1.着順着差", "2.ラップ", "3.血統", "4.枠順展開", "5.厩舎騎手", "6.ローテ", "7.調教", "8.道悪"), "スコア": fv}).set_index("項目"))
+    st.markdown("---")
+    st.subheader("🤖 全頭AI評価一覧（AI能力順）")
+    md = st.radio("評価基準", ("🎯 的中重視(能力順)", "💎 期待値重視(妙味順)"), horizontal=True, label_visibility="collapsed")
+    sc = "能力スコア" if "的中" in md else "期待値スコア"
+    rk = rdf.sort_values(sc, ascending=False).copy()
+    avg = round(float(rk["能力スコア"].mean()), 1)
+    for r in rk.to_dict("records"):
+        mk_s = f"**{r['AI印']}** " if r["AI印"] else ""
+        st.info(f"{mk_s}**{int(r['馬番'])} {r['馬名']}**（単勝{r['単勝オッズ']}倍 / 勝率{r['AI予測勝率']}% / 期待値{r['期待値スコア']}%）\n\n{ai_comment(r, avg)}")
+    sh = st.selectbox("📊 詳細内訳グラフを見る馬を選択", tuple(rk["馬名"]))
+    inf = rk.query("馬名 == @sh").squeeze()
+    fv = (float(inf["着順着差指数"]), float(inf["ラップタイム指数"]), float(inf["厩舎騎手勝負度"]), float(inf["枠順展開適合"]), float(inf["調教指数"]), float(inf["血統適性"]))
+    st.bar_chart(pd.DataFrame({"項目": ("1_着順着差", "2_ラップ", "3_騎手勝負度", "4_枠順展開", "5_調教", "6_血統"), "スコア": fv}).set_index("項目"))
+
 
     elif "買い目" in page_mode:
         bt = st.radio("券種", ("単勝", "複勝", "枠連", "馬連", "ワイド", "馬単", "3連複", "3連単"), horizontal=True)
