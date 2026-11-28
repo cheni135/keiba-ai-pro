@@ -139,12 +139,6 @@ if "ホーム" in page_mode:
     sw_b, sk_b = get_bias_txt("芝")
     dw_b, dk_b = get_bias_txt("ダ")
     st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px 12px;margin-bottom:10px;'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;'><span style='font-size:13px;font-weight:bold;color:#f8fafc;'>{w_p}競馬場</span><span style='font-size:11px;color:#94a3b8;'>JRA馬場・気象</span></div><div style='display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;background:#0f172a;padding:7px;border-radius:6px;text-align:center;font-size:11px;margin-bottom:6px;'><div><div style='color:#94a3b8;font-size:10px;'>天候</div><b style='color:#38bdf8;font-size:13px;'>{wt_st}</b></div><div style='border-left:1px solid #1e293b;border-right:1px solid #1e293b;'><div style='color:#94a3b8;font-size:10px;'>芝状態</div><b style='color:#4ade80;font-size:13px;'>{s_st}</b></div><div><div style='color:#94a3b8;font-size:10px;'>ダート状態</div><b style='color:#fbbf24;font-size:13px;'>{d_st}</b></div></div><div style='display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#0f172a;padding:7px;border-radius:6px;font-size:11px;'><div><div style='color:#4ade80;font-weight:bold;margin-bottom:2px;'>芝 トレンド</div><div style='color:#cbd5e1;'>枠：<b style='color:#f8fafc;'>{sw_b}</b> / 脚：<b style='color:#f8fafc;'>{sk_b}</b></div></div><div style='border-left:1px solid #1e293b;padding-left:8px;'><div style='color:#fbbf24;font-weight:bold;margin-bottom:2px;'>ダート トレンド</div><div style='color:#cbd5e1;'>枠：<b style='color:#f8fafc;'>{dw_b}</b> / 脚：<b style='color:#f8fafc;'>{dk_b}</b></div></div></div></div>", unsafe_allow_html=True)
-    st.markdown("#### 勝ち馬サーチ（AI勝率・能力上位）")
-    win_top = all_df[all_df["単勝オッズ"] < 10.0].sort_values(["能力スコア", "期待値スコア"], ascending=[False, False]).head(2)
-    ecols = st.columns(2)
-    for idx_e, (_, er) in enumerate(win_top.iterrows()):
-        with ecols[idx_e]:
-            st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-top:3px solid #38bdf8;border-radius:8px;padding:8px 9px;margin-bottom:10px;'><div style='font-size:10.5px;color:#38bdf8;font-weight:bold;margin-bottom:3px;'>{er['開催']} {int(er['レース番号'])}R</div><div style='font-size:12px;font-weight:bold;color:#f8fafc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>{int(er['馬番'])} {er['馬名']}</div><div style='font-size:10.5px;color:#cbd5e1;margin-top:3px;'>単勝 <b style='color:#f87171;'>{float(er['単勝オッズ']):.1f}倍</b> / 能力 <b style='color:#4ade80;'>{float(er.get('能力スコア',0)):.1f}点</b></div></div>", unsafe_allow_html=True)
     st.markdown("#### 開催レース一覧")
     st.markdown("<style>div.st-key-hm_rgrid div[data-testid='stHorizontalBlock']{display:flex !important;flex-direction:row !important;flex-wrap:nowrap !important;gap:6px !important;align-items:flex-start !important;}div.st-key-hm_rgrid div[data-testid='column'],div.st-key-hm_rgrid div[data-testid='stColumn']{flex:1 1 50% !important;width:50% !important;min-width:0 !important;}div.st-key-hm_rgrid div[class*='st-key-hm_done_'] button{width:100% !important;min-width:0 !important;background:#0f172a !important;color:#64748b !important;border:1px solid #1e293b !important;border-left:3px solid #475569 !important;border-radius:6px !important;padding:5px 4px !important;margin-bottom:3px !important;font-size:10px !important;line-height:1.25 !important;text-align:left !important;justify-content:flex-start !important;}div.st-key-hm_rgrid div[class*='st-key-hm_open_'] button{width:100% !important;min-width:0 !important;background:#1e293b !important;color:#f8fafc !important;border:1px solid #334155 !important;border-left:3px solid #0ea5e9 !important;border-radius:6px !important;padding:5px 4px !important;margin-bottom:3px !important;font-size:10px !important;line-height:1.25 !important;text-align:left !important;justify-content:flex-start !important;}</style>", unsafe_allow_html=True)
     all_pls = list(dict.fromkeys(all_df.get("開催", ())))
@@ -172,6 +166,13 @@ if "ホーム" in page_mode:
                             st.session_state["jump_kaisai"] = pl_nm
                             st.session_state["jump_rkey"] = f"{int(rno)}R"
                             st.rerun()
+    st.markdown("#### 勝ち馬サーチ（AI勝率・能力上位）")
+    win_top = all_df[all_df["単勝オッズ"] < 10.0].sort_values(["能力スコア", "期待値スコア"], ascending=[False, False]).head(2)
+    ecols = st.columns(2)
+    for idx_e, (_, er) in enumerate(win_top.iterrows()):
+        with ecols[idx_e]:
+            st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-top:3px solid #38bdf8;border-radius:8px;padding:8px 9px;margin-bottom:10px;'><div style='font-size:10.5px;color:#38bdf8;font-weight:bold;margin-bottom:3px;'>{er['開催']} {int(er['レース番号'])}R</div><div style='font-size:12px;font-weight:bold;color:#f8fafc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>{int(er['馬番'])} {er['馬名']}</div><div style='font-size:10.5px;color:#cbd5e1;margin-top:3px;'>単勝 <b style='color:#f87171;'>{float(er['単勝オッズ']):.1f}倍</b> / 能力 <b style='color:#4ade80;'>{float(er.get('能力スコア',0)):.1f}点</b></div></div>", unsafe_allow_html=True)
+
     st.subheader("🔥 本日のAI厳選 勝負レース（発走順）")
     picked = 0
     for idx_g, ((rno, ks, rn), g) in enumerate(all_df.sort_values(["レース番号", "開催"]).groupby(["レース番号", "開催", "レース"], sort=False)):
