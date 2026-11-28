@@ -111,7 +111,7 @@ if not page_mode:
     st.markdown("#### 注目メイン・重賞 最新オッズ")
     mains = all_df[all_df["レース番号"].isin()].copy()
     if not mains.empty:
-        mains["_m_lbl"] = mains.apply(lambda x: f"{x['開催']} {int(x['レース番号'])}R", axis=1)
+        mains = all_df[all_df["レース番号"].isin((11, 12))].copy()
         m_opts = list(dict.fromkeys(mains["_m_lbl"]))
         sel_m = st.segmented_control("メイン選択", m_opts, default=next(iter(m_opts), None), label_visibility="collapsed", key="hm_main_sel") or next(iter(m_opts), "")
         msub = mains[mains["_m_lbl"] == sel_m].sort_values("単勝オッズ").head(5)
