@@ -193,6 +193,7 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
             with c_card:
                 nk_url = "https://netkeiba.com" + __import__("urllib.parse").parse.quote(str(r["馬名"]))
                 st.markdown(f"""<div class="nk-card" style="margin-bottom:0;"><div style="display:flex;align-items:center;"><div class="waku-box w{int(r.get('枠番',1))}">{u_no}</div><div class="ai-sq ai-{ai_m}">{ai_m}</div><div><div><a href="{nk_url}" target="_blank" style="color:#fff;font-weight:bold;text-decoration:none;">{r['馬名']} 🔗</a></div><div style="font-size:12px;color:#9ca3af;">{r.get('性齢','')} ｜ {r['騎手']} {r['斤量']} ｜ {r['脚質']}</div></div></div><div style="text-align:right;"><div class="odds-txt">{r['単勝オッズ']}倍</div><span class="score-pill">能力 {r['能力スコア']}</span></div></div>""", unsafe_allow_html=True)
+ 
         st.markdown("---")
         st.subheader("🤖 全頭AI評価一覧（AI能力順）")
         md = st.radio("評価基準", ("🔢 枠番(馬番)順", "🎯 的中重視(能力順)", "💎 期待値重視(妙味順)"), horizontal=True, label_visibility="collapsed", key="ai_eval_md")
