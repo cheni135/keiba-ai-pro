@@ -156,7 +156,7 @@ elif "AI検証" in page_mode:
         st.markdown("#### ③ AI印別 成績＆回収率（◎○の信頼度 ＆ ☆穴馬の爆発力）")
         m_list = []
         for mk in ["◎", "○", "▲", "△", "☆"]:
-            sub = vdf.query("AI印 == @mk")
+            sub = vdf[vdf["AI印"] == mk]
             if not sub.empty:
                 m_list.append({"AI印": mk, "頭数": len(sub), "勝率%": round(sub["1着"].mean()*100, 1), "複勝率%": round(sub["3着内"].mean()*100, 1), "単勝回収%": round(sub["単勝払戻"].sum()/(len(sub)*100)*100, 1), "平均オッズ": round(sub["単勝オッズ"].mean(), 1)})
         st.dataframe(pd.DataFrame(m_list), hide_index=True, use_container_width=True)
