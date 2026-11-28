@@ -130,20 +130,13 @@ else:
         elif sort_by == "オッズ人気順": rdf = rdf.sort_values("単勝オッズ", ascending=True)
 
         st.markdown("""<style>
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box){display:flex !important;flex-direction:row !important;flex-wrap:nowrap !important;align-items:center !important;gap:6px !important;background:#1e293b;border-radius:8px;padding:8px 6px;margin-bottom:6px;width:100% !important;min-height:48px !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]{min-width:0 !important;padding:0 !important;display:flex !important;align-items:center !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"] > div{width:100% !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(1){flex:0 0 28px !important;width:28px !important;max-width:28px !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(2){flex:0 0 38px !important;width:38px !important;max-width:38px !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(3){flex:0 0 32px !important;width:32px !important;max-width:32px !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(4){flex:1 1 auto !important;width:auto !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-testid="stSelectbox"] *{min-height:0 !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(2){padding-top:8px !important;}
-
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-baseweb="select"],
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-baseweb="select"] > div{height:32px !important;min-height:32px !important;max-height:32px !important;padding:0 !important;font-size:14px !important;font-weight:bold !important;display:flex !important;align-items:center !important;justify-content:center !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-baseweb="select"] > div > div{padding:0 !important;margin:0 !important;line-height:32px !important;justify-content:center !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) svg{display:none !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box){display:flex !important;flex-direction:row !important;flex-wrap:nowrap !important;align-items:center !important;gap:6px !important;background:#1e293b;border-radius:8px;padding:6px;margin-bottom:5px;width:100% !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]{min-width:0 !important;padding:0 !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(1){flex:0 0 28px !important;width:28px !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(2){flex:0 0 34px !important;width:34px !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(3){flex:0 0 34px !important;width:34px !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(4){flex:1 1 auto !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) button{width:32px !important;height:32px !important;min-height:32px !important;padding:0 !important;border-radius:6px !important;font-size:15px !important;font-weight:bold !important;background:#0f172a !important;color:#fbbf24 !important;border:1.5px solid #fbbf24 !important;line-height:1 !important;}
 .ai-sq{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:6px;font-weight:bold;font-size:14px;border:1.5px solid #475569;color:#94a3b8;background:#0f172a;}
 .ai-◎{border-color:#ef4444;color:#ef4444;background:rgba(239,68,68,.15);}
 .ai-○{border-color:#3b82f6;color:#60a5fa;background:rgba(59,130,246,.15);}
@@ -152,23 +145,22 @@ div[data-testid="stHorizontalBlock"]:has(.nk-row-box) svg{display:none !importan
 .ai-☆{border-color:#a855f7;color:#c084fc;background:rgba(168,85,247,.15);}
 </style>
 <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#9ca3af;padding:4px 6px;border-bottom:1px solid #374151;margin-bottom:6px;">
-<div style="width:28px;text-align:center;">番</div><div style="width:38px;text-align:center;">My印</div><div style="width:32px;text-align:center;">AI印</div><div style="flex:1;padding-left:2px;">馬名・騎手・斤量</div><div style="text-align:right;">オッズ/能力</div>
+<div style="width:28px;text-align:center;">番</div><div style="width:34px;text-align:center;">My印</div><div style="width:34px;text-align:center;">AI印</div><div style="flex:1;padding-left:2px;">馬名・騎手・斤量</div><div style="text-align:right;">オッズ/能力</div>
 </div>""", unsafe_allow_html=True)
 
-        mk_opts = ("--", "◎", "○", "▲", "△", "☆", "✓", "消")
+        mk_cycle = ["", "◎", "○", "▲", "△", "☆", "✓", "消"]
         for r in rdf.to_dict("records"):
             u_no = int(r["馬番"])
-            cur_my = smk.get(u_no, "") or "--"
+            cur_my = smk.get(u_no, "")
             ai_m = r["AI印"] if r["AI印"] else "--"
-            c_no, c_my, c_ai, c_info = st.columns([1, 2, 1, 6])
+            c_no, c_my, c_ai, c_info = st.columns()
             with c_no:
-                st.markdown(f'<div class="nk-row-box waku-box w{int(r.get("枠番",1))}" style="margin:0;width:26px;height:32px;line-height:32px;font-size:13px;">{u_no}</div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="nk-row-box waku-box w{int(r.get("枠番",1))}" style="margin:0;width:28px;height:32px;line-height:32px;font-size:13px;">{u_no}</div>', unsafe_allow_html=True)
             with c_my:
-                sel_m = st.selectbox(f"my_{u_no}", mk_opts, index=mk_opts.index(cur_my) if cur_my in mk_opts else 0, label_visibility="collapsed", key=f"sel_mk_{sk}_{sr}_{u_no}")
-                if sel_m != cur_my:
-                    val_m = "" if sel_m == "--" else sel_m
+                if st.button(cur_my if cur_my else "--", key=f"btn_mk_{sk}_{sr}_{u_no}"):
+                    nxt_m = mk_cycle[(mk_cycle.index(cur_my) + 1) % len(mk_cycle)] if cur_my in mk_cycle else "◎"
                     op = pdf.query("not (開催 == @sk and レース == @sr and 馬番 == @u_no)")
-                    nr = [{"開催": sk, "レース": sr, "馬番": u_no, "My印": val_m, "Myメモ": ""}] if val_m else []
+                    nr = [{"開催": sk, "レース": sr, "馬番": u_no, "My印": nxt_m, "Myメモ": ""}] if nxt_m else []
                     upd = pd.concat([op, pd.DataFrame(nr, columns=["開催", "レース", "馬番", "My印", "Myメモ"])], ignore_index=True)
                     st.session_state["my_preds_df"] = upd
                     save_csv("my_predictions.csv", upd, f"Save {sk} {sr} #{u_no}")
@@ -181,6 +173,7 @@ div[data-testid="stHorizontalBlock"]:has(.nk-row-box) svg{display:none !importan
 <div style="font-size:10px;color:#9ca3af;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{r.get('性齢','')}｜{r['騎手']} {r['斤量']}</div></div>
 <div style="text-align:right;flex-shrink:0;margin-left:4px;"><div class="odds-txt" style="font-size:13px;line-height:1.2;">{r['単勝オッズ']}倍</div><span class="score-pill" style="font-size:9px;padding:1px 5px;">能力 {r['能力スコア']}</span></div>
 </div>''', unsafe_allow_html=True)
+
 
         md = st.radio("モード", ("🎯 的中重視（能力スコア）", "💰 回収率重視（期待値スコア）"), horizontal=True)
         sc = "能力スコア" if "的中" in md else "期待値スコア"
