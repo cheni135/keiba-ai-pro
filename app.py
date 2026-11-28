@@ -64,7 +64,7 @@ with h2:
 
 if "jump_page" in st.session_state:
     st.session_state["nav_radio"] = st.session_state.pop("jump_page")
-page_mode = st.radio("メニュー", ("🔥 勝負レース", "📋 出馬表・AI分析", "💰 買い目", "🌱 馬場傾向"), horizontal=True, label_visibility="collapsed", key="nav_radio")
+page_mode = st.radio("メニュー", ("🔥 勝負レース", "📋 出馬表・AI分析", "💰 買い目", "🌱 馬場傾向", "📊 AI検証"), horizontal=True, label_visibility="collapsed", key="nav_radio")
 
 if not os.path.exists("latest_races.csv"): st.stop()
 all_df = pd.read_csv("latest_races.csv")
@@ -130,6 +130,43 @@ elif "馬場傾向" in page_mode:
     tdf = sdf.query(f"馬場 == '{'芝' if bs == '芝コース' else 'ダート'}'")
     for r in tdf.query("枠番 <= 4 and 脚質 in ('逃げ','先行')" if bs == "芝コース" else "枠番 >= 5 and 脚質 in ('逃げ','先行')").sort_values("能力スコア", ascending=False).head(8).to_dict("records"):
         st.markdown(f"""<div class="nk-card"><div style="display:flex;align-items:center;"><div class="waku-box w{int(r['枠番'])}">{int(r['馬番'])}</div><div><div style="font-size:11px;color:#9ca3af;">{r['レース']}</div><b>{r['馬名']}</b> ({r['脚質']})</div></div><div class="odds-txt">{r['単勝オッズ']}倍</div></div>""", unsafe_allow_html=True)
+elif "AI検証" in page_mode:
+    st.subheader("📊 能力スコア・予測勝率・実着順 三者比較分析")
+    if "実着順" not in all_df.columns or all_df.query("実着順 > 0").empty:
+        st.info("まだ確定着順データがありません。レース終了後に「🔄 全体データ更新」を実行すると自動集計されます。")
+    else:
+        vdf = all_df.query("実着順 > 0").copy()
+        vdf["1着"] = (vdf["実着順"] == 1).astype(int)
+        vdf["3着内"] = (vdf["実着順"] <= 3).astype(int)
+        vdf["単勝払戻"] = vdf["1着"] * vdf["単勝オッズ"] * 100
+        st.caption(f"集計対象：{vdf.groupby(['開催', 'レース']).ngroups}レース（延べ{len(vdf)}頭）")
+        st.markdown("#### ① 能力スコア帯別の好走率（高スコアほど好走しているか？）")
+        bins = [0, 54.9, 59.9, 64.9, 69.9, 100]
+        lbls = ["55点未満", "55〜59点", "60〜64点", "65〜69点", "70点以上"]
+        vdf["スコア帯"] = pd.cut(vdf["能力スコア"], bins=bins, labels=lbls)
+        s_tbl = vdf.groupby("スコア帯", observed=False).agg(頭数=("馬番", "count"), 勝率=("1着", lambda x: round(x.mean()*100, 1)), 複勝率=("3着内", lambda x: round(x.mean()*100, 1)), 単勝回収率=("単勝払戻", lambda x: round(x.sum()/(len(x)*100)*100, 1) if len(x)>0 else 0)).reset_index().iloc[::-1]
+        st.dataframe(s_tbl, hide_index=True, use_container_width=True)
+        st.markdown("#### ② 予測勝率 vs 実勝率（AIの確率予測は正確か？）")
+        pbins = [0, 4.9, 9.9, 19.9, 29.9, 100]
+        plbls = ["5%未満", "5〜9%", "10〜19%", "20〜29%", "30%以上"]
+        vdf["勝率帯"] = pd.cut(vdf["AI予測勝率"], bins=pbins, labels=plbls)
+        p_tbl = vdf.groupby("勝率帯", observed=False).agg(頭数=("馬番", "count"), 平均予測勝率=("AI予測勝率", lambda x: round(x.mean(), 1)), 実際の勝率=("1着", lambda x: round(x.mean()*100, 1)), 複勝率=("3着内", lambda x: round(x.mean()*100, 1))).reset_index().iloc[::-1]
+        st.dataframe(p_tbl, hide_index=True, use_container_width=True)
+        st.markdown("#### ③ AI印別 成績＆回収率（◎○の信頼度 ＆ ☆穴馬の爆発力）")
+        m_list = []
+        for mk in ["◎", "○", "▲", "△", "☆"]:
+            sub = vdf.query("AI印 == @mk")
+            if not sub.empty:
+                m_list.append({"AI印": mk, "頭数": len(sub), "勝率%": round(sub["1着"].mean()*100, 1), "複勝率%": round(sub["3着内"].mean()*100, 1), "単勝回収%": round(sub["単勝払戻"].sum()/(len(sub)*100)*100, 1), "平均オッズ": round(sub["単勝オッズ"].mean(), 1)})
+        st.dataframe(pd.DataFrame(m_list), hide_index=True, use_container_width=True)
+        st.markdown("#### ④ ☆穴馬 激走・好走ピックアップ（3着以内）")
+        hoshi_hit = vdf.query("AI印 == '☆' and 実着順 <= 3").sort_values("単勝オッズ", ascending=False)
+        if hoshi_hit.empty:
+            st.caption("本日の☆印の3着以内好走はまだありません。")
+        else:
+            for r in hoshi_hit.to_dict("records"):
+                st.markdown(f"<div class='nk-card'><div><b>{r['開催']} {r['レース']}</b> ｜ <b>{int(r['実着順'])}着</b><br><span style='color:#fbbf24;'>☆ {int(r['馬番'])}{r['馬名']}</span>（単勝 {r['単勝オッズ']}倍 / 能力 {r['能力スコア']}点 / 期待値 {r['期待値スコア']}%）</div></div>", unsafe_allow_html=True)
+
 else:
     k_opts = list(all_df["開催"].unique())
     def_k = st.session_state.pop("jump_kaisai", k_opts[0])
