@@ -209,99 +209,99 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
         st.bar_chart(pd.DataFrame({"項目": ("1_着順着差", "2_ラップ", "3_騎手勝負度", "4_枠順展開", "5_調教", "6_血統"), "スコア": fv}).set_index("項目"))
 
     elif "買い目" in page_mode:
-    c_bt, c_fm = st.columns([1.4, 1.6])
-    bt = c_bt.selectbox("券種", ("3連複", "3連単", "馬連", "馬単", "ワイド", "枠連", "単勝", "複勝"), label_visibility="collapsed", key="nk_bt")
-    fm = c_fm.radio("方式", ("フォーメ", "ボックス"), horizontal=True, label_visibility="collapsed", key="nk_fm")
-    c_so, c_bg, c_cl = st.columns([1.3, 1.2, 0.8])
-    so_m = c_so.radio("並替", ("枠番順", "人気順", "AI順"), horizontal=True, label_visibility="collapsed", key="nk_so")
-    bg = c_bg.number_input("予算", 100, 1000000, 3000, 500, label_visibility="collapsed", key="nk_bg")
-    rk_key = f"mk_{sk}_{sr}_{bt}"
-    if rk_key not in st.session_state:
-        has_my = rdf["My印"].ne("").any()
-        t_col = "My印" if has_my else "AI印"
-        st.session_state[rk_key] = {
-            1: set(rdf.loc[rdf[t_col].isin(("◎", "○")), "馬番"].astype(int)),
-            2: set(rdf.loc[rdf[t_col].isin(("◎", "○", "▲", "△")), "馬番"].astype(int)),
-            3: set(rdf.loc[rdf[t_col].ne(""), "馬番"].astype(int)),
-        }
-    if c_cl.button("消去", key=f"clr_{rk_key}", use_container_width=True):
-        st.session_state[rk_key] = {1: set(), 2: set(), 3: set()}
-        st.rerun()
-    mk_st = st.session_state[rk_key]
-    cols_n = 1 if (bt in ("単勝", "複勝") or fm == "ボックス") else (2 if bt not in ("3連複", "3連単") else 3)
-    h_cols = st.columns([2.7] + [0.65] * cols_n)
-    h_cols.markdown("<div style='font-size:11px;color:#94a3b8;padding:2px 4px;'>枠 / 印 / 馬名・オッズ</div>", unsafe_allow_html=True)
-    for ci in range(cols_n):
-        lbl = "軸/BOX" if fm == "ボックス" else f"馬{ci+1}"
-        h_cols[ci+1].markdown(f"<div style='text-align:center;font-size:11px;color:#38bdf8;font-weight:bold;'>{lbl}</div>", unsafe_allow_html=True)
-    bdf = rdf.sort_values("馬番" if so_m == "枠番順" else ("単勝オッズ" if so_m == "人気順" else "能力スコア"), ascending=(so_m != "AI順"))
-    for r in bdf.to_dict("records"):
-        u = int(r["馬番"])
-        w = int(r.get("枠番", 1))
-        mk_txt = f"{r['AI印']}{r['My印']}" or "--"
-        rc = st.columns([2.7] + [0.65] * cols_n)
-        rc.markdown(f"<div style='display:flex;align-items:center;background:#1e293b;padding:5px 7px;border-radius:6px;margin-bottom:2px;'><div class='waku-box w{w}' style='margin-right:6px;'>{u}</div><div style='font-size:11px;color:#fbbf24;width:24px;'>{mk_txt}</div><div style='line-height:1.15;'><div style='font-size:13px;font-weight:bold;color:#f8fafc;'>{r['馬名']}</div><div style='font-size:11px;color:#f87171;'>{r['単勝オッズ']}倍 <span style='color:#94a3b8;'>(AI {r['能力スコア']})</span></div></div></div>", unsafe_allow_html=True)
+        c_bt, c_fm = st.columns([1.4, 1.6])
+        bt = c_bt.selectbox("券種", ("3連複", "3連単", "馬連", "馬単", "ワイド", "枠連", "単勝", "複勝"), label_visibility="collapsed", key="nk_bt")
+        fm = c_fm.radio("方式", ("フォーメ", "ボックス"), horizontal=True, label_visibility="collapsed", key="nk_fm")
+        c_so, c_bg, c_cl = st.columns([1.3, 1.2, 0.8])
+        so_m = c_so.radio("並替", ("枠番順", "人気順", "AI順"), horizontal=True, label_visibility="collapsed", key="nk_so")
+        bg = c_bg.number_input("予算", 100, 1000000, 3000, 500, label_visibility="collapsed", key="nk_bg")
+        rk_key = f"mk_{sk}_{sr}_{bt}"
+        if rk_key not in st.session_state:
+            has_my = rdf["My印"].ne("").any()
+            t_col = "My印" if has_my else "AI印"
+            st.session_state[rk_key] = {
+                1: set(rdf.loc[rdf[t_col].isin(("◎", "○")), "馬番"].astype(int)),
+                2: set(rdf.loc[rdf[t_col].isin(("◎", "○", "▲", "△")), "馬番"].astype(int)),
+                3: set(rdf.loc[rdf[t_col].ne(""), "馬番"].astype(int)),
+            }
+        if c_cl.button("消去", key=f"clr_{rk_key}", use_container_width=True):
+            st.session_state[rk_key] = {1: set(), 2: set(), 3: set()}
+            st.rerun()
+        mk_st = st.session_state[rk_key]
+        cols_n = 1 if (bt in ("単勝", "複勝") or fm == "ボックス") else (2 if bt not in ("3連複", "3連単") else 3)
+        h_cols = st.columns([2.7] + [0.65] * cols_n)
+        h_cols.markdown("<div style='font-size:11px;color:#94a3b8;padding:2px 4px;'>枠 / 印 / 馬名・オッズ</div>", unsafe_allow_html=True)
         for ci in range(cols_n):
-            c_idx = ci + 1
-            on = u in mk_st[c_idx]
-            if rc[c_idx].button("✓" if on else "・", key=f"b_{rk_key}_{u}_{c_idx}", type="primary" if on else "secondary", use_container_width=True):
-                if on: mk_st[c_idx].remove(u)
-                else: mk_st[c_idx].add(u)
-                st.rerun()
-    n1, n2, n3 = sorted(mk_st), sorted(mk_st if fm == "ボックス" else mk_st), sorted(mk_st if fm == "ボックス" else mk_st)
-    n2o = {int(r["馬番"]): float(r["単勝オッズ"]) for r in rdf.to_dict("records")}
-    n2w = {int(r["馬番"]): int(r.get("枠番", 1)) for r in rdf.to_dict("records")}
-    n2nm = {int(r["馬番"]): str(r["馬名"])[:3] for r in rdf.to_dict("records")}
-    tinv = sum(1.0 / max(1.1, v) for v in n2o.values())
-    wp = {k: (1.0 / max(1.1, v)) / tinv for k, v in n2o.items()}
-    cbs, seen = [], set()
-    if bt in ("単勝", "複勝"): cbs = [(a,) for a in n1]
-    elif bt in ("枠連", "馬連", "ワイド", "馬単"):
-        for a in n1:
-            for b in n2:
-                p = tuple(sorted((n2w[a], n2w[b]))) if bt == "枠連" else ((a, b) if bt == "馬単" else tuple(sorted((a, b))))
-                if (bt == "枠連" or a != b) and p not in seen: seen.add(p); cbs.append(p)
-    else:
-        for a in n1:
-            for b in n2:
-                for c in n3:
-                    if len({a, b, c}) == 3:
-                        t = (a, b, c) if bt == "3連単" else tuple(sorted((a, b, c)))
-                        if t not in seen: seen.add(t); cbs.append(t)
-    if cbs:
-        st.markdown("---")
-        ex_rows = []
-        for cb in cbs:
-            it = iter(cb)
-            a, b, c = next(it, 0), next(it, 0), next(it, 0)
-            if bt == "単勝": eo, lb = round(n2o[a], 1), f"{a:02d} ({n2nm[a]})"
-            elif bt == "複勝": eo, lb = round(max(1.1, n2o[a] * 0.28 + 0.5), 1), f"{a:02d} ({n2nm[a]})"
-            elif bt == "枠連": eo, lb = round(max(1.5, 0.75 / max(0.002, sum(wp[k] for k, wv in n2w.items() if wv == a) * sum(wp[k] for k, wv in n2w.items() if wv == b) * (1 if a == b else 2))), 1), f"枠{a}-{b}"
-            elif bt == "馬連": eo, lb = round(max(1.8, 0.775 / max(0.001, 2 * wp[a] * wp[b])), 1), f"{a:02d}-{b:02d} ({n2nm[a]}・{n2nm[b]})"
-            elif bt == "ワイド": eo, lb = round(max(1.2, 0.775 / max(0.002, 5.5 * wp[a] * wp[b])), 1), f"{a:02d}-{b:02d} ({n2nm[a]}・{n2nm[b]})"
-            elif bt == "馬単": eo, lb = round(max(2.2, 0.75 / max(0.0008, wp[a] * wp[b])), 1), f"{a:02d}→{b:02d} ({n2nm[a]}→{n2nm[b]})"
-            elif bt == "3連複": eo, lb = round(max(3.0, 0.75 / max(0.0002, 6 * wp[a] * wp[b] * wp[c])), 1), f"{a:02d}-{b:02d}-{c:02d} ({n2nm[a]}・{n2nm[b]}・{n2nm[c]})"
-            else: eo, lb = round(max(5.0, 0.725 / max(0.0001, wp[a] * wp[b] * wp[c])), 1), f"{a:02d}→{b:02d}→{c:02d} ({n2nm[a]}→{n2nm[b]}→{n2nm[c]})"
-            ex_rows.append({"cb": str(cb), "lb": lb, "eo": eo})
-        off_k = f"off_{rk_key}"
-        if off_k not in st.session_state: st.session_state[off_k] = set()
-        off_s = st.session_state[off_k]
-        act_r = [x for x in ex_rows if x["cb"] not in off_s]
-        if act_r:
-            isum = sum(1.0 / x["eo"] for x in act_r)
-            syn = round(1.0 / isum, 2)
-            for x in act_r:
-                x["bet"] = max(100, int(round((bg / (x["eo"] * isum)) / 100.0)) * 100)
-            m1, m2, m3 = st.columns(3)
-            m1.metric("選択点数", f"{len(act_r)}点")
-            m2.metric("合成オッズ", f"{syn}倍")
-            m3.metric("購入合計", f"{sum(x['bet'] for x in act_r):,}円")
-        for x in ex_rows:
-            is_on = x["cb"] not in off_s
-            bc1, bc2 = st.columns([4.2, 0.8])
-            bet_t = f"配分 {x['bet']:,}円 (払戻 {int(x['bet']*x['eo']):,}円)" if is_on else "除外中"
-            bc1.markdown(f"<div style='background:{'#1e293b' if is_on else '#0f172a'};opacity:{'1.0' if is_on else '0.45'};padding:6px 10px;border-radius:6px;border-left:3px solid {'#ef4444' if is_on else '#475569'};margin-bottom:3px;'><div style='font-size:13px;font-weight:bold;color:#f8fafc;'>{x['lb']} <span style='color:#f87171;float:right;'>{x['eo']}倍</span></div><div style='font-size:11px;color:#38bdf8;'>{bet_t}</div></div>", unsafe_allow_html=True)
-            if bc2.button("✓" if is_on else "－", key=f"tg_{rk_key}_{x['cb']}", type="primary" if is_on else "secondary", use_container_width=True):
-                if is_on: off_s.add(x["cb"])
-                else: off_s.remove(x["cb"])
-                st.rerun()
+            lbl = "軸/BOX" if fm == "ボックス" else f"馬{ci+1}"
+            h_cols[ci+1].markdown(f"<div style='text-align:center;font-size:11px;color:#38bdf8;font-weight:bold;'>{lbl}</div>", unsafe_allow_html=True)
+        bdf = rdf.sort_values("馬番" if so_m == "枠番順" else ("単勝オッズ" if so_m == "人気順" else "能力スコア"), ascending=(so_m != "AI順"))
+        for r in bdf.to_dict("records"):
+            u = int(r["馬番"])
+            w = int(r.get("枠番", 1))
+            mk_txt = f"{r['AI印']}{r['My印']}" or "--"
+            rc = st.columns([2.7] + [0.65] * cols_n)
+            rc.markdown(f"<div style='display:flex;align-items:center;background:#1e293b;padding:5px 7px;border-radius:6px;margin-bottom:2px;'><div class='waku-box w{w}' style='margin-right:6px;'>{u}</div><div style='font-size:11px;color:#fbbf24;width:24px;'>{mk_txt}</div><div style='line-height:1.15;'><div style='font-size:13px;font-weight:bold;color:#f8fafc;'>{r['馬名']}</div><div style='font-size:11px;color:#f87171;'>{r['単勝オッズ']}倍 <span style='color:#94a3b8;'>(AI {r['能力スコア']})</span></div></div></div>", unsafe_allow_html=True)
+            for ci in range(cols_n):
+                c_idx = ci + 1
+                on = u in mk_st[c_idx]
+                if rc[c_idx].button("✓" if on else "・", key=f"b_{rk_key}_{u}_{c_idx}", type="primary" if on else "secondary", use_container_width=True):
+                    if on: mk_st[c_idx].remove(u)
+                    else: mk_st[c_idx].add(u)
+                    st.rerun()
+        n1, n2, n3 = sorted(mk_st), sorted(mk_st if fm == "ボックス" else mk_st), sorted(mk_st if fm == "ボックス" else mk_st)
+        n2o = {int(r["馬番"]): float(r["単勝オッズ"]) for r in rdf.to_dict("records")}
+        n2w = {int(r["馬番"]): int(r.get("枠番", 1)) for r in rdf.to_dict("records")}
+        n2nm = {int(r["馬番"]): str(r["馬名"])[:3] for r in rdf.to_dict("records")}
+        tinv = sum(1.0 / max(1.1, v) for v in n2o.values())
+        wp = {k: (1.0 / max(1.1, v)) / tinv for k, v in n2o.items()}
+        cbs, seen = [], set()
+        if bt in ("単勝", "複勝"): cbs = [(a,) for a in n1]
+        elif bt in ("枠連", "馬連", "ワイド", "馬単"):
+            for a in n1:
+                for b in n2:
+                    p = tuple(sorted((n2w[a], n2w[b]))) if bt == "枠連" else ((a, b) if bt == "馬単" else tuple(sorted((a, b))))
+                    if (bt == "枠連" or a != b) and p not in seen: seen.add(p); cbs.append(p)
+        else:
+            for a in n1:
+                for b in n2:
+                    for c in n3:
+                        if len({a, b, c}) == 3:
+                            t = (a, b, c) if bt == "3連単" else tuple(sorted((a, b, c)))
+                            if t not in seen: seen.add(t); cbs.append(t)
+        if cbs:
+            st.markdown("---")
+            ex_rows = []
+            for cb in cbs:
+                it = iter(cb)
+                a, b, c = next(it, 0), next(it, 0), next(it, 0)
+                if bt == "単勝": eo, lb = round(n2o[a], 1), f"{a:02d} ({n2nm[a]})"
+                elif bt == "複勝": eo, lb = round(max(1.1, n2o[a] * 0.28 + 0.5), 1), f"{a:02d} ({n2nm[a]})"
+                elif bt == "枠連": eo, lb = round(max(1.5, 0.75 / max(0.002, sum(wp[k] for k, wv in n2w.items() if wv == a) * sum(wp[k] for k, wv in n2w.items() if wv == b) * (1 if a == b else 2))), 1), f"枠{a}-{b}"
+                elif bt == "馬連": eo, lb = round(max(1.8, 0.775 / max(0.001, 2 * wp[a] * wp[b])), 1), f"{a:02d}-{b:02d} ({n2nm[a]}・{n2nm[b]})"
+                elif bt == "ワイド": eo, lb = round(max(1.2, 0.775 / max(0.002, 5.5 * wp[a] * wp[b])), 1), f"{a:02d}-{b:02d} ({n2nm[a]}・{n2nm[b]})"
+                elif bt == "馬単": eo, lb = round(max(2.2, 0.75 / max(0.0008, wp[a] * wp[b])), 1), f"{a:02d}→{b:02d} ({n2nm[a]}→{n2nm[b]})"
+                elif bt == "3連複": eo, lb = round(max(3.0, 0.75 / max(0.0002, 6 * wp[a] * wp[b] * wp[c])), 1), f"{a:02d}-{b:02d}-{c:02d} ({n2nm[a]}・{n2nm[b]}・{n2nm[c]})"
+                else: eo, lb = round(max(5.0, 0.725 / max(0.0001, wp[a] * wp[b] * wp[c])), 1), f"{a:02d}→{b:02d}→{c:02d} ({n2nm[a]}→{n2nm[b]}→{n2nm[c]})"
+                ex_rows.append({"cb": str(cb), "lb": lb, "eo": eo})
+            off_k = f"off_{rk_key}"
+            if off_k not in st.session_state: st.session_state[off_k] = set()
+            off_s = st.session_state[off_k]
+            act_r = [x for x in ex_rows if x["cb"] not in off_s]
+            if act_r:
+                isum = sum(1.0 / x["eo"] for x in act_r)
+                syn = round(1.0 / isum, 2)
+                for x in act_r:
+                    x["bet"] = max(100, int(round((bg / (x["eo"] * isum)) / 100.0)) * 100)
+                m1, m2, m3 = st.columns(3)
+                m1.metric("選択点数", f"{len(act_r)}点")
+                m2.metric("合成オッズ", f"{syn}倍")
+                m3.metric("購入合計", f"{sum(x['bet'] for x in act_r):,}円")
+            for x in ex_rows:
+                is_on = x["cb"] not in off_s
+                bc1, bc2 = st.columns([4.2, 0.8])
+                bet_t = f"配分 {x['bet']:,}円 (払戻 {int(x['bet']*x['eo']):,}円)" if is_on else "除外中"
+                bc1.markdown(f"<div style='background:{'#1e293b' if is_on else '#0f172a'};opacity:{'1.0' if is_on else '0.45'};padding:6px 10px;border-radius:6px;border-left:3px solid {'#ef4444' if is_on else '#475569'};margin-bottom:3px;'><div style='font-size:13px;font-weight:bold;color:#f8fafc;'>{x['lb']} <span style='color:#f87171;float:right;'>{x['eo']}倍</span></div><div style='font-size:11px;color:#38bdf8;'>{bet_t}</div></div>", unsafe_allow_html=True)
+                if bc2.button("✓" if is_on else "－", key=f"tg_{rk_key}_{x['cb']}", type="primary" if is_on else "secondary", use_container_width=True):
+                    if is_on: off_s.add(x["cb"])
+                    else: off_s.remove(x["cb"])
+                    st.rerun()
