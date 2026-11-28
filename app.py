@@ -105,38 +105,42 @@ if not page_mode:
             orows += f"<div style='display:flex;justify-content:space-between;align-items:center;padding:5px 8px;border-bottom:1px solid #334155;font-size:12px;'><div><span style='color:#94a3b8;margin-right:8px;'>{idx_p}番人気</span><b style='color:#f8fafc;'>{int(mr['馬番'])} {mr['馬名']}</b>{mk_tag}</div><span style='color:#f87171;font-weight:bold;'>{float(mr['単勝オッズ']):.1f}倍</span></div>"
         st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-left:4px solid #0284c7;border-radius:8px;overflow:hidden;margin-bottom:10px;'><div style='background:#0f172a;padding:8px 10px;border-bottom:1px solid #334155;'><div style='font-size:13px;font-weight:bold;color:#f8fafc;'>{r_info.get('開催','')} {int(r_info.get('レース番号',0))}R {r_info.get('レース','').split('R ',1).__getitem__(-1)}</div></div>{orows}</div>", unsafe_allow_html=True)
     st.markdown("#### 競馬場・馬場情報")
-    @st.cache_data(ttl=300)
-    def get_jra_baba(pl_name):
-        import urllib.request, re, ssl
-        ctx = ssl._create_unverified_context()
-        slug = {"東京":"tokyo","京都":"kyoto","中山":"nakayama","阪神":"hanshin","中京":"chukyo","新潟":"niigata","福島":"fukushima","小倉":"kokura","札幌":"sapporo","函館":"hakodate"}.get(pl_name, "tokyo")
-        url = f"https://jra.go.jp{slug}.html"
-        try:
-            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-            raw = urllib.request.urlopen(req, timeout=6, context=ctx).read()
-            html = raw.decode("shift_jis", errors="ignore")
-            if "馬場" not in html:
-                html = raw.decode("utf-8", errors="ignore")
-            txt = re.sub(r"<[^>]+>", " ", html)
-            txt = re.sub(r"\s+", " ", txt)
-            wt_m = re.search(r"天候[：:]\s*(晴|曇|雨|小雨|雪)", txt)
-            sb_m = re.search(r"芝\s*(良|稍重|重|不良)", txt)
-            db_m = re.search(r"ダート\s*(良|稍重|重|不良)", txt)
-            cs_m = re.search(r"クッション値[^0-9]{0,80}(\d{1,2}\.\d)", txt)
-            pcts = re.findall(r"(\d{1,2}\.\d)\s*[%％]", txt)
-            s_g = pcts.__getitem__(0) + "%" if len(pcts) >= 1 else "-"
-            s_4 = pcts.__getitem__(1) + "%" if len(pcts) >= 2 else "-"
-            d_g = pcts.__getitem__(2) + "%" if len(pcts) >= 3 else "-"
-            d_4 = pcts.__getitem__(3) + "%" if len(pcts) >= 4 else "-"
-            return {"wt": wt_m.group(1) if wt_m else "晴", "sb": sb_m.group(1) if sb_m else "良", "db": db_m.group(1) if db_m else "稍重", "cs": cs_m.group(1) if cs_m else "-", "sg": s_g, "s4": s_4, "dg": d_g, "d4": d_4}
-        except Exception:
-            return {"wt": "晴", "sb": "良", "db": "稍重", "cs": "-", "sg": "-", "s4": "-", "dg": "-", "d4": "-"}
     wx_places = tuple(dict.fromkeys(p for p in ("東京","京都","中山","阪神","中京","新潟","福島","小倉","札幌","函館") if any(p in str(h) for h in all_df.get("開催", ())))) or ("東京", "京都")
     w_p = st.segmented_control("天候場", wx_places, default=next(iter(wx_places), "東京"), label_visibility="collapsed", key="hm_wx_p") or next(iter(wx_places), "東京")
-    jb = get_jra_baba(w_p)
-    st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px 12px;margin-bottom:10px;'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;'><span style='font-size:13px;font-weight:bold;color:#f8fafc;'>{w_p}競馬場</span><span style='font-size:12px;color:#38bdf8;font-weight:bold;'>天候：{jb.get('wt')}</span></div><div style='display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;background:#0f172a;padding:7px;border-radius:6px;text-align:center;font-size:11px;margin-bottom:6px;'><div><div style='color:#94a3b8;font-size:10px;'>芝状態</div><b style='color:#4ade80;font-size:13px;'>{jb.get('sb')}</b></div><div style='border-left:1px solid #1e293b;border-right:1px solid #1e293b;'><div style='color:#94a3b8;font-size:10px;'>ダート状態</div><b style='color:#fbbf24;font-size:13px;'>{jb.get('db')}</b></div><div><div style='color:#94a3b8;font-size:10px;'>クッション値</div><b style='color:#38bdf8;font-size:13px;'>{jb.get('cs')}</b></div></div><div style='display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#0f172a;padding:7px;border-radius:6px;font-size:11px;'><div><div style='color:#4ade80;font-weight:bold;margin-bottom:2px;'>芝 含水率</div><div style='color:#cbd5e1;'>ゴール前 <b style='color:#f8fafc;'>{jb.get('sg')}</b> ／ 4角 <b style='color:#f8fafc;'>{jb.get('s4')}</b></div></div><div style='border-left:1px solid #1e293b;padding-left:8px;'><div style='color:#fbbf24;font-weight:bold;margin-bottom:2px;'>ダート 含水率</div><div style='color:#cbd5e1;'>ゴール前 <b style='color:#f8fafc;'>{jb.get('dg')}</b> ／ 4角 <b style='color:#f8fafc;'>{jb.get('d4')}</b></div></div></div></div>", unsafe_allow_html=True)
-
-    st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px 12px;margin-bottom:10px;'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;'><span style='font-size:13px;font-weight:bold;color:#f8fafc;'>{w_p}競馬場</span><span style='font-size:12px;color:#38bdf8;font-weight:bold;'>天候：{jb.get('wt')} ／ クッション値：{jb.get('cs')}</span></div><div style='display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;background:#0f172a;padding:7px;border-radius:6px;text-align:center;font-size:11px;'><div><div style='color:#94a3b8;font-size:10px;'>芝状態</div><b style='color:#4ade80;font-size:13px;'>{jb.get('sb')}</b></div><div style='border-left:1px solid #1e293b;border-right:1px solid #1e293b;'><div style='color:#94a3b8;font-size:10px;'>ダート状態</div><b style='color:#fbbf24;font-size:13px;'>{jb.get('db')}</b></div><div><div style='color:#94a3b8;font-size:10px;'>含水率</div><b style='color:#f8fafc;font-size:13px;'>{jb.get('gs')}</b></div></div></div>", unsafe_allow_html=True)
+    p_df = all_df[all_df.apply(lambda x: w_p in str(x.get("開催", "")), axis=1)]
+    wt_st = next((str(x.get("天候","")) for x in p_df.to_dict("records") if str(x.get("天候","")) not in ("","nan")), "晴")
+    s_st = next((str(x.get("馬場状態","")) for x in p_df.to_dict("records") if "芝" in str(x.get("馬場","")) and str(x.get("馬場状態","")) not in ("","nan")), "良")
+    d_st = next((str(x.get("馬場状態","")) for x in p_df.to_dict("records") if "ダ" in str(x.get("馬場","")) and str(x.get("馬場状態","")) not in ("","nan")), "稍重")
+    r_cnt = len(set(zip(p_df.get("開催", ()), p_df.get("レース番号", ()))))
+    s_cnt = len(set(zip(p_df[p_df.apply(lambda x: "芝" in str(x.get("馬場","")), axis=1)].get("開催", ()), p_df[p_df.apply(lambda x: "芝" in str(x.get("馬場","")), axis=1)].get("レース番号", ()))))
+    d_cnt = max(0, r_cnt - s_cnt)
+    try:
+        hb = pd.read_csv("history_races.csv")
+        if "着順" in all_df.columns:
+            c_hb = all_df[all_df["着順"] > 0]
+            if not c_hb.empty:
+                hb = pd.concat([hb, c_hb], ignore_index=True)
+        hb_p = hb[hb.apply(lambda x: w_p in str(x.get("開催", "")), axis=1)].copy()
+    except Exception:
+        hb_p = pd.DataFrame()
+    def get_bias_txt(surf_k):
+        if hb_p.empty:
+            return "開催前", "開催前"
+        sdf = hb_p[hb_p.apply(lambda x: surf_k in str(x.get("レース", "")) and int(x.get("着順", 99)) in (1, 2, 3), axis=1)]
+        if sdf.empty:
+            return "集計中", "集計中"
+        w_grp = {"内(1-2枠)": 0, "中(3-5枠)": 0, "外(6-8枠)": 0}
+        k_grp = {}
+        for x in sdf.to_dict("records"):
+            wk = int(x.get("枠番", 4))
+            w_grp["内(1-2枠)" if wk <= 2 else ("中(3-5枠)" if wk <= 5 else "外(6-8枠)")] += 1
+            kj = str(x.get("脚質", "")).strip()
+            if kj and kj != "nan":
+                k_grp[kj] = k_grp.get(kj, 0) + 1
+        return max(w_grp, key=w_grp.get), (max(k_grp, key=k_grp.get) if k_grp else "先行")
+    sw_b, sk_b = get_bias_txt("芝")
+    dw_b, dk_b = get_bias_txt("ダ")
+    st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px 12px;margin-bottom:10px;'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;'><span style='font-size:13px;font-weight:bold;color:#f8fafc;'>{w_p}競馬場（全{r_cnt}R）</span><span style='font-size:12px;color:#38bdf8;font-weight:bold;'>天候：{wt_st}</span></div><div style='display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;background:#0f172a;padding:7px;border-radius:6px;text-align:center;font-size:11px;margin-bottom:6px;'><div><div style='color:#94a3b8;font-size:10px;'>芝状態</div><b style='color:#4ade80;font-size:13px;'>{s_st}</b></div><div style='border-left:1px solid #1e293b;border-right:1px solid #1e293b;'><div style='color:#94a3b8;font-size:10px;'>ダート状態</div><b style='color:#fbbf24;font-size:13px;'>{d_st}</b></div><div><div style='color:#94a3b8;font-size:10px;'>内訳</div><b style='color:#f8fafc;font-size:12px;'>芝{s_cnt} / ダ{d_cnt}</b></div></div><div style='display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#0f172a;padding:7px;border-radius:6px;font-size:11px;'><div><div style='color:#4ade80;font-weight:bold;margin-bottom:2px;'>芝 傾向</div><div style='color:#cbd5e1;'>枠：<b style='color:#f8fafc;'>{sw_b}</b> / 脚：<b style='color:#f8fafc;'>{sk_b}</b></div></div><div style='border-left:1px solid #1e293b;padding-left:8px;'><div style='color:#fbbf24;font-weight:bold;margin-bottom:2px;'>ダート 傾向</div><div style='color:#cbd5e1;'>枠：<b style='color:#f8fafc;'>{dw_b}</b> / 脚：<b style='color:#f8fafc;'>{dk_b}</b></div></div></div></div>", unsafe_allow_html=True)
     st.markdown("#### 勝ち馬サーチ（期待値上位）")
     ev_top = all_df[all_df["単勝オッズ"] < 50.0].sort_values("期待値スコア", ascending=False).head(2)
     ecols = st.columns(2)
