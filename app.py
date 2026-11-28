@@ -142,17 +142,29 @@ elif "AI検証" in page_mode:
         vdf["単勝払戻"] = vdf["1着"] * vdf["単勝オッズ"] * 100
         st.caption(f"集計対象：{vdf.groupby(['開催', 'レース']).ngroups}レース（延べ{len(vdf)}頭）")
         st.markdown("#### ① 能力スコア帯別の好走率（高スコアほど好走しているか？）")
-        bins = [0, 54.9, 59.9, 64.9, 69.9, 100]
-        lbls = ["55点未満", "55〜59点", "60〜64点", "65〜69点", "70点以上"]
+        bins, lbls = [0, 54.9, 59.9, 64.9, 69.9, 100], ["55未満", "55〜59", "60〜64", "65〜69", "70以上"]
         vdf["スコア帯"] = pd.cut(vdf["能力スコア"], bins=bins, labels=lbls)
-        s_tbl = vdf.groupby("スコア帯", observed=False).agg(頭数=("馬番", "count"), 勝率=("1着", lambda x: round(x.mean()*100, 1)), 複勝率=("3着内", lambda x: round(x.mean()*100, 1)), 単勝回収率=("単勝払戻", lambda x: round(x.sum()/(len(x)*100)*100, 1) if len(x)>0 else 0)).reset_index().iloc[::-1]
-        st.dataframe(s_tbl, hide_index=True, use_container_width=True)
+        s_h = ""
+        for lb in reversed(lbls):
+            sub = vdf[vdf["スコア帯"] == lb]
+            if not sub.empty:
+                wr, fr = round(sub["1着"].mean()*100, 1), round(sub["3着内"].mean()*100, 1)
+                roi = round(sub["単勝払戻"].sum()/(len(sub)*100)*100, 1)
+                cr = "#f87171" if roi >= 100 else "#cbd5e1"
+                s_h += f"<tr style='border-bottom:1px solid #334155;text-align:right;'><td style='text-align:left;font-weight:bold;color:#38bdf8;padding:6px 8px;'>{lb}</td><td>{len(sub)}</td><td>{wr}%</td><td style='font-weight:bold;'>{fr}%</td><td style='color:{cr};font-weight:bold;padding-right:8px;'>{roi}%</td></tr>"
+        st.markdown(f"<table style='width:100%;border-collapse:collapse;background:#1e293b;color:#f8fafc;font-size:12px;border-radius:8px;overflow:hidden;'><thead><tr style='background:#0f172a;color:#94a3b8;text-align:right;'><th style='text-align:left;padding:6px 8px;'>スコア帯</th><th>頭数</th><th>勝率</th><th>複勝率</th><th style='padding-right:8px;'>単回収</th></tr></thead><tbody>{s_h}</tbody></table>", unsafe_allow_html=True)
         st.markdown("#### ② 予測勝率 vs 実勝率（AIの確率予測は正確か？）")
-        pbins = [0, 4.9, 9.9, 19.9, 29.9, 100]
-        plbls = ["5%未満", "5〜9%", "10〜19%", "20〜29%", "30%以上"]
+        pbins, plbls = [0, 4.9, 9.9, 19.9, 29.9, 100], ["5%未満", "5〜9%", "10〜19%", "20〜29%", "30%以上"]
         vdf["勝率帯"] = pd.cut(vdf["AI予測勝率"], bins=pbins, labels=plbls)
-        p_tbl = vdf.groupby("勝率帯", observed=False).agg(頭数=("馬番", "count"), 平均予測勝率=("AI予測勝率", lambda x: round(x.mean(), 1)), 実際の勝率=("1着", lambda x: round(x.mean()*100, 1)), 複勝率=("3着内", lambda x: round(x.mean()*100, 1))).reset_index().iloc[::-1]
-        st.dataframe(p_tbl, hide_index=True, use_container_width=True)
+        p_h = ""
+        for lb in reversed(plbls):
+            sub = vdf[vdf["勝率帯"] == lb]
+            if not sub.empty:
+                ap, wr, fr = round(sub["AI予測勝率"].mean(), 1), round(sub["1着"].mean()*100, 1), round(sub["3着内"].mean()*100, 1)
+                cw = "#f87171" if wr >= ap else "#cbd5e1"
+                p_h += f"<tr style='border-bottom:1px solid #334155;text-align:right;'><td style='text-align:left;font-weight:bold;color:#38bdf8;padding:6px 8px;'>{lb}</td><td>{len(sub)}</td><td>{ap}%</td><td style='color:{cw};font-weight:bold;'>{wr}%</td><td style='padding-right:8px;'>{fr}%</td></tr>"
+        st.markdown(f"<table style='width:100%;border-collapse:collapse;background:#1e293b;color:#f8fafc;font-size:12px;border-radius:8px;overflow:hidden;'><thead><tr style='background:#0f172a;color:#94a3b8;text-align:right;'><th style='text-align:left;padding:6px 8px;'>予測勝率帯</th><th>頭数</th><th>平均予測</th><th>実勝率</th><th style='padding-right:8px;'>複勝率</th></tr></thead><tbody>{p_h}</tbody></table>", unsafe_allow_html=True)
+
         st.markdown("#### ③ AI印別 成績＆回収率（◎○の信頼度 ＆ ☆穴馬の爆発力）")
         vdf["_ai"] = ""
         for _, g in vdf.groupby(["開催", "レース"]):
