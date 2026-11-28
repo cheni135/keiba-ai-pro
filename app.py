@@ -229,6 +229,7 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
             st.rerun()
         mk_st = st.session_state[rk_key]
         cols_n = 1 if (bt in ("単勝", "複勝") or fm == "ボックス") else (2 if bt not in ("3連複", "3連単") else 3)
+        h_cols = st.columns([2.7] + [0.65] * cols_n)
         next(iter(h_cols)).markdown("<div style='font-size:11px;color:#94a3b8;padding:2px 4px;'>枠 / 印 / 馬名・オッズ</div>", unsafe_allow_html=True)
         for ci in range(cols_n):
             lbl = "軸/BOX" if fm == "ボックス" else f"馬{ci+1}"
@@ -238,6 +239,7 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
             u = int(r["馬番"])
             w = int(r.get("枠番", 1))
             mk_txt = f"{r['AI印']}{r['My印']}" or "--"
+            rc = st.columns([2.7] + [0.65] * cols_n)
             next(iter(rc)).markdown(f"<div style='display:flex;align-items:center;background:#1e293b;padding:5px 7px;border-radius:6px;margin-bottom:2px;'><div class='waku-box w{w}' style='margin-right:6px;'>{u}</div><div style='font-size:11px;color:#fbbf24;width:24px;'>{mk_txt}</div><div style='line-height:1.15;'><div style='font-size:13px;font-weight:bold;color:#f8fafc;'>{r['馬名']}</div><div style='font-size:11px;color:#f87171;'>{r['単勝オッズ']}倍 <span style='color:#94a3b8;'>(AI {r['能力スコア']})</span></div></div></div>", unsafe_allow_html=True)
             for ci in range(cols_n):
                 c_idx = ci + 1
