@@ -202,21 +202,20 @@ if rows:
 p_map_r = {'01':'札幌','02':'函館','03':'福島','04':'新潟','05':'東京','06':'中山','07':'中京','08':'京都','09':'阪神','10':'小倉'}
 k_list = [ln.strip() for ln in open("target_kaisai.txt", encoding="utf-8") if ln.strip()] if os.path.exists("target_kaisai.txt") else []
 res_map = {}
-for kc in k_list:
-    kl = f"{int(kc[6:8])}回{p_map_r.get(kc[4:6],'')}{int(kc[8:10])}日"
-    for rn in range(1, 13):
-        cid = f"{kc}{rn:02d}"
-        try:
-            raw_b = requests.get(f"https://netkeiba.com{cid}/", headers=HEADERS, timeout=8).content
-            h_txt = raw_b.decode("euc-jp", errors="ignore")
-            for tr in __import__("bs4").BeautifulSoup(h_txt, "html.parser").select("table.race_table_01 tr"):
-                tds = [td.get_text(strip=True) for td in tr.find_all("td")]
-                c0 = next(iter(tds), "")
-                c2 = next(iter(tds[2:3]), "")
-                if c0.isdigit() and c2.isdigit() and 1 <= int(c0) <= 18 and 1 <= int(c2) <= 18:
-                    res_map[(kl, rn, int(c2))] = int(c0)
-        except Exception:
-            pass
+if os.path.exists("result_raw.txt"):
+    r_all = open("result_raw.txt", "rb").read().decode("utf-8", errors="ignore")
+    r_blks = [b for b in r_all.split("<!-- RACE_SPLIT -->") if len(b) > 200]
+    for idx_s, sb in enumerate(r_blks):
+        c_i, r_n = idx_s // 12, (idx_s % 12) + 1
+        if c_i >= len(k_list): continue
+        kc = k_list[c_i]
+        kl = f"{int(kc[6:8])}回{p_map_r.get(kc[4:6],'')}{int(kc[8:10])}日"
+        lns = [ln.strip() for ln in next(iter(sb.split("<!-- ODDS_JSON -->")), "").splitlines() if ln.strip()]
+        for i in range(len(lns) - 3):
+            if lns[i].isdigit() and lns[i+1].isdigit() and lns[i+2].isdigit() and not lns[i+3].isdigit():
+                rk_v, wk_v, um_v = int(lns[i]), int(lns[i+1]), int(lns[i+2])
+                if 1 <= rk_v <= 18 and 1 <= wk_v <= 8 and 1 <= um_v <= 18:
+                    res_map[(kl, r_n, um_v)] = rk_v
 df["実着順"] = [res_map.get((str(r["開催"]), int(r["レース番号"]), int(r["馬番"])), 0) for _, r in df.iterrows()]
 
 df.to_csv("latest_races.csv", index=False, encoding="utf-8-sig")
