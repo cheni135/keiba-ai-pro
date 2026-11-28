@@ -145,28 +145,33 @@ if not page_mode:
     st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px 12px;margin-bottom:10px;'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;'><span style='font-size:13px;font-weight:bold;color:#f8fafc;'>{w_p}競馬場</span><span style='font-size:11px;color:#94a3b8;'>JRA馬場・気象</span></div><div style='display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;background:#0f172a;padding:7px;border-radius:6px;text-align:center;font-size:11px;margin-bottom:6px;'><div><div style='color:#94a3b8;font-size:10px;'>天候</div><b style='color:#38bdf8;font-size:13px;'>{wt_st}</b></div><div style='border-left:1px solid #1e293b;border-right:1px solid #1e293b;'><div style='color:#94a3b8;font-size:10px;'>芝状態</div><b style='color:#4ade80;font-size:13px;'>{s_st}</b></div><div><div style='color:#94a3b8;font-size:10px;'>ダート状態</div><b style='color:#fbbf24;font-size:13px;'>{d_st}</b></div></div><div style='display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#0f172a;padding:7px;border-radius:6px;font-size:11px;'><div><div style='color:#4ade80;font-weight:bold;margin-bottom:2px;'>芝 トレンド</div><div style='color:#cbd5e1;'>枠：<b style='color:#f8fafc;'>{sw_b}</b> / 脚：<b style='color:#f8fafc;'>{sk_b}</b></div></div><div style='border-left:1px solid #1e293b;padding-left:8px;'><div style='color:#fbbf24;font-weight:bold;margin-bottom:2px;'>ダート トレンド</div><div style='color:#cbd5e1;'>枠：<b style='color:#f8fafc;'>{dw_b}</b> / 脚：<b style='color:#f8fafc;'>{dk_b}</b></div></div></div></div>", unsafe_allow_html=True)
     st.markdown("#### 勝ち馬サーチ（期待値上位）")
     ev_top = all_df[all_df["単勝オッズ"] < 50.0].sort_values("期待値スコア", ascending=False).head(2)
-    st.markdown("#### 開催レース一覧（タップで出馬表へ）")
-    st.markdown("<style>div.st-key-hm_rgrid,div.st-key-hm_rgrid>div{width:100% !important;}div.st-key-hm_rgrid div[data-testid='stVerticalBlockBorderWrapper']>div>div[data-testid='stVerticalBlock'],div.st-key-hm_rgrid>div>div[data-testid='stVerticalBlock']{display:grid !important;grid-template-columns:1fr 1fr !important;gap:6px !important;align-items:start !important;}div.st-key-hm_rgrid button{width:100% !important;min-width:0 !important;background:#1e293b !important;color:#f8fafc !important;border:1px solid #334155 !important;border-left:3px solid #0284c7 !important;border-radius:6px !important;padding:5px 5px !important;margin-bottom:3px !important;font-size:10px !important;line-height:1.25 !important;text-align:left !important;justify-content:flex-start !important;}</style>", unsafe_allow_html=True)
+    st.markdown("#### 開催レース一覧")
+    st.markdown("<style>div.st-key-hm_rgrid>div[data-testid='stVerticalBlock']{display:grid !important;grid-template-columns:1fr 1fr !important;gap:6px !important;align-items:start !important;}div.st-key-hm_rgrid div[class*='st-key-hm_col_']>div[data-testid='stVerticalBlock']{display:flex !important;flex-direction:column !important;gap:3px !important;}div.st-key-hm_rgrid div[class*='st-key-hm_done_'] button{width:100% !important;min-width:0 !important;background:#0f172a !important;color:#94a3b8 !important;border:1px solid #1e293b !important;border-left:3px solid #64748b !important;border-radius:6px !important;padding:5px 5px !important;font-size:10px !important;line-height:1.25 !important;text-align:left !important;justify-content:flex-start !important;}div.st-key-hm_rgrid div[class*='st-key-hm_open_'] button{width:100% !important;min-width:0 !important;background:#1e293b !important;color:#f8fafc !important;border:1px solid #334155 !important;border-left:3px solid #0ea5e9 !important;border-radius:6px !important;padding:5px 5px !important;font-size:10px !important;line-height:1.25 !important;text-align:left !important;justify-content:flex-start !important;}</style>", unsafe_allow_html=True)
     all_pls = list(dict.fromkeys(all_df.get("開催", ())))
     latest_pls = tuple(dict.fromkeys(next((p for p in reversed(all_pls) if trk in str(p)), None) for trk in ("東京","京都","中山","阪神","中京","新潟","福島","小倉","札幌","函館")))
     show_pls = [p for p in latest_pls if p] or all_pls
     with st.container(key="hm_rgrid"):
-        for pl_nm in show_pls:
-            with st.container():
+        for c_i, pl_nm in enumerate(show_pls):
+            with st.container(key=f"hm_col_{c_i}"):
                 sub_p = all_df[all_df.get("開催") == pl_nm].sort_values("レース番号")
                 s_c = next((str(x.get("馬場状態","")) for x in sub_p.to_dict("records") if "芝" in str(x.get("馬場","")) and str(x.get("馬場状態","")) not in ("","nan")), "良")
                 d_c = next((str(x.get("馬場状態","")) for x in sub_p.to_dict("records") if "ダ" in str(x.get("馬場","")) and str(x.get("馬場状態","")) not in ("","nan")), "良")
-                st.markdown(f"<div style='background:#0f172a;border:1px solid #334155;border-radius:6px;padding:5px 4px;margin-bottom:4px;text-align:center;'><div style='font-size:11px;font-weight:bold;color:#f8fafc;'>{pl_nm}</div><div style='font-size:9.5px;color:#38bdf8;'>芝:{s_c} ／ ダ:{d_c}</div></div>", unsafe_allow_html=True)
+                st.markdown(f"<div style='background:#0f172a;border:1px solid #334155;border-radius:6px;padding:6px 4px;margin-bottom:2px;text-align:center;'><div style='font-size:11.5px;font-weight:bold;color:#f8fafc;'>{pl_nm}</div><div style='font-size:9.5px;color:#38bdf8;'>芝:{s_c} ／ ダ:{d_c}</div></div>", unsafe_allow_html=True)
                 for rno, grp in sub_p.groupby("レース番号", sort=True):
                     r0 = next(iter(grp.to_dict("records")), {})
                     r_str = str(r0.get("レース", ""))
                     r_tit = r_str.split("R ", 1).__getitem__(-1).split(" (").__getitem__(0)
                     r_crs = r_str.split("(").__getitem__(-1).replace(")", "") if "(" in r_str else ""
-                    if st.button(f"{int(rno)}R {r_tit}\n{r_crs} {len(grp)}頭", key=f"hm_go_{pl_nm}_{int(rno)}", use_container_width=True):
-                        st.session_state["jump_page"] = "出馬表"
-                        st.session_state["jump_kaisai"] = pl_nm
-                        st.session_state["jump_rkey"] = r_str
-                        st.rerun()
+                    is_done = any(int(float(x.get("実着順", x.get("着順", 0)) or 0)) > 0 for x in grp.to_dict("records"))
+                    st_tag = " [確定]" if is_done else ""
+                    w_cls = f"hm_done_{c_i}_{int(rno)}" if is_done else f"hm_open_{c_i}_{int(rno)}"
+                    with st.container(key=w_cls):
+                        if st.button(f"{int(rno)}R {r_tit}{st_tag}\n{r_crs} {len(grp)}頭", key=f"hm_go_{pl_nm}_{int(rno)}", use_container_width=True):
+                            st.session_state["jump_page"] = "出馬表"
+                            st.session_state["jump_kaisai"] = pl_nm
+                            st.session_state["jump_rkey"] = r_str
+                            st.rerun()
+
     st.subheader("🔥 本日のAI厳選 勝負レース（発走順）")
     picked = 0
     for idx_g, ((rno, ks, rn), g) in enumerate(all_df.sort_values(["レース番号", "開催"]).groupby(["レース番号", "開催", "レース"], sort=False)):
