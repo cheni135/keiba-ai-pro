@@ -140,7 +140,7 @@ if not page_mode:
     st.markdown("#### リアルタイム天候情報")
     wx_places = list(dict.fromkeys(p for p in ("東京","京都","中山","阪神","中京","新潟","福島","小倉","札幌","函館") if any(p in str(h) for h in all_df.get("開催", ())))) or ["東京", "京都"]
     w_p = st.segmented_control("天候場", wx_places, default=next(iter(wx_places), "東京"), label_visibility="collapsed", key="hm_wx_p") or next(iter(wx_places), "東京")
-    wi = wx_d.get(w_p, wx_d["東京"])
+    wi = wx_d.get(w_p) or next(iter(wx_d.values()))
     st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px 12px;margin-bottom:10px;'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;'><span style='font-size:13px;font-weight:bold;color:#f8fafc;'>{w_p}競馬場</span><span style='font-size:15px;font-weight:bold;color:#38bdf8;'>{wi['wt']}　{wi['tmp']}℃</span></div><div style='display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;background:#0f172a;padding:7px;border-radius:6px;text-align:center;font-size:11px;'><div><div style='color:#94a3b8;font-size:10px;'>降水確率</div><b style='color:#f8fafc;'>{wi['pp']}%</b></div><div style='border-left:1px solid #1e293b;border-right:1px solid #1e293b;'><div style='color:#94a3b8;font-size:10px;'>湿度</div><b style='color:#f8fafc;'>{wi['hum']}%</b></div><div><div style='color:#94a3b8;font-size:10px;'>直線の風</div><b style='color:#fbbf24;'>{wi['wd']} {wi['ws']}m/s</b></div></div></div>", unsafe_allow_html=True)
     st.markdown("#### 勝ち馬サーチ（期待値上位）")
     ev_top = all_df[all_df["単勝オッズ"] < 50.0].sort_values("期待値スコア", ascending=False).head(2)
