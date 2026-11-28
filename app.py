@@ -139,8 +139,7 @@ if not page_mode:
     rl_rows = ""
     for rno, grp in rlist_df.groupby("レース番号", sort=True):
         r0 = next(iter(grp.to_dict("records")), {})
-        hon = grp[grp.get("AI印", grp.get("印", "")) == "◎"]
-        h0 = next(iter(hon.to_dict("records")), None)
+        h0 = next((x for x in grp.to_dict("records") if str(x.get("AI印", x.get("印", ""))) == "◎"), None)
         hon_s = f"◎ {int(h0['馬番'])}{h0['馬名']}" if h0 else ""
         rl_rows += f"<div style='display:flex;align-items:center;justify-content:space-between;padding:7px 8px;border-bottom:1px solid #334155;'><div style='display:flex;align-items:center;min-width:0;'><span style='background:#0284c7;color:#ffffff;font-weight:bold;font-size:11px;padding:3px 7px;border-radius:5px;margin-right:8px;flex-shrink:0;'>{int(rno)}R</span><div style='min-width:0;'><div style='font-size:12px;font-weight:bold;color:#f8fafc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'>{r0.get('レース名','')}</div><div style='font-size:10px;color:#94a3b8;'>{r0.get('レース','')} {len(grp)}頭</div></div></div><span style='font-size:10.5px;color:#fbbf24;font-weight:bold;flex-shrink:0;margin-left:6px;'>{hon_s}</span></div>"
     st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-radius:8px;overflow:hidden;'>{rl_rows}</div>", unsafe_allow_html=True)
