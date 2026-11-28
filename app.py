@@ -315,8 +315,9 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
         w_hex_a = {1:"#f8fafc", 2:"#0f172a", 3:"#ef4444", 4:"#3b82f6", 5:"#eab308", 6:"#22c55e", 7:"#f97316", 8:"#ec4899"}
         for r in rk_a.to_dict("records"):
             wc = w_hex_a.get(int(r.get("枠番", 1)), "#f8fafc")
+            my_m = str(smk.get(int(r["馬番"]), ""))
             mk_t = str(r.get("AI印", r.get("印", "")))
-            mk_b = f"<span style='background:#fbbf24;color:#0f172a;font-weight:bold;font-size:11px;padding:1px 6px;border-radius:4px;margin-left:6px;'>{mk_t}</span>" if mk_t in ("◎","○","▲","△","☆") else ""
+            mk_b = (f"<span style='background:#0284c7;color:#ffffff;font-weight:bold;font-size:10px;padding:1px 5px;border-radius:4px;margin-left:5px;'>自 {my_m}</span>" if my_m in ("◎","○","▲","△","☆","✓") else "") + (f"<span style='background:#fbbf24;color:#0f172a;font-weight:bold;font-size:10px;padding:1px 5px;border-radius:4px;margin-left:4px;'>AI {mk_t}</span>" if mk_t in ("◎","○","▲","△","☆") else "")
             ev_a = float(r.get("期待値スコア", 0)); ev_ca = "#fbbf24" if ev_a >= 100 else "#cbd5e1"; pop_n = int(r["_pop"])
             top_r = f"<span style='color:#38bdf8;'>勝率 {float(r['AI予測勝率']):.1f}%</span>" if a_so=="馬番順" else (f"<span style='color:#fbbf24;'>能力 {float(r['能力スコア']):.1f}点</span>" if a_so=="能力順" else (f"<span style='color:{ev_ca};'>期待値 {ev_a:.1f}%</span>" if a_so=="期待値" else f"<span style='color:#f87171;'>{pop_n}番人気 ({float(r['単勝オッズ']):.1f}倍)</span>"))
             sub_r = f"<span><b style='color:#e2e8f0;'>{pop_n}番人気</b></span><span>単勝 <b style='color:#f87171;'>{float(r['単勝オッズ']):.1f}倍</b></span><span>勝率 <b style='color:#38bdf8;'>{float(r['AI予測勝率']):.1f}%</b></span><span>能力 <b style='color:#fbbf24;'>{float(r['能力スコア']):.1f}</b></span><span>期待値 <b style='color:{ev_ca};'>{ev_a:.1f}%</b></span>"
