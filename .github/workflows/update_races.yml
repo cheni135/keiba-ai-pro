@@ -38,5 +38,5 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add latest_races.csv target_kaisai.txt
+          git add latest_races.csv history_races.csv
           git diff --quiet && git diff --staged --quiet || (git commit -m "Auto update JRA race data" && git push)
