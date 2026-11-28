@@ -202,23 +202,25 @@ if rows:
         p_map_r = {'01':'札幌','02':'函館','03':'福島','04':'新潟','05':'東京','06':'中山','07':'中京','08':'京都','09':'阪神','10':'小倉'}
         k_list = [ln.strip() for ln in open("target_kaisai.txt", encoding="utf-8") if ln.strip()] if os.path.exists("target_kaisai.txt") else []
         res_map = {}
-        for kc in k_list:
-            kl = f"{int(kc[6:8])}回{p_map_r.get(kc[4:6],'')}{int(kc[8:10])}日"
-            for rn in range(1, 13):
-                cid = f"{kc[2:]}{rn:02d}"
-                try:
-                    r_html = requests.get(f"https://yahoo.co.jp{cid}", headers=HEADERS, timeout=8).text
-                    for tr in BeautifulSoup(r_html, "html.parser").select("tr"):
-                        tds = [td.get_text(strip=True) for td in tr.find_all(["td", "th"])]
-                        nums = [int(x) for x in tds if x.isdigit() and 1 <= int(x) <= 18]
-                        if len(nums) >= 3:
-                            res_map[(kl, rn, next(iter(nums[2:3])))] = next(iter(nums))
-                        elif len(nums) == 2:
-                            res_map[(kl, rn, next(iter(nums[1:2])))] = next(iter(nums))
-                except Exception:
-                    pass
+        if os.path.exists("sp_raw.txt"):
+            sp_all = open("sp_raw.txt", "rb").read().decode("utf-8", errors="ignore")
+            if "芝" not in sp_all and "ダ" not in sp_all:
+                sp_all = open("sp_raw.txt", "rb").read().decode("euc-jp", errors="ignore")
+            sp_blks = [b for b in sp_all.split("<!-- RACE_SPLIT -->") if len(b) > 500]
+            for idx_s, sb in enumerate(sp_blks):
+                c_i, r_n = idx_s // 12, (idx_s % 12) + 1
+                if c_i >= len(k_list): continue
+                kc = k_list[c_i]
+                kl = f"{int(kc[6:8])}回{p_map_r.get(kc[4:6],'')}{int(kc[8:10])}日"
+                h_part = next(iter(sb.split("<!-- ODDS_JSON -->")), "")
+                for tr in BeautifulSoup(h_part, "html.parser").select("tr"):
+                    tds = [td.get_text(strip=True) for td in tr.find_all(["td", "th"])]
+                    nums = [int(x) for x in tds if x.isdigit() and 1 <= int(x) <= 18]
+                    if len(nums) >= 3:
+                        res_map[(kl, r_n, next(iter(nums[2:3])))] = next(iter(nums))
+                    elif len(nums) == 2:
+                        res_map[(kl, r_n, next(iter(nums[1:2])))] = next(iter(nums))
         df["実着順"] = [res_map.get((str(r["開催"]), int(r["レース番号"]), int(r["馬番"])), 0) for _, r in df.iterrows()]
-
 
         df.to_csv("latest_races.csv", index=False, encoding="utf-8-sig")
         print("Saved rows:", len(df))
