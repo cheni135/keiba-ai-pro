@@ -167,15 +167,15 @@ if rows:
         df["能力スコア"] = np.round(np.clip(raw_sc, 24, 94), 1)
         wp, t3p, odds, exps = np.zeros(n), np.zeros(n), np.zeros(n), np.zeros(n) 
         for _, g in df.groupby(["開催","レース番号"]):
-        ix = g.index.to_numpy()
-        sc = g["能力スコア"].values
-        e = np.exp((sc - np.mean(sc)) / 5.5)
-        w = e / np.sum(e)
-        t3 = np.clip(w*2.6 + 0.03, 0.02, 0.88)
-        real_od = g["実オッズ"].values
-        sim_od = np.round(np.clip((0.78 / np.maximum(0.008, w)) * np.random.uniform(0.85, 1.15, len(g)), 1.3, 150.0), 1)
-        od = np.where(real_od > 1.0, real_od, sim_od)
-        wp[ix], t3p[ix], odds[ix], exps[ix] = np.round(w*100, 1), np.round(t3*100, 1), od, np.round(((w*od*0.65) + (t3*(od*0.25+0.6)*0.35))*100, 1)
+            ix = g.index.to_numpy()
+            sc = g["能力スコア"].values
+            e = np.exp((sc - np.mean(sc)) / 5.5)
+            w = e / np.sum(e)
+            t3 = np.clip(w*2.6 + 0.03, 0.02, 0.88)
+            real_od = g["実オッズ"].values
+            sim_od = np.round(np.clip((0.78 / np.maximum(0.008, w)) * np.random.uniform(0.85, 1.15, len(g)), 1.3, 150.0), 1)
+            od = np.where(real_od > 1.0, real_od, sim_od)
+            wp[ix], t3p[ix], odds[ix], exps[ix] = np.round(w*100, 1), np.round(t3*100, 1), od, np.round(((w*od*0.65) + (t3*(od*0.25+0.6)*0.35))*100, 1)
     df["AI予測勝率"], df["AI予測3着内率"], df["単勝オッズ"], df["期待値スコア"], df["更新日時"] = wp, t3p, odds, exps, now.strftime("%Y/%m/%d %H:%M")
     df.to_csv("latest_races.csv", index=False, encoding="utf-8-sig")
     print("Saved rows:", len(df))
