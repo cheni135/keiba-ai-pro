@@ -130,12 +130,12 @@ else:
         elif sort_by == "オッズ人気順": rdf = rdf.sort_values("単勝オッズ", ascending=True)
 
         st.markdown("""<style>
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box){display:flex !important;flex-direction:row !important;flex-wrap:nowrap !important;align-items:center !important;gap:4px !important;background:#1e293b;border-radius:8px;padding:6px;margin-bottom:5px;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="column"]{min-width:0 !important;padding:0 !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="column"]:nth-child(1){flex:0 0 28px !important;width:28px !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="column"]:nth-child(2){flex:0 0 58px !important;width:58px !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="column"]:nth-child(3){flex:0 0 32px !important;width:32px !important;}
-div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="column"]:nth-child(4){flex:1 1 auto !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box){display:flex !important;flex-direction:row !important;flex-wrap:nowrap !important;align-items:center !important;gap:4px !important;background:#1e293b;border-radius:8px;padding:6px;margin-bottom:5px;width:100% !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]{min-width:0 !important;padding:0 !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(1){flex:0 0 28px !important;width:28px !important;max-width:28px !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(2){flex:0 0 54px !important;width:54px !important;max-width:54px !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(3){flex:0 0 32px !important;width:32px !important;max-width:32px !important;}
+div[data-testid="stHorizontalBlock"]:has(.nk-row-box) > div[data-testid="stColumn"]:nth-child(4){flex:1 1 auto !important;width:auto !important;}
 div[data-testid="stHorizontalBlock"]:has(.nk-row-box) div[data-baseweb="select"] > div{min-height:32px !important;height:32px !important;padding:0 4px !important;font-size:13px !important;}
 div[data-testid="stHorizontalBlock"]:has(.nk-row-box) svg{display:none !important;}
 .ai-sq{display:flex;align-items:center;justify-content:center;width:30px;height:32px;border-radius:6px;font-weight:bold;font-size:14px;border:1.5px solid #475569;color:#94a3b8;background:#0f172a;}
@@ -145,6 +145,7 @@ div[data-testid="stHorizontalBlock"]:has(.nk-row-box) svg{display:none !importan
 .ai-△{border-color:#eab308;color:#facc15;background:rgba(234,179,8,.15);}
 .ai-☆{border-color:#a855f7;color:#c084fc;background:rgba(168,85,247,.15);}
 </style>
+
 <div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#9ca3af;padding:4px 6px;border-bottom:1px solid #374151;margin-bottom:6px;">
 <div style="width:28px;text-align:center;">番</div><div style="width:58px;text-align:center;">My印</div><div style="width:32px;text-align:center;">AI印</div><div style="flex:1;">馬名・騎手・斤量</div><div style="text-align:right;">オッズ/能力</div>
 </div>""", unsafe_allow_html=True)
