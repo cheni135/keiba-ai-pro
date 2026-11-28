@@ -207,7 +207,6 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
     fv = (float(inf["着順着差指数"]), float(inf["ラップタイム指数"]), float(inf["厩舎騎手勝負度"]), float(inf["枠順展開適合"]), float(inf["調教指数"]), float(inf["血統適性"]))
     st.bar_chart(pd.DataFrame({"項目": ("1_着順着差", "2_ラップ", "3_騎手勝負度", "4_枠順展開", "5_調教", "6_血統"), "スコア": fv}).set_index("項目"))
 
-
     elif "買い目" in page_mode:
         bt = st.radio("券種", ("単勝", "複勝", "枠連", "馬連", "ワイド", "馬単", "3連複", "3連単"), horizontal=True)
         bg = st.number_input("総予算(円)", 100, 1000000, 3000, 100)
