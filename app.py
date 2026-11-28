@@ -89,63 +89,31 @@ def ai_comment(r, avg):
     return f"能力{r.get('能力スコア')}点（平均比 {df_a:+.1f}pt）：" + (" ／ ".join(res) if res else "平均水準のバランス型。")
 
 if not page_mode:
-    import urllib.request, json
-    @st.cache_data(ttl=300)
-    def get_track_wx(places):
-        import ssl, urllib.parse
-        ctx = ssl._create_unverified_context()
-        coords = {"東京":(35.664,139.485),"京都":(34.907,135.724),"中山":(35.725,139.960),"阪神":(34.779,135.362),"中京":(35.066,136.988),"新潟":(37.948,139.184),"福島":(37.766,140.483),"小倉":(33.841,130.873),"札幌":(43.076,141.326),"函館":(41.782,140.793)}
-        res = {}
-        for nm in places:
-            lat, lon = coords.get(nm, (35.664, 139.485))
-            try:
-                u = urllib.parse.quote(f"https://open-meteo.com{lat}&longitude={lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m&hourly=precipitation_probability&forecast_days=1&timezone=GMT", safe=":/?=&,.")
-                req = urllib.request.Request(u, headers={"User-Agent": "curl/8.0"})
-                d = json.loads(urllib.request.urlopen(req, timeout=6, context=ctx).read().decode())
-                cur = d.get("current", {})
-                wc = int(cur.get("weather_code", 0))
-                wt = "快晴" if wc == 0 else ("晴" if wc <= 2 else ("曇" if wc <= 48 else ("雨" if wc <= 67 or wc >= 80 else "雪")))
-                dirs = ("北", "北東", "東", "南東", "南", "南西", "西", "北西")
-                wd = dirs.__getitem__(int((float(cur.get("wind_direction_10m", 0)) + 22.5) // 45) % 8)
-                pp = next(iter(d.get("hourly", {}).get("precipitation_probability", (0,))), 0)
-                res[nm] = {"wt": wt, "tmp": round(float(cur.get("temperature_2m", 0)), 1), "hum": int(cur.get("relative_humidity_2m", 0)), "ws": round(float(cur.get("wind_speed_10m", 0)), 1), "wd": wd, "pp": int(pp)}
-            except Exception as e1:
-                try:
-                    wu = f"https://wttr.in{q_city}?format=j1"
-                    wreq = urllib.request.Request(wu, headers={"User-Agent": "curl/8.0"})
-                    wd_j = json.loads(urllib.request.urlopen(wreq, timeout=6, context=ctx).read().decode())
-                    cc = next(iter(wd_j.get("current_condition", ())))
-                    w_en = next(iter(cc.get("weatherDesc", ()))).get("value", "").lower()
-                    wt = "雨" if "rain" in w_en or "drizzle" in w_en else ("曇" if "cloud" in w_en or "overcast" in w_en else "晴")
-                    ws_ms = round(float(cc.get("windspeedKmph", 10)) / 3.6, 1)
-                    pp_w = next(iter(next(iter(wd_j.get("weather", ()))).get("hourly", ()))).get("chanceofrain", "10")
-                    res[nm] = {"wt": wt, "tmp": cc.get("temp_C", "-"), "hum": cc.get("humidity", "-"), "ws": ws_ms, "wd": cc.get("winddir16Point", "-"), "pp": pp_w}
-                except Exception as e2:
-                    res[nm] = {"wt": f"ERR:{type(e1).__name__}", "tmp": "-", "hum": "-", "ws": "-", "wd": "-", "pp": "-"}
-        return res
-
-    wx_places = tuple(dict.fromkeys(p for p in ("東京","京都","中山","阪神","中京","新潟","福島","小倉","札幌","函館") if any(p in str(h) for h in all_df.get("開催", ())))) or ("東京", "京都")
-    wx_d = get_track_wx(wx_places)
     st.markdown("#### 注目メイン・重賞 最新オッズ")
     mains = all_df[all_df.apply(lambda x: any(k in f"{x.get('レース名','')} {x.get('レース','')}" for k in ("(GI)", "(GII)", "(GIII)", "(G1)", "(G2)", "(G3)", "(L)", "(OP)", "オープン", "JGI", "JGII", "JGIII")) and not any(ng in f"{x.get('レース名','')} {x.get('レース','')}" for ng in ("3勝", "2勝", "1勝", "未勝利", "新馬")), axis=1)].copy()
     st.markdown("<style>div.st-key-hm_main_sel,div.st-key-hm_main_sel>div,div.st-key-hm_main_sel>div>div,div.st-key-hm_main_sel div[data-testid='stButtonGroup']{width:100% !important;max-width:100% !important;display:block !important;}div.st-key-hm_main_sel div[role='radiogroup']{display:grid !important;grid-template-columns:1fr 1fr !important;width:100% !important;gap:6px !important;margin-bottom:8px !important;}div.st-key-hm_main_sel button{width:100% !important;min-width:0 !important;background:#1e293b !important;color:#f8fafc !important;border:1px solid #334155 !important;border-left:4px solid #0ea5e9 !important;border-radius:8px !important;padding:7px 8px !important;font-size:11px !important;line-height:1.3 !important;white-space:normal !important;text-align:left !important;justify-content:flex-start !important;}div.st-key-hm_main_sel button:is([aria-checked='true'],[aria-pressed='true'],[kind='segmented_controlActive']){background:#0284c7 !important;border-color:#38bdf8 !important;color:#ffffff !important;box-shadow:0 0 8px rgba(56,189,248,0.4) !important;}div.st-key-hm_wx_p,div.st-key-hm_wx_p>div,div.st-key-hm_wx_p>div>div,div.st-key-hm_wx_p div[data-testid='stButtonGroup']{width:100% !important;max-width:100% !important;display:block !important;}div.st-key-hm_wx_p div[role='radiogroup']{display:grid !important;grid-template-columns:1fr 1fr !important;width:100% !important;background:#0f172a !important;padding:4px !important;border-radius:8px !important;border:1px solid #334155 !important;gap:4px !important;margin-bottom:6px !important;}div.st-key-hm_wx_p button{width:100% !important;background:transparent !important;color:#94a3b8 !important;border:1px solid transparent !important;border-radius:6px !important;padding:6px 0 !important;font-size:12px !important;font-weight:bold !important;justify-content:center !important;}div.st-key-hm_wx_p button:is([aria-checked='true'],[aria-pressed='true'],[kind='segmented_controlActive']){background:#0284c7 !important;border-color:#38bdf8 !important;color:#ffffff !important;}</style>", unsafe_allow_html=True)
     if not mains.empty:
-        mains = mains.assign(_m_lbl=mains.apply(lambda x: str(x.get('レース','')).split('R ',1)[-1].split(' (')[0].replace('(',' ').replace(')',''), axis=1))
+        mains = mains.assign(_m_lbl=mains.apply(lambda x: str(x.get('レース','')).split('R ',1).__getitem__(-1).split(' (').__getitem__(0).replace('(',' ').replace(')',''), axis=1))
         m_opts = list(dict.fromkeys(mains.get("_m_lbl")))
         sel_m = st.segmented_control("メイン選択", m_opts, default=next(iter(m_opts), None), label_visibility="collapsed", key="hm_main_sel") or next(iter(m_opts), "")
-        msub = mains[mains["_m_lbl"] == sel_m].sort_values("単勝オッズ").head(5)
+        msub = mains[mains.get("_m_lbl") == sel_m].sort_values("単勝オッズ").head(5)
         r_info = next(iter(msub.to_dict("records")), {})
         orows = ""
         for idx_p, (_, mr) in enumerate(msub.iterrows(), 1):
             mk_s = str(mr.get("AI印", mr.get("印", "")))
             mk_tag = f"<span style='background:#fbbf24;color:#0f172a;font-size:10px;font-weight:bold;padding:1px 5px;border-radius:3px;margin-left:6px;'>AI {mk_s}</span>" if mk_s in ("◎","○","▲","△","☆") else ""
             orows += f"<div style='display:flex;justify-content:space-between;align-items:center;padding:5px 8px;border-bottom:1px solid #334155;font-size:12px;'><div><span style='color:#94a3b8;margin-right:8px;'>{idx_p}番人気</span><b style='color:#f8fafc;'>{int(mr['馬番'])} {mr['馬名']}</b>{mk_tag}</div><span style='color:#f87171;font-weight:bold;'>{float(mr['単勝オッズ']):.1f}倍</span></div>"
-        st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-left:4px solid #0284c7;border-radius:8px;overflow:hidden;margin-bottom:10px;'><div style='background:#0f172a;padding:8px 10px;border-bottom:1px solid #334155;'><div style='font-size:13px;font-weight:bold;color:#f8fafc;'>{r_info.get('開催','')} {int(r_info.get('レース番号',0))}R {r_info.get('レース名','')}</div><div style='font-size:11px;color:#94a3b8;'>{r_info.get('レース','')}</div></div>{orows}</div>", unsafe_allow_html=True)
-    st.markdown("#### リアルタイム天候情報")
-    wx_places = list(dict.fromkeys(p for p in ("東京","京都","中山","阪神","中京","新潟","福島","小倉","札幌","函館") if any(p in str(h) for h in all_df.get("開催", ())))) or ["東京", "京都"]
+        st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-left:4px solid #0284c7;border-radius:8px;overflow:hidden;margin-bottom:10px;'><div style='background:#0f172a;padding:8px 10px;border-bottom:1px solid #334155;'><div style='font-size:13px;font-weight:bold;color:#f8fafc;'>{r_info.get('開催','')} {int(r_info.get('レース番号',0))}R {r_info.get('レース','').split('R ',1).__getitem__(-1)}</div></div>{orows}</div>", unsafe_allow_html=True)
+    st.markdown("#### 馬場・コンディション情報")
+    wx_places = tuple(dict.fromkeys(p for p in ("東京","京都","中山","阪神","中京","新潟","福島","小倉","札幌","函館") if any(p in str(h) for h in all_df.get("開催", ())))) or ("東京", "京都")
     w_p = st.segmented_control("天候場", wx_places, default=next(iter(wx_places), "東京"), label_visibility="collapsed", key="hm_wx_p") or next(iter(wx_places), "東京")
-    wi = wx_d.get(w_p) or next(iter(wx_d.values()))
-    st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px 12px;margin-bottom:10px;'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;'><span style='font-size:13px;font-weight:bold;color:#f8fafc;'>{w_p}競馬場</span><span style='font-size:15px;font-weight:bold;color:#38bdf8;'>{wi['wt']}　{wi['tmp']}℃</span></div><div style='display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;background:#0f172a;padding:7px;border-radius:6px;text-align:center;font-size:11px;'><div><div style='color:#94a3b8;font-size:10px;'>降水確率</div><b style='color:#f8fafc;'>{wi['pp']}%</b></div><div style='border-left:1px solid #1e293b;border-right:1px solid #1e293b;'><div style='color:#94a3b8;font-size:10px;'>湿度</div><b style='color:#f8fafc;'>{wi['hum']}%</b></div><div><div style='color:#94a3b8;font-size:10px;'>直線の風</div><b style='color:#fbbf24;'>{wi['wd']} {wi['ws']}m/s</b></div></div></div>", unsafe_allow_html=True)
+    p_df = all_df[all_df.apply(lambda x: w_p in str(x.get("開催", "")), axis=1)]
+    r_one = next(iter(p_df.to_dict("records")), {})
+    wt_v = str(r_one.get("天候", r_one.get("天気", "晴"))) or "晴"
+    wd_v = str(r_one.get("風", r_one.get("風向風速", "良コン"))) or "良コン"
+    s_baba = next((str(x.get("馬場", x.get("馬場状態", ""))) for x in p_df.to_dict("records") if "芝" in str(x.get("レース", "")) and str(x.get("馬場", x.get("馬場状態", "")))), "良")
+    d_baba = next((str(x.get("馬場", x.get("馬場状態", ""))) for x in p_df.to_dict("records") if "ダ" in str(x.get("レース", "")) and str(x.get("馬場", x.get("馬場状態", "")))), "良")
+    st.markdown(f"<div style='background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px 12px;margin-bottom:10px;'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;'><span style='font-size:13px;font-weight:bold;color:#f8fafc;'>{w_p}競馬場</span><span style='font-size:13px;font-weight:bold;color:#38bdf8;'>天候：{wt_v}</span></div><div style='display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;background:#0f172a;padding:7px;border-radius:6px;text-align:center;font-size:11px;'><div><div style='color:#94a3b8;font-size:10px;'>芝馬場</div><b style='color:#4ade80;'>{s_baba}</b></div><div style='border-left:1px solid #1e293b;border-right:1px solid #1e293b;'><div style='color:#94a3b8;font-size:10px;'>ダート馬場</div><b style='color:#fbbf24;'>{d_baba}</b></div><div><div style='color:#94a3b8;font-size:10px;'>コンディション</div><b style='color:#f8fafc;'>{wd_v}</b></div></div></div>", unsafe_allow_html=True)
     st.markdown("#### 勝ち馬サーチ（期待値上位）")
     ev_top = all_df[all_df["単勝オッズ"] < 50.0].sort_values("期待値スコア", ascending=False).head(2)
     ecols = st.columns(2)
