@@ -109,8 +109,10 @@ if not page_mode:
     w_p = st.segmented_control("天候場", wx_places, default=next(iter(wx_places), "東京"), label_visibility="collapsed", key="hm_wx_p") or next(iter(wx_places), "東京")
     p_df = all_df[all_df.apply(lambda x: w_p in str(x.get("開催", "")), axis=1)]
     wt_st = next((str(x.get("天候","")) for x in p_df.to_dict("records") if str(x.get("天候","")) not in ("","nan")), "晴")
-    s_st = next((str(x.get("馬場状態","")) for x in p_df.to_dict("records") if "芝" in str(x.get("馬場","")) and str(x.get("馬場状態","")) not in ("","nan")), "更新待ち")
-    d_st = next((str(x.get("馬場状態","")) for x in p_df.to_dict("records") if "ダ" in str(x.get("馬場","")) and str(x.get("馬場状態","")) not in ("","nan")), "更新待ち")
+    s_list = [str(x.get("馬場状態","")) for x in p_df.to_dict("records") if "芝" in str(x.get("馬場","")) and str(x.get("馬場状態","")) not in ("","nan")]
+    d_list = [str(x.get("馬場状態","")) for x in p_df.to_dict("records") if "ダ" in str(x.get("馬場","")) and str(x.get("馬場状態","")) not in ("","nan")]
+    s_st = next((v for v in s_list if v != "良"), next(iter(s_list), "良"))
+    d_st = next((v for v in d_list if v != "良"), next(iter(d_list), "良"))
     r_cnt = len(set(zip(p_df.get("開催", ()), p_df.get("レース番号", ()))))
     s_cnt = len(set(zip(p_df[p_df.apply(lambda x: "芝" in str(x.get("馬場","")), axis=1)].get("開催", ()), p_df[p_df.apply(lambda x: "芝" in str(x.get("馬場","")), axis=1)].get("レース番号", ()))))
     d_cnt = max(0, r_cnt - s_cnt)
