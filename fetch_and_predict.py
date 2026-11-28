@@ -213,7 +213,7 @@ if os.path.exists("sp_raw.txt"):
         kc = k_list[c_i]
         kl = f"{int(kc[6:8])}回{p_map_r.get(kc[4:6],'')}{int(kc[8:10])}日"
         h_part = next(iter(sb.split("<!-- ODDS_JSON -->")), "")
-        for tr in BeautifulSoup(h_part, "html.parser").select("tr"):
+        for tr in __import__("bs4").BeautifulSoup(h_part, "html.parser").select("tr"):
             tds = [td.get_text(strip=True) for td in tr.find_all(["td", "th"])]
             nums = [int(x) for x in tds if x.isdigit() and 1 <= int(x) <= 18]
             if len(nums) >= 3:
