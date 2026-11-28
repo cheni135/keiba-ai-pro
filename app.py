@@ -109,7 +109,7 @@ if not page_mode:
         return res
     wx_d = get_track_wx()
     st.markdown("#### 注目メイン・重賞 最新オッズ")
-    mains = all_df[all_df["レース番号"].isin((11,12))].copy()
+        mains = all_df[all_df.apply(lambda x: any(k in f"{x.get('レース名','')} {x.get('レース','')}" for k in ("(GI)", "(GII)", "(GIII)", "(G1)", "(G2)", "(G3)", "(L)", "(OP)", "オープン", "JGI", "JGII", "JGIII")) and not any(ng in f"{x.get('レース名','')} {x.get('レース','')}" for ng in ("3勝", "2勝", "1勝", "未勝利", "新馬")), axis=1)].copy()
     if not mains.empty:
         mains = mains.assign(_m_lbl=mains.apply(lambda x: f"{x['開催']} {int(x['レース番号'])}R", axis=1))
         m_opts = list(dict.fromkeys(mains.get("_m_lbl")))
