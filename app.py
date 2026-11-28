@@ -193,7 +193,7 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
             with c_card:
                 st.markdown(f"""<div class="nk-card" style="margin-bottom:0;"><div style="display:flex;align-items:center;"><div class="waku-box w{int(r.get('枠番',1))}">{u_no}</div><div class="ai-sq ai-{ai_m}">{ai_m}</div><div><div><a href="{r['netkeiba']}" target="_blank" style="color:#fff;font-weight:bold;text-decoration:none;">{r['馬名']}</a></div><div style="font-size:12px;color:#9ca3af;">{r.get('性齢','')} ｜ {r['騎手']} {r['斤量']} ｜ {r['脚質']}</div></div></div><div style="text-align:right;"><div class="odds-txt">{r['単勝オッズ']}倍</div><span class="score-pill">能力 {r['能力スコア']}</span></div></div>""", unsafe_allow_html=True)
 
- elif "AI分析" in page_mode:
+  elif "AI分析" in page_mode:
 
         md = st.radio("モード", ("🎯 的中重視（能力スコア）", "💰 回収率重視（期待値スコア）"), horizontal=True)
         sc = "能力スコア" if "的中" in md else "期待値スコア"
