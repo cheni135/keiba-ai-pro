@@ -153,7 +153,8 @@ elif "AI検証" in page_mode:
         vdf["勝率帯"] = pd.cut(vdf["AI予測勝率"], bins=pbins, labels=plbls)
         p_tbl = vdf.groupby("勝率帯", observed=False).agg(頭数=("馬番", "count"), 平均予測勝率=("AI予測勝率", lambda x: round(x.mean(), 1)), 実際の勝率=("1着", lambda x: round(x.mean()*100, 1)), 複勝率=("3着内", lambda x: round(x.mean()*100, 1))).reset_index().iloc[::-1]
         st.dataframe(p_tbl, hide_index=True, use_container_width=True)
-        st.markdown("#### ③ AI印別 成績＆回収率（◎○の信頼度 ＆ ☆穴馬の爆発力）")        vdf["_ai"] = ""
+        st.markdown("#### ③ AI印別 成績＆回収率（◎○の信頼度 ＆ ☆穴馬の爆発力）")
+        vdf["_ai"] = ""
         for _, g in vdf.groupby(["開催", "レース"]):
             idxs = g.sort_values("能力スコア", ascending=False).index.tolist()
             for rank_i, ix in enumerate(idxs[:4]):
