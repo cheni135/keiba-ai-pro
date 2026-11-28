@@ -316,8 +316,8 @@ div[data-testid="stHorizontalBlock"]:has(.my-out-btn) button{width:42px !importa
         for r in rk.to_dict("records"):
             mk_s = f"**{r['AI印']}** " if r["AI印"] else ""
             st.info(f"{mk_s}**{int(r['馬番'])} {r['馬名']}**（単勝{r['単勝オッズ']}倍 / 勝率{r['AI予測勝率']}% / 期待値{r['期待値スコア']}%）\n\n{ai_comment(r, avg)}")
+        st.markdown("<style>div[data-testid='stButtonGroup'] button{background:#1e293b !important;color:#f8fafc !important;border:1px solid #334155 !important;border-radius:6px !important;font-size:12px !important;padding:5px 8px !important;width:100% !important;justify-content:flex-start !important;}div[data-testid='stButtonGroup'] button[kind='pillsActive']{background:#0284c7 !important;border-color:#38bdf8 !important;color:#ffffff !important;font-weight:bold !important;}</style>", unsafe_allow_html=True)
         w_emo = {1:"⬜", 2:"⬛", 3:"🟥", 4:"🟦", 5:"🟨", 6:"🟩", 7:"🟧", 8:"🩷"}
-        st.markdown("<style>div[data-testid='stPills'] button{background:#1e293b !important;color:#f8fafc !important;border:1px solid #334155 !important;border-radius:8px !important;font-size:12px !important;padding:4px 8px !important;}div[data-testid='stPills'] button[aria-pressed='true']{background:#0284c7 !important;border-color:#38bdf8 !important;font-weight:bold !important;box-shadow:0 0 8px rgba(56,189,248,0.4);}</style>", unsafe_allow_html=True)
         rk["_lbl"] = rk.apply(lambda x: f"{w_emo.get(int(x.get('枠番',1)),'⬜')} {int(x['馬番'])} {x['馬名']}", axis=1)
         sh_lbl = st.pills("📊 詳細内訳を見る馬を選択", rk["_lbl"].tolist(), default=next(iter(rk["_lbl"]), ""), key="g_h_pill") or next(iter(rk["_lbl"]), "")
         inf = next(iter(rk[rk["_lbl"] == sh_lbl].to_dict("records")), {})
