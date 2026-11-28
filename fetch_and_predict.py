@@ -176,9 +176,9 @@ if rows:
             sim_od = np.round(np.clip((0.78 / np.maximum(0.008, w)) * np.random.uniform(0.85, 1.15, len(g)), 1.3, 150.0), 1)
             od = np.where(real_od > 1.0, real_od, sim_od)
             wp[ix], t3p[ix], odds[ix], exps[ix] = np.round(w*100, 1), np.round(t3*100, 1), od, np.round(((w*od*0.65) + (t3*(od*0.25+0.6)*0.35))*100, 1)
-    df["AI予測勝率"], df["AI予測3着内率"], df["単勝オッズ"], df["期待値スコア"], df["更新日時"] = wp, t3p, odds, exps, now.strftime("%Y/%m/%d %H:%M")
-    df.to_csv("latest_races.csv", index=False, encoding="utf-8-sig")
-    print("Saved rows:", len(df))
+        df["AI予測勝率"], df["AI予測3着内率"], df["単勝オッズ"], df["期待値スコア"], df["更新日時"] = wp, t3p, odds, exps, now.strftime("%Y/%m/%d %H:%M")
+        df.to_csv("latest_races.csv", index=False, encoding="utf-8-sig")
+        print("Saved rows:", len(df))
 
 # 毎週自動で来週の開催候補コードを target_kaisai.txt に更新（JRA月別標準ローテーション）
 nxt_sun = now + timedelta(days=(6 - now.weekday()) % 7)
