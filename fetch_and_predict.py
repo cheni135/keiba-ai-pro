@@ -40,12 +40,34 @@ if t_odds > t_sp and os.path.exists("odds_raw.txt") and os.path.exists("latest_r
         for om in re.finditer(r'\b([1-8])\s+([1-9]|1[0-8])\s+[ァ-ヶー・A-Za-z0-9]{2,15}\s+(\d{1,3}\.\d)\b', sec):
             u_no, o_v = int(om.group(2)), float(om.group(3))
             if 1.1 <= o_v <= 999.9:
-                mask = (df_ex["開催"] == k_label) & (df_ex["レース番号"] == rnum) & (df_ex["馬番"] == u_no)
-                df_ex.loc[mask, "単勝オッズ"] = o_v
-        if "最終更新" in df_ex.columns: df_ex["最終更新"] = now.strftime("%Y/%m/%d %H:%M")
-
+                    mask = (df_ex["開催"] == k_label) & (df_ex["レース番号"] == rnum) & (df_ex["馬番"] == u_no)
+                    df_ex.loc[mask, ["単勝オッズ", "実オッズ"]] = o_v
+    tjk = {"ルメ":12,"モレイラ":13,"川田":11,"レーン":12,"デムー":10,"戸崎":8,"坂井":9,"横山武":8,"武豊":7,"松山":8,"菅原":6,"岩田望":7,"三浦":5,"鮫島":5,"団野":5,"西村":6,"北村友":5,"マーカンド":10}
+    ro_arr = pd.to_numeric(df_ex["単勝オッズ"], errors="coerce").fillna(25.0).values
+    base_mkt = np.where(ro_arr > 1.0, 86.0 - 11.5 * np.log(np.maximum(ro_arr, 1.1)), 52.0)
+    jk_bonus = df_ex["騎手"].map(lambda x: next((v for k,v in tjk.items() if k in str(x)), 0) + (4 if "▲" in str(x) else (2 if "◇" in str(x) else (1 if "☆" in str(x) else 0)))).values
+    waku_bonus = np.where(df_ex["馬場"]=="芝", (5 - df_ex["枠番"].values)*1.4, (df_ex["枠番"].values - 4)*1.1) + np.where(df_ex["脚質"].isin(["逃げ","先行"]), 3.5, -2.0)
+    b_chk = np.where(df_ex["コース替わり"].fillna("")!="", 6.0, 0.0)
+    df_ex["着順着差指数"] = np.round(np.clip(base_mkt + b_chk + df_ex["不利補正値"].fillna(0.0), 22, 95), 1)
+    df_ex["ラップタイム指数"] = np.round(np.clip(base_mkt*0.85 + 8.0 + df_ex["クラス補正"].fillna(0.0)*0.4, 22, 95), 1)
+    df_ex["厩舎騎手勝負度"] = np.round(np.clip(50.0 + jk_bonus*1.5 + np.where(df_ex["激変サイン"].fillna("")=="初ブリンカー", 6.0, 0.0), 25, 95), 1)
+    df_ex["枠順展開適合"] = np.round(np.clip(50.0 + waku_bonus, 25, 92), 1)
+    df_ex["調教指数"] = np.round(np.clip(base_mkt*0.4 + 32.0, 25, 94), 1)
+    df_ex["能力スコア"] = np.round(np.clip(df_ex["着順着差指数"]*0.35 + df_ex["ラップタイム指数"]*0.22 + df_ex["厩舎騎手勝負度"]*0.16 + df_ex["枠順展開適合"]*0.12 + df_ex["調教指数"]*0.08 + df_ex["血統適性"]*0.07, 24, 94), 1)
+    for _, g in df_ex.groupby(["開催","レース番号"]):
+        ix = g.index.to_numpy()
+        sc = g["能力スコア"].values
+        e = np.exp((sc - np.mean(sc)) / 5.5)
+        w = e / np.sum(e)
+        t3 = np.clip(w*2.6 + 0.03, 0.02, 0.88)
+        od = g["単勝オッズ"].values
+        df_ex.loc[ix, "AI予測勝率"] = np.round(w*100, 1)
+        df_ex.loc[ix, "AI予測3着内率"] = np.round(t3*100, 1)
+        df_ex.loc[ix, "期待値スコア"] = np.round(((w*od*0.65) + (t3*(od*0.25+0.6)*0.35))*100, 1)
+    df_ex["更新日時"] = now.strftime("%Y/%m/%d %H:%M")
     df_ex.to_csv("latest_races.csv", index=False, encoding="utf-8-sig")
-    print("Fast odds-only update completed via odds_raw.txt.")
+    print("Fast odds-only update completed via SportsNavi!")
+
     raise SystemExit(0)
 
 if os.path.exists("sp_raw.txt"):
