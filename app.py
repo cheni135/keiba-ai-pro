@@ -85,19 +85,23 @@ def ai_comment(r, avg):
     return f"能力{r.get('能力スコア')}点（平均比 {df_a:+.1f}pt）：" + (" ／ ".join(res) if res else "平均水準のバランス型。")
 
 if "勝負レース" in page_mode:
-    st.subheader("🔥 本日のAI激アツ勝負レース")
+    st.subheader("🔥 本日のAI厳選 勝負レース")
+    picked = 0
     for (ks, rn), g in all_df.groupby(list(("開催", "レース")), sort=False):
         sg = g.sort_values("能力スコア", ascending=False)
         t1 = sg.head(1).squeeze()
         t2 = sg.head(2).tail(1).squeeze() if len(sg) > 1 else t1
         d12 = round(float(t1["能力スコア"]) - float(t2["能力スコア"]), 1)
-        eh = g.sort_values("期待値スコア", ascending=False).head(1).squeeze()
-        bg = "👑 AI鉄板" if float(t1["能力スコア"]) >= 66 and d12 >= 4.5 else "💎 激アツお宝" if float(g["期待値スコア"].max()) >= 125 else "🔥 有力軸" if d12 >= 3.5 else ""
+        sc1, od1, ev1 = float(t1["能力スコア"]), float(t1["単勝オッズ"]), float(t1["期待値スコア"])
+        bg = "👑 AI鉄板・1強軸" if (sc1 >= 71.0 and d12 >= 5.5) else ("💎 激アツ中穴・期待値◎" if (ev1 >= 120.0 and 4.0 <= od1 <= 25.0) else ("🔥 有力軸・好勝負" if (sc1 >= 68.0 and d12 >= 4.5 and ev1 >= 105.0) else ""))
         if bg:
-            st.markdown(f"""<div class="nk-card"><div><b>{ks} {rn}</b> <span style="color:#fbbf24;font-weight:bold;">{bg}</span><br><span style="font-size:13px;">◎{int(t1['馬番'])}{t1['馬名']}({t1['能力スコア']}点) ｜ <span style="color:#38bdf8;">💎期待値TOP:{int(eh['馬番'])}{eh['馬名']}({eh['単勝オッズ']}倍)</span></span></div></div>""", unsafe_allow_html=True)
-    st.subheader("🏆 期待値Sランク お宝穴馬 TOP10")
-    for r in all_df.query("期待値スコア >= 115.0").sort_values("期待値スコア", ascending=False).head(10).to_dict("records"):
-        st.markdown(f"""<div class="nk-card"><div style="display:flex;align-items:center;"><div class="waku-box w{int(r.get('枠番',1))}">{int(r['馬番'])}</div><div><div style="font-size:11px;color:#9ca3af;">{r['開催']} {r['レース']}</div><a href="{r['netkeiba']}" target="_blank" style="color:#fff;font-weight:bold;text-decoration:none;">{r['馬名']} 🔗</a></div></div><div class="odds-txt">{r['単勝オッズ']}倍<br><span class="score-pill" style="background:#dc2626;">期待値 {r['期待値スコア']}</span></div></div>""", unsafe_allow_html=True)
+            picked += 1
+            st.markdown(f"""<div class="nk-card"><div><b>{ks} {rn}</b> <span style="color:#fbbf24;font-weight:bold;">{bg}</span><br><span style="font-size:13px;">◎{int(t1['馬番'])}{t1['馬名']}（能力{sc1}点 / 2位差+{d12} / 単勝{od1}倍 / 期待値{ev1}%）</span></div></div>""", unsafe_allow_html=True)
+    if picked == 0:
+        st.info("本日の全レースは混戦傾向のため、突出した勝負レースはありません（各レースのAI分析をご参照ください）。")
+    st.subheader("🏆 厳選！期待値Sランク お宝中穴 TOP5（単勝4〜30倍）")
+    for r in all_df.query("期待値スコア >= 115.0 and 4.0 <= 単勝オッズ <= 30.0").sort_values("期待値スコア", ascending=False).head(5).to_dict("records"):
+        st.markdown(f"""<div class="nk-card"><div style="display:flex;align-items:center;"><div class="waku-box w{int(r.get('枠番',1))}">{int(r['馬番'])}</div><div><div style="font-size:11px;color:#9ca3af;">{r['開催']} {r['レース']}</div><a href="{r['netkeiba']}" target="_blank" style="color:#fff;font-weight:bold;text-decoration:none;">{r['馬名']} 🔗</a></div></div><div class="odds-txt">{r['単勝オッズ']}倍<br><span class="score-pill">能力{r['能力スコア']} / 期待値{r['期待値スコア']}%</span></div></div>""", unsafe_allow_html=True)
 
 elif "馬場傾向" in page_mode:
     sk = st.selectbox("開催場を選択", tuple(all_df["開催"].unique()))
